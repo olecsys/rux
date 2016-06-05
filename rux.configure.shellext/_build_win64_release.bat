@@ -1,0 +1,1 @@
+@call _build.bat "rux.configure.shelext" "Release" "x64"

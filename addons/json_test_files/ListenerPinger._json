@@ -1,0 +1,4564 @@
+{
+    "192.168.10.47": {
+        "is_central_server": true,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 1,
+        "cams": [
+
+        ],
+        "down_servers": [
+{
+    "192.168.10.39": {
+        "is_central_server": false,
+        "iv54server_port": "",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 2,
+        "cams": [
+
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+,{
+    "192.168.10.30": {
+        "is_central_server": false,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 2,
+        "cams": [
+            {
+                "key1": "DVR_0202",
+                "key2": "2102",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "DVR_0202",
+                "key2": "2101",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            }
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+,{
+    "192.168.0.2": {
+        "is_central_server": true,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 1,
+        "cams": [
+
+        ],
+        "down_servers": [
+{
+    "171.31.10.187": {
+        "is_central_server": false,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 2,
+        "cams": [
+            {
+                "key1": "Kievski7",
+                "key2": "7_119",
+                "key3": "Q",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_118",
+                "key3": "Q",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_117",
+                "key3": "Q",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_116",
+                "key3": "Q",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_115",
+                "key3": "Q",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_114",
+                "key3": "Q",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_113",
+                "key3": "Q",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_112",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_111",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_110",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_109",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_108",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_107",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_106",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_105",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_104",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski7",
+                "key2": "7_103",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            }
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+,{
+    "171.31.10.186": {
+        "is_central_server": false,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 2,
+        "cams": [
+            {
+                "key1": "Kievski6",
+                "key2": "6_99",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_98",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_97",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_96",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_95",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_94",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_93",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_92",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_91",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_90",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_89",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_88",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_87",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_86",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_102",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_101",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski6",
+                "key2": "6_100",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            }
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+,{
+    "171.31.10.185": {
+        "is_central_server": false,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 2,
+        "cams": [
+            {
+                "key1": "Kievski5",
+                "key2": "5_85",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_84",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_83",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_82",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_81",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_80",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_79",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_78",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_77",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_76",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_75",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_74",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_73",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_72",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_71",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_70",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski5",
+                "key2": "5_69",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            }
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+,{
+    "171.31.10.184": {
+        "is_central_server": false,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 2,
+        "cams": [
+            {
+                "key1": "Kievski4",
+                "key2": "4_68",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_67",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_66",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_65",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_64",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_63",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_62",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_61",
+                "key3": "Q",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_60",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_59",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_58",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_57",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_56",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_55",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_54",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_53",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski4",
+                "key2": "4_52",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            }
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+,{
+    "171.31.10.183": {
+        "is_central_server": false,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 2,
+        "cams": [
+            {
+                "key1": "Kievski3",
+                "key2": "3_51",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_50",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_49",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_48",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_47",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_46",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_45",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_44",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_43",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_42",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_41",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_40",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_39",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_38",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_37",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_36",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski3",
+                "key2": "3_35",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            }
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+,{
+    "171.31.10.182": {
+        "is_central_server": false,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 2,
+        "cams": [
+            {
+                "key1": "Kievski2",
+                "key2": "2_34",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_33",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_32",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_31",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_30",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_29",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_28",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_27",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_26",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_25",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_24",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_23",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_22",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_21",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_20",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_19",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski2",
+                "key2": "2_18",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            }
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+,{
+    "171.31.10.181": {
+        "is_central_server": true,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 2,
+        "cams": [
+            {
+                "key1": "Kievski1",
+                "key2": "1_9",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_8",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_7",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_6",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_5",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_4",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_3",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_2",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_1",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_17",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_16",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_15",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_14",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_13",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_12",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_11",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Kievski1",
+                "key2": "1_10",
+                "key3": "Q",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            }
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+
+        ]
+    }
+}
+,{
+    "178.252.200.151": {
+        "is_central_server": true,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 1,
+        "cams": [
+            {
+                "key1": "Integra",
+                "key2": "camera_sip",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.9",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.8",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.7",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.6",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.5",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.4",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.3",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.2",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.1",
+                "key3": "Quality",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.19",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.18",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.17",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.16",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.15",
+                "key3": "Quality",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.14",
+                "key3": "Quality",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.13",
+                "key3": "Quality",
+                "key4": "",
+                "Status": false,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.12",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.11",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            },
+            {
+                "key1": "Integra",
+                "key2": "10.50.5.10",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": true,
+                "audio": false
+            }
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+,{
+    "10.2.25.23": {
+        "is_central_server": true,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 1,
+        "cams": [
+
+        ],
+        "down_servers": [
+{
+    "10.2.25.6": {
+        "is_central_server": true,
+        "iv54server_port": "20000",
+        "rtsp_port": 0,
+        "rtmp_port": 0,
+        "direct_access": 1,
+        "cams": [
+            {
+                "key1": "DVR_8962",
+                "key2": "Стилобат Тепловизор Видео",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "DVR_8962",
+                "key2": "Поворотная 2 Стилобат",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "DVR_8962",
+                "key2": "Поворотная 1 Стилобат",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "DVR_8962",
+                "key2": "Axis Q6034-E 10.2.26.101",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "DVR_8962",
+                "key2": "Axis Q6034 10.2.26.102",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "DVR_8962",
+                "key2": "18 шлюз Стилобат поворотная",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": false,
+                "audio": false
+            },
+            {
+                "key1": "DVR_8962",
+                "key2": "17 шлюз Стилобат",
+                "key3": "Quality",
+                "key4": "",
+                "Status": true,
+                "video": false,
+                "audio": false
+            }
+        ],
+        "down_servers": [
+
+        ]
+    }
+}
+
+        ]
+    }
+}
+,
+    {
+        "192.168.19.11": {
+            "direct_access": 1,
+            "cams": [],
+            "down_servers": [
+                
+                    {
+                        "192.168.19.11": {
+                            "cams": [
+                                { "key2": "НТК-3 (платформа №1)","Status": true},
+                                { "key2": "НТК-15(Вход в турникутный павильон)","Status": true},
+                                { "key2": "НТК-17(Кассы)","Status": true},
+                                { "key2": "НТК-19(Платформа№2)","Status": true},
+                                { "key2": "НТК-18(Платформа№2)","Status": true},
+                                { "key2": "НТК-29 (Платформа №2)","Status": true},
+                                { "key2": "НТК-21(Платформа№2)","Status": true},
+                                { "key2": "НЗТК-2(Турникетный павильон)","Status": true},
+                                { "key2": "НЗТК-3","Status": true},
+                                { "key2": "НЗТК-3 (турникетный павильон)","Status": true},
+                                { "key2": "НЗТК-1(Турникетный павильон)","Status": true},
+                                { "key2": "НТК-3(Платформа№1)","Status": true},
+                                { "key2": "НТК-4(Платформа№1)","Status": true},
+                                { "key2": "НТК-5(Платформа№1)","Status": true},
+                                { "key2": "НТК-6(Платформа№1)" },
+                                { "key2": "НТК-7(Платформа№1)" },
+                                { "key2": "НТК-8(Платформа№1)" },
+                                { "key2": "НТК-2(Прилегающая территория)","Status": true},
+                                { "key2": "НТК-1(Прилегающая территория)","Status": true},
+                                { "key2": "НТК-22(Прилегающая территория)","Status": true}
+                            ],
+                            "down_servers": [
+							
+                             {
+                                "192.168.19.13": {
+                            "cams": [
+                                { "key2": "НТК-3(Платформа№1)","Status": true},
+                                { "key2": "НТК-4(Платформа№1)","Status": true},
+                                { "key2": "НТК-5(Платформа№1)","Status": true},
+                                { "key2": "НТК-6(Платформа№1)" },
+                                { "key2": "НТК-7(Платформа№1)" },
+                                { "key2": "НТК-8(Платформа№1)" },
+                                { "key2": "НТК-2(Прилегающая территория)","Status": true},
+                                { "key2": "НТК-1(Прилегающая территория)","Status": true},
+                                { "key2": "НТК-22(Прилегающая территория)","Status": true}
+                                    ],
+							  "down_servers": []
+						                     	} 
+                            }							
+						
+						],
+                    "down_servers": []
+                      }
+                    }
+                
+            
+		]
+        }
+	
+    }
+,
+    {
+        "192.168.19.11": {
+            "direct_access": 1,
+            "cams": [],
+            "down_servers": [
+                
+                    {
+                        "192.168.19.12": {
+                            "cams": [
+                                {
+                                    "key2": "СЭС-1 (платформа №1)"
+									,"Status": true
+                                },
+                                {
+                                    "key2": "НТК-9(Платформа№2)"
+									,"Status": true
+                                },
+                                {
+                                    "key2": "НТК-10(Платформа№2)"
+									,"Status": true
+                                },
+                                {
+                                    "key2": "НТК-11(Платформа№2)"
+									,"Status": true
+                                },
+                                {
+                                    "key2": "НТК-12(Платформа№2)"
+									,"Status": true
+                                },
+                                {
+                                    "key2": "НТК-13(Платформа№2)"
+									,"Status": true
+                                },
+                                {
+                                    "key2": "НТК-14(Платформа№2)"
+									,"Status": true
+                                },
+                                {
+                                    "key2": "НТК-16(Платформа№2)"
+									,"Status": true
+                                },
+                                {
+                                    "key2": "СЭС-1"
+									,"Status": true
+                                },
+                                {
+                                    "key2": "СЭС-2"
+									,"Status": true
+                                },
+                                {
+                                    "key2": "СЭС-2 (платформа №2)"
+									,"Status": true
+                                }
+						],
+                                     "down_servers": []
+            
+        }
+    }
+
+]
+}
+}
+,    {      "10.0.12.23": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"10.0.12.1": 
+												{"cams": 
+													[
+														{"key2": "дверь в спорт зал","Status": true},
+														{"key2": "10","Status": true},
+														{"key2": "11","Status": true},
+														{"key2": "12","Status": true},
+														{"key2": "13","Status": true},
+														{"key2": "14","Status": true},
+														{"key2": "16","Status": true},
+														{"key2": "17","Status": true},
+														{"key2": "4","Status": true},
+														{"key2": "5","Status": true},
+														{"key2": "7","Status": true},
+														{"key2": "8","Status": true},
+														{"key2": "9","Status": true},
+														{"key2": "2","Status": true},
+														{"key2": "3","Status": true},
+														{"key2": "6","Status": true},
+														{"key2": "дверь №1","Status": true},
+														{"key2": "Микрофон 1101","Status": true},
+														{"key2": "Микрофон 1201","Status": true},
+														{"key2": "15 Камера","Status": true},
+														{"key2": "дверь в шахту","Status": true},
+														{"key2": "дверь №11","Status": true},
+														{"key2": "дверь №4","Status": true},
+														{"key2": "дверь 5","Status": true},
+														{"key2": "дверь на мрц","Status": true},
+														{"key2": "дверь на склад","Status": true},
+														{"key2": "Микрофон 801","Status": true}				
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.0.12.10": 
+												{"cams": 
+													[
+														{"key2": "Микрофон 15001","Status": true},
+														{"key2": "162","Status": true},
+														{"key2": "149","Status": true},
+														{"key2": "151","Status": true},
+														{"key2": "153","Status": true},
+														{"key2": "154","Status": true},
+														{"key2": "Микрофон 15201","Status": true},
+														{"key2": "Микрофон 15601","Status": true},
+														{"key2": "тр.к 3 этаж","Status": true},
+														{"key2": "Микрофон 15701","Status": true},
+														{"key2": "тр. к 4 этаж","Status": true},
+														{"key2": "Микрофон 15801","Status": true},
+														{"key2": "тр. к 5 этаж","Status": true},
+														{"key2": "Микрофон 15901","Status": true},
+														{"key2": "тр. к 6 этаж","Status": true},
+														{"key2": "Микрофон 16001","Status": true},
+														{"key2": "тр к 7 этаж","Status": true},
+														{"key2": "тр к 9 этаж","Status": true},
+														{"key2": "тр.к эконом зал","Status": true},
+														{"key2": "тр. к вип зал","Status": true},
+														{"key2": "тр. к адм комн отдыха","Status": true},
+														{"key2": "тр. к ресторан","Status": true},
+														{"key2": "тр.к 8 этаж","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.0.12.11": 
+												{"cams": 
+													[
+														{"key2": "164","Status": true},
+														{"key2": "165","Status": true},
+														{"key2": "166","Status": true},
+														{"key2": "167","Status": true},
+														{"key2": "168","Status": true},
+														{"key2": "169","Status": true},
+														{"key2": "97","Status": true},
+														{"key2": "170","Status": true},
+														{"key2": "90","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.0.12.2": 
+												{"cams": 
+													[
+														{"key2": "18","Status": true},
+														{"key2": "19","Status": true},
+														{"key2": "20","Status": true},
+														{"key2": "дверь №10","Status": true},
+														{"key2": "21","Status": true},
+														{"key2": "дверь №7","Status": true},
+														{"key2": "22","Status": true},
+														{"key2": "23","Status": true},
+														{"key2": "25","Status": true},
+														{"key2": "26","Status": true},
+														{"key2": "27","Status": true},
+														{"key2": "28","Status": true},
+														{"key2": "24 Камера","Status": true},
+														{"key2": "29","Status": true},
+														{"key2": "30","Status": true},
+														{"key2": "31","Status": true},
+														{"key2": "32","Status": true},
+														{"key2": "33","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.0.12.3": 
+												{"cams": 
+													[
+														{"key2": "34","Status": true},
+														{"key2": "35","Status": true},
+														{"key2": "36","Status": true},
+														{"key2": "37","Status": true},
+														{"key2": "38","Status": true},
+														{"key2": "39","Status": true},
+														{"key2": "48","Status": true},
+														{"key2": "49","Status": true},
+														{"key2": "40","Status": true},
+														{"key2": "41","Status": true},
+														{"key2": "42","Status": true},
+														{"key2": "43","Status": true},
+														{"key2": "44","Status": true},
+														{"key2": "45","Status": true},
+														{"key2": "тр. к кафе 3 этаж","Status": true},
+														{"key2": "46","Status": true},
+														{"key2": "47","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.0.12.4": 
+												{"cams": 
+													[
+														{"key2": "61","Status": true},
+														{"key2": "65","Status": true},
+														{"key2": "53","Status": true},
+														{"key2": "54","Status": true},
+														{"key2": "55","Status": true},
+														{"key2": "56","Status": true},
+														{"key2": "57","Status": true},
+														{"key2": "58","Status": true},
+														{"key2": "59","Status": true},
+														{"key2": "60","Status": true},
+														{"key2": "62","Status": true},
+														{"key2": "63","Status": true},
+														{"key2": "50","Status": true},
+														{"key2": "51","Status": true},
+														{"key2": "52","Status": true},
+														{"key2": "64","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.0.12.5": 
+												{"cams": 
+													[
+														{"key2": "69","Status": true},
+														{"key2": "73","Status": true},
+														{"key2": "74","Status": true},
+														{"key2": "75","Status": true},
+														{"key2": "76","Status": true},
+														{"key2": "79","Status": true},
+														{"key2": "80","Status": true},
+														{"key2": "66","Status": true},
+														{"key2": "67","Status": true},
+														{"key2": "68","Status": true},
+														{"key2": "70","Status": true},
+														{"key2": "71","Status": true},
+														{"key2": "72","Status": true},
+														{"key2": "77","Status": true},
+														{"key2": "78","Status": true},
+														{"key2": "81","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.0.12.6": 
+												{"cams": 
+													[
+														{"key2": "82","Status": true},
+														{"key2": "83","Status": true},
+														{"key2": "84","Status": true},
+														{"key2": "дверь в кр. уголок","Status": true},
+														{"key2": "85","Status": true},
+														{"key2": "86","Status": true},
+														{"key2": "87","Status": true},
+														{"key2": "88","Status": true},
+														{"key2": "89","Status": true},
+														{"key2": "98","Status": true},
+														{"key2": "99","Status": true},
+														{"key2": "91","Status": true},
+														{"key2": "92","Status": true},
+														{"key2": "93","Status": true},
+														{"key2": "94","Status": true},
+														{"key2": "95","Status": true},
+														{"key2": "96","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.0.12.7": 
+												{"cams": 
+													[
+														{"key2": "Микрофон 10001","Status": true},
+														{"key2": "101","Status": true},
+														{"key2": "102","Status": true},
+														{"key2": "Микрофон 10401","Status": true},
+														{"key2": "106","Status": true},
+														{"key2": "Микрофон 10601","Status": true},
+														{"key2": "107","Status": true},
+														{"key2": "Микрофон 10701","Status": true},
+														{"key2": "111","Status": true},
+														{"key2": "112","Status": true},
+														{"key2": "Микрофон 11401","Status": true},
+														{"key2": "тр. к кассира-контролёра","Status": true},
+														{"key2": "тр. к мед кабинет","Status": true},
+														{"key2": "104","Status": true},
+														{"key2": "105","Status": true},
+														{"key2": "108","Status": true},
+														{"key2": "109","Status": true},
+														{"key2": "110","Status": true},
+														{"key2": "113","Status": true},
+														{"key2": "114","Status": true},
+														{"key2": "115","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.0.12.8": 
+												{"cams": 
+													[
+														{"key2": "Микрофон 11801","Status": true},
+														{"key2": "вых в подвал","Status": true},
+														{"key2": "вых администрации","Status": true},
+														{"key2": "Микрофон 12801","Status": true},
+														{"key2": "Микрофон 13001","Status": true},
+														{"key2": "116","Status": true},
+														{"key2": "117","Status": true},
+														{"key2": "118","Status": true},
+														{"key2": "119","Status": true},
+														{"key2": "120","Status": true},
+														{"key2": "121","Status": true},
+														{"key2": "122","Status": true},
+														{"key2": "123","Status": true},
+														{"key2": "124","Status": true},
+														{"key2": "125","Status": true},
+														{"key2": "126","Status": true},
+														{"key2": "127","Status": true},
+														{"key2": "128","Status": true},
+														{"key2": "129","Status": true},
+														{"key2": "130","Status": true},
+														{"key2": "131","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.0.12.9": 
+												{"cams": 
+													[
+														{"key2": "135","Status": true},
+														{"key2": "Микрофон 13601","Status": true},
+														{"key2": "Микрофон 13701","Status": true},
+														{"key2": "Микрофон 13801","Status": true},
+														{"key2": "132","Status": true},
+														{"key2": "133","Status": true},
+														{"key2": "134","Status": true},
+														{"key2": "тр. к зал повышенной комфортности","Status": true},
+														{"key2": "137","Status": true},
+														{"key2": "тр. к детский зал","Status": true},
+														{"key2": "139","Status": true},
+														{"key2": "140","Status": true},
+														{"key2": "141","Status": true},
+														{"key2": "142","Status": true},
+														{"key2": "143","Status": true},
+														{"key2": "144","Status": true},
+														{"key2": "145","Status": true},
+														{"key2": "146","Status": true},
+														{"key2": "147","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,    {      "10.2.25.23": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"10.2.25.10": 
+												{"cams": 
+													[
+														{"key2": "НТК 14","Status": true},
+														{"key2": "НТК 13","Status": true},
+														{"key2": "НТК 8","Status": true},
+														{"key2": "НТК 15","Status": true},
+														{"key2": "НТК 16","Status": true},
+														{"key2": "НТК 17","Status": true},
+														{"key2": "НТК 21","Status": true},
+														{"key2": "Тепловизор Стилобат","Status": true},
+														{"key2": "Стилобат Тепловизор Видео","Status": true}		
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.2.25.11": 
+												{"cams": 
+													[
+														{"key2": "НТК 5","Status": true},
+														{"key2": "НТК 1","Status": true},
+														{"key2": "НТК 2","Status": true},
+														{"key2": "НТК 4","Status": true},
+														{"key2": "НТК 12","Status": true},
+														{"key2": "НТК 6","Status": true},
+														{"key2": "НТК 7","Status": true},
+														{"key2": "НТК 9","Status": true},
+														{"key2": "НТК 10","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.2.25.12": 
+												{"cams": 
+													[
+														{"key2": "НТК 54","Status": true},
+														{"key2": "НТК 66","Status": true},
+														{"key2": "НТК 67","Status": true},
+														{"key2": "НТК 68","Status": true},
+														{"key2": "НТК 69","Status": true},
+														{"key2": "НТК 70","Status": true},
+														{"key2": "НТК 71","Status": true},
+														{"key2": "НТК 72","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.2.25.13": 
+												{"cams": 
+													[
+														{"key2": "НТК 77","Status": true},
+														{"key2": "НТК 76","Status": true},
+														{"key2": "НТК 80","Status": true},
+														{"key2": "НТК 75","Status": true},
+														{"key2": "НТК 79","Status": true},
+														{"key2": "НТК 74","Status": true},
+														{"key2": "НТК 73","Status": true},
+														{"key2": "НТК 78","Status": true},
+														{"key2": "Рабочий стол компьютера 9999","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.2.25.14": 
+												{"cams": 
+													[
+														{"key2": "НТК 24","Status": true},
+														{"key2": "НТК 27","Status": true},
+														{"key2": "НТК 28","Status": true},
+														{"key2": "НТК 23","Status": true},
+														{"key2": "НТК 22","Status": true},
+														{"key2": "НТК 11","Status": true},
+														{"key2": "НТК 25","Status": true},
+														{"key2": "НТК 26","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.2.25.15": 
+												{"cams": 
+													[
+														{"key2": "НТК 61","Status": true},
+														{"key2": "НТК 29","Status": true},
+														{"key2": "НТК 34","Status": true},
+														{"key2": "НТК 30","Status": true},
+														{"key2": "НТК 31","Status": true},
+														{"key2": "НТК 32","Status": true},
+														{"key2": "НТК 18","Status": true},
+														{"key2": "НТК 19","Status": true},
+														{"key2": "НТК 20","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.2.25.16": 
+												{"cams": 
+													[
+														{"key2": "Стилобат Вход подвал ","Status": true},
+														{"key2": "Камера Стилобат аппаратная","Status": true},
+														{"key2": "Камера Стилобат ЦПУ ","Status": true},
+														{"key2": "Камера Стилобат выход на шлюз","Status": true},
+														{"key2": "Камера Стилобат коридор 1 этаж","Status": true},
+														{"key2": "Стилобат корридор подвал","Status": true},
+														{"key2": "Новое устройство Камера","Status": true},
+														{"key2": "Камера Стилобат коридор 2 этажа","Status": true},
+														{"key2": "Камера Стилобат выход на мост","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.2.25.17": 
+												{"cams": 
+													[
+														{"key2": "Вход караульное помещение","Status": true},
+														{"key2": "Камера Адм. корпус","Status": true},
+														{"key2": "КПП","Status": true},
+														{"key2": "Камера Приемная","Status": true},
+														{"key2": "Камера Адм. корпус Коридор 2 этаж","Status": true},
+														{"key2": "Камера Адм. корпус коридор 1 этажа","Status": true},
+														{"key2": "Камера Адм. корпус центральный вход","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.2.25.5": 
+												{"cams": 
+													[
+														{"key2": "НТК 50","Status": true},
+														{"key2": "НТК 46","Status": true},
+														{"key2": "НТК 44","Status": true},
+														{"key2": "НТК 33","Status": true},
+														{"key2": "НТК 45","Status": true},
+														{"key2": "НТК 47","Status": true},
+														{"key2": "НТК 48","Status": true},
+														{"key2": "НТК 49","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}																	
+											
+										,
+										{"10.2.25.8": 
+												{"cams": 
+													[
+														{"key2": "НТК 65","Status": true},
+														{"key2": "НТК 64","Status": true},
+														{"key2": "НТК 58","Status": true},
+														{"key2": "НТК 60","Status": true},
+														{"key2": "НТК 59","Status": true},
+														{"key2": "НТК 62","Status": true},
+														{"key2": "НТК 57","Status": true},
+														{"key2": "НТК 56","Status": true},
+														{"key2": "НТК 63","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+                                        {"10.2.25.9": 
+												{"cams": 
+													[
+														{"key2": "НТК 3","Status": true},
+														{"key2": "НТК 39","Status": true},
+														{"key2": "НТК 40","Status": true},
+														{"key2": "НТК 41","Status": true},
+														{"key2": "НТК 43","Status": true},
+														{"key2": "НТК 42","Status": true},
+														{"key2": "Тепловизор ВГ","Status": true},
+														{"key2": "Тепловизор ВГ","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+											{"10.2.25.7": 
+												{"cams": 
+													[
+														{"key2": "НТК 38","Status": true},
+														{"key2": "НТК 37","Status": true},
+														{"key2": "НТК 35","Status": true},
+														{"key2": "НТК 36","Status": true},
+														{"key2": "НТК 51","Status": true},
+														{"key2": "НТК 52","Status": true},
+														{"key2": "НТК 55","Status": true},
+														{"key2": "НТК 53","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,    {      "10.254.254.49": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+											{"192.168.10.21":
+												{"cams": 
+													[
+														{"key2": "Камера 2101","Status": true},
+														{"key2": "Камера 2102","Status": true},
+														{"key2": "Поворотная камера 2103 (6 - 3 этаж)","Status": true},
+														{"key2": "Поворотная камера (5 - Вход 3 этаж)","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+											{"192.168.10.22":
+												{"cams":
+													[
+														{"key2": "Серпантин со 2 на 3 этаж","Status": true},                                
+														{"key2": "Камера 2202","Status": true},
+														{"key2": "Камера 2203","Status": true},
+														{"key2": "Камера 2204","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.23":
+												{"cams":
+													[
+														{"key2": "Поворотная камера 2301 (15- вход 1этаж)","Status": true},                                
+														{"key2": "Поворотная камера 2302 (17 - вход 3 этаж)","Status": true},
+														{"key2": "Поворотная камера 2303 (18 - Радиоузел)","Status": true},
+														{"key2": "Поворотная камера 2304","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.24":
+												{"cams":
+													[
+														{"key2": "2401 (25 - пл.4 поворотн. Безым.)","Status": true},                                
+														{"key2": "2402 (26 - пл.4 поворотн. Кряж)","Status": true},
+														{"key2": "2403 (25 - пл.4 поворотн. Безым.)","Status": true},
+														{"key2": "2404 (28 - пл.3 поворотн. Кряж)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.25":
+												{"cams":
+													[
+														{"key2": "Камера 2501 (2 платф  конкорс Кряж)","Status": true},                                
+														{"key2": "Камера 2502 (2 платф тонель Кряж)","Status": true},
+														{"key2": "Камера 2503 (1 платформа Кряж)","Status": true},
+														{"key2": "Камера 2504 (1 платформа Безым)","Status": true},
+														{"key2": "Камера 2505","Status": true},                                
+														{"key2": "Камера 2506","Status": true},
+														{"key2": "Камера 2507","Status": true},
+														{"key2": "Камера 2508","Status": true},
+														{"key2": "Туалет 2-ой эт","Status": true},                                
+														{"key2": "Камера 2510","Status": true},
+														{"key2": "Камера 2511","Status": true},
+														{"key2": "Камера 2512","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.26":
+												{"cams":
+													[
+														{"key2": "Поворотная камера 2601 (29 - пл.2 поворотн. Безым.)","Status": true},                                
+														{"key2": "Поворотная камера 2602 (30 - пл.2 поворотн. Кряж)","Status": true},
+														{"key2": "Поворотная камера 2603 (31 - Пл.1)","Status": true},
+														{"key2": "Поворотная камера 2604 (32 - Приг. кассы )","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.27":
+												{"cams":
+													[
+														{"key2": "Камера 2701 (Администратор поворот)","Status": true},                                
+														{"key2": "Камера 2702 (3-й этаж)","Status": true},
+														{"key2": "Камера 2703 (3-й этаж)","Status": true},
+														{"key2": "Камера 2704 (3-й этаж авивкасса)","Status": true},                             
+														{"key2": "Камера 2705","Status": true},
+														{"key2": "Камера 2706 (3-й этаж)","Status": true},
+														{"key2": "Камера 2707 (3-й этаж)","Status": true},
+														{"key2": "Камера 2708 (85)","Status": true},
+														{"key2": "Камера 2709 (86)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.28":
+												{"cams":
+													[
+														{"key2": "Камера 2801","Status": true},                                
+														{"key2": "Камера 2802","Status": true},
+														{"key2": "Камера 2803","Status": true},
+														{"key2": "Камера 2804","Status": true},                             
+														{"key2": "Камера 2805","Status": true},
+														{"key2": "Камера 2806 (6 этаж Вход)","Status": true},
+														{"key2": "Камера 2807 (3 этаж Гостиница холл)","Status": true},
+														{"key2": "Камера 2808 (3 этаж Гостиница коридор)","Status": true},
+														{"key2": "Камера 2809 (3 этаж Гостиница коридор)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.29":
+												{"cams":
+													[
+														{"key2": "Камера 2901","Status": true},                                
+														{"key2": "Камера 2902","Status": true},
+														{"key2": "Камера 2903","Status": true},
+														{"key2": "Камера 2904","Status": true},                             
+														{"key2": "Камера 2905","Status": true},
+														{"key2": "Камера 2906","Status": true},
+														{"key2": "Камера 2907","Status": true},
+														{"key2": "Камера 2908","Status": true},
+														{"key2": "Камера 2909","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.30":
+												{"cams":
+													[
+														{"key2": "Камера 3001 (3 этаж Гостиница лифт)","Status": true},                                
+														{"key2": "Камера 3002 (Гостиница холл 4 этаж)","Status": true},
+														{"key2": "Камера 3003 (Гостиница коридор 4 этаж)","Status": true},
+														{"key2": "Камера 3004 (1 этаж Коридор)","Status": true},                             
+														{"key2": "Камера 3005 (Гостиница коридор 4 этаж)","Status": true},
+														{"key2": "Камера 3006 (5 этаж)","Status": true},
+														{"key2": "Камера 3007 (Гостиница лифт 4 этаж)","Status": true},
+														{"key2": "Камера 3008 (130 (Парикмахерская 3эт. Гостиница)","Status": true},
+														{"key2": "Камера 3009 (5 этаж)","Status": true},
+														{"key2": "Камера 3010 (1 этаж Вход)","Status": true},
+														{"key2": "Камера 3011 (5 этаж)","Status": true},
+														{"key2": "Камера 3012","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.31":
+												{"cams":
+													[
+														{"key2": "Камера 3101 (камера 6 этаж)","Status": true},                                
+														{"key2": "Камера 3102 (камера 6 этаж)","Status": true},
+														{"key2": "Камера 3103 (камера 6 этаж)","Status": true},
+														{"key2": "Камера 3104 (камера 6 этаж)","Status": true},                             
+														{"key2": "Камера 3105 (камера 6 этаж)","Status": true},
+														{"key2": "Камера 3106 (камера 6 этаж)","Status": true},
+														{"key2": "Камера 3107 (камера 6 этаж)","Status": true},
+														{"key2": "Камера 3108 (Фонтан)","Status": true},
+														{"key2": "Камера 3109 (Фонтан)","Status": true},
+														{"key2": "Камера 3110 (Фонтан)","Status": true},
+														{"key2": "Камера 3111","Status": true},
+														{"key2": "Камера 3112 (камера 31)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.32":
+												{"cams":
+													[
+														{"key2": "Камера 3201","Status": true},                                
+														{"key2": "3 эт серпантин","Status": true},
+														{"key2": "4 этаж серпантин","Status": true},
+														{"key2": "4 этаж серпантин","Status": true},                             
+														{"key2": "Серпантин с 4-гог на 5-ый этаж","Status": true},
+														{"key2": "серпантин 5 этаж","Status": true},
+														{"key2": "5 этаж серпантин","Status": true},
+														{"key2": "Камера 3209 (камера 6 Этаж)","Status": true},
+														{"key2": "Камера 3210 (камера 6 Этаж)","Status": true},
+														{"key2": "Камера 3211 (камера 6 Этаж)","Status": true},
+														{"key2": "Камера 3215 (камера 6 Этаж служ. лифт)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.33":
+												{"cams":
+													[
+														{"key2": "Камера 3301 (3 платф  конкорс Безым.)","Status": true},                                
+														{"key2": "Камера 3302 (4 платф  конкорс Кряж)","Status": true},
+														{"key2": "Камера 3303 (4 платф тонель Кряж)","Status": true},
+														{"key2": "Камера 3304 (3 платф тонель Безым.)","Status": true},                             
+														{"key2": "Камера 3305 (3 платф  конкорс Безым)","Status": true},
+														{"key2": "Камера 3306 (3 платф  конкорс Кряж)","Status": true},
+														{"key2": "Камера 3307 (3 платф тонель Кряж)","Status": true},
+														{"key2": "Камера 3308 (2 платф тонель Безым.)","Status": true},
+														{"key2": "Камера 3309 (2 платф  конкорс Безым.)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.34":
+												{"cams":
+													[
+														{"key2": "Поворотная камера 3401 (21 - пл.6 поворотн. Безым.)","Status": true},                                
+														{"key2": "Поворотная камера 3402 (22 пл.6 поворотн. Кряж)","Status": true},
+														{"key2": "Поворотная камера 3403 (23 - пл.5 поворотн. Безым.)","Status": true},
+														{"key2": "Поворотная камера 3404 (24 - пл.5 поворотн. Кряж)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.35":
+												{"cams":
+													[
+														{"key2": "Тоннель № 2","Status": true},                                
+														{"key2": "Тоннель № 2 ","Status": true},
+														{"key2": "Тоннель № 2","Status": true},
+														{"key2": "Тоннель № 2 ","Status": true},                             
+														{"key2": "Камера 3505","Status": true},
+														{"key2": "Тоннель № 2 дизельная","Status": true},
+														{"key2": "Камера 3507","Status": true},
+														{"key2": "Камера 3508 (спуск тоннель 2)","Status": true},
+														{"key2": "Тоннель №1","Status": true},
+														{"key2": "Выход тоннель № 1 полиция","Status": true},
+														{"key2": "Вход в тоннель №1","Status": true},
+														{"key2": "Тоннель №1","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.36":
+												{"cams":
+													[
+														{"key2": "Камера 3601 (6 платф тонель Безым.)","Status": true},                                
+														{"key2": "Камера 3602 (6 платф  конкорс Безым.)","Status": true},
+														{"key2": "Камера 3603 (6 платф  конкорс Кряж)","Status": true},
+														{"key2": "Камера 3604 (6 платф тонель Кряж)","Status": true},                             
+														{"key2": "Камера 3605 (5 платф тонель Безым.)","Status": true},
+														{"key2": "Камера 3606 (5 платф  конкорс Безым.)","Status": true},
+														{"key2": "Камера 3607 (4 платф  конкорс Кряж)","Status": true},
+														{"key2": "Камера 3608 (5 платф тонель Кряж)","Status": true},
+														{"key2": "Камера 3609 (4 платф тонель Безым.)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.37":
+												{"cams":
+													[
+														{"key2": "Камера 3701 (Балкон 7)","Status": true},                                
+														{"key2": "Камера 3702 (Балкон 7)","Status": true},
+														{"key2": "Камера 3703 (Балкон 8)","Status": true},
+														{"key2": "Камера 3704 (Балкон 9)","Status": true},                             
+														{"key2": "Камера 3705 (Балкон 10)","Status": true},
+														{"key2": "Камера 3706 (Балкон 11)","Status": true},
+														{"key2": "Камера 3707","Status": true},
+														{"key2": "Камера 3708 (3-й этаж)","Status": true},
+														{"key2": "3-й этаж туалет","Status": true},
+														{"key2": "Камера 3710 (3-й этаж Лифт)","Status": true},
+														{"key2": "Камера 3711 (3-й этаж Вход)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.38":
+												{"cams":
+													[
+														{"key2": "Камера 3801 (3-й этаж)","Status": true},                                
+														{"key2": "3-й этаж 6 пл Безымянка","Status": true},
+														{"key2": "3-й этаж 6 пл Кряж","Status": true},
+														{"key2": "3-й этаж 5 пл Безым","Status": true},                             
+														{"key2": "3-й этаж 2 пл Безым","Status": true},
+														{"key2": "3-й этаж 3 пл Безым","Status": true},
+														{"key2": "3-й этаж 4 пл Кряж","Status": true},
+														{"key2": "3-й этаж 5 пл Кряж","Status": true},
+														{"key2": "3-й этаж 2 пл Кряж","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.39":
+												{"cams":
+													[
+														{"key2": "Камера 3901 (3-й этаж поворот)","Status": true},                                
+														{"key2": "Камера 3902","Status": true},
+														{"key2": "Камера 3903","Status": true},
+														{"key2": "Камера 3904","Status": true},                             
+														{"key2": "Камера 3905","Status": true},
+														{"key2": "Камера 3906","Status": true},
+														{"key2": "Камера 3907","Status": true},
+														{"key2": "Камера 3908","Status": true},
+														{"key2": "Камера 3909","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.40":
+												{"cams":
+													[
+														{"key2": "Вход 1-ый этаж (ВТК-1.26)","Status": true},                                
+														{"key2": "3-ий этаж табло (ВПТК-1.3)","Status": true,"udp_id":1301},
+														{"key2": "3-ий этаж Храм (ВТК-1.31)","Status": true},
+														{"key2": "2-огй этаж эскалатор (ВТК-1.32)","Status": true},                             
+														{"key2": "2-ой этаж лифт (ВТК-1.38)","Status": true},
+														{"key2": "2 этаж серверная (ВТК-1.40)","Status": true},
+														{"key2": "3-ий этаж зал №1 (ВТК-1.41)","Status": true},
+														{"key2": "3-й этаж служебный лифт (ВТК-1.42)","Status": true},
+														{"key2": "3 пл 5 путь Безымянка (НТК-4.57)","Status": true},
+														{"key2": "3 пл 5 путь Безымянка (НТК-4.60)","Status": true},
+														{"key2": "ВТК-6.1 (Вход 1 этаж)","Status": true},
+														{"key2": "ВТК-6.3 (Вход 3 этаж)","Status": true},
+                                                        {"key2": "3 пл 5 путь Безымянка (НТК-4.55)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.41":
+												{"cams":
+													[
+														{"key2": "3-ий этаж зал №2 (ВТК-1.43)","Status": true},                                
+														{"key2": "3-ий этаж вход (ВТК-1.53)","Status": true},
+														{"key2": "3-ий этаж касса 1-5 (ВТК-1.55)","Status": true},
+														{"key2": "3-ий этаж касса 5-7 (ВТК-1.56)","Status": true},                             
+														{"key2": "3 этаж кассовый зал (ВТК-1.57)","Status": true},
+														{"key2": "3-ий этаж авиакасса (ВТК-1.58)","Status": true},
+														{"key2": "3-ий этаж касса 8-10 (ВТК-1.59)","Status": true},
+														{"key2": "3-ий этаж 2 платформа Кряж (ВТК-1.60)","Status": true},
+														{"key2": "3-ий этаж 2 платформа Безымянка (ВТК-1.61)","Status": true},
+														{"key2": "3-ий этаж 3 платформа Кряж (ВТК-1.62)","Status": true},
+														{"key2": "3-ий этаж 3 палтформа Безымянка (ВТК-1.63)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.42":
+												{"cams":
+													[
+														{"key2": "3-ий этаж 2 платформа Кряж (ВТК-1.110)","Status": true},                                
+														{"key2": "Эскалатор 1-ый (ВТК-1.23)","Status": true},
+														{"key2": "Эскалатор 2-ой  этаж (ВТК-1.30)","Status": true},
+														{"key2": "3-ий этаж 2-3 платформа Кряж (ВТК-1.71)","Status": true},                             
+														{"key2": "3-ий этаж 2-3 платформа Безымянка (ВТК-1.73)","Status": true},
+														{"key2": "Выход с конкорса 3-я платфома Безымянка (НТК-4.56)","Status": true},
+														{"key2": "3 платформа 6-ой путь Безымянка (НТК-4.58)","Status": true},
+														{"key2": "3 пл тоннель Безымянка (НТК-4.59)","Status": true},
+														{"key2": "3 пл 6 путь Безымянка (НТК-4.62)","Status": true},
+														{"key2": "3 пл 6 путь Безымянка (НТК-4.65)","Status": true},
+														{"key2": "Выход 1 этаж на 1-ую платформу (ВТК-1.21)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.43":
+												{"cams":
+													[
+														{"key2": "ВТК-1.112","Status": true},                                
+														{"key2": "Пригородные кассы (НТК-2.1)","Status": true},
+														{"key2": "Проход к пригородным кассам (НТК-2.2)","Status": true},
+														{"key2": "Проход со стороны почты (НТК-2.3)","Status": true},
+														{"key2": "Привокзальная площадь (НПТК-3.1)","Status": true},                             
+														{"key2": "1 этаж аппарель (НПТК-3.2)","Status": true},
+														{"key2": "3-ий этаж аппарель (НПТК-3.3)","Status": true},
+														{"key2": "3 пл 6 путь Безымянка (НТК-4.61)","Status": true},
+														{"key2": "3 пл 6 путь Безымянка (НТК-4.63)","Status": true},
+														{"key2": "3 пл 5 путь Безымянка (НТК-4.64)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.49":
+												{"cams":
+													[
+														{"key2": "Камера Вокзал 5301","Status": true},                                
+														{"key2": "Камера Вокзал 5501","Status": true},
+														{"key2": "Камера Вокзал 4901","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.168.10.44":
+												{"cams":
+													[
+														{"key2": "1 этаж дежурный по вокзалу (ВТК-1.16)","Status": true},                                
+														{"key2": "Шлагбаум (НТК-3.1)","Status": true},
+														{"key2": "Нижний аппарель (НТК-3.2)","Status": true},
+														{"key2": "Проезд к полиции (НТК-3.3)","Status": true},                             
+														{"key2": "Нижний аппарель вход в тоннель (НТК-3.4)","Status": true},
+														{"key2": "Привокзальная площадь (НТК-3.5)","Status": true},
+														{"key2": "Вход 3-ий этаж (НТК-3.6)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+									]        
+								}    
+	}
+,    {      "10.254.254.49": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										{"192.168.10.130":
+												{"cams": 
+													[
+														{"key2": "Камера 101 мост","Status": true},
+														{"key2": "Тепловизор 24601","Status": true},
+														{"key2": "Камера 23801","Status": true},
+														{"key2": "Камера 23701","Status": true},
+														{"key2": "Камера 23501","Status": true},
+														{"key2": "Камера 24201","Status": true},
+														{"key2": "IP-Камера 24301","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										{"192.168.10.131":
+												{"cams":
+													[
+														{"key2": "Камера 24001","Status": true},                                
+														{"key2": "Камера 24801","Status": true},
+														{"key2": "Камера 23901","Status": true},
+														{"key2": "Тепловизор 23301","Status": true},
+														{"key2": "Поворотная камера 24501","Status": true},
+														{"key2": "Поворотная камера 20001","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										{"192.168.10.132":
+												{"cams":
+													[
+														{"key2": "Камера 3701","Status": true},                                
+														{"key2": "Камера 3601","Status": true},
+														{"key2": "Камера 3501","Status": true},
+														{"key2": "Камера 3401","Status": true},                                
+														{"key2": "Камера 3901","Status": true},
+														{"key2": "Камера 3101","Status": true},
+														{"key2": "Камера 3001","Status": true},                                
+														{"key2": "Камера 3301","Status": true},
+														{"key2": "Камера 3201 мост","Status": true},
+														{"key2": "Поворотная камера 4001","Status": true},
+														{"key2": "Поворотная камера 3801","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+										}
+									]        
+								}    
+	}
+,    {      "10.3.100.1": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										{"10.3.100.2":
+												{"cams": 
+													[
+														{"key2": "НТК - 1.1","Status": true},
+														{"key2": "НТК - 1.2","Status": true},
+														{"key2": "НТК - 1.3","Status": true},
+														{"key2": "НТК - 1.4","Status": true},
+														{"key2": "НТК - 1.5","Status": true},
+														{"key2": "НТК - 1.6","Status": true},
+														{"key2": "НТК - 1.7","Status": true},
+														{"key2": "НТК - 1.8","Status": true},
+														{"key2": "НТК - 1.9","Status": true},
+														{"key2": "НТК - 1.10","Status": true},
+														{"key2": "НТК - 1.11","Status": true},
+														{"key2": "НТК - 1.12","Status": true},
+														{"key2": "НТК - 1.13","Status": true},
+														{"key2": "НТК - 1.14","Status": true},
+														{"key2": "НТК - 1.15","Status": true},
+														{"key2": "НТК - 1.16","Status": true},
+														{"key2": "НТК - 1.17","Status": true},
+														{"key2": "НТК - 1.18","Status": true},
+														{"key2": "НТК - 1.19","Status": true},
+														{"key2": "Серверная Гагарино-Донская","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+											{"10.3.100.3":
+												{"cams":
+													[
+														{"key2": "НТК - 2.1","Status": true},
+														{"key2": "НТК - 2.2","Status": true},
+														{"key2": "НТК - 2.3","Status": true},
+														{"key2": "НТК - 2.4","Status": true},
+														{"key2": "НТК - 2.5","Status": true},
+														{"key2": "НТК - 2.6","Status": true},
+														{"key2": "НТК - 2.7","Status": true},
+														{"key2": "НТК - 2.8","Status": true},
+														{"key2": "НТК - 2.9","Status": true},
+														{"key2": "НТК - 2.10","Status": true},
+														{"key2": "НТК - 2.11","Status": true},
+														{"key2": "НТК - 2.12","Status": true},
+														{"key2": "НТК - 2.13","Status": true},
+														{"key2": "НТК - 2.14","Status": true},
+														{"key2": "НТК - 2.15","Status": true},
+														{"key2": "НТК - 2.16","Status": true},
+														{"key2": "НТК - 2.17","Status": true},
+														{"key2": "НТК - 2.18","Status": true},
+														{"key2": "НТК - 2.19","Status": true},
+														{"key2": "НТК - 2.20","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+									]        
+								}    
+	}
+,    {      "10.3.102.1": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										{"10.3.102.2":
+												{"cams": 
+													[
+														{"key2": "НТК-1.1","Status": true},
+														{"key2": "НТК-1.2","Status": true},
+														{"key2": "НТК-1.3","Status": true},
+														{"key2": "НТК-1.4","Status": true},
+														{"key2": "НТК-1.5","Status": true},
+														{"key2": "НТК-1.6","Status": true},
+														{"key2": "НТК-1.7","Status": true},
+														{"key2": "НТК-1.8","Status": true},
+														{"key2": "НТК-1.9","Status": true},
+														{"key2": "НТК-1.10","Status": true},
+														{"key2": "Серверная","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}						
+									]        
+								}    
+	}
+,    {      "10.3.12.1": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										{"192.168.1.3": 
+												{"cams": 
+													[
+														{"key2": "Тепловизор АМБ","Status": true,"udp_id": 5001},
+														{"key2": "Тепловизор АМБ видеоканал","Status": true,"udp_id": 5101},
+														{"key2": "Поворотная (башня)","Status": true,"udp_id": 10101}
+												    ],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										{"192.168.1.2": 
+												{"cams": 
+													[
+														{"key2": "Тепловизор 10501","Status": true},
+														{"key2": "Тепловизор 10601","Status": true},
+														{"key2": "Тепловизор 10301","Status": true},
+														{"key2": "Тепловизор 10401","Status": true},
+														{"key2": "Тепловизор 10901","Status": true},
+														{"key2": "Тепловизор 10801","Status": true},
+														{"key2": "Тепловизор 10701","Status": true},
+														{"key2": "Тепловизор 11001","Status": true}
+												],
+												"down_servers":
+												[  ]
+												}
+											}
+									]        
+								}    
+	}
+,    {      "10.3.22.17": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"10.3.22.1":
+												{"cams": 
+													[
+														{"key2": "ACti KCM-5311E 10.1.22.28","Status": true},
+														{"key2": "AMB-S-320 10.1.22.27","Status": true},
+														{"key2": "BeWard B2.920DX 10.1.22.21","Status": true},
+														{"key2": "BeWard B2.920DX 10.1.22.22","Status": true},
+														{"key2": "BeWard BD133 10.1.22.26","Status": true},
+														{"key2": "BeWard BD4330DH 10.1.22.23","Status": true},
+														{"key2": "BeWard BD4330DH 10.1.22.24","Status": true},
+														{"key2": "BeWard BD4330DH 10.1.22.25","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.3.22.2":
+												{"cams":
+													[
+														{"key2": "Камера 1101","Status": true},
+														{"key2": "Камера 1201","Status": true},
+														{"key2": "Камера 1301","Status": true},
+														{"key2": "Камера 1401","Status": true},
+														{"key2": "Камера 1501","Status": true},
+														{"key2": "Камера 1601","Status": true},
+														{"key2": "Камера 1701","Status": true},
+														{"key2": "Камера 1801","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.3.22.3":
+												{"cams": 
+													[
+														{"key2": "Камера 101","Status": true},
+														{"key2": "Камера 201","Status": true},
+														{"key2": "Камера 301","Status": true},
+														{"key2": "Камера 401","Status": true},
+														{"key2": "Камера 501","Status": true},
+														{"key2": "Камера 601","Status": true}
+													],
+												"down_servers":
+													[  ]
+												}
+											}
+										,
+										
+											{"10.3.22.4":
+												{"cams": 
+													[
+														{"key2": "Камера 601","Status": true},
+														{"key2": "Камера 701","Status": true},
+														{"key2": "Камера 801","Status": true},
+														{"key2": "Камера 3101","Status": true},
+														{"key2": "Камера 3201","Status": true},
+														{"key2": "Камера 3301","Status": true},
+														{"key2": "Камера 3401","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.3.22.5":
+												{"cams": 
+													[
+														{"key2": "Камера 3601","Status": true},
+														{"key2": "Камера 3501","Status": true},
+														{"key2": "Камера 3701","Status": true},
+														{"key2": "Камера 3801","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.3.22.6":
+												{"cams": 
+													[
+														{"key2": "AMB-S-320 10.1.22.47","Status": true},
+														{"key2": "AMB-S-640-IR 10.1.22.48","Status": true},
+														{"key2": "BeWard BD133 10.1.22.46","Status": true},
+														{"key2": "BeWard BD4330DH 10.1.22.45","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.3.22.7":
+												{"cams": 
+													[
+														{"key2": "AMB-S-320 10.1.22.43","Status": true},
+														{"key2": "AMB-S-320-IR 10.1.22.44","Status": true},
+														{"key2": "BeWard BD133 10.1.22.42","Status": true},
+														{"key2": "BeWard BD4330DH 10.1.22.41","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.3.22.8":
+												{"cams": 
+													[
+														{"key2": "Камера 4901","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+																		]        
+								}    
+	}
+,    {      "10.3.27.3": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+											{"10.3.27.1":
+												{"cams": 
+													[
+														{"key2": "Камера Отрадный 501","Status": true},
+														{"key2": "Камера Отрадный 601","Status": true},
+														{"key2": "Камера Отрадный 701","Status": true},
+														{"key2": "Камера Отрадный 801","Status": true},
+														{"key2": "Камера Отрадный 1101","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.3.27.2":
+												{"cams":
+													[
+														{"key2": "Камера Отрадный 1001","Status": true},
+														{"key2": "Камера Отрадный 1201","Status": true},
+														{"key2": "Камера Отрадный 901","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+									]        
+								}    
+	}
+,    {      "10.3.6.5": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"10.3.6.1":
+												{"cams": 
+													[
+														{"key2":"ТК 1","Status": true},
+														{"key2":"ТК 10","Status": true},
+														{"key2":"ТК 11","Status": true},
+														{"key2":"ТК 12","Status": true},
+														{"key2":"ТК 13","Status": true},
+														{"key2":"ТК 14","Status": true},
+														{"key2":"ТК 15","Status": true},
+														{"key2":"ТК 16","Status": true},
+														{"key2":"ТК 17","Status": true},
+														{"key2":"ТК 18","Status": true},
+														{"key2":"ТК 19","Status": true},
+														{"key2":"ТК 2","Status": true},
+														{"key2":"ТК 20","Status": true},
+														{"key2":"ТК 21","Status": true},
+														{"key2":"ТК 22","Status": true},
+														{"key2":"ТК 23","Status": true},
+														{"key2":"ТК 24","Status": true},
+														{"key2":"ТК 25","Status": true},
+														{"key2":"ТК 3","Status": true},
+														{"key2":"ТК 4","Status": true},
+														{"key2":"ТК 5","Status": true},
+														{"key2":"ТК 6","Status": true},
+														{"key2":"ТК 7","Status": true},
+														{"key2":"ТК 8","Status": true},
+														{"key2":"ТК 9","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.3.6.2":
+												{"cams":
+													[
+														{"key2":"ТК 26","Status": true},
+														{"key2":"ТК 27","Status": true},
+														{"key2":"ТК 28","Status": true},
+														{"key2":"ТК 29","Status": true},
+														{"key2":"ТК 30","Status": true},
+														{"key2":"ТК 31","Status": true},
+														{"key2":"ТК 32","Status": true},
+														{"key2":"ТК 33","Status": true},
+														{"key2":"ТК 34","Status": true},
+														{"key2":"ТК 35","Status": true},
+														{"key2":"ТК 36","Status": true},
+														{"key2":"ТК 37","Status": true},
+														{"key2":"ТК 38","Status": true},
+														{"key2":"ТК 39","Status": true},
+														{"key2":"ТК 40","Status": true},
+														{"key2":"ТК 41","Status": true},
+														{"key2":"ТК 42","Status": true},
+														{"key2":"ТК 43","Status": true},
+														{"key2":"ТК 44","Status": true},
+														{"key2":"ТК 45","Status": true},
+														{"key2":"ТК 46","Status": true},
+														{"key2":"ТК 47","Status": true},
+														{"key2":"ТК 48","Status": true},
+														{"key2":"ТК 49","Status": true},
+														{"key2":"ТК 50","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.3.6.3":
+												{"cams":
+													[
+														{"key2":"ТК 51","Status": true},
+														{"key2":"ТК 52","Status": true},
+														{"key2":"ТК 53","Status": true},
+														{"key2":"ТК 54","Status": true},
+														{"key2":"ТК 55","Status": true},
+														{"key2":"ТК 56","Status": true},
+														{"key2":"ТК 57","Status": true},
+														{"key2":"ТК 58","Status": true},
+														{"key2":"ТК 59","Status": true},
+														{"key2":"ТК 60","Status": true},
+														{"key2":"ТК 61","Status": true},
+														{"key2":"ТК 62","Status": true},
+														{"key2":"ТК 63","Status": true},
+														{"key2":"ТК 64","Status": true},
+														{"key2":"ТК 65","Status": true},
+														{"key2":"ТК 66","Status": true},
+														{"key2":"ТК 67","Status": true},
+														{"key2":"ТК 68","Status": true},
+														{"key2":"ТК 69","Status": true},
+														{"key2":"ТК 70","Status": true},
+														{"key2":"ТК 71","Status": true},
+														{"key2":"ТК 72","Status": true},
+														{"key2":"ТК 73","Status": true},
+														{"key2":"ТК 74","Status": true},
+														{"key2":"ТК 75","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.3.6.4":
+												{"cams":
+													[
+														{"key2":"ТК 75","Status": true},
+														{"key2":"ТК 100","Status": true},
+														{"key2":"ТК 101","Status": true},
+														{"key2":"ТК 102","Status": true},
+														{"key2":"Караульное помещение","Status": true},
+														{"key2":"ПТК 110","Status": true},
+														{"key2":"ТК 76","Status": true},
+														{"key2":"ТК 77","Status": true},
+														{"key2":"ТК 78","Status": true},
+														{"key2":"ТК 79","Status": true},
+														{"key2":"ТК 80","Status": true},
+														{"key2":"ТК 81","Status": true},
+														{"key2":"ТК 81","Status": true},
+														{"key2":"ТК 82","Status": true},
+														{"key2":"ТК 83","Status": true},
+														{"key2":"ТК 84","Status": true},
+														{"key2":"ТК 85","Status": true},
+														{"key2":"ТК 86","Status": true},
+														{"key2":"ТК 87","Status": true},
+														{"key2":"ТК 88","Status": true},
+														{"key2":"ТК 89","Status": true},
+														{"key2":"ТК 90","Status": true},
+														{"key2":"ТК 91","Status": true},
+														{"key2":"ТК 92","Status": true},
+														{"key2":"ТК 93","Status": true},
+														{"key2":"ТК 94","Status": true},
+														{"key2":"ТК 95","Status": true},
+														{"key2":"ТК 96","Status": true},
+														{"key2":"ТК 97","Status": true},
+														{"key2":"ТК 98","Status": true},
+														{"key2":"ТК 99","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.3.6.6":
+												{"cams":
+													[
+														{"key2":"Тепловизор 1","Status": true},
+														{"key2":"Тепловизор 2","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+																				
+									]        
+								}    
+	}
+,    {      "10.3.9.6": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+										[
+											{"10.3.9.11":
+												{"cams": 
+													[
+														{"key2": "Камера 6301 Архангельск","Status": true},
+														{"key2": "Камера 6201 Архангельск","Status": true},
+														{"key2": "Камера 6601 Архангельск","Status": true},
+														{"key2": "Камера 6701 Архангельск","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											},
+											{"10.3.9.25":
+												{"cams":
+													[
+														{"key2": "Камера 8601 Архангельск","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"10.3.9.15":
+												{"cams":
+													[
+														{"key2": "Камера 7801 Архангельск","Status": true},
+														{"key2": "Камера 7501 Архангельск","Status": true},
+														{"key2": "Камера 7401 Архангельск","Status": true},
+														{"key2": "Камера 7301 Архангельск","Status": true},
+														{"key2": "Камера 7201 Архангельск","Status": true},
+														{"key2": "Камера 7101 Архангельск","Status": true},
+														{"key2": "Камера 7001 Архангельск","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"10.3.9.24":
+												{"cams":
+													[
+														{"key2": "Камера 8801 Архангельск","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"10.3.9.18":
+												{"cams":
+													[
+														{"key2": "Камера 5101 Архангельск","Status": true},
+														{"key2": "Камера 5201 Архангельск","Status": true},
+														{"key2": "Камера 5301 Архангельск","Status": true},
+														{"key2": "Камера 5401 Архангельск","Status": true},
+														{"key2": "Камера 5501 Архангельск","Status": true},
+														{"key2": "Камера 5601 Архангельск","Status": true},
+														{"key2": "Камера 5701 Архангельск","Status": true},
+                                                        {"key2": "Камера 5801 Архангельск","Status": true},
+                                                        {"key2": "Камера 5901 Архангельск","Status": true},
+														{"key2": "Камера 6001 Архангельск","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"10.3.9.23":
+												{"cams":
+													[
+														{"key2": "Камера 6101 Архангельск","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											},
+											{"10.3.9.2":
+												{"cams":
+													[
+														{"key2": "Камера 5001 Архангельск","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+                                   ]  
+						}
+		}
+
+,    {      "10.3.99.1": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										{"10.3.99.3":
+												{"cams": 
+													[
+														{"key2": "Краснодарское кольцо 24","Status": true},
+														{"key2": "Краснодарское кольцо 25","Status": true},
+														{"key2": "Краснодарское кольцо 26","Status": true},
+														{"key2": "Краснодарское кольцо 27","Status": true},
+														{"key2": "Краснодарское кольцо 28","Status": true},
+														{"key2": "Краснодарское кольцо 29","Status": true},
+														{"key2": "Краснодарское кольцо 30","Status": true},
+														{"key2": "Краснодарское кольцо 31","Status": true},
+														{"key2": "Краснодарское кольцо 32","Status": true},
+														{"key2": "Краснодарское кольцо 33","Status": true},
+														{"key2": "Краснодарское кольцо 34","Status": true},
+														{"key2": "Краснодарское кольцо 35","Status": true},
+														{"key2": "Краснодарское кольцо 36","Status": true},
+														{"key2": "Краснодарское кольцо 37","Status": true},
+														{"key2": "Краснодарское кольцо 38","Status": true},
+														{"key2": "Краснодарское кольцо 39","Status": true},
+														{"key2": "Краснодарское кольцо 40","Status": true},
+														{"key2": "Краснодарское кольцо 41","Status": true},
+														{"key2": "Краснодарское кольцо 42","Status": true},
+														{"key2": "Краснодарское кольцо 43","Status": true},
+														{"key2": "Краснодарское кольцо 44","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+											{"10.3.99.4":
+												{"cams":
+													[
+														{"key2": "Краснодарское кольцо 3","Status": true},
+														{"key2": "Краснодарское кольцо 4","Status": true},
+														{"key2": "Краснодарское кольцо 5","Status": true},
+														{"key2": "Краснодарское кольцо 6","Status": true},
+														{"key2": "Краснодарское кольцо 7","Status": true},
+														{"key2": "Краснодарское кольцо 8","Status": true},
+														{"key2": "Краснодарское кольцо 9","Status": true},
+														{"key2": "Краснодарское кольцо 10","Status": true},
+														{"key2": "Краснодарское кольцо 11","Status": true},
+														{"key2": "Краснодарское кольцо 12","Status": true},
+														{"key2": "Краснодарское кольцо 13","Status": true},
+														{"key2": "Краснодарское кольцо 14","Status": true},
+														{"key2": "Краснодарское кольцо 15","Status": true},
+														{"key2": "Краснодарское кольцо 16","Status": true},
+														{"key2": "Краснодарское кольцо 17","Status": true},
+														{"key2": "Краснодарское кольцо 18","Status": true},
+														{"key2": "Краснодарское кольцо 19","Status": true},
+														{"key2": "Краснодарское кольцо 20","Status": true},
+														{"key2": "Краснодарское кольцо 21","Status": true},
+														{"key2": "Краснодарское кольцо 22","Status": true},
+														{"key2": "Краснодарское кольцо 23","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+                                            {"10.3.99.5":
+												{"cams":
+													[
+														{"key2": "Краснодарское кольцо 1","Status": true},
+														{"key2": "Краснодарское кольцо 2","Status": true},
+														{"key2": "Серверная","Status": true},
+														{"key2": "Тепловизор 2","Status": true},
+														{"key2": "Тепловизор","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}										
+									]        
+								}    
+	}
+,    {      "172.0.0.143": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"192.168.190.102":
+												{"cams": 
+													[
+    													{"key2": "Axis 201","Status": true}, 
+                                                        {"key2": "Axis 202","Status": true},	
+                                                        {"key2": "Axis 203","Status": true},
+														{"key2": "Axis 204","Status": true},
+														{"key2": "Axis 205","Status": true},
+                                                        {"key2": "Axis 206","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,    {      "172.17.0.6": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+											{"1.0.71.30":
+												{"cams": 
+													[
+														{"key2": "Камера 3001 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3002 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3003 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3004 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3005 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3006 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3007 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3008 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3009 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3010 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3011 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3012 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3013 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3014 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3015 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3016 СГУПС корпус 3","Status": true}
+														
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+											{"1.0.71.32":
+												{"cams":
+													[
+														{"key2": "Камера 3205 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3206 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3209 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 3212 СГУПС корпус 3","Status": true},
+														{"key2": "Камера 1205 СГУПС корпус 3","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"1.0.71.204":
+												{"cams":
+													[
+														{"key2": "Камера 1301 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1302 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1303 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1304 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1305 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1306 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1307 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1308 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1309 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1310 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1311 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1312 СГУПС корпус 1","Status": true}
+														
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"1.0.71.203":
+												{"cams":
+													[
+														{"key2": "Камера 1201 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1202 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1203 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1204 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1205 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1206 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1207 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1208 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1209 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1210 СГУПС корпус 1","Status": true}
+														
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"1.0.71.205":
+												{"cams":
+													[
+														{"key2": "Камера 1401 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1402 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1403 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1404 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1405 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1406 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1407 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1408 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1409 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1410 СГУПС корпус 1","Status": true},
+														{"key2": "Камера 1411 СГУПС корпус 1","Status": true}
+														
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"1.0.71.215":
+												{"cams":
+													[
+														{"key2": "Камера 101 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 102 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 103 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 104 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 105 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 106 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 107 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 8 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 5 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 111 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 7 СГУПС корпус 4","Status": true}
+														
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"1.0.71.210":
+												{"cams":
+													[
+														{"key2": "Камера 701 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 702 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 703 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 704 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 705 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 706 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 707 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 708 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 709 СГУПС корпус 4","Status": true},
+														{"key2": "Камера 710 СГУПС корпус 4","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"1.0.71.201":
+												{"cams":
+													[
+														{"key2": "Камера 2011 СГУПС корпус 7","Status": true},
+														{"key2": "Камера 2012 СГУПС корпус 7","Status": true},
+														{"key2": "Камера 2013 СГУПС корпус 7","Status": true},
+														{"key2": "Камера 2014 СГУПС корпус 7","Status": true},
+														{"key2": "Камера 2015 СГУПС корпус 7","Status": true},
+														{"key2": "Камера 2016 СГУПС корпус 7","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.0.0.1":
+												{"cams":
+													[
+														{"key2": "Камера 7001 СГУПС корпус Админ","Status": true},                                
+														{"key2": "Камера 7101 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 7201 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 7301 СГУПС корпус Админ","Status": true},                             
+														{"key2": "Камера 7401 СГУПС корпус Админ","Status": true},                                
+														{"key2": "Камера 7501 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 7601 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 7701 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 7801 СГУПС корпус Админ","Status": true},                                
+														{"key2": "Камера 7901 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 8001 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 8101 СГУПС корпус Админ","Status": true},                             
+														{"key2": "Камера 8201 СГУПС корпус Админ","Status": true},                                
+														{"key2": "Камера 8301 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 8401 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 8501 СГУПС корпус Админ","Status": true}
+														
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"192.0.0.2":
+												{"cams":
+													[
+														{"key2": "Камера 8601 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 8701 СГУПС корпус Админ","Status": true},                             
+														{"key2": "Камера 8801 СГУПС корпус Админ","Status": true},                                
+														{"key2": "Камера 8901 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 9001 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 9101 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 9201 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 9301 СГУПС корпус Админ","Status": true},                             
+														{"key2": "Камера 9401 СГУПС корпус Админ","Status": true},                                
+														{"key2": "Камера 9501 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 9601 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 9701 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 9801 СГУПС корпус Админ","Status": true},                                
+														{"key2": "Камера 9901 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 10001 СГУПС корпус Админ","Status": true},
+														{"key2": "Камера 10101 СГУПС корпус Админ","Status": true},                             
+														{"key2": "Камера 10201 СГУПС корпус Админ","Status": true}       
+														
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"1.0.71.1":
+												{"cams":
+													[
+														{"key2": "Камера 1 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 2 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 3 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 4 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 5 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 6 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 7 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 8 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 9 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 10 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 11 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 12 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 13 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 14 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 15 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 16 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 17 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 18 СГУПС корпус 7л","Status": true},
+														{"key2": "Камера 19 СГУПС корпус 7л","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+											{"1.0.71.200":
+												{"cams":
+													[
+														{"key2": "Камера 1 СГУПС корпус 8","Status": true},
+														{"key2": "Камера 2 СГУПС корпус 8","Status": true},
+														{"key2": "Камера 3 СГУПС корпус 8","Status": true},
+														{"key2": "Камера 4 СГУПС корпус 8","Status": true},
+														{"key2": "Камера 5 СГУПС корпус 8","Status": true},
+														{"key2": "Камера 6 СГУПС корпус 8","Status": true},
+														{"key2": "Камера 401 СГУПС корпус 8","Status": true},
+														{"key2": "Камера 402 СГУПС корпус 8","Status": true},
+														{"key2": "Камера 403 СГУПС корпус 8","Status": true},
+														{"key2": "Камера 404 СГУПС корпус 8","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+									]        
+								}    
+	}
+,    {      "192.168.10.30": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										{"192.168.10.30":
+												{"cams": 
+													[
+														{"key2": "2101","Status": true},
+														{"key2": "2102","Status": true}
+																												
+													],
+												"down_servers":
+												[  ]
+												}
+											}						
+									]        
+								}    
+	}
+,    {      "192.168.12.11": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"192.168.12.11":
+												{"cams": 
+													[
+														{"key2": "НТК-5","Status": true},
+														{"key2": "НЗТК-2","Status": true},
+														{"key2": "НЗТК-1","Status": true},
+														{"key2": "НТК-1","Status": true},
+														{"key2": "НТК-7","Status": true},
+														{"key2": "НТК-9","Status": true},
+														{"key2": "НТК-10","Status": true},
+														{"key2": "НТК-11","Status": true},
+														{"key2": "НТК-2","Status": true},
+														{"key2": "НТК-3","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"192.168.12.12":
+												{"cams":
+													[
+														{"key2": "НЗТК-3 на москву1","Status": true},
+														{"key2": "НТК-12","Status": true},
+														{"key2": "НЗТК-4 на москву 1","Status": true},
+														{"key2": "НТК-4","Status": true},
+														{"key2": "НТК-6","Status": true},
+														{"key2": "НЗТК-6 от москвы","Status": true},
+														{"key2": "СЭС-1","Status": true},
+														{"key2": "СЭС-2","Status": true},
+														{"key2": "НТК-8","Status": true},
+														{"key2": "НЗТК-5 от москвы","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,    {      "192.168.13.11": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"192.168.13.11":
+												{"cams": 
+													[
+														{"key2": "НЗТК-1 (турникетный павильон)","Status": true},
+														{"key2": "НЗТК-2 (турникетный павильон)","Status": true},
+														{"key2": "НЗТК-3 (турникетный павильон)","Status": true},
+														{"key2": "НТК-1 (платформа №1)","Status": true},
+														{"key2": "НТК-3 (платформа №1)","Status": true},
+														{"key2": "НТК-2 (платформа №1)","Status": true},
+														{"key2": "НТК-9 (платформа №2)","Status": true},
+														{"key2": "НЗТК-7 (турникетный павильон)","Status": true},
+														{"key2": "НТК-5 (платформа №1)","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"192.168.13.12":
+												{"cams":
+													[
+														{"key2": "НТК-4 (платформа №1)","Status": true},
+														{"key2": "НЗТК-4 (платформа №2)","Status": true},
+														{"key2": "НТК-7 (платформа №2)","Status": true},
+														{"key2": "НЗТК-5 (платформа №2)","Status": true},
+														{"key2": "НЗТК-6 (турникетный павильон)","Status": true},
+														{"key2": "НТК-6 ( (платформа №2)","Status": true},
+														{"key2": "НТК-8 (платформа №2)","Status": true},
+														{"key2": "СЭС-2","Status": true},
+														{"key2": "СЭС-1","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,    {      "192.168.17.11": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"192.168.17.11":
+												{"cams": 
+													[
+														{"key2": "НТК-2 (платформа №1)","Status": true},
+														{"key2": "НТК-1 (платформа №1)","Status": true},
+														{"key2": "НЗТК-3 (турникетный павильон)","Status": true},
+														{"key2": "НТК-3 (платформа №1)","Status": true},
+														{"key2": "ВТК-2 (зал ожидания здания вокзала)","Status": true},
+														{"key2": "ВТК-1 (зал ожидания здания вокзала)","Status": true},
+														{"key2": "СЭС-1","Status": true},
+														{"key2": "НЗТК-7 (платформа №1)","Status": true},
+														{"key2": "НЗТК-4 (турникетный павильон)","Status": true},
+														{"key2": "НЗТК-2 (турникетный павильон)","Status": true},
+														{"key2": "НЗТК-1 (турникетный павильон)","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"192.168.17.12":
+												{"cams":
+													[
+														{"key2": "НЗТК-5 (турникетный павильон)","Status": true},
+														{"key2": "НТК-4","Status": true},
+														{"key2": "НТК-5 (платформа №2)","Status": true},
+														{"key2": "НТК-6 (платформа №2)","Status": true},
+														{"key2": "НТК-7","Status": true},
+														{"key2": "НЗТК-6 (турникетный павильон)","Status": true},
+														{"key2": "НТК-8 (платформа №2)","Status": true},
+														{"key2": "СЭС-2","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,    {      "192.168.2.115": {
+									"direct_access":1,
+									"cams":
+										[	            {"key2": "Камера-ВТК27(комната-312)","Status": true},
+														{"key2": "Камера-ВТК26(комната-314)","Status": true},
+														{"key2": "Камера-ВТК25(комната-313)","Status": true},
+														{"key2": "Камера-ВТК30(комната-308)","Status": true},
+														{"key2": "Камера-ВТК31(комната-304)","Status": true},
+														{"key2": "Камера-ВТК6(комната-103)","Status": true},
+														{"key2": "Камера-ВТК15(комната-216)","Status": true},
+														{"key2": "Камера-ВТК2(комната-120)","Status": true}
+										],
+									"down_servers": 
+									[
+										
+										
+											{"192.168.2.117":
+												{"cams":
+													[
+														{"key2": "Камера-ВТК22(комната-203)","Status": true},                                
+														{"key2": "Камера-ВТК23(комната-209)","Status": true},
+														{"key2": "Камера-ВТК13(комната-214)","Status": true},
+														{"key2": "Камера-ВТК17(комната-215)","Status": true},
+														{"key2": "Камера-ВТК17(комната-215)","Status": true},
+														{"key2": "Камера-ВТК7(комната-108)","Status": true},
+														{"key2": "Камера-ВТК28(комната-301)","Status": true},
+														{"key2": "Камера-ВТК18(комната-201)","Status": true},
+														{"key2": "Камера-ВТК33(комната-309)","Status": true},
+														{"key2": "Камера-ВТК29(комната-302)","Status": true}
+													
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"192.168.2.116":
+												{"cams":
+													[
+														{"key2": "Уличная камера 1","Status": true},                                
+														{"key2": "Уличная камера 2","Status": true},
+														{"key2": "Уличная камера 3","Status": true},
+														{"key2": "Уличная камера 4","Status": true},
+														{"key2": "Уличная камера 5","Status": true},
+														{"key2": "Уличная камера 6","Status": true},
+														{"key2": "Уличная камера 7","Status": true},
+														{"key2": "Уличная камера 8","Status": true}															
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"192.168.2.119":
+												{"cams":
+													[
+														{"key2": "Камера-ВТК9(комната-102)","Status": true},                                
+														{"key2": "Камера-ВТК11(комната-106)","Status": true},
+														{"key2": "Камера-ВТК5(комната-122)","Status": true},
+														{"key2": "Камера-ВТК8(комната-104)","Status": true},
+														{"key2": "Камера-ВТК3(комната-116)","Status": true},
+														{"key2": "Камера-ВТК10(комната-107)","Status": true},
+														{"key2": "Камера-ВТК4(комната-101)","Status": true},
+														{"key2": "Камера-ВТК1(комната-117)","Status": true},
+														{"key2": "Камера-ВТК16(комната-116)","Status": true},
+														{"key2": "Камера-ВТК19(комната-212)","Status": true},
+														{"key2": "ВТК-14","Status": true},
+														{"key2": "Камера-ВТК20(комната-209)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+									 	
+                                       ]										
+									}
+					}			
+		  
+ 
+
+,    {      "192.168.2.42": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"10.1.78.11":
+												{"cams": 
+													[
+														{"key2": "Камера 10701 (К70)","Status": true},
+														{"key2": "Камера 11201 (К76)","Status": true},
+														{"key2": "Камера 12501 (К81)","Status": true},
+														{"key2": "Камера 12901 (К77)","Status": true},
+														{"key2": "Камера 13701 (К69)","Status": true},
+														{"key2": "Камера 11201(K76)","Status": true},
+														{"key2": "Камера 12501 (К81)","Status": true},
+														{"key2": "Камера 13701 (К69)","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.12":
+												{"cams":
+													[
+														{"key2": "Камера 11701 (К66)","Status": true},
+														{"key2": "Камера 12001 (К80)","Status": true},
+														{"key2": "Камера 12301 (К88)","Status": true},
+														{"key2": "Камера 17001 (К84)","Status": true},
+														{"key2": "Камера 11701 (К66)","Status": true},
+														{"key2": "Камера 12001 (К80)","Status": true},
+														{"key2": "Камера 12101(K73)","Status": true},
+														{"key2": "Камера 12301 (К88)","Status": true},
+														{"key2": "Камера 17001 (К84)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.13":
+												{"cams":
+													[
+														{"key2": "Поворотная камера 15101 (К64)","Status": true},
+														{"key2": "Поворотная камера 15201 (К67)","Status": true},
+														{"key2": "Поворотная камера 15301 (К65)","Status": true},
+														{"key2": "Поворотная камера 15401 (К57)","Status": true},
+														{"key2": "Поворотная камера 15601 (К72)","Status": true},
+														{"key2": "Поворотная камера 15701 (К89)","Status": true},
+														{"key2": "Камера 15101 (К64)","Status": true},
+														{"key2": "Камера 15201 (К67)","Status": true},
+														{"key2": "Камера 15301 (К65)","Status": true},
+														{"key2": "Камера 15401 (К57)","Status": true},
+														{"key2": "Камера 15601 (К72)","Status": true},
+														{"key2": "Камера 15701(К89)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.14":
+												{"cams":
+													[
+														{"key2": "Камера 11101 (К86)","Status": true},
+														{"key2": "Камера 11601 (К63)","Status": true},
+														{"key2": "Камера 12201 (К85)","Status": true},
+														{"key2": "Камера 12401 (К87)","Status": true},
+														{"key2": "Камера 11101 (К86)","Status": true},
+														{"key2": "Камера 11601 (К63)","Status": true},
+														{"key2": "Камера 12201 (К85)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.15":
+												{"cams":
+													[
+														{"key2": "Камера 11301 (К56)","Status": true},
+														{"key2": "Камера 11901 (К79)","Status": true},
+														{"key2": "Камера 13301 (К75)","Status": true},
+														{"key2": "Камера 11301 (К56)","Status": true},
+														{"key2": "Камера 11901 (К79)","Status": true},
+														{"key2": "Камера 13301(K75)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.2":
+												{"cams":
+													[
+														{"key2": "Камера 201 (К17)","Status": true},
+														{"key2": "Камера 204 (К26)","Status": true},
+														{"key2": "Камера 205 (К23)","Status": true},
+														{"key2": "Камера 207 (К25)","Status": true},
+														{"key2": "Камера 201(K17)","Status": true},
+														{"key2": "Камера 202(K32)","Status": true},
+														{"key2": "Камера 203(K30)","Status": true},
+														{"key2": "Камера 205(K23)","Status": true},
+														{"key2": "Камера 206(K28)","Status": true},
+														{"key2": "Камера 207(K25)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.1":
+												{"cams":
+													[
+														{"key2": "Камера 101 (К90)","Status": true},
+														{"key2": "Камера 104 (К16)","Status": true},
+														{"key2": "Камера 101(K90)","Status": true},
+														{"key2": "Камера 102(K31)","Status": true},
+														{"key2": "Камера 104(k16)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.10":
+												{"cams":
+													[
+														{"key2": "Камера 13401 (К82)","Status": true},
+														{"key2": "Камера 13501 (К68)","Status": true},
+														{"key2": "Камера 13601 (К71)","Status": true},
+														{"key2": "Камера 13401 (К82)","Status": true},
+														{"key2": "Камера 13501 (К68)","Status": true},
+														{"key2": "Камера 13601 (К71)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.3":
+												{"cams":
+													[
+														{"key2": "Камера 301 (К21)","Status": true},
+														{"key2": "Камера 302 (К22)","Status": true},
+														{"key2": "Камера 305 (К24)","Status": true},
+														{"key2": "Камера 306 (К20)","Status": true},
+														{"key2": "Камера 308 (К18)","Status": true},
+														{"key2": "Камера 301(K21)","Status": true},
+														{"key2": "Камера 302(K22)","Status": true},
+														{"key2": "Камера 303(K29)","Status": true},
+														{"key2": "Камера 305(K24)","Status": true},
+														{"key2": "Камера 306(K20)","Status": true},
+														{"key2": "Камера 307(K27)","Status": true},
+														{"key2": "Камера 308(K18)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.4":
+												{"cams":
+													[
+														{"key2": "Камера 401 (К3)","Status": true},
+														{"key2": "Камера 403 (K6)","Status": true},
+														{"key2": "Поворотная камера 404 (К8)","Status": true},
+														{"key2": "Камера  405 (К10)","Status": true},
+														{"key2": "Камера 406 (К2)","Status": true},
+														{"key2": "Камера 407 (К1)","Status": true},
+														{"key2": "Камера 408 (К9)","Status": true},
+														{"key2": "Камера 401(K3)","Status": true},
+														{"key2": "Камера 403 (К6)","Status": true},
+														{"key2": "Камера 404(K8)","Status": true},
+														{"key2": "Камера 405(K10)","Status": true},
+														{"key2": "Камера 406(K2)","Status": true},
+														{"key2": "Камера 407(K1)","Status": true},
+														{"key2": "Камера 408(K9)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.5":
+												{"cams":
+													[
+														{"key2": "Камера 501 (К41)","Status": true},
+														{"key2": "Камера 502 (К38)","Status": true},
+														{"key2": "Камера 503 (К42)","Status": true},
+														{"key2": "Поворотная камера 504 (К40)","Status": true},
+														{"key2": "Камера 505 (К34)","Status": true},
+														{"key2": "Камера 506 (К37)","Status": true},
+														{"key2": "Камера 509 (К11)","Status": true},
+														{"key2": "Камера 511 (К7)","Status": true},
+														{"key2": "Камера 512","Status": true},
+														{"key2": "Камера 513 (К4)","Status": true},
+														{"key2": "Камера 514 (К12)","Status": true},
+														{"key2": "Камера 515 (К5)","Status": true},
+														{"key2": "Камера 501 (К41)","Status": true},
+														{"key2": "Камера 502 (К38)","Status": true},
+														{"key2": "Камера 503 (К42)","Status": true},
+														{"key2": "Камера 504 (К40)","Status": true},
+														{"key2": "Камера 506 (К37)","Status": true},
+														{"key2": "Камера 507(K47)","Status": true},
+														{"key2": "Камера 508(K46)","Status": true},
+														{"key2": "Камера 509(K11)","Status": true},
+														{"key2": "Камера 511(K7)","Status": true},
+														{"key2": "Камера 512","Status": true},
+														{"key2": "Камера 513(K4)","Status": true},
+														{"key2": "Камера 514(K12)","Status": true},
+														{"key2": "Камера 515(K5)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.6":
+												{"cams":
+													[
+														{"key2": "Камера 601 (К35)","Status": true},
+														{"key2": "Камера 602 (К33)","Status": true},
+														{"key2": "Камера 603 (К39)","Status": true},
+														{"key2": "Камера 604 (К43)","Status": true},
+														{"key2": "Камера 605 (К44)","Status": true},
+														{"key2": "Камера 607 (К36)","Status": true},
+														{"key2": "Камера 601(K35)","Status": true},
+														{"key2": "Камера 602(K33)","Status": true},
+														{"key2": "Камера 602(K45)","Status": true},
+														{"key2": "Камера 604 (К43)","Status": true},
+														{"key2": "Камера 605 (К44)","Status": true},
+														{"key2": "Камера 607(K36)","Status": true},
+														{"key2": "Камера 608(K48)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.7":
+												{"cams":
+													[
+														{"key2": "Камера 10101 (К53)","Status": true},
+														{"key2": "Камера 10102 (К54)","Status": true},
+														{"key2": "Камера 10401 (К51)","Status": true},
+														{"key2": "Камера 10801 (К52)","Status": true},
+														{"key2": "Камера 10101 (К53)","Status": true},
+														{"key2": "Камера 10101 (К54)","Status": true},
+														{"key2": "Камера 10401 (К51)","Status": true},
+														{"key2": "Камера 10801 (К52)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+									,
+										
+											{"10.1.78.8":
+												{"cams":
+													[
+														{"key2": "Камера 10901 (К59)","Status": true},
+														{"key2": "Камера 11001 (К58)","Status": true},
+														{"key2": "Камера 11401 (К55)","Status": true},
+														{"key2": "Камера 10901 (К59)","Status": true},
+														{"key2": "Камера 11001 (К58)","Status": true},
+														{"key2": "Камера 11401 (К55)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										,
+										
+											{"10.1.78.9":
+												{"cams":
+													[
+														{"key2": "Камера 11501 (К62)","Status": true},
+														{"key2": "Камера 11801 (К61)","Status": true},
+														{"key2": "Камера 13101 (К83)","Status": true},
+														{"key2": "Камера 13201 (К78)","Status": true},
+														{"key2": "Камера 11501 (К62)","Status": true},
+														{"key2": "Камера 11801 (К61)","Status": true},
+														{"key2": "Камера 13101 (К83)","Status": true},
+														{"key2": "Камера 13201(K78)","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,    {      "192.168.28.11": {
+									"direct_access":1,
+									"cams":
+										[
+														{"key2": "НТК-4 (Кассы)","Status": true},
+														{"key2": "НТК-8 (Платформа №2)","Status": true},
+														{"key2": "НТК-3 (Кассы)","Status": true},
+														{"key2": "НТК-1 (Платформа №2)","Status": true},
+														{"key2": "НЗТК-1 (Турникетный павильон)","Status": true},
+														{"key2": "НЗТК-2 (Турникетный павильон)","Status": true},
+														{"key2": "НТК-12 (Платформа №2)","Status": true},
+														{"key2": "СЭС-2","Status": true},
+														{"key2": "НТК-9 (Платформа №1)","Status": true},
+														{"key2": "СЭС-1","Status": true},
+														{"key2": "НТК-6 (Платформа №2)","Status": true},
+														{"key2": "НТК-5 (Платформа №2)","Status": true},
+														{"key2": "НТК-2 (Платформа №1)","Status": true},
+														{"key2": "НТК-7 (Платформа №1)","Status": true},
+														{"key2": "НТК-11 (Платформа №1)","Status": true},
+														{"key2": "НТК-10 (Платформа №2)","Status": true}
+										],
+									"down_servers": 
+									[			]        
+								}    
+	}
+,    {      "192.168.4.11": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"192.168.4.11":
+												{"cams": 
+													[
+														{"key2": "НТК-8  (платформа №2)","Status": true},
+														{"key2": "НТК-13  (платформа №2)","Status": true},
+														{"key2": "ВТК-3 (зал ожидания)","Status": true},
+														{"key2": "НТК-2 (турникетный павильон)","Status": true},
+														{"key2": "ВТК-8 (турникетный павильон)","Status": true},
+														{"key2": "ВТК-7 (турникетный павильон)","Status": true},
+														{"key2": "НТК-9  (платформа №2)","Status": true},
+														{"key2": "ВТК-9 (турникетный павильон)","Status": true},
+														{"key2": "ВТК-10 (турникетный павильон)","Status": true},
+														{"key2": "ВТК-12 (турникетный павильон)","Status": true},
+														{"key2": "ВТК-11 (турникетный павильон)","Status": true},
+														{"key2": "НТК-6  (платформа №2)","Status": true},
+														{"key2": "НТК-16  (платформа №2)","Status": true},
+														{"key2": "ВТК-1 (турникетный павильон)","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										,
+										
+											{"192.168.4.12":
+												{"cams":
+													[
+														{"key2": "ВТК-6 (турникетный павильон)","Status": true},
+														{"key2": "НТК-11 (палатки между платформ)","Status": true},
+														{"key2": "НТК-12  (платформа №1)","Status": true},
+														{"key2": "НТК-7  (платформа №1)","Status": true},
+														{"key2": "НТК-10  (платформа №1)","Status": true},
+														{"key2": "НТК-1 (платформа №1)","Status": true},
+														{"key2": "ВТК-3 (зал ожидания)","Status": true},
+														{"key2": "НТК-4  (платформа №2)","Status": true},
+														{"key2": "ВТК-2 (турникетный павильон)","Status": true},
+														{"key2": "НТК-15  (платформа №2)","Status": true},
+														{"key2": "ВТК-4 (зал ожидания)","Status": true},
+														{"key2": "НТК-5 (платформа №2)","Status": true},
+														{"key2": "СЭС-1","Status": true},
+														{"key2": "СЭС-2","Status": true},
+														{"key2": "ВТК-5 (турникетный павильон)","Status": true},
+														{"key2": "1","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,    {      "192.168.5.11": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"192.168.5.11":
+												{"cams": 
+													[
+														{"key2": "(НТК-5) 1001","Status": true},
+														{"key2": "(ВТК-2) 1201","Status": true},
+														{"key2": "(ВТК-3) 1401","Status": true},
+														{"key2": "(НТК-1) 1501","Status": true},
+														{"key2": "(ВТК-1) 1601","Status": true},
+														{"key2": "(НТК-2) 1701","Status": true},
+														{"key2": "(НТК-4) 1801","Status": true},
+														{"key2": "(НТК-3) 1901","Status": true},
+														{"key2": "Новое устройство Камера","Status": true},
+														{"key2": "НТК-8","Status": true},
+														{"key2": "Новое устройство Камера","Status": true}
+													],
+												"down_servers": 
+													[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,    {      "212.176.215.82": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										{"212.176.215.82":
+												{"cams": 
+													[
+														{"key2": "TSM5611-1","Status": true},
+														{"key2": "TSM5611-2","Status": true}
+																												
+													],
+												"down_servers":
+												[  ]
+												}
+											}						
+									]        
+								}    
+	}
+,    {      "83.220.233.103": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"192.168.135.1":
+												{"cams": 
+													[
+    													{"key2": "Камера 101","Status": true},   
+                                                                                                        {"key2": "Камера 102","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,    {      "83.220.234.36": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"192.168.135.2":
+												{"cams": 
+													[
+    													{"key2": "Камера 2101 овраг","Status": true},   
+                                                                                                        {"key2": "КДД овраг","Status": true},
+                                                                                                        {"key2": "Камера 2301 овраг","Status": true}
+            
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										
+									]        
+								}    
+	}
+,   {        "10.1.4.150": {
+                                    "is_central_server": true,
+                                    "iv54server_port": "20000",
+                                    "rtsp_port": 0,
+                                    "rtmp_port": 0,
+                                    "time_correction": 14400000000,
+									"direct_access":1,
+									"cams": 
+										[
+											{"key2": "kursk11910","Status": true},
+                                            {"key2": "kursk11911","Status": true},
+                                            {"key2": "kursk11810","Status": true},
+                                            {"key2": "kursk11811","Status": true},
+                                            {"key2": "kursk11710","Status": true},
+                                            {"key2": "kursk119100","Status": true},
+                                            {"key2": "kursk119101","Status": true},
+                                            {"key2": "kursk118100","Status": true},
+											{"key2": "kursk118101","Status": true},
+											{"key2": "kursk117100","Status": true},
+                                            {"key2": "kursk117101","Status": true}
+										],
+									"down_servers": 
+										[   ]      
+								}    
+	}
+,   {        "10.113.110.30": {
+                                    "is_central_server": true,
+                                    "iv54server_port": "20000",
+                                    "rtsp_port": 0,
+                                    "rtmp_port": 0,
+                                    "time_correction": 14400000000,
+									"direct_access":1,
+									"cams": 
+										[
+											{"key2": "kursk1","Status": true},
+											{"key2": "kursk2","Status": true},
+											{"key2": "kursk3","Status": true},
+											{"key2": "kursk4","Status": true},
+											{"key2": "kursk5","Status": true},
+                                            {"key2": "kursk6","Status": true},
+                                                                                        {"key2": "kursk7","Status": true},
+                                                                                        {"key2": "kursk8","Status": true},
+                                                                                        {"key2": "kursk9","Status": true},
+                                                                                        {"key2": "kursk11","Status": true},
+                                                                                        {"key2": "kursk12","Status": true},
+                                                                                        {"key2": "kursk13","Status": true},
+																						{"key2": "kursk17","Status": true},
+																						{"key2": "kursk18","Status": true},
+																						{"key2": "kursk19","Status": true},
+																						{"key2": "kursk20","Status": true},
+																						{"key2": "kursk21","Status": true},
+																						{"key2": "kursk22","Status": true},
+																						{"key2": "kursk23","Status": true},
+																						{"key2": "kursk24","Status": true},
+																						{"key2": "kursk25","Status": true},
+																						{"key2": "kursk26","Status": true},
+																						{"key2": "kursk27","Status": true},
+																						{"key2": "kursk28","Status": true},
+																						{"key2": "kursk29","Status": true},
+																						{"key2": "kursk30","Status": true},
+																						{"key2": "kursk31","Status": true},
+																						{"key2": "kursk32","Status": true},
+																						{"key2": "kursk33","Status": true},
+																						{"key2": "kursk34","Status": true},
+																						{"key2": "kursk35","Status": true},
+																						{"key2": "kursk36","Status": true},
+																						{"key2": "kursk37","Status": true},
+																						{"key2": "kursk38","Status": true},
+																						{"key2": "kursk39","Status": true},
+																						{"key2": "kursk40","Status": true},
+																						{"key2": "kursk41","Status": true},
+																						{"key2": "kursk42","Status": true},
+																						{"key2": "kursk43","Status": true},
+																						{"key2": "kursk44","Status": true},
+																						{"key2": "kursk48","Status": true},
+																						{"key2": "kursk49","Status": true},
+                                                                                        {"key2": "kursk10","Status": true}
+										],
+									"down_servers": 
+										[                             
+                                        ]      
+								}    
+	}
+,   {        "10.113.110.40": {
+                                    "is_central_server": true,
+                                    "iv54server_port": "20000",
+                                    "rtsp_port": 0,
+                                    "rtmp_port": 0,
+                                    "time_correction": 14400000000,
+									"direct_access":1,
+									"cams": 
+										[
+											{"key2": "kursk16","Status": true,"udp_id":16},
+                                            {"key2": "kursk14","Status": true,"udp_id":14},
+                                            {"key2": "kursk15","Status": true,"udp_id":15}
+										],
+									"down_servers": 
+										[   ]      
+								}    
+	}
+,   {        "192.168.10.227": {
+									"direct_access":2,
+									"cams": 
+										[
+											{"key2": "Камера_22704","Status": true},
+											{"key2": "Камера 23201 (перекресток)","Status": true}
+										],
+									"down_servers": 
+										[   ]      
+								}    
+	}
+,   {        "192.168.10.231": {
+									"direct_access":2,
+									"cams": 
+										[
+									        {"key2": "Камера перекресток 1701","Status": true},
+											{"key2": "Камера 23104","Status": true}
+										],
+									"down_servers": 
+										[   ]      
+								}    
+	}
+,[    {      "192.168.150.4": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"192.168.150.6":
+												{"cams": 
+													[
+														{"key2": "Камера 2101","Status": true},
+														{"key2": "Камера 2001","Status": true},
+														{"key2": "Камера 1901","Status": true},
+														{"key2": "Камера 1801","Status": true},
+														{"key2": "Камера 1701","Status": true},
+														{"key2": "Камера 1601","Status": true},
+														{"key2": "Камера 1501","Status": true},
+														{"key2": "Камера 1401","Status": true},
+														{"key2": "Камера 1301","Status": true},
+														{"key2": "Камера 1201","Status": true},					
+														{"key2": "Камера 1101","Status": true},
+														{"key2": "Камера 12201","Status": true},
+														{"key2": "Камера 12101","Status": true},
+														{"key2": "Камера 12001","Status": true},
+														{"key2": "Камера 11901","Status": true},
+														{"key2": "Камера 11801","Status": true},
+														{"key2": "Камера 11701","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										]        
+								}    
+	}
+],{      "10.11.224.23": {
+									"direct_access":1,
+									"cams":
+										[	],
+									"down_servers": 
+									[
+										
+											{"10.11.224.21":
+												{"cams": 
+													[
+														{"key2": "Камера СПБ 18501","Status": true},
+														{"key2": "Камера СПБ 1501","Status": true},
+														{"key2": "Камера СПБ 1301","Status": true},
+														{"key2": "Камера СПБ 1302","Status": true},
+														{"key2": "Камера СПБ 1307","Status": true},
+														{"key2": "Камера СПБ 1503","Status": true},
+														{"key2": "Камера СПБ 3201","Status": true},
+														{"key2": "Камера СПБ 1303","Status": true},
+														{"key2": "Камера СПБ 1304","Status": true},
+														{"key2": "Камера СПБ 1502","Status": true},					
+														{"key2": "Камера СПБ 1308","Status": true},
+														{"key2": "Камера СПБ 1305","Status": true},
+														{"key2": "Камера СПБ 1306","Status": true},
+														{"key2": "Камера СПБ 1401","Status": true},
+														{"key2": "Камера СПБ 1402","Status": true},
+														{"key2": "Камера СПБ 3801","Status": true}
+													],
+												"down_servers":
+												[  ]
+												}
+											}
+										]        
+								}    
+	}
+
+        ]
+    }
+}

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="69">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true"
+                   kind="SOURCE_LOGICAL_FOLDER">
+      <itemPath>lib/xan_array.h</itemPath>
+      <itemPath>lib/xan_asm.h</itemPath>
+      <itemPath>lib/xan_base64.h</itemPath>
+      <itemPath>lib/xan_boolean.h</itemPath>
+      <itemPath>lib/xan_char.h</itemPath>
+      <itemPath>lib/xan_console.h</itemPath>
+      <itemPath>lib/xan_crtsect.h</itemPath>
+      <itemPath>lib/xan_debug.h</itemPath>
+      <itemPath>lib/xan_defines.h</itemPath>
+      <itemPath>lib/xan_double.h</itemPath>
+      <itemPath>lib/xan_error.h</itemPath>
+      <itemPath>lib/xan_event.h</itemPath>
+      <itemPath>lib/xan_float.h</itemPath>
+      <itemPath>lib/xan_gc_defines.h</itemPath>
+      <itemPath>lib/xan_gchandle.h</itemPath>
+      <itemPath>lib/xan_gcref.h</itemPath>
+      <itemPath>lib/xan_includes.h</itemPath>
+      <itemPath>lib/xan_int32.h</itemPath>
+      <itemPath>lib/xan_int64.h</itemPath>
+      <itemPath>lib/xan_interlocked.h</itemPath>
+      <itemPath>lib/xan_keyvaluepair.h</itemPath>
+      <itemPath>lib/xan_log.h</itemPath>
+      <itemPath>lib/xan_malloc_array.h</itemPath>
+      <itemPath>lib/xan_malloc_event.h</itemPath>
+      <itemPath>lib/xan_malloc_thread.h</itemPath>
+      <itemPath>lib/xan_math.h</itemPath>
+      <itemPath>lib/xan_memorymanager_defines.h</itemPath>
+      <itemPath>lib/xan_methodinfo.h</itemPath>
+      <itemPath>lib/xan_methodparameter.h</itemPath>
+      <itemPath>lib/xan_null.h</itemPath>
+      <itemPath>lib/xan_object.h</itemPath>
+      <itemPath>lib/xan_pipe.h</itemPath>
+      <itemPath>lib/xan_platform.h</itemPath>
+      <itemPath>lib/xan_randomnumbergenerator.h</itemPath>
+      <itemPath>lib/xan_rawdata.h</itemPath>
+      <itemPath>lib/xan_registry.h</itemPath>
+      <itemPath>lib/xan_security.h</itemPath>
+      <itemPath>lib/xan_siren.h</itemPath>
+      <itemPath>lib/xan_string.h</itemPath>
+      <itemPath>lib/xan_thread.h</itemPath>
+      <itemPath>lib/xan_time.h</itemPath>
+      <itemPath>lib/xan_type.h</itemPath>
+      <itemPath>lib/xan_typemanager_defines.h</itemPath>
+      <itemPath>lib/xan_types.h</itemPath>
+      <itemPath>lib/xan_uint32.h</itemPath>
+      <itemPath>lib/xan_uint64.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true"
+                   kind="SOURCE_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true"
+                   kind="SOURCE_LOGICAL_FOLDER">
+      <itemPath>lib/xan_base64.cpp</itemPath>
+      <itemPath>lib/xan_boolean.cpp</itemPath>
+      <itemPath>lib/xan_char.cpp</itemPath>
+      <itemPath>lib/xan_console.cpp</itemPath>
+      <itemPath>lib/xan_crtsect.cpp</itemPath>
+      <itemPath>lib/xan_debug.cpp</itemPath>
+      <itemPath>lib/xan_double.cpp</itemPath>
+      <itemPath>lib/xan_error.cpp</itemPath>
+      <itemPath>lib/xan_event.cpp</itemPath>
+      <itemPath>lib/xan_float.cpp</itemPath>
+      <itemPath>lib/xan_gc_defines.cpp</itemPath>
+      <itemPath>lib/xan_gcref.cpp</itemPath>
+      <itemPath>lib/xan_int32.cpp</itemPath>
+      <itemPath>lib/xan_int64.cpp</itemPath>
+      <itemPath>lib/xan_interlocked.cpp</itemPath>
+      <itemPath>lib/xan_linux_asm32.S</itemPath>
+      <itemPath>lib/xan_linux_asm64.S</itemPath>
+      <itemPath>lib/xan_log.cpp</itemPath>
+      <itemPath>lib/xan_malloc_event.cpp</itemPath>
+      <itemPath>lib/xan_malloc_thread.cpp</itemPath>
+      <itemPath>lib/xan_math.cpp</itemPath>
+      <itemPath>lib/xan_memorymanager_defines.cpp</itemPath>
+      <itemPath>lib/xan_methodinfo.cpp</itemPath>
+      <itemPath>lib/xan_methodparameter.cpp</itemPath>
+      <itemPath>lib/xan_null.cpp</itemPath>
+      <itemPath>lib/xan_object.cpp</itemPath>
+      <itemPath>lib/xan_pipe.cpp</itemPath>
+      <itemPath>lib/xan_randomnumbergenerator.cpp</itemPath>
+      <itemPath>lib/xan_rawdata.cpp</itemPath>
+      <itemPath>lib/xan_registry.cpp</itemPath>
+      <itemPath>lib/xan_security.cpp</itemPath>
+      <itemPath>lib/xan_string.cpp</itemPath>
+      <itemPath>lib/xan_thread.cpp</itemPath>
+      <itemPath>lib/xan_time.cpp</itemPath>
+      <itemPath>lib/xan_type.cpp</itemPath>
+      <itemPath>lib/xan_typemanager_defines.cpp</itemPath>
+      <itemPath>lib/xan_uint32.cpp</itemPath>
+      <itemPath>lib/xan_uint64.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>rux.basis</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>rux.basis</projectmakefile>
+  <confs>
+    <conf name="Debug" type="3">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <compilerSet>OracleSolarisStudio|OracleSolarisStudio</compilerSet>
+        <platform>1</platform>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <architecture>2</architecture>
+        </cTool>
+        <ccTool>
+          <architecture>2</architecture>
+          <incDir>
+            <pElem>./lib</pElem>
+          </incDir>
+          <commandLine>-xldscope=hidden -Kpic</commandLine>
+        </ccTool>
+        <asmTool>
+          <commandLine>-a x86 -f elf64 -m amd64 -p nasm</commandLine>
+        </asmTool>
+        <archiverTool>
+          <output>./../build/librux.basis.a</output>
+        </archiverTool>
+      </compileType>
+      <item path="lib/xan_linux_asm32.S" ex="true" tool="4">
+      </item>
+    </conf>
+    <conf name="Release" type="3">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <compilerSet>OracleSolarisStudio|OracleSolarisStudio</compilerSet>
+        <platform>1</platform>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <archiverTool>
+        </archiverTool>
+      </compileType>
+    </conf>
+  </confs>
+</configurationDescriptor>

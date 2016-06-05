@@ -1,0 +1,18 @@
+gdb --pid=pid
+
+
+Сthread threadnoТ, a command to switch among threads
+Сinfo threadsТ, a command to inquire about existing threads
+'frame N' - переход по функци€м в стеке, где N - номер функции
+'print funcname' - значение переменной
+'info symbol address' - информаци€ о функции или переменной
+'break <file.cpp>:<line>' - установить точку останова
+'delete breakpoints <range>' - удалить точки останова
+'info breakpoints' - информаци€ о точках останова
+'break <file.cpp>:<line> if strcmp(y, "hello") == 0' - установить точку останова с условием
+'info share' - информаци€ о загруженных модул€х
+
+ѕолезные команды bash дл€ отладки:
+
+'ps uH p <PID_OF_PROCESS> | wc -l' или 'ps -L -o pid= -p <pid> | wc -l' - количество потоков в процессе
+'lsof -p <PID_OF_PROCESS> | wc -l' - количество открытых файлов в процессе

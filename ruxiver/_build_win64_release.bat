@@ -1,0 +1,1 @@
+@call _build.bat "ruxiver" "Release" "x64"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="1">
+    <root name="C:/work/rux/rux.framework/"/>
+    <defines>
+        <define name="_WIN64"/>
+        <define name="__WINDOWS__"/>
+        <define name="__x64__"/>
+    </defines>
+    <paths>
+        <dir name="C:/work/rux/rux.framework/lib"/>
+    </paths>
+    <libraries>
+        <library>posix</library>
+        <library>windows</library>
+    </libraries>
+    <suppressions>
+        <suppression>variableScope</suppression>
+    </suppressions>
+</project>

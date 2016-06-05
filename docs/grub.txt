@@ -1,0 +1,10 @@
+ubuntu:
+==============================================================
+sudo add-apt-repository ppa:danielrichter2007/grub-customizer 
+sudo apt-get update 
+sudo apt-get install grub-customizer
+==============================================================
+Если grub 2, то:
+/etc/default/grub
+Если grub legacy, то:
+/boot/grub/grub.cfg

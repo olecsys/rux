@@ -1,0 +1,37 @@
+Name:	videosrv7
+State:	S (sleeping)
+Tgid:	19482
+Pid:	19482
+PPid:	18776
+TracerPid:	0
+Uid:	0	0	0	0
+Gid:	0	0	0	0
+FDSize:	256
+Groups:	0 
+VmPeak:	 1006872 kB
+VmSize:	  941336 kB
+VmLck:	       0 kB
+VmHWM:	  237440 kB
+VmRSS:	  237436 kB
+VmData:	  659516 kB
+VmStk:	      88 kB
+VmExe:	    1204 kB
+VmLib:	   49864 kB
+VmPTE:	    1628 kB
+Threads:	64
+SigQ:	0/16382
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000001000
+SigCgt:	00000001c7b86eef
+CapInh:	0000000000000000
+CapPrm:	ffffffffffffffff
+CapEff:	ffffffffffffffff
+CapBnd:	ffffffffffffffff
+Cpus_allowed:	f
+Cpus_allowed_list:	0-3
+Mems_allowed:	00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	235
+nonvoluntary_ctxt_switches:	3

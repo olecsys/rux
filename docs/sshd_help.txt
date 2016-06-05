@@ -1,0 +1,11 @@
+shell:
+
+    groupadd –r sshusers
+
+    usermod –a –G sshusers username
+
+With this we will no longer be using AllowUsers but AllowGroups
+
+/etc/ssh/sshd_config:
+
+    AllowGroups sshusers

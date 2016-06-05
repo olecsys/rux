@@ -1,0 +1,1 @@
+@call _copy_to_integra_video.bat "_build_win64_release_projects.bat" "release" "x64"

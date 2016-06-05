@@ -1,0 +1,17 @@
+For Debian Squeeze: 
+--------------------------------------------------------------------------------------------------------
+#echo "deb http://backports.debian.org/debian-backports squeeze-backports main" >> /etc/apt/sources.list
+aptitude update
+--------------------------------------------------------------------------------------------------------
+And then:
+#apt-get install python-pip
+
+#pip install pythonbrew
+
+$pythonbrew_install
+
+$source "$HOME/.pythonbrew/etc/bashrc"
+
+$pythonbrew install 2.7.3
+
+$pythonbrew use 2.7.3

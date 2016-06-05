@@ -1,0 +1,303 @@
+{
+                    "_linkvalues":
+                    [
+                        {
+                            "Protocol": [ "HTTP", "JPEG HTTP" ],
+                            "_values":
+							[ 80 ]
+                        }
+					],
+"xer": [{"m":1}],
+"xer1": [{}],
+"xz1\\":"xexe\"xexe",
+"xz2":"xexe\"xexexwxwxwxwxwxwxw",
+"testa":{"a":{"x":9007199254740991},"b":9007199254740992},"x":2,"test5":3.1415926,
+"test6":3.1415926e3,
+"test7":3.1415926e-33,
+"test8":-3.1415926e-3,
+"test9":-3.1415926e3,
+"test11":[[1,2],[3,4],[5,6],[7,8],[9,10]],
+"test10":[[1,2],[3,4],[5,6]],
+"test12":[[1,2,3,4,5],[3,4,1,2,3],[5,6,7,5,3],[7,8,1,2,3],[9,10,3,2,1]],
+	"common" :	{
+		"enable" :	false,
+		"key1" :	"Astafiev-S2",
+		"key2" :	"key2",
+		"key3" :	"key3",
+		"_typeJS" :	"profiles"
+	}
+	,
+	"device" :	[
+		{
+			"_type" :	{
+				"_level" :	0,
+				"_value" :	"ipcameras:Axis:P1346"
+			}
+			,
+			"ipcameras:Axis:P1346" :	{
+				"_Key4" :	{
+					"_level" :	2,
+					"_value" :	""
+				}
+				,
+				"out" :	{
+					"_level" :	1,
+					"_value" :	"trackSource"
+				}
+				,
+				"in" :	{
+					"_level" :	1,
+					"_value" :	"trackInSource"
+				}
+				,
+				"_in_command" :	{
+					"_level" :	2,
+					"_value" :	"trackCommand"
+				}
+				,
+				"_out_command" :	{
+					"_level" :	2,
+					"_value" :	"trackCommand"
+				}
+				,
+				"PTZ" :	{
+					"_level" :	1,
+					"_value" :	false
+				}
+				,
+				"Ip" :	{
+					"_level" :	0,
+					"_value" :	"192.168.10.0"
+				}
+				,
+				"IpPort" :	{
+					"_level" :	1,
+					"_value" :	554,
+					"_minvalue" :	1,
+					"_maxvalue" :	65535,
+					"_linkvalues" :	[
+						{
+							"Protocol" :	[
+								"HTTP",
+								"JPEG HTTP",
+								"ONVIF RTSP\/TCP",
+								"ONVIF RTSP/UDP"
+							]
+							,
+							"_values" :	[
+								80
+							]
+							
+						}
+						,
+						{
+							"Protocol" :	[
+								"RTSP\/UDP",
+								"RTSP/TCP",
+								"IPProfile RTSP\/UDP",
+								"IPProfile RTSP\/TCP"
+							]
+							,
+							"_values" :	[
+								554
+							]
+							
+						}
+						
+					]
+					
+				}
+				,
+				"Login" :	{
+					"_level" :	1,
+					"_value" :	"root"
+				}
+				,
+				"Password" :	{
+					"_level" :	1,
+					"_value" :	"admin"
+				}
+				,
+				"Protocol" :	{
+					"_level" :	1,
+					"_value" :	"RTSP\/UDP",
+					"_link" :	[
+						"HTTP",
+						"JPEG HTTP",
+						"RTSP\/UDP",
+						"RTSP\/TCP",
+						"IPProfile RTSP\/UDP",
+						"IPProfile RTSP\/TCP",
+						"ONVIF RTSP\/TCP",
+						"ONVIF RTSP\/UDP"
+					]
+					,
+					"_web" :	[
+						"IPProfile RTSP\/UDP",
+						"IPProfile RTSP\/UDP",
+						"IPProfile RTSP\/UDP",
+						"IPProfile RTSP\/UDP\"xe-xe"
+					]
+					
+				}
+				,
+				"ProfileName" :	{
+					"_level" :	1,
+					"_editable" :	true,
+					"_value" :	"Quality",
+					"_web" :	[
+						"Quality",
+						"Balanced",
+						"Bandwidth",
+						"Mobile"
+					]
+					,
+					"_linkvalues" :	[
+						{
+							"Protocol" :	[
+								"IPProfile RTSP\/UDP",
+								"IPProfile RTSP\/TCP",
+								"ONVIF RTSP\/TCP",
+								"ONVIF RTSP\/UDP"
+							]
+							,
+							"_values" :	[
+								"Quality",
+								"Balanced",
+								"Bandwidth",
+								"Mobile"
+							]
+							
+						}
+						
+					]
+					
+				}
+				,
+				"Video" :	{
+					"_level" :	0,
+					"_value" :	false
+				}
+				,
+				"Audio" :	{
+					"_level" :	0,
+					"_value" :	false
+				}
+				,
+				"AlwaysCapture" :	{
+					"_level" :	2,
+					"_value" :	false
+				}
+				,
+				"SNMPTimeScanInSec" :	{
+					"_level" :	2,
+					"_value" :	0
+				}
+				,
+				"SNMPPauseAfterRestartInSec" :	{
+					"_level" :	2,
+					"_value" :	30
+				}
+				,
+				"SNMPPasswordRead" :	{
+					"_level" :	2,
+					"_value" :	"public"
+				}
+				,
+				"FullPathForReadWrite" :	{
+					"_level" :	2,
+					"_value" :	""
+				}
+				,
+				"StepForRead" :	{
+					"_level" :	2,
+					"_value" :	0
+				}
+				
+			}
+			
+		}
+		
+	]
+	,
+	"ptzserver54" :	[
+		{
+			"_type" :	{
+				"_level" :	0,
+				"_value" :	"PTZServer54"
+			}
+			,
+			"PTZServer54" :	{
+				"profiles::network_5_4::iv54server::ID_54::_value" :	null,
+				"_out_command" :	{
+					"_level" :	2,
+					"_value" :	"trackCommand"
+				}
+				,
+				"_in_command" :	{
+					"_level" :	2,
+					"_value" :	"trackCommand"
+				}
+				,
+				"UseKey3" :	{
+					"_level" :	2,
+					"_value" :	false
+				}
+				,
+				"DelayAfterCommandInMs" :	{
+					"_level" :	2,
+					"_value" :	0
+				}
+				,
+				"DefaultPresetNumber" :	{
+					"_level" :	2,
+					"_value" :	0
+				}
+				,
+				"TimeOutOnDefaultPresetInSec" :	{
+					"_level" :	2,
+					"_value" :	0
+				}
+				,
+				"TimeOutOnTourInSec" :	{
+					"_level" :	2,
+					"_value" :	0
+				}
+				,
+				"TourDescribe" :	{
+					"_level" :	2,
+					"_value" :	"[{\"preset\":0,\"pauseInSec\":0},{\"preset\":0,\"pauseInSec\":0}]"
+				}
+				,
+				"eventfilter" :	{
+					"_level" :	2,
+					"_value" :	""
+				}
+				,
+				"ZoomSpeed" :	{
+					"_level" :	2,
+					"_value" :	0
+				}
+				,
+				//"test1":asas,
+				"test2":false,
+				"test3":null,
+				/*"test4":"any\u000A"
+				,*/
+				"test5":3.1415926,
+				"test6":3.1415926e3,
+				"test7":3.1415926e-3,
+				"test8":-3.1415926e-3,
+				"test9":-3.1415926e3,
+				"SendMoveToCamera" :	{
+					"_level" :	2,
+					"_value" :	""
+				}
+				
+			}
+			
+		}
+		
+	]
+	
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+<!-- Vs lbh pna ernq guvf, cyrnfr ivfvg uggc://nobhg.cvagrerfg.pbz/pnerref -->
+<script type="text/javascript">
+(function (w, d, a) {
+  var $ = w[a.k] = {
+    'w': w, 'd': d, 'a': a,
+    'f': (function () {
+      return {
+        devNull: function (r) {
+          // drop logging callbacks on the floor
+        },
+        init: function () { 
+          $.d.b = $.d.getElementsByTagName('BODY')[0];
+          var t = $.d.URL.split('#'), script;
+          if (t[1]) {
+            script = $.d.createElement('SCRIPT');
+            script.src = $.a.endpoint + '?' + t[1] + '&callback=' + $.a.k + '.f.devNull&t=' + new Date().getTime();
+            $.d.b.appendChild(script);
+          }
+        }
+      };
+    }())
+  };
+  $.w.onload = function () {
+    $.f.init();
+  }
+}(window, document, {
+  'k': 'PIDGET_' + new Date().getTime(),
+  'endpoint': '//widgets.pinterest.com/v3/pidgets/log/'
+}));
+</script>
+
+
+<script src="pidget_data/a.txt"></script></body></html>

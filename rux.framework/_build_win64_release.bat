@@ -1,0 +1,1 @@
+@call _build.bat "rux.framework" "Release" "x64"

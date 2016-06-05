@@ -1,0 +1,34 @@
+sudo apt-get install iptables
+
+iptables -F #удалить все правила
+
+iptables -t nat -A POSTROUTING -o <local_lan_interface_name> -j MASQUERADE
+iptables -A INPUT -i tun+ -j ACCEPT
+iptables -A FORWARD -i tun+ -o <local_lan_interface_name> -j ACCEPT
+iptables -A FORWARD -i <local_lan_interface_name> -o tun+ -j ACCEPT
+
+
+Делаем скрипт, выполняемый при поднятии интерфейса
+nano -w /etc/network/if-up.d/00-iptables
+#!/bin/sh
+iptables-restore < /etc/firewall.conf
+ip6tables-restore < /etc/firewall6.conf
+Даём право запуска этого скрипта
+chmod +x nano -w /etc/network/if-up.d/00-iptables
+Сохраняем в конфиг правила для IPv4
+iptables-save >/etc/firewall.conf
+Сохраняем в конфиг правила для IPv6
+ip6tables-save >/etc/firewall6.conf
+
+
+/sbin/iptables-save > /etc/iptables/iptables_snat.conf
+
+iptables -L -n -v #статус
+
+Еще кое-что полезное:
+
+tcpdump -nn -v dst host <ip address> and tcp port <port>
+
+Открытые порты по процессу:
+lsof -i -nP grep sshd
+

@@ -1,0 +1,1282 @@
+{
+    "encode": [
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "recode:video"
+            },
+            "recode:video": {
+                "in": {
+                    "_level": 0,
+                    "_value": "trackSource"
+                },
+                "out": {
+                    "_level": 0,
+                    "_value": "trackEncode"
+                },
+                "codec": {
+                    "_level": 0,
+                    "_value": "h264"
+                },
+                "width": {
+                    "_level": 1,
+                    "_value": 0
+                },
+                "height": {
+                    "_level": 1,
+                    "_value": 0
+                },
+                "bitrate": {
+                    "_level": 1,
+                    "_value": 0
+                },
+                "fps": {
+                    "_level": 1,
+                    "_value": 0
+                },
+                "keyint": {
+                    "_level": 1,
+                    "_value": 25
+                },
+                "quality": {
+                    "_level": 1,
+                    "_value": 70,
+                    "_minvalue": 0,
+                    "_maxvalue": 100
+                },
+                "preset": {
+                    "_level": 3,
+                    "_value": "superfast"
+                },
+                "profile": {
+                    "_level": 3,
+                    "_value": "baseline"
+                },
+                "proportion": {
+                    "_level": 2,
+                    "_value": "1:1"
+                },
+                "thread": {
+                    "_level": 2,
+                    "_value": false
+                }
+            }
+        },
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "recode:audio"
+            },
+            "recode:audio": {
+                "in": {
+                    "_level": 0,
+                    "_value": "trackSource"
+                },
+                "out": {
+                    "_level": 0,
+                    "_value": "trackEncode"
+                },
+                "codec": {
+                    "_level": 0,
+                    "_value": "pcmu"
+                },
+                "sps": {
+                    "_level": 1,
+                    "_value": 0
+                },
+                "bps": {
+                    "_level": 1,
+                    "_value": 0
+                },
+                "nch": {
+                    "_level": 1,
+                    "_value": " "
+                }
+            }
+        }
+    ],
+    "sender": [
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "http"
+            },
+            "http": {
+                "in": {
+                    "_level": 0,
+                    "_value": "trackOut"
+                },
+                "id": {
+                    "_level": 0,
+                    "_value": 1041
+                }
+            }
+        },
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "rtmp"
+            },
+            "rtmp": {
+                "in": {
+                    "_level": 0,
+                    "_value": "trackOut"
+                },
+                "id": {
+                    "_level": 0,
+                    "_value": 1041
+                },
+                "profile": {
+                    "_level": 0,
+                    "_value": "high"
+                }
+            }
+        },
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "rtsp"
+            },
+            "rtsp": {
+                "in": {
+                    "_level": 0,
+                    "_value": "trackOut"
+                },
+                "id": {
+                    "_level": 0,
+                    "_value": 1041
+                },
+                "profile": {
+                    "_level": 0,
+                    "_value": "high"
+                }
+            }
+        }
+    ],
+    "network_5_4": [
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "iv54server"
+            },
+            "iv54server": {
+                "in": {
+                    "_level": 0,
+                    "_value": "trackOut",
+                    "_track": "${track}_${_value}"
+                },
+                "ID_54": {
+                    "_level": 0,
+                    "_maxvalue": 1000000000,
+                    "_minvalue": 0,
+                    "_sdklevel": 0,
+                    "_value": 1041
+                },
+                "width_from": {
+                    "_level": 0,
+                    "_maxvalue": 10000,
+                    "_minvalue": 0,
+                    "_value": 0
+                },
+                "width_to": {
+                    "_level": 0,
+                    "_maxvalue": 10000,
+                    "_minvalue": 0,
+                    "_value": 10000
+                },
+                "delay_between_frames_ms": {
+                    "_level": 2,
+                    "_maxvalue": 400,
+                    "_minvalue": 0,
+                    "_value": 0
+                }
+            }
+        }
+    ],
+    "archive": [
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "writer"
+            },
+            "writer": {
+                "in": {
+                    "_level": 0,
+                    "_value": "trackOut"
+                },
+                "by_events": {
+                    "_level": 0,
+                    "_value": false
+                },
+                "events": {
+                    "_level": 1,
+                    "_value": "20001,20009,20016,20026,20027,20028,20030"
+                },
+                "prev_write": {
+                    "_level": 1,
+                    "_value": 0
+                },
+                "post_write": {
+                    "_level": 1,
+                    "_value": 0
+                },
+                "storage": {
+                    "_level": 1,
+                    "_value": ""
+                },
+                "depth_restrict": {
+                    "_level": 1,
+                    "_value": false
+                },
+                "depth": {
+                    "_level": 1,
+                    "_value": 0
+                },
+                "arc_key1": {
+                    "_level": 3,
+                    "_value": ""
+                },
+                "arc_key2": {
+                    "_level": 3,
+                    "_value": ""
+                },
+                "arc_key3": {
+                    "_level": 3,
+                    "_value": ""
+                },
+                "profiles::network_5_4::iv54server::ID_54::_value": null
+            }
+        }
+    ],
+    "muxer": [
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "muxer"
+            },
+            "muxer": {
+                "in": {
+                    "_level": 0,
+                    "_value": "trackEncode",
+                    "_track": "${track}",
+                    "_profile": "${_value}/${track}"
+                },
+                "out": {
+                    "_level": 0,
+                    "_value": "trackOut",
+                    "_track": "${track}",
+                    "_profile": "${_value}/${track}"
+                }
+            }
+        }
+    ],
+    "common": {
+        "enable": true,
+        "key1": "STN_9162",
+        "key2": "Axis P1346 192.168.1.41",
+        "key3": "Quality",
+        "_typeJS": "profiles"
+    },
+    "device": [
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "ipcameras:Axis:P1346"
+            },
+            "ipcameras:Axis:P1346": {
+                "_Key4": {
+                    "_level": 2,
+                    "_value": ""
+                },
+                "out": {
+                    "_level": 1,
+                    "_value": "trackSource"
+                },
+                "in": {
+                    "_level": 1,
+                    "_value": "trackInSource"
+                },
+                "_in_command": {
+                    "_level": 2,
+                    "_value": "trackCommand"
+                },
+                "_out_command": {
+                    "_level": 2,
+                    "_value": "trackCommand"
+                },
+                "PTZ": {
+                    "_level": 1,
+                    "_value": false
+                },
+                "Ip": {
+                    "_level": 0,
+                    "_value": "192.168.1.41"
+                },
+                "IpPort": {
+                    "_level": 1,
+                    "_value": 554,
+                    "_minvalue": 1,
+                    "_maxvalue": 65535
+                },
+                "Login": {
+                    "_level": 1,
+                    "_value": "root"
+                },
+                "Password": {
+                    "_level": 1,
+                    "_value": "admin"
+                },
+                "Protocol": {
+                    "_level": 1,
+                    "_value": "IPProfile RTSP/UDP",
+                    "_web": [
+                        "IPProfile RTSP/UDP",
+                        "IPProfile RTSP/UDP",
+                        "IPProfile RTSP/UDP",
+                        "IPProfile RTSP/UDP"
+                    ]
+                },
+                "ProfileName": {
+                    "_level": 1,
+                    "_editable": true,
+                    "_value": "Quality",
+                    "_web": [
+                        "Quality",
+                        "Balanced",
+                        "Bandwidth",
+                        "Mobile"
+                    ]
+                },
+                "Video": {
+                    "_level": 0,
+                    "_value": true
+                },
+                "Audio": {
+                    "_level": 0,
+                    "_value": false
+                },
+                "AlwaysCapture": {
+                    "_level": 2,
+                    "_value": false
+                },
+                "SNMPTimeScanInSec": {
+                    "_level": 2,
+                    "_value": 0
+                },
+                "SNMPPauseAfterRestartInSec": {
+                    "_level": 2,
+                    "_value": 30
+                },
+                "SNMPPasswordRead": {
+                    "_level": 2,
+                    "_value": "public"
+                },
+                "FullPathForReadWrite": {
+                    "_level": 2,
+                    "_value": ""
+                },
+                "StepForRead": {
+                    "_level": 2,
+                    "_value": 0
+                }
+            }
+        }
+    ],
+    "analytics": [
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "SmokeDetection"
+            },
+            "SmokeDetection": {
+                "common_settings": {
+                    "_group_caption": "Common_Settings",
+                    "in": {
+                        "_level": 0,
+                        "_value": "videoDecode_for_detectors",
+                        "_track": "${track}",
+                        "_profile": "${_value}/${track}",
+                        "_values": [
+                            "trackEncode",
+                            "trackOut",
+                            "trackSource",
+                            "alphabetta",
+                            "videoDecode_for_detectors"
+                        ]
+                    },
+                    "out": {
+                        "_level": 0,
+                        "_value": "alphabetta",
+                        "_track": "${track}",
+                        "_profile": "${_value}/${track}"
+                    }
+                },
+                "base_settings": {
+                    "_group_caption": "Base_Settings",
+                    "_schedule": {
+                        "usual": {
+                            "monday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "tuesday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "wednesday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "thursday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "friday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "saturday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "sunday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ]
+                        }
+                    },
+                    "enable": {
+                        "_level": 0,
+                        "_value": false,
+                        "_minvalue": false,
+                        "_maxvalue": true
+                    },
+                    "Name": {
+                        "_level": 0,
+                        "_value": "SmokeDetection"
+                    },
+                    "FrameNeedToDetect": {
+                        "_level": 0,
+                        "_value": 10,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "ColorDetect": {
+                        "_level": 0,
+                        "_value": true,
+                        "_minvalue": false,
+                        "_maxvalue": true
+                    },
+                    "ThresholdDetect": {
+                        "_level": 0,
+                        "_value": 0.0511239,
+                        "_minvalue": 0.00001,
+                        "_maxvalue": 0.977
+                    },
+                    "MinWidth": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 80
+                    },
+                    "MinHeight": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 80
+                    },
+                    "PauseBetweenEvents": {
+                        "_level": 0,
+                        "_value": 5,
+                        "_minvalue": 0,
+                        "_maxvalue": 3600
+                    }
+                },
+                "detection_regions": {
+                    "_group_caption": "Detection_Regions",
+                    "square": {
+                        "_level": 0,
+                        "_value": [
+                            {
+                                "name": {
+                                    "_value": "Зона_1"
+                                },
+                                "id": {
+                                    "_value": 1
+                                },
+                                "_points": [
+                                    {
+                                        "x": 0,
+                                        "y": 0
+                                    },
+                                    {
+                                        "x": 65536,
+                                        "y": 0
+                                    },
+                                    {
+                                        "x": 65536,
+                                        "y": 65536
+                                    },
+                                    {
+                                        "x": 0,
+                                        "y": 65536
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "Forget"
+            },
+            "Forget": {
+                "base_settings": {
+                    "in": {
+                        "_level": 0,
+                        "_value": "videoDecode_for_detectors",
+                        "_values": [
+                            "videoDecode_for_detectors",
+                            "alphabetta"
+                        ]
+                    },
+                    "out": {
+                        "_level": 0,
+                        "_value": "alphabetta",
+                        "_track": "${track}",
+                        "_profile": "${_value}/${track}"
+                    },
+                    "enable": {
+                        "_value": false
+                    },
+                    "_calibration": {
+                        "is_calibrated": true,
+                        "rectangles": {
+                            "first_rectangle": {
+                                "x": 512,
+                                "y": 64989,
+                                "w": 6963,
+                                "h": 13380
+                            },
+                            "second_rectangle": {
+                                "x": 57753,
+                                "y": 63761,
+                                "w": 6041,
+                                "h": 10376
+                            },
+                            "third_rectangle": {
+                                "x": 29900,
+                                "y": 3413,
+                                "w": 1638,
+                                "h": 1911
+                            }
+                        },
+                        "real_options": {
+                            "w": 1,
+                            "h": 1.7000000476837158
+                        }
+                    },
+                    "_schedule": {
+                        "usual": {
+                            "monday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "tuesday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "wednesday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "thursday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "friday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "saturday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "sunday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ]
+                        }
+                    }
+                },
+                "size_settings": {
+                    "szMinHeight": {
+                        "_value": 0.4472135954999579
+                    },
+                    "szMaxHeight": {
+                        "_value": 1
+                    },
+                    "szMinWidth": {
+                        "_value": 0.4472135954999579
+                    },
+                    "szMaxWidth": {
+                        "_value": 1
+                    }
+                },
+                "contrast_settings": {
+                    "arzPorogYRz": {
+                        "_value": 60
+                    }
+                },
+                "otstoi_settings": {
+                    "otTSec": {
+                        "_value": 24
+                    },
+                    "otNBefore": {
+                        "_value": 5
+                    }
+                },
+                "UO_settings": {
+                    "phEnableOstavlen": {
+                        "_value": 0
+                    },
+                    "phEnableUbran": {
+                        "_value": 0
+                    }
+                },
+                "detection_regions": {
+                    "square": {
+                        "_value": [
+                            {
+                                "name": {
+                                    "_value": "Зона_1"
+                                },
+                                "id": {
+                                    "_value": 1
+                                },
+                                "_points": [
+                                    {
+                                        "x": 0,
+                                        "y": 0
+                                    },
+                                    {
+                                        "x": 65536,
+                                        "y": 0
+                                    },
+                                    {
+                                        "x": 65536,
+                                        "y": 65536
+                                    },
+                                    {
+                                        "x": 0,
+                                        "y": 65536
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "object_detector"
+            },
+            "object_detector": {
+                "common_settings": {
+                    "_group_caption": "Common_Settings",
+                    "in": {
+                        "_level": 0,
+                        "_value": "videoDecode_for_detectors",
+                        "_track": "${track}",
+                        "_profile": "${_value}/${track}",
+                        "_values": [
+                            "trackEncode",
+                            "trackOut",
+                            "trackSource",
+                            "alphabetta",
+                            "videoDecode_for_detectors"
+                        ]
+                    },
+                    "out": {
+                        "_level": 0,
+                        "_value": "alphabetta",
+                        "_track": "${track}",
+                        "_profile": "${_value}/${track}"
+                    }
+                },
+                "base_settings": {
+                    "_group_caption": "Base_Settings",
+                    "_schedule": {
+                        "usual": {
+                            "monday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "tuesday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "wednesday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "thursday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "friday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "saturday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ],
+                            "sunday": [
+                                {
+                                    "begin": " 0 : 00 ",
+                                    "end": " 24 : 00 "
+                                }
+                            ]
+                        }
+                    },
+                    "_calibration": {
+                        "is_calibrated": true,
+                        "rectangles": {
+                            "first_rectangle": {
+                                "x": 512,
+                                "y": 64989,
+                                "w": 6963,
+                                "h": 13380
+                            },
+                            "second_rectangle": {
+                                "x": 57753,
+                                "y": 63761,
+                                "w": 6041,
+                                "h": 10376
+                            },
+                            "third_rectangle": {
+                                "x": 29900,
+                                "y": 3413,
+                                "w": 1638,
+                                "h": 1911
+                            }
+                        },
+                        "real_options": {
+                            "w": 1,
+                            "h": 1.7000000476837158
+                        }
+                    },
+                    "Name": {
+                        "_level": 0,
+                        "_value": "object_detector"
+                    },
+                    "enable": {
+                        "_level": 0,
+                        "_value": true,
+                        "_minvalue": false,
+                        "_maxvalue": true
+                    },
+                    "Skyline": {
+                        "_level": 0,
+                        "_value": 20,
+                        "_minvalue": 1,
+                        "_maxvalue": 45
+                    },
+                    "Bottom_line": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 45
+                    },
+                    "std_threshold": {
+                        "_level": 0,
+                        "_value": 9,
+                        "_minvalue": 1,
+                        "_maxvalue": 10
+                    },
+                    "min_size": {
+                        "_level": 0,
+                        "_value": 0.2333,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "max_size": {
+                        "_level": 0,
+                        "_value": 50,
+                        "_minvalue": 1,
+                        "_maxvalue": 100
+                    },
+                    "min_speed": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "max_speed": {
+                        "_level": 0,
+                        "_value": 50,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "corrupted_frame": {
+                        "_value": false
+                    },
+                    "light_mod": {
+                        "_level": 0,
+                        "_value": 1,
+                        "_minvalue": 0,
+                        "_maxvalue": 5
+                    },
+                    "Fast_mod": {
+                        "_value": false
+                    },
+                    "_Do_Histogram": {
+                        "_value": false
+                    },
+                    "Auto_Settings": {
+                        "_value": true
+                    }
+                },
+                "objects_settings": {
+                    "_group_caption": "Objects_Settings",
+                    "Car_min_speed": {
+                        "_level": 0,
+                        "_value": 5,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "Car_max_speed": {
+                        "_level": 0,
+                        "_value": 100,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "Car_min_area": {
+                        "_level": 0,
+                        "_value": 6.1,
+                        "_minvalue": 0,
+                        "_maxvalue": 50
+                    },
+                    "Car_max_area": {
+                        "_level": 0,
+                        "_value": 30,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "Car_H1_W2": {
+                        "_level": 0,
+                        "_value": 2,
+                        "_minvalue": 2,
+                        "_maxvalue": 0
+                    },
+                    "Human_min_speed": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "Human_max_speed": {
+                        "_level": 0,
+                        "_value": 5,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "Human_min_area": {
+                        "_level": 0,
+                        "_value": 1,
+                        "_minvalue": 0,
+                        "_maxvalue": 50
+                    },
+                    "Human_max_area": {
+                        "_level": 0,
+                        "_value": 2.5,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "Human_H1_W2": {
+                        "_level": 0,
+                        "_value": 1,
+                        "_minvalue": 0,
+                        "_maxvalue": 2
+                    },
+                    "Group_min_speed": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "Group_max_speed": {
+                        "_level": 0,
+                        "_value": 5,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "Group_min_area": {
+                        "_level": 0,
+                        "_value": 2.6,
+                        "_minvalue": 0,
+                        "_maxvalue": 50
+                    },
+                    "Group_max_area": {
+                        "_level": 0,
+                        "_value": 6,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "Group_H1_W2": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 2
+                    },
+                    "show_only_Car": {
+                        "_value": false
+                    },
+                    "show_only_Human": {
+                        "_value": false
+                    },
+                    "show_only_Group": {
+                        "_value": false
+                    }
+                },
+                "others_settings": {
+                    "_group_caption": "Others_Settings",
+                    "Human_H": {
+                        "_level": 0,
+                        "_value": 1.17999,
+                        "_minvalue": 0.05777,
+                        "_maxvalue": 5
+                    },
+                    "Human_W": {
+                        "_level": 0,
+                        "_value": 0.81111,
+                        "_minvalue": 0.5,
+                        "_maxvalue": 5
+                    },
+                    "LiveTime": {
+                        "_level": 0,
+                        "_value": 1,
+                        "_minvalue": 0,
+                        "_maxvalue": 15
+                    },
+                    "PerspectiveY": {
+                        "_level": 0,
+                        "_value": 1,
+                        "_minvalue": 0.12321,
+                        "_maxvalue": 10
+                    },
+                    "Resolution": {
+                        "_level": 0,
+                        "_value": 100,
+                        "_minvalue": 25,
+                        "_maxvalue": 100
+                    },
+                    "Alert_speed": {
+                        "_level": 0,
+                        "_value": 19,
+                        "_minvalue": 0,
+                        "_maxvalue": 100
+                    },
+                    "MaxMotion": {
+                        "_level": 0,
+                        "_value": 100,
+                        "_minvalue": 2,
+                        "_maxvalue": 100
+                    },
+                    "RetrainingTimeOut": {
+                        "_level": 0,
+                        "_value": 1,
+                        "_minvalue": 0,
+                        "_maxvalue": 60
+                    },
+                    "YTop": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 45
+                    },
+                    "YBottom": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 45
+                    },
+                    "XLeft": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 45
+                    },
+                    "XRight": {
+                        "_level": 0,
+                        "_value": 0,
+                        "_minvalue": 0,
+                        "_maxvalue": 45
+                    },
+                    "ResetStatAt": {
+                        "_level": 0,
+                        "_value": 6,
+                        "_minvalue": 0,
+                        "_maxvalue": 23
+                    },
+                    "pause_between_OVERSPEEDevents": {
+                        "_level": 0,
+                        "_value": 20,
+                        "_minvalue": 0,
+                        "_maxvalue": 3600
+                    },
+                    "pause_between_BEING_WITHIN_AN_AREAevents": {
+                        "_level": 0,
+                        "_value": 20,
+                        "_minvalue": 0,
+                        "_maxvalue": 3600
+                    },
+                    "pause_between_CROSSING_THE_LINEevents": {
+                        "_level": 0,
+                        "_value": 20,
+                        "_minvalue": 0,
+                        "_maxvalue": 3600
+                    },
+                    "pause_between_CROSSING_THE_LINEevents_IN_DIRECTION": {
+                        "_level": 0,
+                        "_value": 20,
+                        "_minvalue": 0,
+                        "_maxvalue": 3600
+                    },
+                    "pause_between_LOITERINGtime": {
+                        "_level": 0,
+                        "_value": 20,
+                        "_minvalue": 0,
+                        "_maxvalue": 3600
+                    },
+                    "Working_preset": {
+                        "_level": 0,
+                        "_value": -1,
+                        "_minvalue": -1,
+                        "_maxvalue": 999
+                    },
+                    "Font_Message": {
+                        "_level": 0,
+                        "_value": 14,
+                        "_minvalue": 4,
+                        "_maxvalue": 32
+                    }
+                },
+                "loitering_settings": {
+                    "_group_caption": "Loitering_Settings",
+                    "radius": {
+                        "_level": 0,
+                        "_value": 3,
+                        "_minvalue": 1,
+                        "_maxvalue": 200
+                    },
+                    "loitering_duration_threshold": {
+                        "_level": 0,
+                        "_value": 10,
+                        "_minvalue": 1,
+                        "_maxvalue": 5000
+                    }
+                },
+                "detection_regions": {
+                    "_group_caption": "Detection_Regions",
+                    "square": {
+                        "_value": [
+                            {
+                                "name": {
+                                    "_value": "Зона_1"
+                                },
+                                "id": {
+                                    "_value": 1
+                                },
+                                "lower_border_detection": {
+                                    "_value": false
+                                },
+                                "all_contour_detection": {
+                                    "_value": false
+                                },
+                                "_points": [
+                                    {
+                                        "x": 0,
+                                        "y": 0
+                                    },
+                                    {
+                                        "x": 65536,
+                                        "y": 0
+                                    },
+                                    {
+                                        "x": 65536,
+                                        "y": 65536
+                                    },
+                                    {
+                                        "x": 0,
+                                        "y": 65536
+                                    }
+                                ],
+                                "advanced_info": {
+                                    "_value": {
+                                        "speed_analyzer": {
+                                            "_value": {
+                                                "enabled": {
+                                                    "_value": false
+                                                }
+                                            }
+                                        },
+                                        "moving_in_region": {
+                                            "_value": {
+                                                "enabled": {
+                                                    "_value": true
+                                                }
+                                            }
+                                        },
+                                        "entry_to_region": {
+                                            "_value": {
+                                                "enabled": {
+                                                    "_value": false
+                                                }
+                                            }
+                                        },
+                                        "exit_from_region": {
+                                            "_value": {
+                                                "enabled": {
+                                                    "_value": false
+                                                }
+                                            }
+                                        },
+                                        "abnormal_behavior": {
+                                            "_value": {
+                                                "enabled": {
+                                                    "_value": false
+                                                }
+                                            }
+                                        },
+                                        "coursing": {
+                                            "_value": {
+                                                "enabled": {
+                                                    "_value": false
+                                                },
+                                                "_points": [
+                                                    {
+                                                        "x": 0,
+                                                        "y": 0
+                                                    },
+                                                    {
+                                                        "x": 0,
+                                                        "y": 0
+                                                    }
+                                                ],
+                                                "object_lifetime": {
+                                                    "_value": 0
+                                                },
+                                                "course_angel": {
+                                                    "_value": 0
+                                                },
+                                                "width": {
+                                                    "_value": 360
+                                                },
+                                                "shift": {
+                                                    "_value": 0
+                                                },
+                                                "shift2": {
+                                                    "_value": 2
+                                                }
+                                            }
+                                        },
+                                        "loitering": {
+                                            "_value": {
+                                                "enabled": {
+                                                    "_value": false
+                                                },
+                                                "radius": {
+                                                    "_level": 0,
+                                                    "_value": 3,
+                                                    "_minvalue": 1,
+                                                    "_maxvalue": 200
+                                                },
+                                                "loitering_duration_threshold": {
+                                                    "_level": 0,
+                                                    "_value": 10,
+                                                    "_minvalue": 1,
+                                                    "_maxvalue": 5000
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "line": {
+                        "_value": []
+                    },
+                    "line_with_direction": {
+                        "_value": []
+                    }
+                }
+            }
+        }
+    ],
+    "decode": [
+        {
+            "_type": {
+                "_level": 0,
+                "_value": "recode:video"
+            },
+            "recode:video": {
+                "in": {
+                    "_level": 0,
+                    "_value": "trackSource"
+                },
+                "out": {
+                    "_level": 0,
+                    "_value": "videoDecode_for_detectors"
+                }
+            }
+        }
+    ]
+}

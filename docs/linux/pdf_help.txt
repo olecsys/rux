@@ -1,0 +1,26 @@
+sudo gedit /var/lib/locales/supported.d/local
+
+Вместо gedit любой текстовик, откроется блокнот и там снизу (если нет) добавить:
+
+ru_RU.CP1251 CP1251
+ru_RU.KOI8-R KOI8-R
+
+Сохранить и после выполнить:
+
+locale-gen
+
+Должно снизу вылезти такое:
+
+Generating locales...
+  en_US.UTF-8... done
+  ru_RU.CP1251... done
+  ru_RU.KOI8-R... done
+  ru_RU.UTF-8... up-to-date
+  ru_UA.UTF-8... up-to-date
+Generation complete.
+
+
+
+LC_ALL="ru_RU.cp1251" evince
+
+LANG=ru_RU.cp1251 evince

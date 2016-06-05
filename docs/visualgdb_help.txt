@@ -1,0 +1,1 @@
+set solib-search-path /opt/core/bin/linux/x64

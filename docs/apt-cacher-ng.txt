@@ -1,0 +1,10 @@
+sudo apt-get install apt-cacher-ng
+
+sudo nano /etc/apt-cacher-ng/acng.conf
+
+CacheDir: var/cache/apt-cacher-ng
+
+Client settings:
+sudo touch /etc/apt/apt.conf.d/01proxy
+
+Acquire::http { Proxy "http://Адрес_Нашего_Нового_Сервера:3142"; };

@@ -1,0 +1,7 @@
+=============== Dec 13, 2014 (SAMT) ===============
+10:31:08.757008 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+10:31:08.757878 db@open opening
+10:31:08.758063 journal@recovery F·1
+10:31:08.769398 journal@recovery recovering @4
+10:31:08.775681 db@janitor F·2 G·0
+10:31:08.775766 db@open done T·17.854116ms

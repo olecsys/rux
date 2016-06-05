@@ -1,0 +1,2 @@
+valgrind --tool=memcheck --leak-check=yes example1 --log-file=
+Чтобы видеть стек по всем абсолютно сообщениям, необходимо добавить -v

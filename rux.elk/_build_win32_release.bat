@@ -1,0 +1,1 @@
+@call _build.bat "rux.elk" "Release" "Win32"

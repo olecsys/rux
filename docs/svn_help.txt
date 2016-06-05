@@ -1,0 +1,10 @@
+svn switch --relocate http://old-url https://new-url
+
+Посмотреть историю:
+svn log -limit 4 PATH
+
+Откатить файл к определенной ревизии:
+svn merge -r head:prev l3toks.dtx
+
+Отменить все изменения:
+svn revert -R .

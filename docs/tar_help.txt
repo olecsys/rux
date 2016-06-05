@@ -1,0 +1,5 @@
+Extract *.tar.gz or *.tgz:
+$ tar -zxvf backup.tar.gz -C /tmp
+
+Extract *.tar.bz2:
+$ tar xjf backup.tar.bz2 -C /tmp

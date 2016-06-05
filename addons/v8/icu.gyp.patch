@@ -1,0 +1,34 @@
+--- icu.gyp.orig	2015-07-09 14:25:26.744938217 +0400
++++ icu.gyp	2015-07-09 14:23:40.587058554 +0400
+@@ -103,6 +103,7 @@
+         {
+           'target_name': 'icudata',
+           'type': 'static_library',
++          'standalone_static_library': 1,
+           'defines': [
+             'U_HIDE_DATA_SYMBOL',
+           ],
+@@ -176,6 +177,11 @@
+         {
+           'target_name': 'icui18n',
+           'type': '<(component)',
++          'conditions': [
++            [ 'component!="shared_library"', {
++                'standalone_static_library': 1,
++            }],
++          ],
+           'sources': [
+             '<@(icui18n_sources)',
+           ],
+@@ -257,6 +263,11 @@
+         {
+           'target_name': 'icuuc',
+           'type': '<(component)',
++          'conditions': [
++            [ 'component!="shared_library"', {
++                'standalone_static_library': 1,
++            }],
++          ],
+           'sources': [
+             '<@(icuuc_sources)',
+           ],

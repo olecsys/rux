@@ -1,0 +1,11 @@
+Debian:
+#aptitude install zip mercurial libasound2-dev libcurl4-openssl-dev libnotify-dev libxt-dev libiw-dev libidl-dev mesa-common-dev autoconf2.13 yasm libgtk2.0-dev libdbus-1-dev libdbus-glib-1-dev python-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libpulse-dev
+#aptitude install unzip gcc g++ make patch
+
+And additional for Squeeze:
+#echo "deb http://backports.debian.org/debian-backports squeeze-backports main" >> /etc/apt/sources.list
+#aptitude update
+#aptitude -t squeeze-backports install yasm mercurial
+#aptitude install libbz2-dev
+
+and install pythonbrew and install python 2.7.3(read pythonbrew_help.txt)

@@ -1,0 +1,39 @@
+I have successfully done the following for running the synergy client for the login screen, and after I login. It is much simpler than the other answers, IMHO.
+
+edit /etc/lightdm/lightdm.conf as root.
+
+sudo vi /etc/lightdm/lightdm.conf
+
+add the following line to the bottom of the file.
+
+greeter-setup-script=/usr/bin/synergyc <ip/host>
+
+restart lightdm. (it is better to do this from a terminal or ssh session)
+
+sudo /etc/init.d/lightdm restart
+
+
+
+
+
+ The location and names of these files depend on the operating system and display manager you're using. A good guess for the location is /etc/X11. If you use kdm then try looking in /etc/kde3 or /usr/kde/version/share/config. Typical file names are:
+
+   	   	xdm 	   	kdm 	   	gdm
+1 		xdm/Xsetup 		kdm/Xsetup 		gdm/Init/Default (*)
+2 		xdm/Xstartup 		kdm/Xstartup 		gdm/PostLogin/Default (*)
+3 		xdm/Xsession 		kdm/Xsession 		gdm/Sessions/Default (*, **)
+
+*) The Default file is used if no other suitable file is found. gdm will try displayname (e.g. :0) and hostname (e.g. somehost), in that order, before and instead of Default.
+**) gdm may use gdm/Xsession, xdm/Xsession or dm/Xsession if gdm/Sessions/Default doesn't exist.
+
+For a synergy client, add the following to the first file: /usr/bin/killall synergyc sleep 1 /usr/bin/synergyc [<options>] synergy-server-hostname Of course, the path to synergyc depends on where you installed it so adjust as necessary.
+
+Add to the second file: /usr/bin/killall synergyc sleep 1
+
+And to the third file: /usr/bin/killall synergyc sleep 1 /usr/bin/synergyc [<options>] synergy-server-hostname Note that <options> must not include -f or --no-daemon or the script will never exit and you won't be able to log in.
+
+The changes are the same for the synergy server except replace synergyc with synergys and use the appropriate synergys command line options. Note that the first script is run as root so synergys will look for the configuration file in root's home directory then in /etc. Make sure it exists in one of those places or use the --config config-pathname option to specify its location.
+
+Note that some display managers (xdm and kdm, but not gdm) grab the keyboard and do not release it until the user logs in for security reasons. This prevents a synergy server from sharing the mouse and keyboard until the user logs in. It doesn't prevent a synergy client from synthesizing mouse and keyboard input, though.
+
+If you're configuring synergy to start only after you log in then edit your .xsession file. Add just what you would add to the third file above. 

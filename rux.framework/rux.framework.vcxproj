@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Android++">
+      <Configuration>Release</Configuration>
+      <Platform>Android++</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib\dxdiag.h" />
+    <ClInclude Include="lib\xan_aes.h" />
+    <ClInclude Include="lib\xan_array.h" />
+    <ClInclude Include="lib\xan_array_sort.h" />
+    <ClInclude Include="lib\xan_asm.h" />
+    <ClInclude Include="lib\xan_asn_defines.h" />
+    <ClInclude Include="lib\xan_async_command_pool.h" />
+    <ClInclude Include="lib\xan_base64.h" />
+    <ClInclude Include="lib\xan_binding.h" />
+    <ClInclude Include="lib\xan_boolean.h" />
+    <ClInclude Include="lib\xan_certificatex509v3.h" />
+    <ClInclude Include="lib\xan_char.h" />
+    <ClInclude Include="lib\xan_codegenerator.h" />
+    <ClInclude Include="lib\xan_code_performance_counter.h" />
+    <ClInclude Include="lib\xan_computerinfo.h" />
+    <ClInclude Include="lib\xan_com_object.h" />
+    <ClInclude Include="lib\xan_console.h" />
+    <ClInclude Include="lib\xan_constructor_info.h" />
+    <ClInclude Include="lib\xan_core.h" />
+    <ClInclude Include="lib\xan_crtsect.h" />
+    <ClInclude Include="lib\xan_cryptography.h" />
+    <ClInclude Include="lib\xan_data.h" />
+    <ClInclude Include="lib\xan_dataobject.h" />
+    <ClInclude Include="lib\xan_dbcolumninfo.h" />
+    <ClInclude Include="lib\xan_dbforeignkeyinfo.h" />
+    <ClInclude Include="lib\xan_dbghelp_module.h" />
+    <ClInclude Include="lib\xan_dbschema.h" />
+    <ClInclude Include="lib\xan_dbtableinfo.h" />
+    <ClInclude Include="lib\xan_debug.h" />
+    <ClInclude Include="lib\xan_defines.h" />
+    <ClInclude Include="lib\xan_des.h" />
+    <ClInclude Include="lib\xan_diagnostic_defines.h" />
+    <ClInclude Include="lib\xan_directory.h" />
+    <ClInclude Include="lib\xan_directxversion.h" />
+    <ClInclude Include="lib\xan_double.h" />
+    <ClInclude Include="lib\xan_double_linked_list.h" />
+    <ClInclude Include="lib\xan_engine_globals.h" />
+    <ClInclude Include="lib\xan_enums.h" />
+    <ClInclude Include="lib\xan_environment.h" />
+    <ClInclude Include="lib\xan_error.h" />
+    <ClInclude Include="lib\xan_event.h" />
+    <ClInclude Include="lib\xan_event_handler.h" />
+    <ClInclude Include="lib\xan_expr.h" />
+    <ClInclude Include="lib\xan_file.h" />
+    <ClInclude Include="lib\xan_fileversion.h" />
+    <ClInclude Include="lib\xan_file_descriptor_waiter.h" />
+    <ClInclude Include="lib\xan_firewall.h" />
+    <ClInclude Include="lib\xan_float.h" />
+    <ClInclude Include="lib\xan_function_info.h" />
+    <ClInclude Include="lib\xan_gchandle.h" />
+    <ClInclude Include="lib\xan_gcref.h" />
+    <ClInclude Include="lib\xan_gc_defines.h" />
+    <ClInclude Include="lib\xan_global_initialization.h" />
+    <ClInclude Include="lib\xan_global_variables.h" />
+    <ClInclude Include="lib\xan_gui_checkbox.h" />
+    <ClInclude Include="lib\xan_gui_events.h" />
+    <ClInclude Include="lib\xan_gui_listbox.h" />
+    <ClInclude Include="lib\xan_gui_tabcontrol.h" />
+    <ClInclude Include="lib\xan_hard_disk.h" />
+    <ClInclude Include="lib\xan_hash.h" />
+    <ClInclude Include="lib\xan_hmac.h" />
+    <ClInclude Include="lib\xan_icmpclient.h" />
+    <ClInclude Include="lib\xan_image.h" />
+    <ClInclude Include="lib\xan_includes.h" />
+    <ClInclude Include="lib\xan_installer_generator.h" />
+    <ClInclude Include="lib\xan_int32.h" />
+    <ClInclude Include="lib\xan_int64.h" />
+    <ClInclude Include="lib\xan_interlocked.h" />
+    <ClInclude Include="lib\xan_io_defines.h" />
+    <ClInclude Include="lib\xan_Iphlpapi_module.h" />
+    <ClInclude Include="lib\xan_items_virtualization.h" />
+    <ClInclude Include="lib\xan_jpeg.h" />
+    <ClInclude Include="lib\xan_jsonserializer.h" />
+    <ClInclude Include="lib\xan_kernel32_module.h" />
+    <ClInclude Include="lib\xan_keyvaluepair.h" />
+    <ClInclude Include="lib\xan_ldap.h" />
+    <ClInclude Include="lib\xan_ldapattributevalueassertion.h" />
+    <ClInclude Include="lib\xan_ldapbindrequest.h" />
+    <ClInclude Include="lib\xan_ldapbindresponse.h" />
+    <ClInclude Include="lib\xan_ldapcontrol.h" />
+    <ClInclude Include="lib\xan_ldapfilter.h" />
+    <ClInclude Include="lib\xan_ldapnode.h" />
+    <ClInclude Include="lib\xan_ldappacket.h" />
+    <ClInclude Include="lib\xan_ldappartialattribute.h" />
+    <ClInclude Include="lib\xan_ldapsearchrequest.h" />
+    <ClInclude Include="lib\xan_ldapsearchresultdone.h" />
+    <ClInclude Include="lib\xan_ldapsearchresultentry.h" />
+    <ClInclude Include="lib\xan_ldapunbindrequest.h" />
+    <ClInclude Include="lib\xan_loader_defines.h" />
+    <ClInclude Include="lib\xan_log.h" />
+    <ClInclude Include="lib\xan_makefile_generator.h" />
+    <ClInclude Include="lib\xan_malloc_array.h" />
+    <ClInclude Include="lib\xan_math.h" />
+    <ClInclude Include="lib\xan_md4.h" />
+    <ClInclude Include="lib\xan_md5.h" />
+    <ClInclude Include="lib\xan_media_image.h" />
+    <ClInclude Include="lib\xan_memorymanager_defines.h" />
+    <ClInclude Include="lib\xan_memory_chunk.h" />
+    <ClInclude Include="lib\xan_memory_helper.h" />
+    <ClInclude Include="lib\xan_methodinfo.h" />
+    <ClInclude Include="lib\xan_methodparameter.h" />
+    <ClInclude Include="lib\xan_module.h" />
+    <ClInclude Include="lib\xan_native_diagnostics.h" />
+    <ClInclude Include="lib\xan_networkaddress.h" />
+    <ClInclude Include="lib\xan_network_functions.h" />
+    <ClInclude Include="lib\xan_network_information.h" />
+    <ClInclude Include="lib\xan_null.h" />
+    <ClInclude Include="lib\xan_numeric.h" />
+    <ClInclude Include="lib\xan_object.h" />
+    <ClInclude Include="lib\xan_ole32_module.h" />
+    <ClInclude Include="lib\xan_oleaut32_module.h" />
+    <ClInclude Include="lib\xan_osversion.h" />
+    <ClInclude Include="lib\xan_path.h" />
+    <ClInclude Include="lib\xan_pdh.h" />
+    <ClInclude Include="lib\xan_pipe.h" />
+    <ClInclude Include="lib\xan_png.h" />
+    <ClInclude Include="lib\xan_process.h" />
+    <ClInclude Include="lib\xan_property_info.h" />
+    <ClInclude Include="lib\xan_psapi_module.h" />
+    <ClInclude Include="lib\xan_randomnumbergenerator.h" />
+    <ClInclude Include="lib\xan_rawdata.h" />
+    <ClInclude Include="lib\xan_regexp.h" />
+    <ClInclude Include="lib\xan_registry.h" />
+    <ClInclude Include="lib\xan_gui_defines.h" />
+    <ClInclude Include="lib\xan_rsa.h" />
+    <ClInclude Include="lib\xan_rsapublickey.h" />
+    <ClInclude Include="lib\xan_security.h" />
+    <ClInclude Include="lib\xan_service.h" />
+    <ClInclude Include="lib\xan_sha1.h" />
+    <ClInclude Include="lib\xan_smb2client.h" />
+    <ClInclude Include="lib\xan_smbclient.h" />
+    <ClInclude Include="lib\xan_sort.h" />
+    <ClInclude Include="lib\xan_sqliteprovider.h" />
+    <ClInclude Include="lib\xan_sslv2clienthello.h" />
+    <ClInclude Include="lib\xan_stdredirect.h" />
+    <ClInclude Include="lib\xan_std_allocator.h" />
+    <ClInclude Include="lib\xan_stream.h" />
+    <ClInclude Include="lib\xan_string.h" />
+    <ClInclude Include="lib\xan_symsrv_module.h" />
+    <ClInclude Include="lib\xan_system_module.h" />
+    <ClInclude Include="lib\xan_task.h" />
+    <ClInclude Include="lib\xan_tcpclient.h" />
+    <ClInclude Include="lib\xan_tcpserver.h" />
+    <ClInclude Include="lib\xan_thread.h" />
+    <ClInclude Include="lib\xan_time.h" />
+    <ClInclude Include="lib\xan_tls.h" />
+    <ClInclude Include="lib\xan_tlsapplicationdata.h" />
+    <ClInclude Include="lib\xan_tlscertificate.h" />
+    <ClInclude Include="lib\xan_tlschangecipherspec.h" />
+    <ClInclude Include="lib\xan_tlsclienthello.h" />
+    <ClInclude Include="lib\xan_tlsclientkeyexchange.h" />
+    <ClInclude Include="lib\xan_tlsfinished.h" />
+    <ClInclude Include="lib\xan_tlsrecordlayerpacket.h" />
+    <ClInclude Include="lib\xan_tlsserverhello.h" />
+    <ClInclude Include="lib\xan_tlsserverhellodone.h" />
+    <ClInclude Include="lib\xan_tls_defines.h" />
+    <ClInclude Include="lib\xan_type.h" />
+    <ClInclude Include="lib\xan_typedefs.h" />
+    <ClInclude Include="lib\xan_typemanager_defines.h" />
+    <ClInclude Include="lib\xan_udpclient.h" />
+    <ClInclude Include="lib\xan_udpserver.h" />
+    <ClInclude Include="lib\xan_uianimation.h" />
+    <ClInclude Include="lib\xan_uiapplication.h" />
+    <ClInclude Include="lib\xan_uibutton.h" />
+    <ClInclude Include="lib\xan_uiclipboard.h" />
+    <ClInclude Include="lib\xan_uidatepicker.h" />
+    <ClInclude Include="lib\xan_uigroup.h" />
+    <ClInclude Include="lib\xan_uigroupanimation.h" />
+    <ClInclude Include="lib\xan_uiimage.h" />
+    <ClInclude Include="lib\xan_uiinlines.h" />
+    <ClInclude Include="lib\xan_uiline.h" />
+    <ClInclude Include="lib\xan_uint32.h" />
+    <ClInclude Include="lib\xan_uint64.h" />
+    <ClInclude Include="lib\xan_uipath.h" />
+    <ClInclude Include="lib\xan_uiprimitives.h" />
+    <ClInclude Include="lib\xan_uiprogressbar.h" />
+    <ClInclude Include="lib\xan_uirectangle.h" />
+    <ClInclude Include="lib\xan_uiselect.h" />
+    <ClInclude Include="lib\xan_uislider.h" />
+    <ClInclude Include="lib\xan_uitextblock.h" />
+    <ClInclude Include="lib\xan_uitextbox.h" />
+    <ClInclude Include="lib\xan_uitimepicker.h" />
+    <ClInclude Include="lib\xan_ui_enums.h" />
+    <ClInclude Include="lib\xan_user32_module.h" />
+    <ClInclude Include="lib\xan_usercontrol.h" />
+    <ClInclude Include="lib\xan_userenv32_module.h" />
+    <ClInclude Include="lib\xan_user_data.h" />
+    <ClInclude Include="lib\xan_visualstudiogenerator.h" />
+    <ClInclude Include="lib\xan_vsrcresources.h" />
+    <ClInclude Include="lib\xan_webcamera.h" />
+    <ClInclude Include="lib\xan_window.h" />
+    <ClInclude Include="lib\xan_winmm_module.h" />
+    <ClInclude Include="lib\xan_ws2_32_module.h" />
+    <ClInclude Include="lib\xan_wtsapi32_module.h" />
+    <ClInclude Include="lib\xan_x11_module.h" />
+    <ClInclude Include="lib\xan_xrandr_module.h" />
+    <ClInclude Include="lib\xan_zip.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lib\xan_asm.inc" />
+    <YASM Include="lib\xan_asm.S">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="lib\xan_asm_x64.S">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </YASM>
+    <None Include="lib\xan_invoke.S" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="lib\xan_aes.cpp" />
+    <ClCompile Include="lib\xan_async_command_pool.cpp" />
+    <ClCompile Include="lib\xan_binding.cpp" />
+    <ClCompile Include="lib\xan_certificatex509v3.cpp" />
+    <ClCompile Include="lib\xan_codegenerator.cpp" />
+    <ClCompile Include="lib\xan_code_performance_counter.cpp" />
+    <ClCompile Include="lib\xan_computerinfo.cpp" />
+    <ClCompile Include="lib\xan_com_object.cpp" />
+    <ClCompile Include="lib\xan_constructor_info.cpp" />
+    <ClCompile Include="lib\xan_cryptography.cpp" />
+    <ClCompile Include="lib\xan_data.cpp" />
+    <ClCompile Include="lib\xan_dataobject.cpp" />
+    <ClCompile Include="lib\xan_dbcolumninfo.cpp" />
+    <ClCompile Include="lib\xan_dbforeignkeyinfo.cpp" />
+    <ClCompile Include="lib\xan_dbghelp_module.cpp" />
+    <ClCompile Include="lib\xan_dbschema.cpp" />
+    <ClCompile Include="lib\xan_dbtableinfo.cpp" />
+    <ClCompile Include="lib\xan_des.cpp" />
+    <ClCompile Include="lib\xan_directory.cpp" />
+    <ClCompile Include="lib\xan_directxversion.cpp" />
+    <ClCompile Include="lib\xan_engine_globals.cpp" />
+    <ClCompile Include="lib\xan_environment.cpp" />
+    <ClCompile Include="lib\xan_expr.cpp" />
+    <ClCompile Include="lib\xan_file.cpp" />
+    <ClCompile Include="lib\xan_fileversion.cpp" />
+    <ClCompile Include="lib\xan_file_descriptor_waiter.cpp" />
+    <ClCompile Include="lib\xan_firewall.cpp" />
+    <ClCompile Include="lib\xan_function_info.cpp" />
+    <ClCompile Include="lib\xan_global_initialization.cpp" />
+    <ClCompile Include="lib\xan_global_variables.cpp" />
+    <ClCompile Include="lib\xan_gui_checkbox.cpp" />
+    <ClCompile Include="lib\xan_gui_defines.cpp" />
+    <ClCompile Include="lib\xan_base64.cpp" />
+    <ClCompile Include="lib\xan_boolean.cpp" />
+    <ClCompile Include="lib\xan_char.cpp" />
+    <ClCompile Include="lib\xan_console.cpp" />
+    <ClCompile Include="lib\xan_crtsect.cpp" />
+    <ClCompile Include="lib\xan_debug.cpp" />
+    <ClCompile Include="lib\xan_double.cpp" />
+    <ClCompile Include="lib\xan_engine.cpp" />
+    <ClCompile Include="lib\xan_error.cpp" />
+    <ClCompile Include="lib\xan_event.cpp" />
+    <ClCompile Include="lib\xan_float.cpp" />
+    <ClCompile Include="lib\xan_gcref.cpp" />
+    <ClCompile Include="lib\xan_gui_listbox.cpp" />
+    <ClCompile Include="lib\xan_gui_tabcontrol.cpp" />
+    <ClCompile Include="lib\xan_hard_disk.cpp" />
+    <ClCompile Include="lib\xan_hash.cpp" />
+    <ClCompile Include="lib\xan_hmac.cpp" />
+    <ClCompile Include="lib\xan_icmpclient.cpp" />
+    <ClCompile Include="lib\xan_image.cpp" />
+    <ClCompile Include="lib\xan_installer_generator.cpp" />
+    <ClCompile Include="lib\xan_int32.cpp" />
+    <ClCompile Include="lib\xan_int64.cpp" />
+    <ClCompile Include="lib\xan_interlocked.cpp" />
+    <ClCompile Include="lib\xan_Iphlpapi_module.cpp" />
+    <ClCompile Include="lib\xan_items_virtualization.cpp" />
+    <ClCompile Include="lib\xan_jpeg.cpp" />
+    <ClCompile Include="lib\xan_jsonserializer.cpp" />
+    <ClCompile Include="lib\xan_kernel32_module.cpp" />
+    <ClCompile Include="lib\xan_ldap.cpp" />
+    <ClCompile Include="lib\xan_ldapattributevalueassertion.cpp" />
+    <ClCompile Include="lib\xan_ldapbindrequest.cpp" />
+    <ClCompile Include="lib\xan_ldapbindresponse.cpp" />
+    <ClCompile Include="lib\xan_ldapcontrol.cpp" />
+    <ClCompile Include="lib\xan_ldapfilter.cpp" />
+    <ClCompile Include="lib\xan_ldapnode.cpp" />
+    <ClCompile Include="lib\xan_ldappacket.cpp" />
+    <ClCompile Include="lib\xan_ldappartialattribute.cpp" />
+    <ClCompile Include="lib\xan_ldapsearchrequest.cpp" />
+    <ClCompile Include="lib\xan_ldapsearchresultdone.cpp" />
+    <ClCompile Include="lib\xan_ldapsearchresultentry.cpp" />
+    <ClCompile Include="lib\xan_ldapunbindrequest.cpp" />
+    <ClCompile Include="lib\xan_log.cpp" />
+    <ClCompile Include="lib\xan_makefile_generator.cpp" />
+    <ClCompile Include="lib\xan_math.cpp" />
+    <ClCompile Include="lib\xan_md4.cpp" />
+    <ClCompile Include="lib\xan_md5.cpp" />
+    <ClCompile Include="lib\xan_media_image.cpp" />
+    <ClCompile Include="lib\xan_memorymanager_defines.cpp" />
+    <ClCompile Include="lib\xan_memory_chunk.cpp" />
+    <ClCompile Include="lib\xan_memory_helper.cpp" />
+    <ClCompile Include="lib\xan_methodinfo.cpp" />
+    <ClCompile Include="lib\xan_methodparameter.cpp" />
+    <ClCompile Include="lib\xan_module.cpp" />
+    <ClCompile Include="lib\xan_native_diagnostics.cpp" />
+    <ClCompile Include="lib\xan_networkaddress.cpp" />
+    <ClCompile Include="lib\xan_network_functions.cpp" />
+    <ClCompile Include="lib\xan_network_information.cpp" />
+    <ClCompile Include="lib\xan_null.cpp" />
+    <ClCompile Include="lib\xan_numeric.cpp" />
+    <ClCompile Include="lib\xan_object.cpp" />
+    <ClCompile Include="lib\xan_ole32_module.cpp" />
+    <ClCompile Include="lib\xan_oleaut32_module.cpp" />
+    <ClCompile Include="lib\xan_osversion.cpp" />
+    <ClCompile Include="lib\xan_path.cpp" />
+    <ClCompile Include="lib\xan_pdh.cpp" />
+    <ClCompile Include="lib\xan_pipe.cpp" />
+    <ClCompile Include="lib\xan_png.cpp" />
+    <ClCompile Include="lib\xan_process.cpp" />
+    <ClCompile Include="lib\xan_property_info.cpp" />
+    <ClCompile Include="lib\xan_psapi_module.cpp" />
+    <ClCompile Include="lib\xan_randomnumbergenerator.cpp" />
+    <ClCompile Include="lib\xan_rawdata.cpp" />
+    <ClCompile Include="lib\xan_regexp.cpp" />
+    <ClCompile Include="lib\xan_registry.cpp" />
+    <ClCompile Include="lib\xan_rsa.cpp" />
+    <ClCompile Include="lib\xan_rsapublickey.cpp" />
+    <ClCompile Include="lib\xan_security.cpp" />
+    <ClCompile Include="lib\xan_service.cpp" />
+    <ClCompile Include="lib\xan_sha1.cpp" />
+    <ClCompile Include="lib\xan_smb2client.cpp" />
+    <ClCompile Include="lib\xan_smbclient.cpp" />
+    <ClCompile Include="lib\xan_sort.cpp" />
+    <ClCompile Include="lib\xan_sqliteprovider.cpp" />
+    <ClCompile Include="lib\xan_sslv2clienthello.cpp" />
+    <ClCompile Include="lib\xan_stdredirect.cpp" />
+    <ClCompile Include="lib\xan_stream.cpp" />
+    <ClCompile Include="lib\xan_string.cpp" />
+    <ClCompile Include="lib\xan_symsrv_module.cpp" />
+    <ClCompile Include="lib\xan_system_module.cpp" />
+    <ClCompile Include="lib\xan_task.cpp" />
+    <ClCompile Include="lib\xan_tcpclient.cpp" />
+    <ClCompile Include="lib\xan_tcpserver.cpp" />
+    <ClCompile Include="lib\xan_thread.cpp" />
+    <ClCompile Include="lib\xan_time.cpp" />
+    <ClCompile Include="lib\xan_tls.cpp" />
+    <ClCompile Include="lib\xan_tlsapplicationdata.cpp" />
+    <ClCompile Include="lib\xan_tlscertificate.cpp" />
+    <ClCompile Include="lib\xan_tlschangecipherspec.cpp" />
+    <ClCompile Include="lib\xan_tlsclienthello.cpp" />
+    <ClCompile Include="lib\xan_tlsclientkeyexchange.cpp" />
+    <ClCompile Include="lib\xan_tlsfinished.cpp" />
+    <ClCompile Include="lib\xan_tlsrecordlayerpacket.cpp" />
+    <ClCompile Include="lib\xan_tlsserverhello.cpp" />
+    <ClCompile Include="lib\xan_tlsserverhellodone.cpp" />
+    <ClCompile Include="lib\xan_type.cpp" />
+    <ClCompile Include="lib\xan_typemanager_defines.cpp" />
+    <ClCompile Include="lib\xan_udpclient.cpp" />
+    <ClCompile Include="lib\xan_udpserver.cpp" />
+    <ClCompile Include="lib\xan_uianimation.cpp" />
+    <ClCompile Include="lib\xan_uiapplication.cpp" />
+    <ClCompile Include="lib\xan_uibutton.cpp" />
+    <ClCompile Include="lib\xan_uiclipboard.cpp" />
+    <ClCompile Include="lib\xan_uidatepicker.cpp" />
+    <ClCompile Include="lib\xan_uigroup.cpp" />
+    <ClCompile Include="lib\xan_uigroupanimation.cpp" />
+    <ClCompile Include="lib\xan_uiimage.cpp" />
+    <ClCompile Include="lib\xan_uiline.cpp" />
+    <ClCompile Include="lib\xan_uint32.cpp" />
+    <ClCompile Include="lib\xan_uint64.cpp" />
+    <ClCompile Include="lib\xan_uipath.cpp" />
+    <ClCompile Include="lib\xan_uiprimitives.cpp" />
+    <ClCompile Include="lib\xan_uiprogressbar.cpp" />
+    <ClCompile Include="lib\xan_uirectangle.cpp" />
+    <ClCompile Include="lib\xan_uiselect.cpp" />
+    <ClCompile Include="lib\xan_uislider.cpp" />
+    <ClCompile Include="lib\xan_uitextblock.cpp" />
+    <ClCompile Include="lib\xan_uitextbox.cpp" />
+    <ClCompile Include="lib\xan_uitimepicker.cpp" />
+    <ClCompile Include="lib\xan_user32_module.cpp" />
+    <ClCompile Include="lib\xan_usercontrol.cpp" />
+    <ClCompile Include="lib\xan_userenv32_module.cpp" />
+    <ClCompile Include="lib\xan_user_data.cpp" />
+    <ClCompile Include="lib\xan_visualstudiogenerator.cpp" />
+    <ClCompile Include="lib\xan_vsrcresources.cpp" />
+    <ClCompile Include="lib\xan_webcamera.cpp" />
+    <ClCompile Include="lib\xan_window.cpp" />
+    <ClCompile Include="lib\xan_winmm_module.cpp" />
+    <ClCompile Include="lib\xan_ws2_32_module.cpp" />
+    <ClCompile Include="lib\xan_wtsapi32_module.cpp" />
+    <ClCompile Include="lib\xan_x11_module.cpp" />
+    <ClCompile Include="lib\xan_xrandr_module.cpp" />
+    <ClCompile Include="lib\xan_zip.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{956C360E-FDD6-4A65-90EC-35EE651F81E5}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ruxbasis1</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Android++'">
+    <PlatformToolset>4.9</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Android++'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\vsyasm.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\build\x86\</OutDir>
+    <TargetName>lib$(ProjectName)</TargetName>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)..\build\x64\</OutDir>
+    <TargetName>lib$(ProjectName)</TargetName>
+    <IntDir>$(Platform)\$(Configuration)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <PreprocessorDefinitions>ZLIB_WINAPI;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\;.\lib;$(ProjectDir)..\extern_includes</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ProgramDataBaseFileName>$(TargetDir)\lib$(ProjectName).pdb</ProgramDataBaseFileName>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <StringPooling>false</StringPooling>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <DisableSpecificWarnings>4505;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>zlibstat.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\extern_lib\windows\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+    <PostBuildEvent>
+      <Command>@call "$(ProjectDir)_copy_to_includes.bat"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <PreprocessorDefinitions>ZLIB_WINAPI;_WIN64;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\;.\lib;$(ProjectDir)..\extern_includes</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ProgramDataBaseFileName>$(TargetDir)\lib$(ProjectName).pdb</ProgramDataBaseFileName>
+      <OmitFramePointers>false</OmitFramePointers>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <StringPooling>false</StringPooling>
+      <TreatWarningAsError>false</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>zlibstat.lib</AdditionalDependencies>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\extern_lib\windows\win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+    <PostBuildEvent>
+      <Command>@call "$(ProjectDir)_copy_to_includes.bat"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android++'">
+    <ClCompile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android++'">
+    <ClCompile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\vsyasm.targets" />
+  </ImportGroup>
+</Project>

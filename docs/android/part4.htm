@@ -1,0 +1,2589 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr"><head>
+<!-- PRETTY PRINT BEGIN -->
+<link href="part4_files/prettify.css" rel="stylesheet" type="text/css">
+<script src="part4_files/widgets.js" id="twitter-wjs"></script><script gapi_processed="true" src="part4_files/plusone_002.js" async="" type="text/javascript"></script><script src="part4_files/all.js" id="facebook-jssdk"></script><script src="part4_files/ga.js" async="" type="text/javascript"></script><script async="" src="part4_files/cbgapi.loaded_1"></script><script async="" src="part4_files/cbgapi.loaded_0"></script><script language="javascript" src="part4_files/prettify.js" type="text/javascript"></script>
+<script language="javascript" src="part4_files/lang-css.js" type="text/javascript"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded',function() {
+        prettyPrint();
+    });
+</script>
+<!-- PRETTY PRINT END -->
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script type="text/javascript">(function() { var b=window,e="jstiming",g="tick";(function(){function d(a){this.t={};this.tick=function(a,d,c){c=void 0!=c?c:(new Date).getTime();this.t[a]=[c,d]};this[g]("start",null,a)}var a=new d;b.jstiming={Timer:d,load:a};if(b.performance&&b.performance.timing){var a=b.performance.timing,c=b[e].load,f=a.navigationStart,a=a.responseStart;0<f&&a>=f&&(c[g]("_wtsrt",void 0,f),c[g]("wtsrt_","_wtsrt",a),c[g]("tbsd_","wtsrt_"))}try{a=null,b.chrome&&b.chrome.csi&&(a=Math.floor(b.chrome.csi().pageT),c&&0<f&&(c[g]("_tbnd",void 0,b.chrome.csi().startE),
+c[g]("tbnd_","_tbnd",f))),null==a&&b.gtbExternal&&(a=b.gtbExternal.pageT()),null==a&&b.external&&(a=b.external.pageT,c&&0<f&&(c[g]("_tbnd",void 0,b.external.startE),c[g]("tbnd_","_tbnd",f))),a&&(b[e].pt=a)}catch(l){}})();b.tickAboveFold=function(d){var a=0;if(d.offsetParent){do a+=d.offsetTop;while(d=d.offsetParent)}d=a;750>=d&&b[e].load[g]("aft")};var h=!1;function k(){h||(h=!0,b[e].load[g]("firstScrollTime"))}b.addEventListener?b.addEventListener("scroll",k,!1):b.attachEvent("onscroll",k);
+ })();</script>
+<meta content="true" name="MSSmartTagsPreventParsing">
+<meta content="blogger" name="generator">
+<link href="http://jia3ep.blogspot.ru/favicon.ico" rel="icon" type="image/x-icon">
+<link href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Code @ C++ - Atom" href="http://jia3ep.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Code @ C++ - RSS" href="http://jia3ep.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Code @ C++ - Atom" href="http://www.blogger.com/feeds/5744154463195670470/posts/default">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.blogger.com/rsd.g?blogID=5744154463195670470">
+<link rel="alternate" type="application/atom+xml" title="Code @ C++ - Atom" href="http://jia3ep.blogspot.com/feeds/4222918906109171580/comments/default">
+<link rel="image_src" href="http://2.bp.blogspot.com/-tyTSUxDecso/TxKoYAohLRI/AAAAAAAAf9U/u7ttnln9-hc/s72-c/install_2_3.png">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Code @ C++: Как написать программу на C++ для Android.Часть 4: Без Java.</title>
+<link type="text/css" rel="stylesheet" href="part4_files/1832531788-widget_css_bundle.css">
+<link type="text/css" rel="stylesheet" href="part4_files/authorization.css">
+<style id="page-skin-1" type="text/css"><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Minima Stretch
+Designer: Douglas Bowman / Darren Delaye
+URL:      www.stopdesign.com
+Date:     26 Feb 2004
+----------------------------------------------- */
+#navbar-iframe {
+display: none !important;
+}
+/* Variable definitions
+====================
+<Variable name="bgcolor" description="Page Background Color"
+type="color" default="#fff">
+<Variable name="textcolor" description="Text Color"
+type="color" default="#333">
+<Variable name="linkcolor" description="Link Color"
+type="color" default="#58a">
+<Variable name="pagetitlecolor" description="Blog Title Color"
+type="color" default="#666">
+<Variable name="descriptioncolor" description="Blog Description Color"
+type="color" default="#999">
+<Variable name="titlecolor" description="Post Title Color"
+type="color" default="#c60">
+<Variable name="bordercolor" description="Border Color"
+type="color" default="#ccc">
+<Variable name="sidebarcolor" description="Sidebar Title Color"
+type="color" default="#999">
+<Variable name="sidebartextcolor" description="Sidebar Text Color"
+type="color" default="#666">
+<Variable name="visitedlinkcolor" description="Visited Link Color"
+type="color" default="#999">
+<Variable name="bodyfont" description="Text Font"
+type="font" default="normal normal 100% Georgia, Serif">
+<Variable name="headerfont" description="Sidebar Title Font"
+type="font"
+default="normal normal 78% 'Trebuchet MS',Trebuchet,Arial,Verdana,Sans-serif">
+<Variable name="pagetitlefont" description="Blog Title Font"
+type="font"
+default="normal normal 200% Georgia, Serif">
+<Variable name="descriptionfont" description="Blog Description Font"
+type="font"
+default="normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif">
+<Variable name="postfooterfont" description="Post Footer Font"
+type="font"
+default="normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif">
+<Variable name="startSide" description="Start side in blog language"
+type="automatic" default="left">
+<Variable name="endSide" description="End side in blog language"
+type="automatic" default="right">
+*/
+/* Use this with templates/template-twocol.html */
+tt {
+font-size: 120%;
+}
+body {
+background:#ffffff;
+margin:0;
+color:#333333;
+font:x-small Georgia Serif;
+font-size/* */:/**/small;
+font-size: /**/small;
+text-align: center;
+}
+a:link {
+color:#5588aa;
+text-decoration:none;
+}
+a:visited {
+color:#999999;
+text-decoration:none;
+}
+a:hover {
+color:#cc6600;
+text-decoration:underline;
+}
+a img {
+border-width:0;
+}
+/* Header
+-----------------------------------------------
+*/
+#header-wrapper {
+margin:0 2% 10px;
+border:1px solid #6B8E23;
+}
+#header {
+margin: 5px;
+border: 1px solid #6B8E23;
+text-align: center;
+color:#666666;
+}
+#header-inner {
+background-position: center;
+margin-left: auto;
+margin-right: auto;
+}
+#header h1 {
+margin:5px 5px 0;
+padding:15px 20px .25em;
+line-height:1.2em;
+text-transform:uppercase;
+letter-spacing:.2em;
+font: normal normal 200% Georgia, Serif;
+}
+#header a {
+color:#666666;
+text-decoration:none;
+}
+#header a:hover {
+color:#666666;
+}
+#header .description {
+margin:0 5px 5px;
+padding:0 20px 15px;
+text-transform:uppercase;
+letter-spacing:.2em;
+line-height: 1.4em;
+font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+color: #999999;
+}
+#header img {
+margin-left: auto;
+margin-right: auto;
+}
+/* Outer-Wrapper
+----------------------------------------------- */
+#outer-wrapper {
+margin:0;
+padding:10px;
+text-align:left;
+font: normal normal 108% Verdana, sans-serif;
+}
+#main-wrapper {
+margin-left: 2%;
+width: 67%;
+float: left;
+display: inline;       /* fix for doubling margin in IE */
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;      /* fix for long non-text content breaking IE sidebar float */
+}
+#sidebar-wrapper {
+margin-right: 2%;
+width: 25%;
+float: right;
+display: inline;       /* fix for doubling margin in IE */
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;      /* fix for long non-text content breaking IE sidebar float */
+}
+/* Headings
+----------------------------------------------- */
+h2 {
+margin:1.5em 0 .75em;
+font:normal normal 78% 'Trebuchet MS',Trebuchet,Arial,Verdana,Sans-serif;
+line-height: 1.4em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color:#999999;
+}
+/* Posts
+-----------------------------------------------
+*/
+h2.date-header {
+margin:1.5em 0 .5em;
+}
+.post {
+margin:.5em 0 1.5em;
+border-bottom:1px dotted #6B8E23;
+padding-bottom:1.5em;
+}
+.post h3 {
+margin:.25em 0 0;
+padding:0 0 4px;
+font-size:140%;
+font-weight:normal;
+line-height:1.4em;
+color:#cc6600;
+}
+.post h3 a, .post h3 a:visited, .post h3 strong {
+display:block;
+text-decoration:none;
+color:#cc6600;
+font-weight:normal;
+}
+.post h3 strong, .post h3 a:hover {
+color:#333333;
+}
+.post-body {
+margin:0 0 .75em;
+line-height:1.6em;
+}
+.post-footer {
+margin: .75em 0;
+color:#999999;
+text-transform:uppercase;
+letter-spacing:.1em;
+font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+line-height: 1.4em;
+}
+.comment-link {
+margin-left:.6em;
+}
+.post img {
+padding:4px;
+border:0px solid #6B8E23;
+}
+/* Comments
+----------------------------------------------- */
+#comments h4 {
+margin:1em 0;
+font-weight: bold;
+line-height: 1.4em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color: #999999;
+}
+#comments-block {
+margin:1em 0 1.5em;
+line-height:1.6em;
+}
+#comments-block .comment-author {
+margin:.5em 0;
+}
+#comments-block .comment-body {
+margin:.25em 0 0;
+}
+#comments-block .comment-footer {
+margin:-.25em 0 2em;
+line-height: 1.4em;
+text-transform:uppercase;
+letter-spacing:.1em;
+}
+#comments-block .comment-body p {
+margin:0 0 .75em;
+}
+.deleted-comment {
+font-style:italic;
+color:gray;
+}
+.feed-links {
+clear: both;
+line-height: 2.5em;
+}
+#blog-pager-newer-link {
+float: left;
+}
+#blog-pager-older-link {
+float: right;
+}
+#blog-pager {
+text-align: center;
+}
+/* Sidebar Content
+----------------------------------------------- */
+.sidebar {
+color: #666666;
+line-height: 1.5em;
+}
+.sidebar ul {
+list-style:none;
+margin:0 0 0;
+padding:0 0 0;
+}
+.sidebar li {
+margin:0;
+padding-top:0;
+padding-right:0;
+padding-bottom:.25em;
+padding-left:15px;
+text-indent:-15px;
+line-height:1.5em;
+}
+.sidebar .widget, .main .widget {
+border-bottom:1px dotted #6B8E23;
+margin:0 0 1.5em;
+padding:0 0 1.5em;
+}
+.main .Blog {
+border-bottom-width: 0;
+}
+/* Profile
+----------------------------------------------- */
+.profile-img {
+float: left;
+margin-top: 0;
+margin-right: 5px;
+margin-bottom: 5px;
+margin-left: 0;
+padding: 4px;
+border: 1px solid #6B8E23;
+}
+.profile-data {
+margin:0;
+text-transform:uppercase;
+letter-spacing:.1em;
+font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+color: #999999;
+font-weight: bold;
+line-height: 1.6em;
+}
+.profile-datablock {
+margin:.5em 0 .5em;
+}
+.profile-textblock {
+margin: 0.5em 0;
+line-height: 1.6em;
+}
+.profile-link {
+font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+text-transform: uppercase;
+letter-spacing: .1em;
+}
+/* Footer
+----------------------------------------------- */
+#footer {
+width:660px;
+clear:both;
+margin:0 auto;
+padding-top:15px;
+line-height: 1.6em;
+text-transform:uppercase;
+letter-spacing:.1em;
+text-align: center;
+}
+pre {
+display: block;
+border: solid #CCC 1px;
+background: #F8F8F8;
+color: black;
+padding: 5px;
+overflow: auto;
+white-space: pre
+}
+/* Label Cloud Styles
+----------------------------------------------- */
+#labelCloud {text-align:center;font-family:arial,sans-serif;}
+#labelCloud .label-cloud li{display:inline;background-image:none !important;padding:0 5px;margin:0;vertical-align:baseline !important;border:0 !important;}
+#labelCloud ul{list-style-type:none;margin:0 auto;padding:0;}
+#labelCloud a img{border:0;display:inline;margin:0 0 0 3px;padding:0}
+#labelCloud a{text-decoration:none}
+#labelCloud a:hover{text-decoration:underline}
+#labelCloud li a{}
+#labelCloud .label-cloud {}
+#labelCloud .label-count {padding-left:0.2em;font-size:9px;color:#000}
+#labelCloud .label-cloud li:before{content:"" !important}
+.post blockquote { background: #F3F3F1 url(http://3.bp.blogspot.com/_7wsQzULWIwo/Swb5Jv9YD4I/AAAAAAAACPc/BJ-zgoLMJXw/s1600/comma-side-orange1.gif) ; background-position:; background-repeat:repeat-y; margin: 0 20px; padding: 20px 20px 10px 45px; font-size: 0.9em; font: italic 1.2em Georgia, "Times New Roman", Times, serif; } .post blockquote p { margin: 0; padding-top: 10px; }
+
+--></style>
+<script type="text/javascript">
+// Label Cloud User Variables
+var cloudMin = 1;
+var maxFontSize = 20;
+var maxColor = [85,136,170];
+var minFontSize = 10;
+var minColor = [0,0,0];
+var lcShowCount = true;
+</script>
+<meta content="K7Go17GXQ2BSUUIk8PekJc7lHxbWMqEH3YB0cFAYdLs=" name="verify-v1">
+<!--TEX SUPPORT-->
+<script src="part4_files/MathJax.js" type="text/javascript">
+MathJax.Hub.Config({
+ extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+ jax: ["input/TeX", "output/HTML-CSS"],
+ tex2jax: {
+     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+     displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+ },
+ "HTML-CSS": { availableFonts: ["TeX"] }
+});
+</script><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style>
+<!--TEX SUPPORT END-->
+<!--SYNTAX HIGHLIGHTER BEGINS-->
+<!--SYNTAX HIGHLIGHTER ENDS-->
+<script type="text/javascript">var a=navigator,b="userAgent",c="indexOf",f="&m=1",g="(^|&)m=",h="?",k="?m=1";function l(){var d=window.location.href,e=d.split(h);switch(e.length){case 1:return d+k;case 2:return 0<=e[1].search(g)?null:d+f;default:return null}}if(-1!=a[b][c]("Mobile")&&-1!=a[b][c]("WebKit")&&-1==a[b][c]("iPad")||-1!=a[b][c]("Opera Mini")||-1!=a[b][c]("IEMobile")){var m=l();m&&window.location.replace(m)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script><script src="part4_files/google_top_exp.js" type="text/javascript"></script><style>.gc-bubbleDefault{background-color:transparent !important;text-align:left;padding:0 !important;margin:0 !important;border:0 !important;table-layout:auto !important}.gc-reset{background-color:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;text-align:left}.pls-bubbleTop{border-bottom:1px solid #ccc !important}.pls-topTail,.pls-vertShimLeft,.pls-contentLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif) !important}.pls-topTail{background-repeat:repeat-x !important;background-position:bottom !important}.pls-vertShim{background-color:#fff !important;text-align:right}.pls-vertShimLeft{background-repeat:repeat-y !important;background-position:right !important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2 !important}.pls-contentWrap{background-color:#fff !important;position:relative !important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:right;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png) !important;background-repeat:repeat-y !important;vertical-align:top}.pls-vert,.pls-tailleft,.pls-dropTR .pls-dropBR,.pls-dropBL,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png) !important;background-repeat:repeat-x !important;width:100%;vertical-align:top}.pls-topLeft{background:inherit !important;text-align:right;vertical-align:bottom}.pls-topRight{background:inherit !important;text-align:left;vertical-align:bottom}.pls-bottomLeft{background:inherit !important;text-align:right}.pls-bottomRight{background:inherit !important;text-align:left;vertical-align:top}.pls-tailtop,.pls-tailright,.pls-tailbottom,.pls-tailleft{display:none;position:relative}.pls-tailbottom,.pls-tailtop,.pls-tailright,.pls-tailleft,.pls-dropTR,.pls-dropBR,.pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png) !important;background-repeat:no-repeat}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-topLeft img,.pls-topRight img,.pls-tailbottom{vertical-align:bottom}.pls-bottomLeft img,.bubbleDropTR,.pls-dropBottomL img,.pls-dropBottom img,.pls-dropBottomR img,.pls-bottomLeft{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacertop,.pls-spacerright,.pls-spacerbottom,.pls-spacerleft{position:static !important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0}</style><style type="text/css">a.PIN_1367314824838_pin_it_button {  background-image: url(http://passets.pinterest.com/images/pidgets/bps1.png)!important; background-repeat: none!important; background-size: 40px 60px!important; height: 20px!important; margin: 0!important; padding: 0!important; vertical-align: baseline!important; text-decoration: none!important; width: 40px!important; background-position: 0 -20px }
+a.PIN_1367314824838_pin_it_button:hover { background-position: 0 0px }
+a.PIN_1367314824838_pin_it_button:active, a.PIN_1367314824838_pin_it_button.PIN_1367314824838_hazClick { background-position: 0 -40px }
+a.PIN_1367314824838_pin_it_button_inline { position: relative!important; display: inline-block!important; }
+a.PIN_1367314824838_pin_it_button_floating { position: absolute!important; }
+a.PIN_1367314824838_pin_it_button span.PIN_1367314824838_pin_it_button_count { position: absolute!important; color: #777!important; text-align: center!important; text-indent: 0!important; }
+a.PIN_1367314824838_pin_it_above span.PIN_1367314824838_pin_it_button_count { background: transparent url(http://passets.pinterest.com/images/pidgets/fpa1.png) 0 0 no-repeat!important; background-size: 40px 29px!important; position: absolute!important; bottom: 21px!important; left: 0px!important; height: 29px!important; width: 40px!important; font: 12px Arial, Helvetica, sans-serif!important; line-height: 24px!important; text-indent: 0!important;}
+a.PIN_1367314824838_pin_it_beside span.PIN_1367314824838_pin_it_button_count, a.PIN_1367314824838_pin_it_beside span.PIN_1367314824838_pin_it_button_count i { background-color: transparent!important; background-repeat: no-repeat!important; background-image: url(http://passets.pinterest.com/images/pidgets/fpb1.png)!important; }
+a.PIN_1367314824838_pin_it_beside span.PIN_1367314824838_pin_it_button_count { padding: 0 3px 0 10px!important; background-size: 45px 20px!important; background-position: 0 0!important; position: absolute!important; top: 0!important; left: 41px!important; height: 20px!important; font: 10px Arial, Helvetica, sans-serif!important; line-height: 20px!important; }
+a.PIN_1367314824838_pin_it_beside span.PIN_1367314824838_pin_it_button_count i { background-position: 100% 0!important; position: absolute!important; top: 0!important; right: -2px!important; height: 20px!important; width: 2px!important; }
+a.PIN_1367314824838_pin_it_button.PIN_1367314824838_pin_it_above { margin-top: 20px!important; }
+a.PIN_1367314824838_follow_me_button, a.PIN_1367314824838_follow_me_button i { background: transparent url(http://passets.pinterest.com/images/pidgets/bfs1.png) 0 0 no-repeat }
+a.PIN_1367314824838_follow_me_button { color: #444!important; display: inline-block!important; font: bold normal normal 11px/20px "Helvetica Neue",helvetica,arial,san-serif!important; height: 20px!important; margin: 0!important; padding: 0!important; position: relative!important; text-decoration: none!important; text-indent: 19px!important; vertical-align: baseline!important;}
+a.PIN_1367314824838_follow_me_button:hover { background-position: 0 -20px}
+a.PIN_1367314824838_follow_me_button:active  { background-position: 0 -40px}
+a.PIN_1367314824838_follow_me_button b { position: absolute!important; top: 3px!important; left: 3px!important; height: 14px!important; width: 14px!important; background-size: 14px 14px!important; background-image: url(http://passets.pinterest.com/images/pidgets/log1.png)!important; }
+a.PIN_1367314824838_follow_me_button i { position: absolute!important; top: 0!important; right: -4px!important; height: 20px!important; width: 4px!important; background-position: 100% 0px!important; }
+a.PIN_1367314824838_follow_me_button:hover i { background-position: 100% -20px!important;  }
+a.PIN_1367314824838_follow_me_button:active i { background-position: 100% -40px!important; }
+span.PIN_1367314824838_embed_pin { display: inline-block!important; text-align: center!important; width: 237px!important; overflow: hidden!important; vertical-align: top!important; }
+span.PIN_1367314824838_embed_pin.PIN_1367314824838_fancy { background: #fff!important; box-shadow: 0 0 3px #aaa!important; border-radius: 3px!important; }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link { display: block!important;  margin: 0 auto!important; padding: 0!important; position: relative!important;  line-height: 0}
+span.PIN_1367314824838_embed_pin img { border: 0!important; margin: 0!important; padding: 0!important;}
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link i.PIN_1367314824838_repin { left: 10px!important; top: 10px!important; position: absolute!important; height: 33px!important; width: 64px!important; background-size: 64px 99px!important; background: transparent url(http://passets.pinterest.com/images/pidgets/repin1.png)!important; }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link i.PIN_1367314824838_repin:hover { background-position: 0 -33px!important; }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link i.PIN_1367314824838_repin.PIN_1367314824838_hazClick { background-position: 0 -66px!important; }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link i.PIN_1367314824838_getThis { display: none }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link:hover i.PIN_1367314824838_getThis, span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link:hover i.PIN_1367314824838_getThis i { background: transparent url(http://passets.pinterest.com/images/pidgets/bfs1.png) }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link:hover i.PIN_1367314824838_getThis { color: #555!important; display: inline-block!important; font: normal normal normal 11px/20px "Helvetica Neue",helvetica,arial,san-serif!important; height: 20px!important; margin: 0!important; padding: 0 1px 0 5px!important; position: absolute!important; bottom: 10px!important; right: 10px!important; text-decoration: none!important;  }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link:hover i.PIN_1367314824838_getThis:hover { background-position: 0 -20px }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link:hover i.PIN_1367314824838_getThis i { position: absolute!important; top: 0!important; right: -4px!important; height: 20px!important; width: 5px!important; background-position: 100% 0px }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_link:hover i.PIN_1367314824838_getThis:hover i { background-position: 100% -20px }
+span.PIN_1367314824838_embed_pin span.PIN_1367314824838_embed_pin_desc { color: #333!important; border-bottom: 1px solid #eee!important; display: block!important; font-family: "Helvetica Neue", arial, sans-serif!important; font-size: 12px!important; line-height: 17px!important; padding: 10px!important; text-align: left!important; }
+span.PIN_1367314824838_embed_pin span.PIN_1367314824838_embed_pin_attrib, span.PIN_1367314824838_embed_pin span.PIN_1367314824838_embed_pin_text_container { color: #a7a7a7!important; font-family: "Helvetica", sans-serif!important; font-size: 10px!important; line-height: 18px!important; font-weight: bold!important; display: block!important;}
+span.PIN_1367314824838_embed_pin span.PIN_1367314824838_embed_pin_attrib img.PIN_1367314824838_embed_pin_attrib_icon { height: 16px!important; width: 16px!important; vertical-align: middle!important; margin-right: 5px!important; float: left!important;}
+span.PIN_1367314824838_embed_pin span.PIN_1367314824838_embed_pin_attrib a { color: #a7a7a7!important; text-decoration: none!important;}
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_text, span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_text span.PIN_1367314824838_embed_pin_text_container { position: relative!important; text-decoration: none!important; display: block!important; font-weight: bold!important; color: #b7b7b7!important; font-family: "Helvetica Neue", arial, sans-serif!important; font-size: 11px!important; line-height: 14px!important; height: 39px!important; text-align: left!important; }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_text { padding: 5px 0 0 7px!important; }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_text:hover { background: #eee!important;}
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_text img.PIN_1367314824838_embed_pin_text_avatar { border-radius: 2px!important; overflow: hidden!important; height: 30px!important; width: 30px!important; vertical-align: middle!important; margin-right: 5px!important; float: left!important;}
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_text span.PIN_1367314824838_embed_pin_text_container em.PIN_1367314824838_embed_pin_text_container_em { font-family: inherit!important; display: block!important; color: #717171!important; font-style: normal!important; width: 180px!important; text-overflow: ellipsis!important; overflow: hidden!important; white-space: nowrap!important; }
+span.PIN_1367314824838_embed_pin a.PIN_1367314824838_embed_pin_text b.PIN_1367314824838_embed_pin_link_shield { position: absolute!important; top: 0!important; left: 0!important; height: 100%!important; width: 100%!important; }
+span.PIN_1367314824838_embed_board { display: inline-block!important; margin: 0!important; padding:10px 0!important; position: relative!important; text-align: center}
+span.PIN_1367314824838_embed_board.PIN_1367314824838_fancy { background: #fff!important; box-shadow: 0 0 3px #aaa!important; border-radius: 3px!important; }
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_hd { display: block!important; margin: 0 10px!important; padding: 0!important; line-height: 20px!important; height: 25px!important; position: relative!important;  }
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_hd a { cursor: pointer!important; background: inherit!important; text-decoration: none!important; width: 48%!important; white-space: nowrap!important; position: absolute!important; top: 0!important; overflow: hidden!important;  text-overflow: ellipsis!important; }
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_hd a:hover { text-decoration: none!important; background: inherit!important; }
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_hd a:active { text-decoration: none!important; background: inherit!important; }
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_hd a.PIN_1367314824838_embed_board_title { width: 100%!important; position: absolute!important; left: 0!important; text-align: left!important; font-family: Georgia!important; font-size: 16px!important; color:#2b1e1e!important;}
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_hd a.PIN_1367314824838_embed_board_name { position: absolute!important; left: 0!important; text-align: left!important; font-family: Georgia!important; font-size: 16px!important; color:#2b1e1e!important;}
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_hd a.PIN_1367314824838_embed_board_author { position: absolute!important; right: 0!important; text-align: right!important; font-family: Helvetica!important; font-size: 11px!important; color: #746d6a!important; font-weight: bold!important;}
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_hd a.PIN_1367314824838_embed_board_author::before { content:"by "!important; font-weight: normal!important; }
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_bd { display:block!important; margin: 0 10px!important; overflow: hidden!important; border-radius: 2px!important; position: relative!important; }
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_bd a.PIN_1367314824838_embed_board_th { cursor: pointer!important; display: inline-block!important; position: absolute!important; overflow: hidden!important; }
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_bd a.PIN_1367314824838_embed_board_th::before { position: absolute!important; content:""!important; z-index: 2!important; top: 0!important; left: 0!important; right: 0!important; bottom: 0!important; box-shadow: inset 0 0 2px #888!important; }
+span.PIN_1367314824838_embed_board span.PIN_1367314824838_embed_board_bd a.PIN_1367314824838_embed_board_th img.PIN_1367314824838_embed_board_img { border: none!important; position: absolute!important; top: 50%!important; left: 0!important; }
+a.PIN_1367314824838_embed_board_ft { text-shadow: 0 1px #fff!important; display: block!important; text-align: center!important; border: 1px solid #ccc!important; margin: 10px 10px 0!important; height: 31px!important; line-height: 30px!important;border-radius: 2px!important; text-decoration: none!important; font-family: Helvetica!important; font-weight: bold!important; font-size: 13px!important; color: #746d6a!important; background: #f4f4f4 url(http://passets.pinterest.com/images/pidgets/board_button_link.png) 0 0 repeat-x}
+a.PIN_1367314824838_embed_board_ft:hover { text-decoration: none!important; background: #fefefe url(http://passets.pinterest.com/images/pidgets/board_button_hover.png) 0 0 repeat-x}
+a.PIN_1367314824838_embed_board_ft:active { text-decoration: none!important; background: #e4e4e4 url(http://passets.pinterest.com/images/pidgets/board_button_active.png) 0 0 repeat-x}
+a.PIN_1367314824838_embed_board_ft span.PIN_1367314824838_embed_board_ft_logo { vertical-align: top!important; display: inline-block!important; margin-left: 2px!important; height: 30px!important; width: 66px!important; background: transparent url(http://passets.pinterest.com/images/pidgets/board_button_logo.png) 50% 48% no-repeat!important; }
+.PIN_1367314824838_hidden { display:none!important; }</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+/* @noflip */
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+/* @noflip */
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+/* @noflip */
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+/* @noflip */
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100%
+}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}
+.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}
+.fb_iframe_widget iframe{position:absolute}
+.fb_iframe_widget_lift{z-index:1}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_fluid{display:inline}
+.fb_iframe_widget_fluid span{width:100%}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fb_edge_widget_with_comment{position:relative;*z-index:1000}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50% 50%;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender
+.FB_Loader{margin-top:0}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+/* @noflip */
+.fbpluginrecommendationsbarleft{left:10px}
+/* @noflip */
+.fbpluginrecommendationsbarright{right:10px}</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuTitle {background-color: #CCCCCC; margin: -1px -1px 1px -1px; text-align: center; font-style: italic; font-size: 80%; color: #444444; padding: 2px 0; overflow: hidden}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style></head>
+<body data-twttr-rendered="true"><div style="display: none;" id="MathJax_Message"></div>
+<div class="navbar section" id="navbar"><div class="widget Navbar" id="Navbar1"><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"><iframe src="part4_files/navbar.htm" name="navbar-iframe" id="navbar-iframe" vspace="0" tabindex="0" style="" marginwidth="0" marginheight="0" hspace="0" frameborder="0" scrolling="no" width="100%"></iframe></div>
+<script gapi_processed="true" type="text/javascript" src="part4_files/plusone_002.js"></script>
+<script type="text/javascript">
+        gapi.load("iframes-styles-bubble", function() {
+          if (window.iframes && iframes.open) {
+            iframes.open(
+                '//www.blogger.com/navbar.g?targetBlogID\0755744154463195670470\46blogName\75Code+@+C%2B%2B\46publishMode\75PUBLISH_MODE_BLOGSPOT\46navbarType\75LIGHT\46layoutType\75LAYOUTS\46searchRoot\75http://jia3ep.blogspot.com/search\46blogLocale\75ru\46v\0752\46homepageUrl\75http://jia3ep.blogspot.com/\46targetPostID\0754222918906109171580\46blogPostOrPageUrl\75http://jia3ep.blogspot.com/2012/01/c-android-4-java.html\46vt\0756284879185636486376',
+                {
+                  container: "navbar-iframe-container",
+                  id: "navbar-iframe"
+                },
+                {
+                });
+          }
+        });
+      </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<div id="outer-wrapper"><div id="wrap2">
+<!-- skip links for text browsers -->
+<span id="skiplinks" style="display:none;">
+<a href="#main">skip to main </a> |
+      <a href="#sidebar">skip to sidebar</a>
+</span>
+<div id="header-wrapper">
+<div class="header section" id="header"><div class="widget Header" id="Header1">
+<div id="header-inner">
+<div class="titlewrapper">
+<h1 class="title">
+<a href="http://jia3ep.blogspot.ru/">Code @ C++</a>
+</h1>
+</div>
+<div class="descriptionwrapper">
+<p class="description"><span>Mostly C++ programming tips</span></p>
+</div>
+</div>
+</div></div>
+</div>
+<div id="content-wrapper">
+<div id="crosscol-wrapper" style="text-align:center">
+<div class="crosscol section" id="crosscol"><div class="widget HTML" id="HTML1">
+<div class="widget-content">
+<script gapi_processed="true" type="text/javascript" src="part4_files/plusone.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2867776-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=HTML&amp;widgetId=HTML1&amp;action=editWidget&amp;sectionId=crosscol" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML1"));' target="configHTML1" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML3">
+<div class="widget-content">
+<form action="http://www.google.ru/cse" id="cse-search-box" target="_blank">
+  <div>
+    <input name="cx" value="partner-pub-8677876544665827:m6lfg6-bjwl" type="hidden">
+    <input name="ie" value="UTF-8" type="hidden">
+    <input style="border: 1px solid rgb(126, 157, 185); padding: 2px; background: url(&quot;http://www.google.ru/cse/intl/ru/images/google_custom_search_watermark.gif&quot;) no-repeat scroll left center rgb(255, 255, 255);" name="q" size="90" type="text">
+    <input name="sa" value="Поиск" type="submit">
+  </div>
+<input value="jia3ep.blogspot.ru/2012/01/c-android-4-java.html" name="siteurl" type="hidden"><input value="jia3ep.blogspot.ru/2011/11/c-android-3-stl.html" name="ref" type="hidden"><input name="ss" type="hidden"></form>
+<script type="text/javascript" src="part4_files/brand"></script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=HTML&amp;widgetId=HTML3&amp;action=editWidget&amp;sectionId=crosscol" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML3"));' target="configHTML3" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+<div id="main-wrapper">
+<div class="main section" id="main"><div class="widget Blog" id="Blog1">
+<div class="blog-posts hfeed">
+<!-- google_ad_section_start(name=default) -->
+
+          <div class="date-outer">
+        
+<h2 class="date-header"><span>понедельник, 16 января 2012 г.</span></h2>
+
+          <div class="date-posts">
+        
+<div class="post-outer">
+<div class="post hentry">
+<a name="4222918906109171580"></a>
+<h3 class="post-title entry-title">
+<a href="http://jia3ep.blogspot.ru/2012/01/c-android-4-java.html">Как написать программу на C++ для Android.<br>Часть 4: Без Java.</a>
+</h3>
+<div class="post-header-line-1"></div>
+<div class="post-body entry-content">
+<p><a href="http://jia3ep.blogspot.com/2011/10/c-android-1.html">Часть 1</a> | <a href="http://jia3ep.blogspot.com/2011/10/c-android-2.html">Часть 2</a> | <a href="http://jia3ep.blogspot.com/2011/11/c-android-3-stl.html">Часть 3</a>  | <b>Часть 4</b> | <a href="http://jia3ep.blogspot.com/2012/09/c-android-5-mac-os.html">Часть 5 (Mac OS)</a><br>
+<br>
+В этой части мы не будем писать на Java. Напишем программу под Android используя только C++. Это будет просто.<br>
+<a name="more"></a><br>
+Нам нужна поддержка фич <a href="http://developer.android.com/sdk/ndk/index.html">NDK</a>, которые появились только в версии Android 2.3. Поэтому сначала нужно установить SDK с поддержкой Android 2.3:<br>
+<img src="part4_files/install_2_3.png"><br>
+<br>
+Если ваша железка не поддерживает такую ОС, то ничего страшного — мой 
+телефон тоже безнадежно устарел, я же купил его целых 6 месяцев назад :)
+ А более новое устройство мне заполучить для тестов не удалось, поэтому я
+ буду запускать примеры на эмуляторе, который входит в состав SDK. Если 
+компьютер, на котором ведется разработка, достаточно быстрый, то 
+неудобств немного. На реальной железке эти примеры также должны 
+работать.<br>
+<br>
+Далее, создаем проект так, как это было описано <a href="http://jia3ep.blogspot.com/2011/10/c-android-2.html">во второй части</a>.
+ Только Build Target у нас теперь Android 2.3 и убираем галку с пункта 
+Create Activity, так как мы договорились обойтись в этот раз без Java:<br>
+<img src="part4_files/create_project.png"><br>
+<br>
+В конце не забываем вызвать Add Native Support (тыкаем правой кнопкой в 
+проект, далее выпадает меню, в котором выбираем Android Tools &gt; Add 
+Native Support). В итоге получим почти пустой проект, но в нем уже есть 
+AndroidManifest.xml, который нужно поправить в соответствии со следующим
+ примером:<br>
+</p><pre style="" class="prettyprint lang-xml prettyprinted"><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"utf-8"</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="tag">&lt;manifest</span><span class="pln"> </span><span class="atn">xmlns:android</span><span class="pun">=</span><span class="atv">"http://schemas.android.com/apk/res/android"</span><span class="pln">
+    </span><span class="atn">package</span><span class="pun">=</span><span class="atv">"com.blogspot.jia3ep.test_native"</span><span class="pln">
+    </span><span class="atn">android:versionCode</span><span class="pun">=</span><span class="atv">"1"</span><span class="pln">
+    </span><span class="atn">android:versionName</span><span class="pun">=</span><span class="atv">"1.0"</span><span class="pln"> </span><span class="tag">&gt;</span><span class="pln">
+
+    </span><span class="com">&lt;!-- В документации ошибочно указано, что можно писать 8 - это не так.
+         NativeActivity появилась только в Android 2.3 --&gt;</span><span class="pln">
+    </span><span class="tag">&lt;uses-sdk</span><span class="pln"> </span><span class="atn">android:minSdkVersion</span><span class="pun">=</span><span class="atv">"9"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+
+    </span><span class="com">&lt;!-- Этот .apk не содержит Java кода, поэтому ставим hasCode = false. --&gt;</span><span class="pln">        
+    </span><span class="tag">&lt;application</span><span class="pln">
+        </span><span class="atn">android:icon</span><span class="pun">=</span><span class="atv">"@drawable/ic_launcher"</span><span class="pln">
+        </span><span class="atn">android:label</span><span class="pun">=</span><span class="atv">"@string/app_name"</span><span class="pln"> 
+        </span><span class="atn">android:hasCode</span><span class="pun">=</span><span class="atv">"false"</span><span class="tag">&gt;</span><span class="pln">
+
+        </span><span class="com">&lt;!-- Используем встроенную NativeActivity. --&gt;</span><span class="pln">
+        </span><span class="tag">&lt;activity</span><span class="pln"> </span><span class="atn">android:name</span><span class="pun">=</span><span class="atv">"android.app.NativeActivity"</span><span class="pln">
+                </span><span class="atn">android:label</span><span class="pun">=</span><span class="atv">"@string/app_name"</span><span class="pln">
+                </span><span class="atn">android:configChanges</span><span class="pun">=</span><span class="atv">"orientation|keyboardHidden"</span><span class="tag">&gt;</span><span class="pln">
+            </span><span class="com">&lt;!-- Указываем название библиотеки, которая содержит NativeActivity --&gt;</span><span class="pln">
+            </span><span class="tag">&lt;meta-data</span><span class="pln"> </span><span class="atn">android:name</span><span class="pun">=</span><span class="atv">"android.app.lib_name"</span><span class="pln">
+                    </span><span class="atn">android:value</span><span class="pun">=</span><span class="atv">"test_native"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+            </span><span class="tag">&lt;intent-filter&gt;</span><span class="pln">
+                </span><span class="tag">&lt;action</span><span class="pln"> </span><span class="atn">android:name</span><span class="pun">=</span><span class="atv">"android.intent.action.MAIN"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+                </span><span class="tag">&lt;category</span><span class="pln"> </span><span class="atn">android:name</span><span class="pun">=</span><span class="atv">"android.intent.category.LAUNCHER"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+            </span><span class="tag">&lt;/intent-filter&gt;</span><span class="pln">
+        </span><span class="tag">&lt;/activity&gt;</span><span class="pln">
+                        
+    </span><span class="tag">&lt;/application&gt;</span><span class="pln">
+</span><span class="tag">&lt;/manifest&gt;</span></pre><br>
+Вместо activity, которую мы создавали в предыдущих примерах, указываем встроенную в NDK <a href="http://developer.android.com/reference/android/app/NativeActivity.html">NativeActivity</a>. Её реализация находится в библиотеке <tt>android_native_app_glue</tt>,
+ которую нужно прилинковать. Для этого меняем Android.mk, заодно добавим
+ подгрузку библиотек, которые нам пригодятся. После этого файл будет 
+выглядеть так:<br>
+<pre style="" class="prettyprint prettyprinted"><span class="pln">LOCAL_PATH </span><span class="pun">:=</span><span class="pln"> $</span><span class="pun">(</span><span class="pln">call </span><span class="kwd">my</span><span class="pun">-</span><span class="pln">dir</span><span class="pun">)</span><span class="pln">
+
+include $</span><span class="pun">(</span><span class="pln">CLEAR_VARS</span><span class="pun">)</span><span class="pln">
+
+LOCAL_MODULE    </span><span class="pun">:=</span><span class="pln"> test_native
+</span><span class="com">### Add all source file names to be included in lib separated by a whitespace</span><span class="pln">
+LOCAL_SRC_FILES </span><span class="pun">:=</span><span class="pln"> test_native</span><span class="pun">.</span><span class="pln">cpp
+LOCAL_ALLOW_UNDEFINED_SYMBOLS </span><span class="pun">:=</span><span class="pln"> </span><span class="kwd">true</span><span class="pln">
+</span><span class="com">### Load additional libs </span><span class="pln">
+LOCAL_LDLIBS    </span><span class="pun">:=</span><span class="pln"> </span><span class="pun">-</span><span class="pln">llog </span><span class="pun">-</span><span class="pln">landroid </span><span class="pun">-</span><span class="pln">lEGL </span><span class="pun">-</span><span class="pln">lGLESv1_CM
+</span><span class="com">### Link NativeActivity support</span><span class="pln">
+LOCAL_STATIC_LIBRARIES </span><span class="pun">:=</span><span class="pln"> android_native_app_glue
+
+include $</span><span class="pun">(</span><span class="pln">BUILD_SHARED_LIBRARY</span><span class="pun">)</span><span class="pln">
+
+$</span><span class="pun">(</span><span class="pln">call </span><span class="kwd">import</span><span class="pun">-</span><span class="kwd">module</span><span class="pun">,</span><span class="pln">android</span><span class="pun">/</span><span class="pln">native_app_glue</span><span class="pun">)</span></pre><br>
+В проекте уже есть cpp файл <tt>test_native.cpp</tt>, который был создан автоматически при конвертации проекта. В него добавим функцию <tt>android_main</tt>, которая использует <tt>android_native_app_glue</tt>. Она запускается в отдельном потоке со своим циклом обработки сообщений. Все очень похоже на <tt>WndProc</tt> в Windows. Но для начала в <tt>test_native.cpp</tt> добавляем всего несколько строк:<br>
+<pre style="" class="prettyprint lang-cpp prettyprinted"><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;android_native_app_glue.h&gt;</span><span class="pln">
+
+</span><span class="kwd">void</span><span class="pln"> android_main</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> android_app</span><span class="pun">*</span><span class="pln"> state</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="com">// Make sure glue isn't stripped.</span><span class="pln">
+    app_dummy</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">}</span></pre><br>
+Чтобы синтаксический анализатор Eclipse не ругался, добавляем путь к <tt>android_native_app_glue.h</tt> как это было описано <a href="http://jia3ep.blogspot.com/2011/10/c-android-2.html">во второй части</a>. У меня получился такой путь: <tt>/home/user/Android/android-ndk-r6b/sources/android/native_app_glue</tt> .<br>
+<br>
+Получаем минимальный пример, который можно скомпилировать и запустить. 
+Делать он ничего не будет и не будет отвечать на кнопки устройства, так 
+как цикла обработки сообщений тут пока нет:<br>
+<img src="part4_files/simple_main.png"><br>
+<br>
+Теперь добавим примитивный цикл обработки сообщений. Для этого нужно в цикле вызывать функцию <tt>ALooper_pollAll</tt>, которая вычитывает все сообщения из очереди. Для обработки этих сообщений определим два почти пустых метода: <tt>engine_handle_input</tt> и <tt>engine_handle_cmd</tt>. Получаем следующий код:<br>
+<pre style="" class="prettyprint lang-cpp prettyprinted"><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;string.h&gt;</span><span class="pln">
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;jni.h&gt;</span><span class="pln">
+
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;android_native_app_glue.h&gt;</span><span class="pln">
+
+</span><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;android/log.h&gt;</span><span class="pln">
+
+</span><span class="com">#define</span><span class="pln"> LOGI</span><span class="pun">(...)</span><span class="pln"> </span><span class="pun">((</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">__android_log_print</span><span class="pun">(</span><span class="pln">ANDROID_LOG_INFO</span><span class="pun">,</span><span class="pln"> </span><span class="str">"test_native"</span><span class="pun">,</span><span class="pln"> __VA_ARGS__</span><span class="pun">))</span><span class="pln">
+</span><span class="com">#define</span><span class="pln"> LOGW</span><span class="pun">(...)</span><span class="pln"> </span><span class="pun">((</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">__android_log_print</span><span class="pun">(</span><span class="pln">ANDROID_LOG_WARN</span><span class="pun">,</span><span class="pln"> </span><span class="str">"test_native"</span><span class="pun">,</span><span class="pln"> __VA_ARGS__</span><span class="pun">))</span><span class="pln">
+
+</span><span class="com">/**
+ * Process the next input event.
+ */</span><span class="pln">
+</span><span class="kwd">static</span><span class="pln"> </span><span class="typ">int32_t</span><span class="pln"> engine_handle_input</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> android_app</span><span class="pun">*</span><span class="pln"> app</span><span class="pun">,</span><span class="pln">
+  </span><span class="typ">AInputEvent</span><span class="pun">*</span><span class="pln"> event</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+ </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">/**
+ * Process the next main command.
+ */</span><span class="pln">
+</span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> engine_handle_cmd</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> android_app</span><span class="pun">*</span><span class="pln"> app</span><span class="pun">,</span><span class="pln"> </span><span class="typ">int32_t</span><span class="pln"> cmd</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+ </span><span class="kwd">switch</span><span class="pln"> </span><span class="pun">(</span><span class="pln">cmd</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+ </span><span class="kwd">case</span><span class="pln"> APP_CMD_SAVE_STATE</span><span class="pun">:</span><span class="pln">
+  </span><span class="com">// The system has asked us to save our current state.</span><span class="pln">
+  </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+ </span><span class="kwd">case</span><span class="pln"> APP_CMD_INIT_WINDOW</span><span class="pun">:</span><span class="pln">
+  </span><span class="com">// The window is being shown.</span><span class="pln">
+  </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+ </span><span class="kwd">case</span><span class="pln"> APP_CMD_TERM_WINDOW</span><span class="pun">:</span><span class="pln">
+  </span><span class="com">// The window is being hidden or closed.</span><span class="pln">
+  </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+ </span><span class="kwd">case</span><span class="pln"> APP_CMD_GAINED_FOCUS</span><span class="pun">:</span><span class="pln">
+  </span><span class="com">// Our app gains focus.</span><span class="pln">
+  </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+ </span><span class="kwd">case</span><span class="pln"> APP_CMD_LOST_FOCUS</span><span class="pun">:</span><span class="pln">
+  </span><span class="com">// Our app looses focus.</span><span class="pln">
+  </span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+ </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="kwd">void</span><span class="pln"> android_main</span><span class="pun">(</span><span class="kwd">struct</span><span class="pln"> android_app</span><span class="pun">*</span><span class="pln"> state</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+ </span><span class="com">// Make sure glue isn't stripped.</span><span class="pln">
+ app_dummy</span><span class="pun">();</span><span class="pln">
+
+ LOGW</span><span class="pun">(</span><span class="pln"> </span><span class="str">"test_native entered main"</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+
+ state</span><span class="pun">-&gt;</span><span class="pln">userData </span><span class="pun">=</span><span class="pln"> NULL</span><span class="pun">;</span><span class="pln">
+ state</span><span class="pun">-&gt;</span><span class="pln">onAppCmd </span><span class="pun">=</span><span class="pln"> engine_handle_cmd</span><span class="pun">;</span><span class="pln">
+ state</span><span class="pun">-&gt;</span><span class="pln">onInputEvent </span><span class="pun">=</span><span class="pln"> engine_handle_input</span><span class="pun">;</span><span class="pln">
+
+ </span><span class="com">// loop waiting for stuff to do.</span><span class="pln">
+
+ </span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(</span><span class="lit">1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="com">// Read all pending events.</span><span class="pln">
+  </span><span class="typ">int</span><span class="pln"> ident</span><span class="pun">;</span><span class="pln">
+  </span><span class="typ">int</span><span class="pln"> events</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">struct</span><span class="pln"> android_poll_source</span><span class="pun">*</span><span class="pln"> source</span><span class="pun">;</span><span class="pln">
+
+  </span><span class="com">// We will block forever waiting for events.</span><span class="pln">
+  </span><span class="kwd">while</span><span class="pln"> </span><span class="pun">((</span><span class="pln">ident </span><span class="pun">=</span><span class="pln"> </span><span class="typ">ALooper_pollAll</span><span class="pun">(-</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> NULL</span><span class="pun">,</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">events</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pun">**)</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">source</span><span class="pun">))</span><span class="pln">
+    </span><span class="pun">&gt;=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+   </span><span class="com">// Process this event.</span><span class="pln">
+   </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">source </span><span class="pun">!=</span><span class="pln"> NULL</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    source</span><span class="pun">-&gt;</span><span class="pln">process</span><span class="pun">(</span><span class="pln">state</span><span class="pun">,</span><span class="pln"> source</span><span class="pun">);</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+
+   </span><span class="com">// Check if we are exiting.</span><span class="pln">
+   </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">state</span><span class="pun">-&gt;</span><span class="pln">destroyRequested </span><span class="pun">!=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    LOGW</span><span class="pun">(</span><span class="pln"> </span><span class="str">"test_native exited main"</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+
+ </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre><br>
+При отладке можно видеть сообщения о старте и выходе, которые я добавил в <tt>android_main</tt>:<br>
+<img src="part4_files/eclipse_log.png"><br>
+<br>
+В следующей части посмотрим как в рамках этого примера можно использовать OpenGL, чтобы увидеть что-то кроме черного экрана.<p></p>
+<div style="clear: both;"></div>
+</div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1">
+<div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="part4_files/xd_arbiter.htm" style="border: medium none;" tab-index="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_http" allowtransparency="true" name="fb_xdm_frame_http" frameborder="0" scrolling="no"></iframe><iframe src="part4_files/xd_arbiter_002.htm" style="border: medium none;" tab-index="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_https" allowtransparency="true" name="fb_xdm_frame_https" frameborder="0" scrolling="no"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) {return;}
+js = d.createElement(s); js.id = id;
+js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<script type="text/javascript">
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class="horizontal-social-buttons" style="padding:10px 0 10px;">
+<div style="float:left;">
+<iframe data-twttr-rendered="true" title="Twitter Tweet Button" style="width: 109px; height: 20px;" class="twitter-share-button twitter-count-horizontal" src="part4_files/tweet_button.htm" allowtransparency="true" frameborder="0" scrolling="no"></iframe>
+</div>
+<div style="float:left;">
+<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px;"><iframe title="+1" data-gapiattached="true" allowtransparency="true" src="part4_files/fastbutton.htm" name="I0_1367314824729" id="I0_1367314824729" vspace="0" tabindex="0" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" marginwidth="0" marginheight="0" hspace="0" frameborder="0" scrolling="no" width="100%"></iframe></div>
+</div>
+<div style="float:left;">
+<fb:like class="fb_edge_widget_with_comment fb_iframe_widget" fb-xfbml-state="rendered" colorscheme="light" font="" href="http://jia3ep.blogspot.ru/2012/01/c-android-4-java.html" layout="button_count" send="true" show_faces="false"><span style="height: 20px; width: 126px;"><iframe src="part4_files/like.htm" class="fb_ltr" title="Like this content on Facebook." style="border: medium none; overflow: hidden; height: 20px; width: 126px;" name="fe2f8f9c9ba626" id="ffe78e8d7f0078" scrolling="no"></iframe></span></fb:like>
+</div>
+<div id="pin-wrapper" style="display: inline;">
+<a data-pin-config="beside" data-pin-log="button_pinit" target="_blank" class="PIN_1367314824838_pin_it_button PIN_1367314824838_pin_it_button_inline PIN_1367314824838_pin_it_beside" href="http://pinterest.com/pin/create/button/?url=http://jia3ep.blogspot.ru/2012/01/c-android-4-java.html"><span id="PIN_1367314824838_pin_count_0" class="PIN_1367314824838_hidden"><i></i></span></a>
+<a href="javascript:void(run_pinmarklet())" style="margin-left:-93px; width:43px; height:20px; display:inline-block;"></a>
+</div>
+
+<script type="text/javascript">
+function run_pinmarklet() {
+    var e=document.createElement('script');
+    e.setAttribute('type','text/javascript');
+    e.setAttribute('charset','UTF-8');
+    e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r=' + Math.random()*99999999);
+    document.body.appendChild(e);
+}
+</script>
+</div>
+<div style="clear: both;"></div>
+<span class="post-author vcard">
+</span>
+<span class="post-timestamp">
+на
+<a class="timestamp-link" href="http://jia3ep.blogspot.ru/2012/01/c-android-4-java.html" rel="bookmark" title="permanent link"><abbr class="published" title="2012-01-16T05:00:00+04:00">5:00</abbr></a>
+</span>
+<span class="post-comment-link">
+</span>
+<span class="post-icons">
+<span class="item-control blog-admin pid-1178933890">
+<a href="http://www.blogger.com/post-edit.g?blogID=5744154463195670470&amp;postID=4222918906109171580&amp;from=pencil" title="Изменить сообщение">
+<img alt="" class="icon-action" src="part4_files/icon18_edit_allbkg.gif" height="18" width="18">
+</a>
+</span>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-2"><span class="post-labels">
+Ярлыки:
+<a href="http://jia3ep.blogspot.ru/search/label/Android" rel="tag">Android</a>,
+<a href="http://jia3ep.blogspot.ru/search/label/C%2B%2B" rel="tag">C++</a>,
+<a href="http://jia3ep.blogspot.ru/search/label/Eclipse" rel="tag">Eclipse</a>
+</span></div>
+<div class="post-footer-line post-footer-line-3"></div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>12 комментариев:</h4>
+<div id="Blog1_comments-block-wrapper">
+<dl class="avatar-comment-indent" id="comments-block">
+<dt class="comment-author " id="c5209574592459754817">
+<a name="c5209574592459754817"></a>
+<div class="avatar-image-container vcard"><span dir="ltr"><a href="http://www.blogger.com/profile/16201443526225351421" rel="nofollow" onclick="" class="avatar-hovercard" id="av-0-16201443526225351421"><img src="part4_files/IMG_0423_.jpg" alt="" class="delayLoad" style="" longdesc="http://1.bp.blogspot.com/_JwI00ZTPVto/S-HWmddILmI/AAAAAAAAAKQ/ZLDVGyVC1UY/S45/IMG_0423_!.jpg" title="Andrey" height="35" width="35">
+
+<noscript><img src="http://1.bp.blogspot.com/_JwI00ZTPVto/S-HWmddILmI/AAAAAAAAAKQ/ZLDVGyVC1UY/S45/IMG_0423_!.jpg" width="35" height="35" class="photo" alt=""></noscript></a></span></div>
+<a href="http://www.blogger.com/profile/16201443526225351421" rel="nofollow">Andrey</a>
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-5209574592459754817">
+<p>
+Спасибо за статью! наконец то можно и без убогого Java
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1329766366455#c5209574592459754817" title="comment permalink">
+20 февраля 2012 г., 23:32
+</a>
+<span class="item-control blog-admin pid-1862293376">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=5209574592459754817" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c5502451658276389708">
+<a name="c5502451658276389708"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><img src="part4_files/blank.gif" alt="" title="Анонимный" height="16" width="16">
+
+</span></div>
+Анонимный
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-5502451658276389708">
+<p>
+Отличные статьи!<br>В ожидании следующей партии знаний.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1331650014795#c5502451658276389708" title="comment permalink">
+13 марта 2012 г., 18:46
+</a>
+<span class="item-control blog-admin pid-1448600607">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=5502451658276389708" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c6274166881640560081">
+<a name="c6274166881640560081"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><img src="part4_files/blank.gif" alt="" title="Анонимный" height="16" width="16">
+
+</span></div>
+Анонимный
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6274166881640560081">
+<p>
+Все еще ждем статью про OpenGL!
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1334696419827#c6274166881640560081" title="comment permalink">
+18 апреля 2012 г., 1:00
+</a>
+<span class="item-control blog-admin pid-2103002475">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=6274166881640560081" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c5322743153066904563">
+<a name="c5322743153066904563"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><img src="part4_files/blank.gif" alt="" title="Анонимный" height="16" width="16">
+
+</span></div>
+Анонимный
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-5322743153066904563">
+<p>
+Автор, ну когда уже следующая!?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1336405131416#c5322743153066904563" title="comment permalink">
+7 мая 2012 г., 19:38
+</a>
+<span class="item-control blog-admin pid-1107508279">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=5322743153066904563" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c1645740515019947240">
+<a name="c1645740515019947240"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><img src="part4_files/blank.gif" alt="" title="Анонимный" height="16" width="16">
+
+</span></div>
+Анонимный
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-1645740515019947240">
+<p>
+автор, ну когда уже дальше писать будешь!? у народа ломка!
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1336405193142#c1645740515019947240" title="comment permalink">
+7 мая 2012 г., 19:39
+</a>
+<span class="item-control blog-admin pid-1107508279">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=1645740515019947240" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c8923644085852857482">
+<a name="c8923644085852857482"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><a href="http://www.blogger.com/profile/07405815565931858691" rel="nofollow" onclick="" class="avatar-hovercard" id="av-5-07405815565931858691"><img src="part4_files/b16-rounded.gif" alt="" title="Анонимный" height="16" width="16">
+
+</a></span></div>
+<a href="http://www.blogger.com/profile/07405815565931858691" rel="nofollow">Анонимный</a>
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-8923644085852857482">
+<p>
+Супер! Спасибо автору
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1336652042359#c8923644085852857482" title="comment permalink">
+10 мая 2012 г., 16:14
+</a>
+<span class="item-control blog-admin pid-1223776479">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=8923644085852857482" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c1249828835633488048">
+<a name="c1249828835633488048"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><a href="http://www.blogger.com/profile/16615057112911137628" rel="nofollow" onclick="" class="avatar-hovercard" id="av-6-16615057112911137628"><img src="part4_files/b16-rounded.gif" alt="" title=".4LPINE" height="16" width="16">
+
+</a></span></div>
+<a href="http://www.blogger.com/profile/16615057112911137628" rel="nofollow">.4LPINE</a>
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-1249828835633488048">
+<p>
+Спасибо за статью! А вы не могли бы выложить архив с проектом? Дело в 
+том, что у меня возникли трудности с Эклипсом и повторить все ваши 
+действия я не могу (собираю проект из командной строки), а архив 
+наглядно бы показал, что и как в проекте должно быть. <br><br>Спасибо.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1338728499677#c1249828835633488048" title="comment permalink">
+3 июня 2012 г., 17:01
+</a>
+<span class="item-control blog-admin pid-1592780610">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=1249828835633488048" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blog-author" id="c1954687524424080810">
+<a name="c1954687524424080810"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><a href="http://www.blogger.com/profile/03118738824565485127" rel="nofollow" onclick="" class="avatar-hovercard" id="av-7-03118738824565485127"><img src="part4_files/b16-rounded.gif" alt="" title="Kirill V. Lyadvinsky" height="16" width="16">
+
+</a></span></div>
+<a href="http://www.blogger.com/profile/03118738824565485127" rel="nofollow">Kirill V. Lyadvinsky</a>
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-1954687524424080810">
+<p>
+Архив выложен в 3-й части.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1338749068676#c1954687524424080810" title="comment permalink">
+3 июня 2012 г., 22:44
+</a>
+<span class="item-control blog-admin pid-1178933890">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=1954687524424080810" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c9100250737646697988">
+<a name="c9100250737646697988"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><a href="http://www.blogger.com/profile/16615057112911137628" rel="nofollow" onclick="" class="avatar-hovercard" id="av-8-16615057112911137628"><img src="part4_files/b16-rounded.gif" alt="" title="Роман Шувалов" height="16" width="16">
+
+</a></span></div>
+<a href="http://www.blogger.com/profile/16615057112911137628" rel="nofollow">Роман Шувалов</a>
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-9100250737646697988">
+<p>
+Ну так в 3-й части выложен проект с использованием Java, а эта часть про
+ программу на чистом Си с NativeActivity, про этот проект и спрашиваю.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1338778324456#c9100250737646697988" title="comment permalink">
+4 июня 2012 г., 6:52
+</a>
+<span class="item-control blog-admin pid-1592780610">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=9100250737646697988" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c7079356188818824631">
+<a name="c7079356188818824631"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><a href="http://www.blogger.com/profile/16615057112911137628" rel="nofollow" onclick="" class="avatar-hovercard" id="av-9-16615057112911137628"><img src="part4_files/b16-rounded.gif" alt="" title="Роман Шувалов" height="16" width="16">
+
+</a></span></div>
+<a href="http://www.blogger.com/profile/16615057112911137628" rel="nofollow">Роман Шувалов</a>
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-7079356188818824631">
+<p>
+Ой, я пропустил мимо глаз - в samples/native-activity NDK как раз есть 
+такой проект, без явы. Там даже инициализация OpenGL показана. Его и 
+возьму за образец.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1338906787133#c7079356188818824631" title="comment permalink">
+5 июня 2012 г., 18:33
+</a>
+<span class="item-control blog-admin pid-1592780610">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=7079356188818824631" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c4928099392087787436">
+<a name="c4928099392087787436"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><img src="part4_files/blank.gif" alt="" title="Alex" height="16" width="16">
+
+</span></div>
+Alex
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-4928099392087787436">
+<p>
+Не хватает еще одной части ;(<br>С интересом прочитал все 5 частей, но пока не пришел к какому-либо выводу по своей задаче:<br>Мне
+ необходимо сделать приложение, в котором слевы будут закладки, справа 
+поле с данными. На первой закладке поле данных - таблица, на второй 
+текстовый ввод, на последующих - графика, которая уже написана на 
+плюсах. Не решил, то ли все на плюсах писать - в этом случае непонятно, 
+как контролы делать, либо оболочку на яве, и объект, с которым все виды 
+будут работать, на плюсах. Непонятно, как  на плюсах сделать свой 
+объект-наследник java.lang.Object, который  бы держал внутри себя чисто 
+плюсовые данные, и как из плюсов картинки возвращать (или рисовать из 
+плюсов на канве)
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1350291148815#c4928099392087787436" title="comment permalink">
+15 октября 2012 г., 12:52
+</a>
+<span class="item-control blog-admin pid-947184379">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=4928099392087787436" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author blog-author" id="c7110273059667416139">
+<a name="c7110273059667416139"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><a href="http://www.blogger.com/profile/03118738824565485127" rel="nofollow" onclick="" class="avatar-hovercard" id="av-11-03118738824565485127"><img src="part4_files/b16-rounded.gif" alt="" title="Kirill V. Lyadvinsky" height="16" width="16">
+
+</a></span></div>
+<a href="http://www.blogger.com/profile/03118738824565485127" rel="nofollow">Kirill V. Lyadvinsky</a>
+комментирует...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-7110273059667416139">
+<p>
+Alex, очевидно GUI проще написать на Java. А в вашем Java классе, 
+который наследник от java.lang.Object, хранить данные и операции над 
+ними в мембере как это сделано с объектом histogram в 3-й части.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="http://jia3ep.blogspot.com/2012/01/c-android-4-java.html?showComment=1350292991471#c7110273059667416139" title="comment permalink">
+15 октября 2012 г., 13:23
+</a>
+<span class="item-control blog-admin pid-1178933890">
+<a class="comment-delete" href="http://www.blogger.com/delete-comment.g?blogID=5744154463195670470&amp;postID=7110273059667416139" title="Удалить комментарий">
+<img src="part4_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+</dl>
+</div>
+<p class="comment-footer">
+<a href="http://www.blogger.com/comment.g?blogID=5744154463195670470&amp;postID=4222918906109171580" onclick="">Отправить комментарий</a>
+</p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+</div>
+</div>
+</div>
+</div>
+<!-- google_ad_section_end(name=default) -->
+<div class="inline-ad">
+<script type="text/javascript"><!--
+google_ad_client="pub-8677876544665827";
+google_ad_host="pub-1556223355139109";
+google_ad_width=728;
+google_ad_height=15;
+google_ad_format="728x15_0ads_al_s";
+google_ad_host_channel="0001+S0020+L0007";
+google_color_border="FFFFFF";
+google_color_bg="FFFFFF";
+google_color_link="CC6600";
+google_color_url="333333";
+google_color_text="333333";
+//--></script>
+<script type="text/javascript" src="part4_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:15px;margin:0;padding:0;position:relative;visibility:visible;width:728px"><ins id="aswift_0_anchor" style="display:block;border:none;height:15px;margin:0;padding:0;position:relative;visibility:visible;width:728px"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="15" scrolling="no" width="728"></iframe></ins></ins>
+</div>
+<!-- google_ad_section_start -->
+
+        </div></div>
+      
+<!-- google_ad_section_end -->
+</div>
+<div class="blog-pager" id="blog-pager">
+<span id="blog-pager-newer-link">
+<a class="blog-pager-newer-link" href="http://jia3ep.blogspot.ru/2012/02/visual-studio-11-tfs-2012.html" id="Blog1_blog-pager-newer-link" title="Следующее">Следующее</a>
+</span>
+<span id="blog-pager-older-link">
+<a class="blog-pager-older-link" href="http://jia3ep.blogspot.ru/2011/12/remove-trailing-spaces.html" id="Blog1_blog-pager-older-link" title="Предыдущее">Предыдущее</a>
+</span>
+<a class="home-link" href="http://jia3ep.blogspot.ru/">Главная страница</a>
+</div>
+<div class="clear"></div>
+<div class="post-feeds">
+<div class="feed-links">
+Подписаться на:
+<a class="feed-link" href="http://jia3ep.blogspot.com/feeds/4222918906109171580/comments/default" target="_blank" type="application/atom+xml">Комментарии к сообщению (Atom)</a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'ru'};</script>
+</div></div>
+</div>
+<div id="sidebar-wrapper">
+<div class="sidebar section" id="sidebar"><div class="widget HTML" id="HTML6">
+<h2 class="title">CONTACT ME</h2>
+<div class="widget-content">
+<!-- Facebook Badge START --><a href="http://ru-ru.facebook.com/people/Kirill-Lyadvinsky/100000586000973" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Kirill Lyadvinsky">Kirill V. Lyadvinsky</a><br><a href="http://ru-ru.facebook.com/people/Kirill-Lyadvinsky/100000586000973" target="_TOP" title="Kirill Lyadvinsky"><img src="part4_files/100000586000973.png" style="border: 0px;"></a><br><a href="http://ru-ru.facebook.com/badges/" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Создайте свою собственную визитку!">Создайте свою визитку</a><!-- Facebook Badge END -->
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=HTML&amp;widgetId=HTML6&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML6"));' target="configHTML6" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML4">
+<h2 class="title">SUBSCRIBE</h2>
+<div class="widget-content">
+<a href="http://feeds.feedburner.com/CodeWorkCodeMore" title="Подписаться на сообщения" rel="alternate" type="application/rss+xml"><img src="part4_files/feed-icon32x32.png" alt="" style="border:0"></a> <bp><a href="http://feeds.feedburner.com/CodeWorkCodeMore"><img src="part4_files/CodeWorkCodeMore.gif" style="border:0" alt="" height="26" width="88"></a>  <a href="http://feeds.feedburner.com/CodeWorkCodeMore" title="Подписаться на сообщения" rel="alternate" type="application/rss+xml">Cообщения</a>
+<p><a href="http://feeds.feedburner.com/CodeATCPPComments" title="Подписаться на комментарии" rel="alternate" type="application/rss+xml"><img src="part4_files/feed-icon32x32.png" alt="" style="border:0"></a> <a href="http://feeds.feedburner.com/CodeATCPPComments"><img src="part4_files/CodeATCPPComments.gif" style="border:0" alt="" height="26" width="88"></a>  <a href="http://feeds.feedburner.com/CodeATCPPComments" title="Подписаться на комментарии" rel="alternate" type="application/rss+xml">Комментарии</a></p></bp>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=HTML&amp;widgetId=HTML4&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML4"));' target="configHTML4" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML7">
+<h2 class="title">Scan to view on mobile device</h2>
+<div class="widget-content">
+<a href="http://jia3ep.blogspot.com/" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img src="part4_files/blog_qr_code.png" border="0" height="150" width="150"></a>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=HTML&amp;widgetId=HTML7&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML7"));' target="configHTML7" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML5">
+<h2 class="title">Ubuntu (free OS for humans)</h2>
+<div class="widget-content">
+<a href="http://www.ubuntu.com/"><img src="part4_files/banner2.png" alt="The next version of Ubuntu is here" border="0" height="150" width="180"></a>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=HTML&amp;widgetId=HTML5&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML5"));' target="configHTML5" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Label" id="Label1">
+<h2>TAGS</h2>
+<div class="widget-content cloud-label-widget-content">
+<span class="label-size label-size-5">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/C%2B%2B">C++</a>
+<span class="label-count" dir="ltr">(83)</span>
+</span>
+<span class="label-size label-size-5">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/programming">programming</a>
+<span class="label-count" dir="ltr">(51)</span>
+</span>
+<span class="label-size label-size-4">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/Windows">Windows</a>
+<span class="label-count" dir="ltr">(42)</span>
+</span>
+<span class="label-size label-size-4">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/%D1%80%D0%B0%D0%B7%D0%BD%D0%BE%D0%B5">разное</a>
+<span class="label-count" dir="ltr">(33)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/boost">boost</a>
+<span class="label-count" dir="ltr">(14)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/Ubuntu">Ubuntu</a>
+<span class="label-count" dir="ltr">(11)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/debug">debug</a>
+<span class="label-count" dir="ltr">(11)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/template">template</a>
+<span class="label-count" dir="ltr">(10)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/HR">HR</a>
+<span class="label-count" dir="ltr">(9)</span>
+</span>
+<span class="label-size label-size-3">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/VisualStudio">VisualStudio</a>
+<span class="label-count" dir="ltr">(7)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/Android">Android</a>
+<span class="label-count" dir="ltr">(5)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/Eclipse">Eclipse</a>
+<span class="label-count" dir="ltr">(5)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/funny">funny</a>
+<span class="label-count" dir="ltr">(4)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/DirectShow">DirectShow</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/SQL">SQL</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/XML">XML</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/books">books</a>
+<span class="label-count" dir="ltr">(3)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/C%2B%2B0x">C++0x</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/HDTV">HDTV</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/JNI">JNI</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/Java">Java</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/Microsoft">Microsoft</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/STL">STL</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/XPath">XPath</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/XQuery">XQuery</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/bash">bash</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-2">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/memcpy">memcpy</a>
+<span class="label-count" dir="ltr">(2)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/ALM">ALM</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/AVI">AVI</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/Empathy">Empathy</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/GNOME">GNOME</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/HDD">HDD</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/MFC">MFC</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/MSDN">MSDN</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/Mac">Mac</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/NVIDIA">NVIDIA</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/OLEDB">OLEDB</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/TFS">TFS</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/VirtualBox">VirtualBox</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/bind">bind</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/favorites">favorites</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/lambda">lambda</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<span class="label-size label-size-1">
+<a dir="ltr" href="http://jia3ep.blogspot.ru/search/label/regex">regex</a>
+<span class="label-count" dir="ltr">(1)</span>
+</span>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=Label&amp;widgetId=Label1&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("Label1"));' target="configLabel1" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget AdSense" id="AdSense1">
+<div class="widget-content">
+<script type="text/javascript"><!--
+google_ad_client="pub-8677876544665827";
+google_ad_host="pub-1556223355139109";
+google_ad_width=234;
+google_ad_height=60;
+google_ad_format="234x60_as";
+google_ad_type="text_image";
+google_ad_host_channel="0001+S0007+L0001";
+google_color_border="FFFFFF";
+google_color_bg="FFFFFF";
+google_color_link="999999";
+google_color_url="5588AA";
+google_color_text="666666";
+//--></script>
+<script type="text/javascript" src="part4_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:234px"><ins id="aswift_1_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:234px"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="60" scrolling="no" width="234"></iframe></ins></ins>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=AdSense&amp;widgetId=AdSense1&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("AdSense1"));' target="configAdSense1" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget Followers" id="Followers1">
+<h2 class="title">REGULAR READERS</h2>
+<div class="widget-content">
+<div id="Followers1-wrapper">
+<div style="margin-right:2px;">
+<script type="text/javascript">
+        if (!window.google || !google.friendconnect) {
+          document.write('<script type="text/javascript"' +
+              'src="http://www.google.com/friendconnect/script/friendconnect.js">' +
+              '</scr' + 'ipt>');
+        }
+      </script><script type="text/javascript" src="part4_files/friendconnect.js"></script>
+<script type="text/javascript">
+      if (!window.registeredBloggerCallbacks) {
+        window.registeredBloggerCallbacks = true;
+
+        
+
+        
+        gadgets.rpc.register('requestReload', function() {
+          document.location.reload();
+        });
+
+        
+        gadgets.rpc.register('requestSignOut', function(siteId) {
+          
+          google.friendconnect.container.openSocialSiteId = siteId;
+          google.friendconnect.requestSignOut();
+        });
+      }
+    </script>
+<script type="text/javascript">
+    
+    function registerGetBlogUrls() {
+      gadgets.rpc.register('getBlogUrls', function() {
+        var holder = {};
+        
+          
+            
+            
+              holder.currentPost = "http://www.blogger.com/feeds/5744154463195670470/posts/default/4222918906109171580";
+            
+            
+            
+              holder.currentComments = "http://www.blogger.com/feeds/5744154463195670470/4222918906109171580/comments/default";
+            
+            holder.currentPostUrl = "";
+            holder.currentPostId = 4222918906109171580
+          
+          
+          
+            holder.postFeed = "http://www.blogger.com/feeds/5744154463195670470/posts/default";
+          
+          
+          
+            holder.commentFeed = "http://www.blogger.com/feeds/5744154463195670470/comments/default";
+          
+          holder.currentBlogUrl = "http://jia3ep.blogspot.com/";
+          holder.currentBlogId = "5744154463195670470";
+        
+        return holder;
+      });
+    }
+  </script>
+<script type="text/javascript">
+  if (!window.registeredCommonBloggerCallbacks) {
+    window.registeredCommonBloggerCallbacks = true;
+
+    gadgets.rpc.register('resize_iframe', function(height) {
+      var el = document.getElementById(this['f']);
+      if (el) {
+        el.style.height = height + 'px';
+      }
+    });
+
+    
+    gadgets.rpc.register('set_pref', function() {});
+
+    registerGetBlogUrls();
+  }
+  </script>
+<div class="gadgets-gadget-container" id="div-1vkeremo227xu" style="width: 100%; visibility: visible;"><div id="gfc_iframe_1533096945_0_body"><iframe id="gfc_iframe_1533096945_0" name="gfc_iframe_1533096945_0" style="width: 100%; height: 244px;" allowtransparency="true" frameborder="0" height="260" scrolling="no"></iframe></div></div>
+<script type="text/javascript">
+    var skin = {};
+    skin['FACE_SIZE'] = '32';
+    skin['HEIGHT'] = "260";
+    skin['TITLE'] = "REGULAR READERS";
+    skin['BORDER_COLOR'] = "transparent";
+    skin['ENDCAP_BG_COLOR'] = "transparent";
+    skin['ENDCAP_TEXT_COLOR'] = "#666666";
+    skin['ENDCAP_LINK_COLOR'] = "#5588aa";
+    skin['ALTERNATE_BG_COLOR'] = "transparent";
+    
+    skin['CONTENT_BG_COLOR'] = "transparent";
+    skin['CONTENT_LINK_COLOR'] = "#5588aa";
+    skin['CONTENT_TEXT_COLOR'] = "#666666";
+    skin['CONTENT_SECONDARY_LINK_COLOR'] = "#5588aa";
+    skin['CONTENT_SECONDARY_TEXT_COLOR'] = "#999999";
+    skin['CONTENT_HEADLINE_COLOR'] = "#cc6600";
+    skin['FONT_FACE'] = "normal normal 108% Verdana, sans-serif";
+    google.friendconnect.container.setParentUrl("/");
+    google.friendconnect.container["renderMembersGadget"](
+    {id: "div-1vkeremo227xu",
+     height: 260,
+     
+     
+     
+     site: "17399058504663684127",
+     
+     locale: 'ru' },
+     skin);
+  </script>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=Followers&amp;widgetId=Followers1&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("Followers1"));' target="configFollowers1" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget BlogArchive" id="BlogArchive1">
+<h2>ARCHIVE</h2>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive1_ArchiveList">
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/search?updated-min=2013-01-01T00:00:00%2B04:00&amp;updated-max=2014-01-01T00:00:00%2B04:00&amp;max-results=2">2013</a>
+<span class="post-count" dir="ltr">(2)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2013_02_01_archive.html">Февраль</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2013_01_01_archive.html">Январь</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">▼&nbsp;</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/search?updated-min=2012-01-01T00:00:00%2B04:00&amp;updated-max=2013-01-01T00:00:00%2B04:00&amp;max-results=6">2012</a>
+<span class="post-count" dir="ltr">(6)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2012_09_01_archive.html">Сентябрь</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2012_04_01_archive.html">Апрель</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2012_02_01_archive.html">Февраль</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">▼&nbsp;</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2012_01_01_archive.html">Январь</a>
+<span class="post-count" dir="ltr">(1)</span>
+<ul class="posts">
+<li><a href="http://jia3ep.blogspot.ru/2012/01/c-android-4-java.html">Как написать программу на C++ для Android.Часть 4:...</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/search?updated-min=2011-01-01T00:00:00%2B03:00&amp;updated-max=2012-01-01T00:00:00%2B04:00&amp;max-results=32">2011</a>
+<span class="post-count" dir="ltr">(32)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_12_01_archive.html">Декабрь</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_11_01_archive.html">Ноябрь</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_10_01_archive.html">Октябрь</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_09_01_archive.html">Сентябрь</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_08_01_archive.html">Август</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_07_01_archive.html">Июль</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_06_01_archive.html">Июнь</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_05_01_archive.html">Май</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_04_01_archive.html">Апрель</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_03_01_archive.html">Март</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_02_01_archive.html">Февраль</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2011_01_01_archive.html">Январь</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/search?updated-min=2010-01-01T00:00:00%2B03:00&amp;updated-max=2011-01-01T00:00:00%2B03:00&amp;max-results=31">2010</a>
+<span class="post-count" dir="ltr">(31)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_12_01_archive.html">Декабрь</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_11_01_archive.html">Ноябрь</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_10_01_archive.html">Октябрь</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_09_01_archive.html">Сентябрь</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_07_01_archive.html">Июль</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_06_01_archive.html">Июнь</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_05_01_archive.html">Май</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_04_01_archive.html">Апрель</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_03_01_archive.html">Март</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_02_01_archive.html">Февраль</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2010_01_01_archive.html">Январь</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/search?updated-min=2009-01-01T00:00:00%2B03:00&amp;updated-max=2010-01-01T00:00:00%2B03:00&amp;max-results=47">2009</a>
+<span class="post-count" dir="ltr">(47)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_12_01_archive.html">Декабрь</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_11_01_archive.html">Ноябрь</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_10_01_archive.html">Октябрь</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_09_01_archive.html">Сентябрь</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_08_01_archive.html">Август</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_07_01_archive.html">Июль</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_06_01_archive.html">Июнь</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_05_01_archive.html">Май</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_04_01_archive.html">Апрель</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_03_01_archive.html">Март</a>
+<span class="post-count" dir="ltr">(8)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_02_01_archive.html">Февраль</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2009_01_01_archive.html">Январь</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/search?updated-min=2008-01-01T00:00:00%2B03:00&amp;updated-max=2009-01-01T00:00:00%2B03:00&amp;max-results=39">2008</a>
+<span class="post-count" dir="ltr">(39)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2008_12_01_archive.html">Декабрь</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2008_11_01_archive.html">Ноябрь</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2008_10_01_archive.html">Октябрь</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2008_09_01_archive.html">Сентябрь</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2008_08_01_archive.html">Август</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2008_07_01_archive.html">Июль</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2008_06_01_archive.html">Июнь</a>
+<span class="post-count" dir="ltr">(9)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2008_05_01_archive.html">Май</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2008_03_01_archive.html">Март</a>
+<span class="post-count" dir="ltr">(7)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/search?updated-min=2007-01-01T00:00:00%2B03:00&amp;updated-max=2008-01-01T00:00:00%2B03:00&amp;max-results=7">2007</a>
+<span class="post-count" dir="ltr">(7)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2007_12_01_archive.html">Декабрь</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2007_11_01_archive.html">Ноябрь</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://jia3ep.blogspot.ru/2007_10_01_archive.html">Октябрь</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=BlogArchive&amp;widgetId=BlogArchive1&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("BlogArchive1"));' target="configBlogArchive1" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget AdSense" id="AdSense2">
+<div class="widget-content">
+<script type="text/javascript"><!--
+google_ad_client="pub-8677876544665827";
+google_ad_host="pub-1556223355139109";
+google_ad_width=234;
+google_ad_height=60;
+google_ad_format="234x60_as";
+google_ad_type="text_image";
+google_ad_host_channel="0001+S0007+L0001";
+google_color_border="FFFFFF";
+google_color_bg="FFFFFF";
+google_color_link="999999";
+google_color_url="5588AA";
+google_color_text="666666";
+//--></script>
+<script type="text/javascript" src="part4_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:234px"><ins id="aswift_2_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:234px"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" frameborder="0" height="60" scrolling="no" width="234"></iframe></ins></ins>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=5744154463195670470&amp;widgetType=AdSense&amp;widgetId=AdSense2&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("AdSense2"));' target="configAdSense2" title="Изменить">
+<img alt="" src="part4_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div></div>
+</div>
+<!-- spacer for skins that want sidebar and main to be the same height-->
+<div class="clear">&nbsp;</div>
+</div>
+<!-- end content-wrapper -->
+<div id="footer-wrapper">
+<div class="footer section" id="footer"></div>
+</div>
+</div></div><iframe src="part4_files/blank.htm" style="height: 0px; width: 0px; position: absolute;" name="google_top_static_frame" frameborder="0"></iframe>
+<!-- end outer-wrapper -->
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="part4_files/2990768181-widgets.js"></script>
+<script gapi_processed="true" type="text/javascript" src="part4_files/plusone_002.js"></script><iframe style="position: absolute; top: -1px; left: -1px;" src="part4_files/pidget.htm" frameborder="0" height="0" width="0"></iframe>
+<script type="text/javascript">
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV1";window['blogger_blog_id'] = '5744154463195670470';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d5744154463195670470','//jia3ep.blogspot.ru/2012/01/c-android-4-java.html','5744154463195670470');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '5744154463195670470', 'bloggerUrl': 'http://www.blogger.com', 'title': 'Code @ C++', 'pageType': 'item', 'url': 'http://jia3ep.blogspot.ru/2012/01/c-android-4-java.html', 'canonicalUrl': 'http://jia3ep.blogspot.com/2012/01/c-android-4-java.html', 'canonicalHomepageUrl': 'http://jia3ep.blogspot.com/', 'homepageUrl': 'http://jia3ep.blogspot.ru/', 'blogspotFaviconUrl': 'http://jia3ep.blogspot.ru/favicon.ico', 'enabledCommentProfileImages': true, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': 'UA-2867776-2', 'searchLabel': '', 'searchQuery': '', 'pageName': 'Как написать программу на C++ для Android.\74br\76Часть 4: Без Java.', 'pageTitle': 'Code @ C++: Как написать программу на C++ для Android.Часть 4: Без Java.', 'encoding': 'UTF-8', 'locale': 'ru', 'localeLanguage': 'ru', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Code @ C++ - Atom\42 href\75\42http://jia3ep.blogspot.com/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42Code @ C++ - RSS\42 href\75\42http://jia3ep.blogspot.com/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42Code @ C++ - Atom\42 href\75\42http://www.blogger.com/feeds/5744154463195670470/posts/default\42 /\76\n\74link rel\75\42EditURI\42 type\75\42application/rsd+xml\42 title\75\42RSD\42 href\75\42http://www.blogger.com/rsd.g?blogID\0755744154463195670470\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Code @ C++ - Atom\42 href\75\42http://jia3ep.blogspot.com/feeds/4222918906109171580/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'postImageThumbnailUrl': 'http://2.bp.blogspot.com/-tyTSUxDecso/TxKoYAohLRI/AAAAAAAAf9U/u7ttnln9-hc/s72-c/install_2_3.png', 'imageSrcTag': '\74link rel\75\42image_src\42 href\75\42http://2.bp.blogspot.com/-tyTSUxDecso/TxKoYAohLRI/AAAAAAAAf9U/u7ttnln9-hc/s72-c/install_2_3.png\42 /\76\n', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { var b\75window,e\75\42jstiming\42,g\75\42tick\42;(function(){function d(a){this.t\75{};this.tick\75function(a,d,c){c\75void 0!\75c?c:(new Date).getTime();this.t[a]\75[c,d]};this[g](\42start\42,null,a)}var a\75new d;b.jstiming\75{Timer:d,load:a};if(b.performance\46\46b.performance.timing){var a\75b.performance.timing,c\75b[e].load,f\75a.navigationStart,a\75a.responseStart;0\74f\46\46a\76\75f\46\46(c[g](\42_wtsrt\42,void 0,f),c[g](\42wtsrt_\42,\42_wtsrt\42,a),c[g](\42tbsd_\42,\42wtsrt_\42))}try{a\75null,b.chrome\46\46b.chrome.csi\46\46(a\75Math.floor(b.chrome.csi().pageT),c\46\0460\74f\46\46(c[g](\42_tbnd\42,void 0,b.chrome.csi().startE),\nc[g](\42tbnd_\42,\42_tbnd\42,f))),null\75\75a\46\46b.gtbExternal\46\46(a\75b.gtbExternal.pageT()),null\75\75a\46\46b.external\46\46(a\75b.external.pageT,c\46\0460\74f\46\46(c[g](\42_tbnd\42,void 0,b.external.startE),c[g](\42tbnd_\42,\42_tbnd\42,f))),a\46\46(b[e].pt\75a)}catch(l){}})();b.tickAboveFold\75function(d){var a\0750;if(d.offsetParent){do a+\75d.offsetTop;while(d\75d.offsetParent)}d\75a;750\76\75d\46\46b[e].load[g](\42aft\42)};var h\75!1;function k(){h||(h\75!0,b[e].load[g](\42firstScrollTime\42))}b.addEventListener?b.addEventListener(\42scroll\42,k,!1):b.attachEvent(\42onscroll\42,k);\n })();\74/script\076', 'mobileHeadScript': '', 'adsenseClientId': 'pub-8677876544665827', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/ef28c3f8c8e1685a', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sf': 'n', 'tf': ''}}, {'name': 'skin', 'data': {'vars': {'sidebartextcolor': '#666666', 'linkcolor': '#5588aa', 'visitedlinkcolor': '#999999', 'textcolor': '#333333', 'headerfont': 'normal normal 78% \47Trebuchet MS\47,Trebuchet,Arial,Verdana,Sans-serif', 'pagetitlefont': 'normal normal 200% Georgia, Serif', 'bgcolor': '#ffffff', 'descriptioncolor': '#999999', 'titlecolor': '#cc6600', 'bordercolor': '#6B8E23', 'postfooterfont': 'normal normal 78% \47Trebuchet MS\47, Trebuchet, Arial, Verdana, Sans-serif', 'pagetitlecolor': '#666666', 'bodyfont': 'normal normal 108% Verdana, sans-serif', 'endSide': 'right', 'startSide': 'left', 'descriptionfont': 'normal normal 78% \47Trebuchet MS\47, Trebuchet, Arial, Verdana, Sans-serif', 'sidebarcolor': '#999999'}, 'override': ''}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '/?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '/?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '/?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '/?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '/?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '/?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '/?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'crosscol', null, document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML3', 'crosscol', null, document.getElementById('HTML3'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML6', 'sidebar', null, document.getElementById('HTML6'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML4', 'sidebar', null, document.getElementById('HTML4'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML7', 'sidebar', null, document.getElementById('HTML7'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML5', 'sidebar', null, document.getElementById('HTML5'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LabelView', new _WidgetInfo('Label1', 'sidebar', null, document.getElementById('Label1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense1', 'sidebar', null, document.getElementById('AdSense1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FollowersView', new _WidgetInfo('Followers1', 'sidebar', null, document.getElementById('Followers1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar', null, document.getElementById('BlogArchive1'), {'languageDirection': 'ltr'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense2', 'sidebar', null, document.getElementById('AdSense2'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', null, document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': '//www.blogger.com/static/v1/jsbin/1179349347-lbx__ru.js', 'lightboxCssUrl': '//www.blogger.com/static/v1/v-css/228702327-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'null', null, document.getElementById('PageList1'), {'title': 'Страницы', 'links': [{'href': 'http://jia3ep.blogspot.ru/', 'title': 'Главная страница', 'isCurrentPage': false}], 'mobile': false}, 'displayModeFull'));
+</script>
+
+</body></html>

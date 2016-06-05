@@ -1,0 +1,1 @@
+delete from videoclient where vclsetting IS NULL OR TRIM(vclsetting) = '';

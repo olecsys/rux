@@ -1,0 +1,300 @@
+{
+	"configurations":
+	{
+		"linux x64":
+		{
+			"compiler":"g++",
+			"compiler_flags":"-std=gnu++0x -m64 -fvisibility=hidden -fPIC",			
+			"linker":"g++ -m64",
+			"linker_flags":"-Wl,-E",
+			"sources":
+			[
+				"./lib/main.cpp"
+			],
+			"post_builds":
+			[				
+			],
+			"pre_builds":
+			[
+			],
+			"intermediate_directory":"./../build",
+			"rm_command":"rm",
+			"mk_dir_command":"mkdir -p",
+			"object_suffix":".o",
+			"source_switch":"-c ",
+			"object_switch":"-o ",
+			"include_switch":"-I",
+			"output_switch":"-o ",
+			"lib_path_switch":"-L",
+			"lib_switch":"-l",
+			"include_paths":
+			[
+				".",
+				"./lib",
+				"./../includes"
+			],
+			"lib_paths":
+			[
+				".",
+				"./../build"
+			],
+			"libs":
+			[
+				"rux.basis",
+				"pthread",
+				"dl",
+				"m",
+				"rt"
+			],
+			"output_file_type":"console",
+			"output_file":"./../build/basistest",
+			"makefile":"../rux.makefiles/basistest.linux.x64.mk",
+			"debug":true
+		},
+		"linux x86":
+		{
+			"compiler":"g++",
+			"compiler_flags":"-m32 -fvisibility=hidden -fPIC",			
+			"linker":"g++ -m32",
+			"linker_flags":"-Wl,-E",
+			"sources":
+			[
+				"./lib/main.cpp"
+			],
+			"post_builds":
+			[				
+			],
+			"pre_builds":
+			[
+			],
+			"intermediate_directory":"./../build",
+			"rm_command":"rm",
+			"mk_dir_command":"mkdir -p",
+			"object_suffix":".o",
+			"source_switch":"-c ",
+			"object_switch":"-o ",
+			"include_switch":"-I",
+			"output_switch":"-o ",
+			"lib_path_switch":"-L",
+			"lib_switch":"-l",
+			"include_paths":
+			[
+				".",
+				"./lib",
+				"./../includes"
+			],
+			"lib_paths":
+			[
+				".",
+				"./../build"
+			],
+			"libs":
+			[
+				"rux.basis",
+				"pthread",
+				"dl",
+				"m",
+				"rt"
+			],
+			"output_file_type":"console",
+			"output_file":"./../build/basistest",
+			"makefile":"../rux.makefiles/basistest.linux.x86.mk"
+		},
+		"linux armv6":
+		{
+			"compiler":"g++",
+			"compiler_flags":"-march=armv6 -mfpu=vfp -mfloat-abi=hard -Wno-psabi -fvisibility=hidden -fPIC",			
+			"linker":"g++",
+			"linker_flags":"-Wl,-E",			
+			"sources":
+			[
+				"./lib/main.cpp"
+			],
+			"post_builds":
+			[				
+			],
+			"pre_builds":
+			[
+			],
+			"intermediate_directory":"./../build",
+			"rm_command":"rm",
+			"mk_dir_command":"mkdir -p",
+			"object_suffix":".o",
+			"source_switch":"-c ",
+			"object_switch":"-o ",
+			"include_switch":"-I",
+			"output_switch":"-o ",
+			"lib_path_switch":"-L",
+			"lib_switch":"-l",
+			"include_paths":
+			[
+				".",
+				"./lib",
+				"./../includes"
+			],
+			"lib_paths":
+			[
+				".",
+				"./../build"
+			],
+			"libs":
+			[
+				"rux.basis",
+				"pthread",
+				"dl",
+				"m",
+				"rt"
+			],
+			"output_file_type":"console",
+			"output_file":"./../build/basistest",
+			"makefile":"../rux.makefiles/basistest.linux.armv6.mk"		
+		},
+		"linux armv6 soft":
+		{
+			"compiler":"g++",
+			"compiler_flags":"-march=armv6 -mfpu=vfp -mfloat-abi=softfp -Wno-psabi -fvisibility=hidden -fPIC",			
+			"linker":"g++",
+			"linker_flags":"-Wl,-E",			
+			"sources":
+			[
+				"./lib/main.cpp"
+			],
+			"post_builds":
+			[				
+			],
+			"pre_builds":
+			[
+			],
+			"intermediate_directory":"./../build",
+			"rm_command":"rm",
+			"mk_dir_command":"mkdir -p",
+			"object_suffix":".o",
+			"source_switch":"-c ",
+			"object_switch":"-o ",
+			"include_switch":"-I",
+			"output_switch":"-o ",
+			"lib_path_switch":"-L",
+			"lib_switch":"-l",
+			"include_paths":
+			[
+				".",
+				"./lib",
+				"./../includes"
+			],
+			"lib_paths":
+			[
+				".",
+				"./../build"
+			],
+			"libs":
+			[
+				"rux.basis",
+				"pthread",
+				"dl",
+				"m",
+				"rt"
+			],
+			"output_file_type":"console",
+			"output_file":"./../build/basistest",
+			"makefile":"../rux.makefiles/basistest.linux.armv6.soft.mk"		
+		},
+		"linux crosscompile armv6":
+		{
+			"compiler":"/opt/raspberrypi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-g++",
+			"compiler_flags":"-march=armv6 -mfpu=vfp -mfloat-abi=hard -Wno-psabi -fvisibility=hidden -fPIC",			
+			"linker":"/opt/raspberrypi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-g++",
+			"linker_flags":"-Wl,-E,--no-undefined,-O2",			
+			"sources":
+			[
+				"./lib/main.cpp"
+			],
+			"post_builds":
+			[				
+			],
+			"pre_builds":
+			[
+			],
+			"intermediate_directory":"./../build",
+			"rm_command":"rm",
+			"mk_dir_command":"mkdir -p",
+			"object_suffix":".o",
+			"source_switch":"-c ",
+			"object_switch":"-o ",
+			"include_switch":"-I",
+			"output_switch":"-o ",
+			"lib_path_switch":"-L",
+			"lib_switch":"-l",
+			"include_paths":
+			[
+				".",
+				"./lib",
+				"./../includes"
+			],
+			"lib_paths":
+			[
+				".",
+				"./../build"
+			],
+			"libs":
+			[
+				"rux.basis",
+				"pthread",
+				"dl",
+				"m",
+				"rt"
+			],
+			"output_file_type":"console",
+			"output_file":"./../build/basistest",
+			"makefile":"../rux.makefiles/basistest.linux.crosscompile.armv6.mk"		
+		},
+		"linux crosscompile armv6 soft":
+		{
+			"compiler":"/opt/raspberrypi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi-g++",
+			"compiler_flags":"-march=armv6 -mfpu=vfp -mfloat-abi=softfp -Wno-psabi -fvisibility=hidden -fPIC",			
+			"linker":"/opt/raspberrypi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi-g++",
+			"linker_flags":"-Wl,-E,--no-undefined,-O2",			
+			"sources":
+			[
+				"./lib/main.cpp"
+			],
+			"post_builds":
+			[				
+			],
+			"pre_builds":
+			[
+			],
+			"intermediate_directory":"./../build",
+			"rm_command":"rm",
+			"mk_dir_command":"mkdir -p",
+			"object_suffix":".o",
+			"source_switch":"-c ",
+			"object_switch":"-o ",
+			"include_switch":"-I",
+			"output_switch":"-o ",
+			"lib_path_switch":"-L",
+			"lib_switch":"-l",
+			"include_paths":
+			[
+				".",
+				"./lib",
+				"./../includes"
+			],
+			"lib_paths":
+			[
+				".",
+				"./../build"
+			],
+			"libs":
+			[
+				"rux.basis",
+				"pthread",
+				"dl",
+				"m",
+				"rt"
+			],
+			"output_file_type":"console",
+			"output_file":"./../build/basistest",
+			"makefile":"../rux.makefiles/basistest.linux.crosscompile.armv6.soft.mk"		
+		}
+	}
+}

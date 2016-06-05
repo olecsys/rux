@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2FCB5EAB-0B21-4846-A1DB-E8A7080C55F4}</ProjectGuid>
+    <RootNamespace>IntegraScripts</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>rux.engine</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\..\build\x86\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)\..\build\x64\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\extern_includes;.\;.\lib;$(ProjectDir)..\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FT2_BUILD_LIBRARY;WIN32;NDEBUG;_WINDOWS;_USRDLL;INTEGRASCRIPTS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <StringPooling>false</StringPooling>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>librux.framework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(ProjectDir)\..\build\x86\$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\build\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>%40if not exist "$(ProjectDir)..\bin" %40md "$(ProjectDir)..\bin"
+%40if not exist "$(ProjectDir)..\bin\windows" %40md "$(ProjectDir)..\bin\windows"
+%40if not exist "$(ProjectDir)..\bin\windows\win32" %40md "$(ProjectDir)..\bin\windows\win32"
+copy $(TargetDir)$(TargetName).pdb "$(ProjectDir)..\bin\windows\win32\$(TargetName).pdb"
+copy $(TargetPath) $(ProjectDir)..\bin\windows\win32\$(TargetFileName)
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\extern_includes;.\;.\lib;$(ProjectDir)..\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FT2_BUILD_LIBRARY;_WIN64;NDEBUG;_WINDOWS;_USRDLL;INTEGRASCRIPTS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <WarningLevel>Level4</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <OmitFramePointers>false</OmitFramePointers>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>Disabled</Optimization>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <StringPooling>false</StringPooling>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>librux.framework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(ProjectDir)\..\build\x64\$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\build\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>%40if not exist "$(ProjectDir)..\bin" %40md "$(ProjectDir)..\bin"
+%40if not exist "$(ProjectDir)..\bin\windows" %40md "$(ProjectDir)..\bin\windows"
+%40if not exist "$(ProjectDir)..\bin\windows\win64" %40md "$(ProjectDir)..\bin\windows\win64"
+copy $(TargetDir)$(TargetName).pdb "$(ProjectDir)..\bin\windows\win64\$(TargetName).pdb"
+copy $(TargetPath) $(ProjectDir)..\bin\windows\win64\$(TargetFileName)
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="lib\dllmain.cpp" />
+    <ClCompile Include="lib\xan_crtsect_info.cpp" />
+    <ClCompile Include="lib\xan_freetype.cpp" />
+    <ClCompile Include="lib\xan_gl_buffer_named_object.cpp" />
+    <ClCompile Include="lib\xan_gl_context.cpp" />
+    <ClCompile Include="lib\xan_gl_texture.cpp" />
+    <ClCompile Include="lib\xan_gui_engine.cpp" />
+    <ClCompile Include="lib\xan_gui_fps.cpp" />
+    <ClCompile Include="lib\xan_gui_window.cpp" />
+    <ClCompile Include="lib\xan_logger.cpp" />
+    <ClCompile Include="lib\xan_memorymanager.cpp" />
+    <ClCompile Include="lib\xan_memory_cluster.cpp" />
+    <ClCompile Include="lib\xan_modulemanager.cpp" />
+    <ClCompile Include="lib\xan_opengl_functions.cpp" />
+    <ClCompile Include="lib\xan_rdwrlock_info.cpp" />
+    <ClCompile Include="lib\xan_render_cache.cpp" />
+    <ClCompile Include="lib\xan_render_context.cpp" />
+    <ClCompile Include="lib\xan_render_font.cpp" />
+    <ClCompile Include="lib\xan_render_thread.cpp" />
+    <ClCompile Include="lib\xan_tasker.cpp" />
+    <ClCompile Include="lib\xan_thread_info.cpp" />
+    <ClCompile Include="lib\xan_typemanager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib\config.h" />
+    <ClInclude Include="lib\version.h" />
+    <ClInclude Include="lib\xan_crtsect_info.h" />
+    <ClInclude Include="lib\xan_freetype.h" />
+    <ClInclude Include="lib\xan_gl_buffer_named_object.h" />
+    <ClInclude Include="lib\xan_gl_context.h" />
+    <ClInclude Include="lib\xan_gl_texture.h" />
+    <ClInclude Include="lib\xan_gui_engine.h" />
+    <ClInclude Include="lib\xan_gui_fps.h" />
+    <ClInclude Include="lib\xan_gui_window.h" />
+    <ClInclude Include="lib\xan_logger.h" />
+    <ClInclude Include="lib\xan_memorymanager.h" />
+    <ClInclude Include="lib\xan_memory_cluster.h" />
+    <ClInclude Include="lib\xan_modulemanager.h" />
+    <ClInclude Include="lib\xan_opengl_functions.h" />
+    <ClInclude Include="lib\xan_rdwrlock_info.h" />
+    <ClInclude Include="lib\xan_render_cache.h" />
+    <ClInclude Include="lib\xan_render_context.h" />
+    <ClInclude Include="lib\xan_render_font.h" />
+    <ClInclude Include="lib\xan_render_thread.h" />
+    <ClInclude Include="lib\xan_tasker.h" />
+    <ClInclude Include="lib\xan_thread_info.h" />
+    <ClInclude Include="lib\xan_typemanager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="lib\version.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>

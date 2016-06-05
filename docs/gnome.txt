@@ -1,0 +1,52 @@
+openSUSE 11.4:
+
+sudo /usr/sbin/rcxdmrestart
+sudo /usr/sbin/rcxdm stop
+sudo /usr/sbin/rcxdm start
+
+sudo /etc/init.d/xdm restart
+sudo /etc/init.d/xdm stop
+sudo /etc/init.d/xdm start
+
+Ubuntu 10.04:
+
+sudo service gdm restart
+sudo service gdm stop
+sudo service gdm start
+
+sudo /etc/init.d/gdm restart
+sudo /etc/init.d/gdm stop
+sudo /etc/init.d/gdm start
+
+Debian GNU/Linux 6:
+
+/etc/init.d/gdm3 restart
+/etc/init.d/gdm3 stop
+/etc/init.d/gdm3 start
+
+Fedora 14
+
+Тут иначе. Дал разрешение sudo. GNOME сидит уже в Сtrl+Alt+F1, поэтому Ctrl+Alt+F2.
+
+sudo init 3
+sudo init 5
+
+При этом все становится как у людей, т.е. на Ctrl+Alt+F7 и далее. Но мне нравится без sudo:
+
+su -c 'killall Xorg'
+
+и при этом все тоже становится как у людей. Потом:
+
+если в Ctrl+Alt+F2 ввести init 5 то GNOME появится в Сtrl+Alt+F8;
+если в Ctrl+Alt+F3 ввести init 5 то GNOME появится в Ctrl+Alt+F9.
+Можно еще убить GNOME:
+
+sudo killall Xorg
+
+и запустить только одного там где вам нужно:
+
+sudo init 5
+
+из Ctrl+Alt+[F1-F6] после логина и init 3 и так далее. При этом они живут все одновременно, а для чего так извращаться, решать тому, кто это изучил :)
+
+А как вы перезагружаете своего гномика или unity?

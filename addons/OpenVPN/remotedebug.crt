@@ -1,0 +1,71 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+        Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=RU, ST=Samara, L=Samara, O=Integra-S, CN=SovietArmy180/emailAddress=me@integra-s.com
+        Validity
+            Not Before: Oct 16 11:53:51 2015 GMT
+            Not After : Oct 13 11:53:51 2025 GMT
+        Subject: C=RU, ST=Samara, L=Samara, O=Integra-S, CN=remotedebug/emailAddress=me@integra-s.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (1024 bit)
+                Modulus (1024 bit):
+                    00:d9:08:6c:a0:42:2b:3a:82:ab:8d:38:45:e9:41:
+                    01:1e:5e:e6:4d:a9:9a:19:fb:76:f9:f3:93:f8:78:
+                    f8:9f:8d:74:2c:e6:df:c1:a0:d2:e8:41:51:44:c3:
+                    96:df:78:00:7f:8e:6c:ba:0f:04:ef:3a:55:88:aa:
+                    5d:a8:13:1f:62:8a:4d:51:6d:d9:6b:70:02:4a:18:
+                    8c:76:00:5d:49:60:73:23:75:95:ff:b0:28:d0:cb:
+                    63:3a:3b:17:da:71:44:bd:2b:25:50:ba:a4:84:90:
+                    84:67:ba:18:83:63:e4:6c:1a:74:fa:f8:84:c6:a6:
+                    32:e3:b5:40:c1:31:c8:83:69
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                Easy-RSA Generated Certificate
+            X509v3 Subject Key Identifier: 
+                DE:CB:7F:4E:14:A7:53:05:C3:E8:DD:07:29:F5:33:0C:8B:B0:7C:F7
+            X509v3 Authority Key Identifier: 
+                keyid:73:77:22:4E:7A:89:0D:B2:B0:CF:0F:5B:F9:16:B8:76:F8:7D:77:61
+                DirName:/C=RU/ST=Samara/L=Samara/O=Integra-S/CN=SovietArmy180/emailAddress=me@integra-s.com
+                serial:DC:21:2C:B9:A3:97:D1:F2
+
+            X509v3 Extended Key Usage: 
+                TLS Web Client Authentication
+            X509v3 Key Usage: 
+                Digital Signature
+    Signature Algorithm: sha1WithRSAEncryption
+        6f:f8:2f:d7:a7:75:2b:2f:81:d5:11:77:52:49:f2:1d:05:34:
+        57:71:b6:2f:ed:9e:66:63:9e:07:7a:d0:3c:df:da:df:ef:31:
+        69:07:88:8b:f8:13:0b:7f:91:42:37:2a:b8:11:82:47:89:ab:
+        25:9f:b0:5b:43:bf:13:99:dc:d7:10:fa:30:4d:62:04:ab:83:
+        7c:c7:a3:ce:52:a7:39:76:7f:04:ac:ec:5b:95:71:1c:f5:bd:
+        f5:98:11:06:1c:5b:e3:2d:59:8e:66:06:6c:51:cd:a0:43:66:
+        10:1d:26:d2:02:d3:09:8e:55:93:7d:3e:d9:3f:11:52:92:c9:
+        e2:1f
+-----BEGIN CERTIFICATE-----
+MIIDnzCCAwigAwIBAgIBATANBgkqhkiG9w0BAQUFADB8MQswCQYDVQQGEwJSVTEP
+MA0GA1UECBMGU2FtYXJhMQ8wDQYDVQQHEwZTYW1hcmExEjAQBgNVBAoTCUludGVn
+cmEtUzEWMBQGA1UEAxMNU292aWV0QXJteTE4MDEfMB0GCSqGSIb3DQEJARYQbWVA
+aW50ZWdyYS1zLmNvbTAeFw0xNTEwMTYxMTUzNTFaFw0yNTEwMTMxMTUzNTFaMHox
+CzAJBgNVBAYTAlJVMQ8wDQYDVQQIEwZTYW1hcmExDzANBgNVBAcTBlNhbWFyYTES
+MBAGA1UEChMJSW50ZWdyYS1TMRQwEgYDVQQDEwtyZW1vdGVkZWJ1ZzEfMB0GCSqG
+SIb3DQEJARYQbWVAaW50ZWdyYS1zLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAw
+gYkCgYEA2QhsoEIrOoKrjThF6UEBHl7mTamaGft2+fOT+Hj4n410LObfwaDS6EFR
+RMOW33gAf45sug8E7zpViKpdqBMfYopNUW3Za3ACShiMdgBdSWBzI3WV/7Ao0Mtj
+OjsX2nFEvSslULqkhJCEZ7oYg2PkbBp0+viExqYy47VAwTHIg2kCAwEAAaOCATEw
+ggEtMAkGA1UdEwQCMAAwLQYJYIZIAYb4QgENBCAWHkVhc3ktUlNBIEdlbmVyYXRl
+ZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQU3st/ThSnUwXD6N0HKfUzDIuwfPcwga8G
+A1UdIwSBpzCBpIAUc3ciTnqJDbKwzw9b+Ra4dvh9d2GhgYCkfjB8MQswCQYDVQQG
+EwJSVTEPMA0GA1UECBMGU2FtYXJhMQ8wDQYDVQQHEwZTYW1hcmExEjAQBgNVBAoT
+CUludGVncmEtUzEWMBQGA1UEAxMNU292aWV0QXJteTE4MDEfMB0GCSqGSIb3DQEJ
+ARYQbWVAaW50ZWdyYS1zLmNvbYIJANwhLLmjl9HyMBMGA1UdJQQMMAoGCCsGAQUF
+BwMCMAsGA1UdDwQEAwIHgDANBgkqhkiG9w0BAQUFAAOBgQBv+C/Xp3UrL4HVEXdS
+SfIdBTRXcbYv7Z5mY54HetA839rf7zFpB4iL+BMLf5FCNyq4EYJHiasln7BbQ78T
+mdzXEPowTWIEq4N8x6POUqc5dn8ErOxblXEc9b31mBEGHFvjLVmOZgZsUc2gQ2YQ
+HSbSAtMJjlWTfT7ZPxFSksniHw==
+-----END CERTIFICATE-----

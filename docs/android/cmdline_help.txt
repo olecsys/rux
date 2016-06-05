@@ -1,0 +1,23 @@
+Создание проекта:
+
+#	Перейти в папку с папкой jni и затем набрать в cygwin:
+
+#	android.bat update project --name myfirstapp --path . --target "android-19" --subprojects
+
+Компиляция NDK проекта:
+
+#	Перейти в папку с папкой jni и затем набрать в cygwin:
+
+#	ndk-build
+
+Создание apk файла:
+
+#	Перейти в папку с папкой jni и затем набрать в cygwin:
+
+#	ant debug
+
+Установка на устройство или эмулятор по умолчаниию:
+
+#	Перейти в папку с папкой jni и затем набрать в cygwin:
+
+#	ant debug install

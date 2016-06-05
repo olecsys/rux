@@ -1,0 +1,5 @@
+sudo apt-get install clamav
+3. Обновляем антивирус
+sudo freshclam
+4. Запускаем сканирование раздела с виндой
+sudo clamscan -r -i --bell --move /tmp/ --log /tmp/virus.log /media/windows

@@ -1,0 +1,17 @@
+17:02:06 INFO: Generating RSA key and certificate...
+[BTORK] 17:02:18 INFO: syncthing v0.10.9 (go1.3.3 windows-amd64 default) unknown-user@syncthing-builder 2014-11-30 12:45:08 UTC
+[BTORK] 17:02:18 INFO: My ID: BTORKGE-OL45IVL-W53W5XN-HTMFODR-JPKCQ55-4MFMHTH-MFOPXQA-SPAJKQF
+[BTORK] 17:02:18 INFO: No config file; starting with empty defaults
+[BTORK] 17:02:18 INFO: Edit C:\Users\olecsys\AppData\Local\Syncthing\config.xml to taste or use the GUI
+[BTORK] 17:02:18 INFO: Starting web GUI on http://127.0.0.1:8080/
+[BTORK] 17:02:18 INFO: Loading HTTPS certificate: open C:\Users\olecsys\AppData\Local\Syncthing\https-cert.pem: The system cannot find the file specified.
+[BTORK] 17:02:18 INFO: Creating new HTTPS certificate
+[BTORK] 17:02:18 INFO: Generating RSA key and certificate...
+[BTORK] 17:02:21 INFO: Starting UPnP discovery...
+[BTORK] 17:02:27 INFO: UPnP discovery complete (found 0 devices).
+[BTORK] 17:02:27 INFO: Starting local discovery announcements
+[BTORK] 17:02:27 INFO: Local discovery over IPv6 unavailable
+[BTORK] 17:02:27 INFO: Starting global discovery announcements
+[BTORK] 17:02:27 OK: Ready to synchronize default (read-write)
+[BTORK] 17:02:27 INFO: Device BTORKGE-OL45IVL-W53W5XN-HTMFODR-JPKCQ55-4MFMHTH-MFOPXQA-SPAJKQF is "ASUS-K53S-RUX" at [dynamic]
+[BTORK] 17:02:27 INFO: Completed initial scan (rw) of folder default

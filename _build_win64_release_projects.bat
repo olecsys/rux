@@ -1,0 +1,1 @@
+@call _build_projects.bat "_build_win64_release.bat" "x64"

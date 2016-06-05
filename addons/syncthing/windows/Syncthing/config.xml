@@ -1,0 +1,38 @@
+<configuration version="6">
+    <folder id="default" path="C:\Users\olecsys\Sync" ro="false" rescanIntervalS="60" ignorePerms="false">
+        <device id="BTORKGE-OL45IVL-W53W5XN-HTMFODR-JPKCQ55-4MFMHTH-MFOPXQA-SPAJKQF"></device>
+        <versioning></versioning>
+        <lenientMtimes>false</lenientMtimes>
+        <copiers>0</copiers>
+        <pullers>0</pullers>
+        <finishers>0</finishers>
+    </folder>
+    <device id="BTORKGE-OL45IVL-W53W5XN-HTMFODR-JPKCQ55-4MFMHTH-MFOPXQA-SPAJKQF" name="ASUS-K53S-RUX" compression="false" introducer="false">
+        <address>dynamic</address>
+    </device>
+    <gui enabled="true" tls="false">
+        <address>127.0.0.1:8080</address>
+    </gui>
+    <options>
+        <listenAddress>0.0.0.0:22000</listenAddress>
+        <globalAnnounceServer>announce.syncthing.net:22026</globalAnnounceServer>
+        <globalAnnounceEnabled>true</globalAnnounceEnabled>
+        <localAnnounceEnabled>true</localAnnounceEnabled>
+        <localAnnouncePort>21025</localAnnouncePort>
+        <localAnnounceMCAddr>[ff32::5222]:21026</localAnnounceMCAddr>
+        <maxSendKbps>0</maxSendKbps>
+        <maxRecvKbps>0</maxRecvKbps>
+        <reconnectionIntervalS>60</reconnectionIntervalS>
+        <startBrowser>true</startBrowser>
+        <upnpEnabled>true</upnpEnabled>
+        <upnpLeaseMinutes>0</upnpLeaseMinutes>
+        <upnpRenewalMinutes>30</upnpRenewalMinutes>
+        <urAccepted>0</urAccepted>
+        <urUniqueID></urUniqueID>
+        <restartOnWakeup>true</restartOnWakeup>
+        <autoUpgradeIntervalH>12</autoUpgradeIntervalH>
+        <keepTemporariesH>24</keepTemporariesH>
+        <cacheIgnoredFiles>true</cacheIgnoredFiles>
+        <progressUpdateIntervalS>5</progressUpdateIntervalS>
+    </options>
+</configuration>

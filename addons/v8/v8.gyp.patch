@@ -1,0 +1,26 @@
+--- v8.orig.gyp	2015-07-11 14:06:34 +0400
++++ v8.gyp	2015-07-13 18:00:21 +0400
+@@ -144,6 +144,7 @@
+     {
+       'target_name': 'v8_snapshot',
+       'type': 'static_library',
++	  'standalone_static_library': 1,
+       'conditions': [
+         ['want_separate_host_toolset==1', {
+           'toolsets': ['host', 'target'],
+@@ -216,6 +217,7 @@
+     {
+       'target_name': 'v8_nosnapshot',
+       'type': 'static_library',
++	  'standalone_static_library': 1,
+       'dependencies': [
+         'v8_base',
+       ],
+@@ -355,6 +357,7 @@
+     {
+       'target_name': 'v8_base',
+       'type': 'static_library',
++	  'standalone_static_library': 1,
+       'dependencies': [
+         'v8_libbase',
+       ],

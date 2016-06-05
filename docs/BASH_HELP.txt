@@ -1,0 +1,39 @@
+Change user password:
+
+	# passwd <username>
+
+Add user:
+
+	# adduser --quiet --system --ingroup "<group>" "<username>"
+
+Add group:
+
+	# addgroup --system "<username>"
+
+Delete user:
+
+	# userdel -r "<username>"
+
+Delete user:
+
+	# groupdel "<group>"
+
+List users:
+
+	$ awk -F':' '{ print $1}' /etc/passwd
+
+Script directory:
+
+	cd "`dirname "$0"`"
+	if [ "$?" = "0" ]
+	then
+		variable="`pwd`/`basename "$0"`"
+	fi
+	variable=`dirname "$variable"`
+
+Raw sockets:
+	# setcap cap_net_raw,cap_net_admin=eip PATH_TO_YOUR_APPLICATION
+
+Change root password:
+	$ sudo su -
+	# passwd

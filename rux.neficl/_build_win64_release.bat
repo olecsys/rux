@@ -1,0 +1,1 @@
+@call _build.bat "rux.neficl" "Release" "x64"

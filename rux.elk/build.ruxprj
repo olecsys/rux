@@ -1,0 +1,212 @@
+{
+	"project_name":"rux.elk",
+	"configurations":
+	{
+		"global":
+		{
+			"output_file_type":"static library",
+			"debug":true
+		},
+		"windows":
+		{
+			"global":
+			{
+				"generate_vs_project":false
+			},
+			"x86":
+			{
+				"vs_project":"./$(project_name).vcxproj",
+				"configuration":"Release",
+				"platform":"Win32"
+			},
+			"x64":
+			{
+				"vs_project":"./$(project_name).vcxproj",
+				"configuration":"Release",
+				"platform":"x64"
+			}
+		},
+		"linux":
+		{
+			"global":
+			{
+				"os":"linux",
+				"compiler_flags":"-std=gnu++0x -fvisibility=hidden -fPIC -ffunction-sections -fdata-sections",
+				"source_directory":"./lib",
+				"post_builds":
+				[
+					"sh $(source_directory)/../_copy_to_includes.sh '$(intermediate_directory)/../includes' '$(source_directory)'"
+				],
+				"intermediate_directory":"./../build/$(os)/$(architecture)",
+				"rm_command":"rm -f",
+				"mk_dir_command":"mkdir -p",
+				"object_suffix":".o",
+				"source_switch":"-c ",
+				"object_switch":"-o ",
+				"include_switch":"-I",
+				"output_switch":"-o ",
+				"lib_path_switch":"-L",
+				"lib_switch":"-l",
+				"include_paths":
+				[
+					"./lib",
+					"./../extern_includes",
+					"./../includes"
+				],
+				"lib_paths":
+				[
+					"./../build/$(os)/$(architecture)",
+					"./../extern_lib/$(os)/$(architecture)",
+					"./../extern_lib/$(os)/$(architecture)/v8"
+				],
+				"merged_libs":
+				[
+					"librux.framework.a",
+					"libv8_base.a",
+					"libv8_libbase.a",
+					"libv8_external_snapshot.a",
+					"libv8_nosnapshot.a",
+					"libv8_libplatform.a",
+					"libicuuc.a",
+					"libicui18n.a",
+					"libicudata.a"
+				],
+				"__removed":[],
+				"output_file":"$(intermediate_directory)/lib$(project_name).a",
+				"makefile":"../projects/$(os)/$(architecture)/$(project_name)/Makefile"				
+			},
+			"linux x64":
+			{
+				"architecture":"x64",
+				"compiler":"g++",
+				"compiler_flags":"-m64",
+				"archiver":"ar",
+				"archiver_flags":"rcus",
+				"asm_compiler":"yasm",
+				"asm_compiler_flags":"-a x86 -f elf -m amd64 -p nasm",
+				"exclude_files":
+				[
+					"xan_asm.S",
+					"xan_asm_x64.S",
+					"xan_linux_asm32.S",
+					"xan_asm_armv6.S",
+					"main.cpp"
+				]				
+			},
+			"linux x86":
+			{
+				"architecture":"x86",
+				"compiler":"g++",
+				"compiler_flags":"-m32",
+				"archiver":"ar",
+				"archiver_flags":"rcus",			
+				"asm_compiler":"yasm",
+				"asm_compiler_flags":"-a x86 -f elf -m x86 -p nasm",
+				"exclude_files":
+				[
+					"xan_asm.S",
+					"xan_asm_x64.S",
+					"xan_linux_asm64.S",
+					"xan_asm_armv6.S",
+					"main.cpp"
+				]
+			},
+			"linux crosscompile armv6":
+			{
+				"architecture":"armv6",
+				"toolchain_dir":"/opt/raspberrypi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin/arm-linux-gnueabihf-",
+				"compiler":"$(toolchain_dir)g++",
+				"compiler_flags":"-march=armv6 -mfpu=vfp -mfloat-abi=hard -Wno-psabi",
+				"archiver":"$(toolchain_dir)ar",
+				"archiver_flags":"rcus",
+				"exclude_files":
+				[
+					"xan_asm.S",
+					"xan_asm_x64.S",
+					"xan_linux_asm32.S",
+					"xan_linux_asm64.S",
+					"main.cpp"
+				]	
+			},
+			"linux crosscompile armv6 soft":
+			{
+				"architecture":"armv6soft",
+				"toolchain_dir":"/opt/raspberrypi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi-",
+				"compiler":"$(toolchain_dir)g++",
+				"compiler_flags":"-march=armv6 -mfpu=vfp -mfloat-abi=softfp -Wno-psabi",
+				"archiver":"$(toolchain_dir)ar",
+				"archiver_flags":"rcus",			
+				"exclude_files":
+				[
+					"xan_asm.S",
+					"xan_asm_x64.S",
+					"xan_linux_asm32.S",
+					"xan_linux_asm64.S",
+					"main.cpp"
+				]	
+			}
+		},
+		"android":
+		{			
+			"global":
+			{
+				"ndk":"./../../Android-NDK/android-ndk-r9",
+				"sdk":"",
+				"ant":"",
+				"os":"android",
+				"output_directory":"./../build/$(os)",
+				"source_directory":"./lib",
+				"rtti":true,
+				"exceptions":true,
+				"gnustl_static":true,
+				"compiler_flags":"-fPIC -Werror -O3 -isystem $(SYSROOT)/usr/include/",
+				"exclude_files":
+				[
+					"xan_asm_armv6.S",
+					"xan_asm.S",
+					"xan_asm_x64.S",
+					"xan_linux_asm32.S",
+					"xan_linux_asm64.S",
+					"main.cpp"
+				],
+				"include_paths":
+				[
+					"./lib",
+					"./../extern_includes",
+					"$(ndk)/sources/android/support/include",
+					"$(ndk)/sources/android/native_app_glue"
+				],
+				"lib_paths":
+				[
+					"./../build/$(os)/$(TARGET_ARCH_ABI)"
+				],
+				"libs":
+				[
+					"log",
+					"android"
+				],
+				"prebuilt_static_libs":
+				[					
+				],
+				"jni_directory":"./../$(os)/$(project_name)",
+				"preprocessors":
+				[
+				],
+				"post_builds":
+				[
+					"\"$(source_directory)/../_copy_to_includes.bat\""
+				],
+				"local_module":"$(project_name)"
+			},
+			"android all":
+			{
+				"architectures":
+				[
+					"armeabi-v7a",
+					"x86"
+				],
+				"platform":9
+			}
+		}		
+	}
+}
