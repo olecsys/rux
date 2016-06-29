@@ -146,14 +146,14 @@ namespace rux
 			};
 			void Button::set_Background( ::rux::gui::ColorBase* background )
 			{	
+				_cs_drawing_elements.wlock( debuginfo_macros );
 				if( _active_state_background == _background )
 				{
-					_cs_drawing_elements.wlock( debuginfo_macros );
-					_active_state_background = background;
-					_cs_drawing_elements.wunlock( debuginfo_macros );
+					_active_state_background = background;					
 					Invalidate();
 				}
 				::rux::gui::copy_color( _background , background );
+				_cs_drawing_elements.wunlock( debuginfo_macros );
 			};
 			void Button::set_ContentOpacity( float opacity )
 			{
@@ -283,25 +283,25 @@ namespace rux
 			};
 			void Button::set_OverBackground( ::rux::gui::ColorBase* over_background )
 			{	
+				_cs_drawing_elements.wlock( debuginfo_macros );
 				if( _active_state_background == _over_background )
 				{
-					_cs_drawing_elements.wlock( debuginfo_macros );
 					_active_state_background = over_background;
-					_cs_drawing_elements.wunlock( debuginfo_macros );
 					Invalidate();
 				}
 				rux::gui::copy_color( _over_background , over_background );
+				_cs_drawing_elements.wunlock( debuginfo_macros );
 			};
 			void Button::set_PressedBackground( ::rux::gui::ColorBase* pressed_background )
 			{	
+				_cs_drawing_elements.wlock( debuginfo_macros );
 				if( _active_state_background == _pressed_background )
 				{
-					_cs_drawing_elements.wlock( debuginfo_macros );
 					_active_state_background = pressed_background;
-					_cs_drawing_elements.wunlock( debuginfo_macros );
 					Invalidate();
 				}
 				rux::gui::copy_color( _pressed_background , pressed_background );
+				_cs_drawing_elements.wunlock( debuginfo_macros );
 			};
 			::rux::uint8 Button::get_IsSupportContentSize( void )
 			{
@@ -359,14 +359,14 @@ namespace rux
 			};
 			void Button::set_DisabledBackground( ::rux::gui::ColorBase* disabled_background )
 			{	
+				_cs_drawing_elements.wlock( debuginfo_macros );
 				if( _active_state_background == _disabled_background )
 				{
-					_cs_drawing_elements.wlock( debuginfo_macros );
 					_active_state_background = disabled_background;
-					_cs_drawing_elements.wunlock( debuginfo_macros );
 					Invalidate();
 				}
 				rux::gui::copy_color( _disabled_background , disabled_background );
+				_cs_drawing_elements.wunlock( debuginfo_macros );
 			};
 			void Button::private_ResetChildLocationAndSizeCache( ::rux::uint8 reset , ::rux::gui::ControlBase* control , ::rux::uint8 left , ::rux::uint8 top , ::rux::uint8 width , ::rux::uint8 height , size_t )
 			{	
