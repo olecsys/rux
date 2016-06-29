@@ -5,6 +5,7 @@
 #include <xan_user_data.h>
 #include <xan_gui_defines.h>
 #include <xan_boolean.h>
+#include <xan_log.h>
 begin_implement_rux_class_ns( Thread , rux::threading );
 	_thread_before_exit = NULL;
 	_thread_before_exit_user_data = NULL;
@@ -281,6 +282,9 @@ namespace rux
 			prctl( PR_SET_NAME , thread_ptr->_thread_name );
 #endif
 #endif
+			::rux::log::WriteError( "<thread>[%u][%x]'%s' started, %u bytes" 
+				, (::rux::uint32)thread_ptr->_thread_id, (::rux::uint32)thread_ptr->_thread_id, thread_ptr->_thread_name 
+				, (::rux::uint32)thread_ptr->_stack_size );
 			XTHREADFUNC local_func = 0;
 			void* local_param = 0;
 			while( thread_ptr->_event->IsSet( __FILE__ , __LINE__ ) == 0 )
@@ -376,6 +380,11 @@ namespace rux
 			::rux::engine::_globals->_rux_remove_thread_from_global( thread_ptr->_thread_index );
 			if( thread_ptr->_thread_before_exit )
 				thread_ptr->_thread_before_exit( thread_ptr->_thread_before_exit_user_data );
+
+			::rux::log::WriteError("<thread>[%u][%x]'%s' stopped, %u bytes"
+				, (::rux::uint32)thread_ptr->_thread_id, (::rux::uint32)thread_ptr->_thread_id, thread_ptr->_thread_name 
+				, (::rux::uint32)thread_ptr->_stack_size);
+
 			thread_ptr->_thread_id = 0;
 			XInterlocked::CompareExchange( &thread_ptr->_is_started , 0 , 1 );
 			thread_ptr->Release();		
