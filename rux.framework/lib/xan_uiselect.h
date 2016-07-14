@@ -80,7 +80,7 @@ namespace rux
 				void set_SelectedIndex( ::rux::uint32 index , ::rux::byte raise_event = 1 );
 				void ItemsClear( void );
 				void ItemsAdd( const XObject& item , ::rux::uint8 selected = 0 );
-				void ItemsRemove( const XObject& item );
+				void ItemsRemove(size_t index);
 				size_t ItemsCount( void );
 				void set_ItemTag( size_t index , const XObject& tag );
 				Object& get_ItemTag( size_t index );
@@ -123,7 +123,7 @@ namespace rux
 				explicit XSelect( XGCRef* object );
 				void ItemsClear( void );
 				void ItemsAdd( const XObject& item , ::rux::uint8 selected = 0 );
-				void ItemsRemove( const XObject& item );
+				void ItemsRemove(size_t index);
 				size_t ItemsCount( void );
 				void set_SelectedIndex( ::rux::uint32 index , ::rux::byte raise_event = 1 );
 				void set_BindingSource( const XObject& binding_source );

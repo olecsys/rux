@@ -327,7 +327,8 @@ namespace booldog
 			{
 				::booldog::result_mbchar res_root_dir( allocator );
 
-				if( settings[ 1 ].type != ::booldog::enums::param::type_not_found )
+				if( settings[ 1 ].type != ::booldog::enums::param::type_not_found
+					&& settings[ 1 ].pcharvalue)
 				{
 					if( ::booldog::utils::string::mbs::insert< 0 >( &resres , allocator , false , SIZE_MAX , res_root_dir.mbchar , res_root_dir.mblen 
 						, res_root_dir.mbsize , settings[ 1 ].pcharvalue , 0 , SIZE_MAX , debuginfo ) == false )
@@ -336,7 +337,8 @@ namespace booldog
 						goto goto_return;							
 					}
 				}
-				else if( settings[ 2 ].type != ::booldog::enums::param::type_not_found )
+				else if( settings[ 2 ].type != ::booldog::enums::param::type_not_found
+					&& settings[ 2 ].pwcharvalue)
 				{
 					if( ::booldog::utils::string::wcs::tombs( &res_root_dir , allocator , settings[ 2 ].pwcharvalue , 0 , SIZE_MAX 
 						, debuginfo ) == false )
@@ -928,7 +930,8 @@ goto_return:
 			{
 				::booldog::result_wchar res_root_dir( allocator );
 
-				if( settings[ 1 ].type != ::booldog::enums::param::type_not_found )
+				if( settings[ 1 ].type != ::booldog::enums::param::type_not_found
+					&& settings[ 1 ].pcharvalue)
 				{
 					if( ::booldog::utils::string::mbs::towcs( &res_root_dir , allocator , settings[ 1 ].pcharvalue , 0 , SIZE_MAX 
 						, debuginfo ) == false )
@@ -937,7 +940,8 @@ goto_return:
 						goto goto_return;							
 					}
 				}
-				else if( settings[ 2 ].type != ::booldog::enums::param::type_not_found )
+				else if( settings[ 2 ].type != ::booldog::enums::param::type_not_found
+					&& settings[ 2 ].pwcharvalue)
 				{
 					if( ::booldog::utils::string::wcs::insert( &resres , allocator , false , SIZE_MAX , res_root_dir.wchar , res_root_dir.wlen 
 						, res_root_dir.wsize , settings[ 2 ].pwcharvalue , 0 , SIZE_MAX , debuginfo ) == false )

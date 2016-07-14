@@ -249,6 +249,18 @@ namespace booldog
 			};
 			struct serializator_fast
 			{
+				booinline char* detach(void)
+				{
+					char* res = json;
+					json = 0;
+					if(nodes)
+					{
+						jsonallocator->free(nodes);
+						nodes = 0;
+					}
+					clear();
+					return res;
+				};
 				booinline void clear( void )
 				{
 					if( json )
@@ -1455,19 +1467,13 @@ goto_return:
 					if( slow.nodes )
 						slow.jsonallocator->free( slow.nodes );
 				};
+				booinline char* detach(void)
+				{
+					return fast.detach();
+				};
 				booinline void clear( void )
 				{
-					if( slow.json )
-						slow.json[ 0 ] = 0;
-					else
-						slow.jsonsize = 0;
-					slow.jsonlen = 0;
-					slow.nodesindex = 0;
-					if( slow.nodes == 0 )
-						slow.nodessize = 0;
-					for( size_t index0 = 0 ; index0 < slow.nodessize ; index0++ )
-						slow.nodes[ index0 ].flags = ::booldog::utils::bits::compile::number_from_bit_index< 
-						::booldog::byte , BOOLDOG_DATA_JSON_NODE_FREE >::value;
+					fast.clear();
 				};
 				booinline ::booldog::data::json::serializator& operator = ( const ::booldog::data::json::serializator& obj );
 				operator ::booldog::data::json::object() const

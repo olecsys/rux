@@ -531,6 +531,21 @@ namespace rux
 				CRITICAL_SECTION_UNLOCK( _cs_items );
 				return tag++;
 			};
+			void Select::ItemsRemove(size_t index)
+			{
+				CRITICAL_SECTION_LOCK( _cs_items );
+				_items.RemoveAt(index);
+				_items_tags.RemoveAt(index);
+				CRITICAL_SECTION_UNLOCK( _cs_items );
+				declare_variable_param( ::rux::gui::controls::XGroup , items , _items_container.get_ControlAt( 1 ) );
+				items.RemoveControl(items.get_ControlAt(index));
+				if(_selected_index == index)
+				{
+					_selected_index = 0;
+					update_main_text();
+					_on_item_selected.raise<const ::rux::gui::events::Event&>(::rux::gui::events::Event(*this, 1));
+				}
+			};
 			void Select::ItemsAdd( const XObject& item , ::rux::uint8 selected )
 			{
 				if( _items_container.get_ControlsCount() == 0 )
@@ -581,9 +596,6 @@ namespace rux
 				if( _selected_text.Length() == 0 )
 					update_main_text();
 				_cs_drawing_elements.wunlock( debuginfo_macros );
-			};
-			void Select::ItemsRemove( const XObject& )
-			{
 			};
 			void Select::on_completed_animation( const ::rux::gui::events::Event& event )
 			{
@@ -952,6 +964,10 @@ namespace rux
 				CRITICAL_SECTION_UNLOCK( _cs_items );
 				private_ResetLocationAndSizeCache( _horizontal_alignment == XEnum_Alignment_Stick || _horizontal_alignment == XEnum_Alignment_RightOrBottom || _horizontal_alignment == XEnum_Alignment_Center ? 1 : 0 , _vertical_alignment == XEnum_Alignment_Stick || _vertical_alignment == XEnum_Alignment_RightOrBottom || _vertical_alignment == XEnum_Alignment_Center ? 1 : 0 , _horizontal_filling == XEnum_Filling_FromContent ? 1 : 0 , _vertical_filling == XEnum_Filling_FromContent ? 1 : 0 );
 				private_ResetCache();
+			};
+			void XSelect::ItemsRemove(size_t index)
+			{
+				operator()()->ItemsRemove(index);
 			};
 			void XSelect::ItemsAdd( const XObject& item , ::rux::uint8 selected )
 			{
