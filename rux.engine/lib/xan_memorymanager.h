@@ -115,6 +115,7 @@ extern dll_internal ::rux::memory::begin_memory_chunk* _first_last_memory;
 extern dll_internal XMallocArray< ::rux::memory::summary_memory_info* > _detailed_memory_infos;
 extern dll_internal ::rux::int64 _working_set;
 extern dll_internal ::rux::int64 _process_threads_count;
+extern dll_internal ::rux::int64 _process_descriptors_count;
 extern dll_internal ::rux::int64 _virtual_bytes;
 extern dll_internal ::rux::threading::RdWrLock* _cs_cpu_logs;
 extern dll_internal size_t _cpu_logs_write_index;

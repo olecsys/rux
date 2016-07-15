@@ -45,6 +45,7 @@ dll_internal ::rux::memory::begin_memory_chunk* _first_last_memory = NULL;
 dll_internal XMallocArray< ::rux::memory::summary_memory_info* > _detailed_memory_infos;
 dll_internal ::rux::int64 _working_set = 0;
 dll_internal ::rux::int64 _process_threads_count = 0;
+dll_internal ::rux::int64 _process_descriptors_count = 0;
 dll_internal ::rux::int64 _virtual_bytes = 0;
 dll_internal XThreadInfo** _rux_threads = 0;
 dll_internal size_t _rux_threads_count = 0;
@@ -1542,6 +1543,16 @@ void XMemoryManager::private_info_thread( void* param , size_t ___rux__thread_in
 					else
 						file.write_text( "Threads " I64u "\n" , temp );
 					_process_threads_count = temp;		
+#ifdef __UNIX__
+					temp = ::rux::diagnostics::process_info::descriptors_count(pid, 0);
+					if(temp > _process_descriptors_count)
+						file.write_text("Descriptors " I64u "(+" I64u ")\n", temp, temp - _process_descriptors_count);
+					else if(temp < _process_descriptors_count)
+						file.write_text("Descriptors " I64u "(-" I64u ")\n", temp, _process_descriptors_count - temp);
+					else
+						file.write_text("Descriptors " I64u "\n", temp);
+					_process_descriptors_count = temp;
+#endif
 
 					file.write_text( "\n=============================\n" );
 					file.close();

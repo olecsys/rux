@@ -15,6 +15,31 @@ namespace rux
 {
 	namespace diagnostics
 	{
+		::rux::int64 descriptors_count(::rux::pid_t pid, ::rux::XString* error)
+		{
+			::rux::int64 threads = 0;
+#ifdef __WINDOWS__
+#else
+			declare_stack_variable( char , pid_string , 64 );
+			rux::string::uint32_to_string( pid , pid_string );
+			const char* ps_path = "/usr/bin/lsof";
+			::rux::byte exists = rux_is_exists_file_or_link( ps_path );
+			if( exists == 0 )
+			{
+				ps_path = "/bin/lsof";
+				exists = rux_is_exists_file_or_link( ps_path );
+			}
+			if( exists )
+			{
+				char* args[ 2 ] = {0};
+				args[ 0 ] = const_cast< char* >( "-p" );
+				args[ 1 ] = pid_string;
+				::rux::diagnostics::process::start_with_redirect(ps_path, args, 2
+					, ::rux::diagnostics::on_lines_count_redirect_stdout_or_stderr_handler, 0, &threads, 0, 0, NULL);
+			}
+#endif
+			return threads;
+		};
 		::rux::int64 process_info::threads_count( ::rux::pid_t pid , ::rux::XString* error )
 		{
 			::rux::int64 threads = 0;

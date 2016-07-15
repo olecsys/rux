@@ -16,6 +16,7 @@ namespace rux
 			static pid_t pidof( const char* process_name , ::rux::pid_t include_pid = 0 , ::rux::pid_t except_pid = 0 
 				, bool check_only_fullname = false );
 			static ::rux::int64 threads_count( ::rux::pid_t pid , ::rux::XString* error );
+			static ::rux::int64 descriptors_count( ::rux::pid_t pid , ::rux::XString* error );
 		};
 	};
 };
