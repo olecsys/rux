@@ -1544,6 +1544,15 @@ void XMemoryManager::private_info_thread( void* param , size_t ___rux__thread_in
 						file.write_text( "Threads " I64u "\n" , temp );
 					_process_threads_count = temp;		
 #ifdef __UNIX__
+					struct rlimit lim;
+					int rlim_cur = 0, rlim_max = 0;
+					lim.rlim_cur = 0;
+					lim.rlim_max = 0;
+					if(getrlimit(RLIMIT_NOFILE, &lim) == 0)
+					{
+						rlim_cur = (int)lim.rlim_cur, rlim_max = (int)lim.rlim_max;
+					}
+
 					temp = ::rux::diagnostics::process_info::descriptors_count(pid, 0);
 					if(temp > _process_descriptors_count)
 						file.write_text("Descriptors " I64u "(+" I64u ")\n", temp, temp - _process_descriptors_count);
@@ -1551,6 +1560,8 @@ void XMemoryManager::private_info_thread( void* param , size_t ___rux__thread_in
 						file.write_text("Descriptors " I64u "(-" I64u ")\n", temp, _process_descriptors_count - temp);
 					else
 						file.write_text("Descriptors " I64u "\n", temp);
+					file.write_text("Descriptors soft limit %d\n", rlim_cur);
+					file.write_text("Descriptors hard limit %d\n", rlim_max);
 					_process_descriptors_count = temp;
 #endif
 
