@@ -111,6 +111,9 @@ do_start()\n\
 	#   0 if daemon has been started\n\
 	#   1 if daemon was already running\n\
 	#   2 if daemon could not be started\n\
+	if hash ulimit 2>/dev/null; then\n\
+		ulimit -n 16384\n\
+	fi\n\
 	if hash start-stop-daemon 2>/dev/null; then\n\
 		start-stop-daemon --start --quiet $PIDFILE_OPT $PIDFILE \\\n\
 			--chuid $USER:$GROUP --user $USER --exec \"$DAEMON\" --test > /dev/null \\\n\
@@ -894,7 +897,9 @@ namespace rux
 							struct rlimit lim;
 							lim.rlim_cur = 16384;
 							lim.rlim_max = 16384;
-							setrlimit( RLIMIT_NOFILE , &lim );
+							int setrlimit_res = setrlimit( RLIMIT_NOFILE , &lim );
+							if(setrlimit_res == -1)
+								printf("setrlimit, error(%d)", (int)errno);
 							sigemptyset( &rux::engine::_globals->_service_globals->_sigset );
 							sigaddset( &rux::engine::_globals->_service_globals->_sigset , SIGQUIT );
 							sigaddset( &rux::engine::_globals->_service_globals->_sigset , SIGINT );

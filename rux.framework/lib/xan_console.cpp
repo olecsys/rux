@@ -165,7 +165,9 @@ namespace rux
 			struct rlimit lim;
 			lim.rlim_cur = 16384;
 			lim.rlim_max = 16384;
-			setrlimit( RLIMIT_NOFILE , &lim );
+			int setrlimit_res = setrlimit( RLIMIT_NOFILE , &lim );
+			if(setrlimit_res == -1)
+				printf("setrlimit, error(%d)", (int)errno);
 			struct sigaction act;
 			memset( &act , 0 , sizeof( act ) );
 			act.sa_handler = console_posix_ctrl_c_signal;
@@ -301,7 +303,9 @@ namespace rux
 		struct rlimit lim;
 		lim.rlim_cur = 16384;
 		lim.rlim_max = 16384;
-		setrlimit( RLIMIT_NOFILE , &lim );
+		int setrlimit_res = setrlimit( RLIMIT_NOFILE , &lim );
+		if(setrlimit_res == -1)
+			printf("setrlimit, error(%d)", (int)errno);
 		struct sigaction act;
 		memset( &act , 0 , sizeof( act ) );
 		act.sa_handler = SIG_DFL;
@@ -350,7 +354,9 @@ namespace rux
 		struct rlimit lim;
 		lim.rlim_cur = 16384;
 		lim.rlim_max = 16384;
-		setrlimit( RLIMIT_NOFILE , &lim );
+		int setrlimit_res = setrlimit( RLIMIT_NOFILE , &lim );
+		if(setrlimit_res == -1)
+			printf("setrlimit, error(%d)", (int)errno);
 		struct sigaction act;
 		memset( &act , 0 , sizeof( act ) );
 		act.sa_handler = console_posix_ctrl_c_signal;
