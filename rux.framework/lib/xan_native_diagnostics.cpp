@@ -15,7 +15,7 @@ namespace rux
 {
 	namespace diagnostics
 	{
-		::rux::int64 descriptors_count(::rux::pid_t pid, ::rux::XString* error)
+		::rux::int64 process_info::descriptors_count(::rux::pid_t pid, ::rux::XString* error)
 		{
 			::rux::int64 threads = 0;
 #ifdef __WINDOWS__

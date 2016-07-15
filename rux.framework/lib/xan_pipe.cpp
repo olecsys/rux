@@ -335,7 +335,15 @@ namespace rux
 			}
 			else
 			{
-				rux_write_error_2( "request fifo does not exist" , error , 0 );
+				int errnoint = errno;
+				if(errnoint != 0)
+				{
+					errno_error_to_string_2(errnoint, error, 0);
+				}
+				else
+				{
+					rux_write_error_2( "request fifo(" + request_fifo_filename + ") does not exist" , error , 0 );
+				}
 			}
 	#endif
 		}
