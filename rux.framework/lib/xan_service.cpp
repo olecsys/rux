@@ -960,7 +960,7 @@ namespace rux
 								restart = 0;
 							else if(WIFSIGNALED(status))
 							{
-								const char* termsignal = "unknown;
+								const char* termsignal = "unknown";
 								switch(WTERMSIG(status))
 								{
 								case SIGSEGV: termsignal = "SIGSEGV";break;
