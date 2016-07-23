@@ -8,6 +8,19 @@
 #include <xan_security.h>
 #include <xan_registry.h>
 #include <xan_keyvaluepair.h>
+
+#ifndef BOOLDOG_NETWORK
+#define BOOLDOG_NETWORK
+#endif
+#ifndef BOOLDOG_HEADER
+#define BOOLDOG_HEADER( header ) <booldog/header>
+#endif
+#include BOOLDOG_HEADER(boo_string_utils.h)
+#include BOOLDOG_HEADER(boo_heap_allocator.h)
+#include BOOLDOG_HEADER(boo_mixed_allocator.h)
+#include BOOLDOG_HEADER(boo_io_file.h)
+#include BOOLDOG_HEADER(boo_time_utils.h)
+
 const char* _init_d_daemon_script = 
 "#!/bin/sh\n\
 # %s initscript\n\
@@ -823,197 +836,256 @@ namespace rux
 			}			
 			return can_start;
 		};
+		void boowritelog(::booldog::result_mbchar* dst, ::booldog::result_mbchar* mbchar, const char* format, ...)
+		{
+			::booldog::uint64 now = ::booldog::utils::time::posix::now_as_utc();
+
+			::booldog::result_file resfile;
+			::booldog::param filesearch_paths_params[] =
+			{
+				BOOPARAM_PCHAR("databases"),
+				BOOPARAM_NONE
+			};
+			::booldog::named_param fileload_params[] =
+			{
+				BOONAMED_PARAM_PPARAM("search_paths", filesearch_paths_params),
+				BOONAMED_PARAM_BOOL("exedir_as_root_path", true),
+				BOONAMED_PARAM_NONE
+			};
+
+			if(::booldog::io::file::mbsopen(&resfile, dst->mballocator, "service.daemon.logs.txt"
+				, ::booldog::enums::io::file_mode_append|::booldog::enums::io::file_mode_write
+				, fileload_params) == false)
+			{
+				::booldog::io::file::mbsopen(&resfile, dst->mballocator, "service.daemon.logs.txt"
+					, ::booldog::enums::io::file_mode_create|::booldog::enums::io::file_mode_append|::booldog::enums::io::file_mode_write
+					, fileload_params);
+			}
+			if(resfile.succeeded())
+			{					
+				now = ::booldog::utils::time::posix::tolocal(now);
+
+				va_list ap;
+				va_start(ap, format);
+				::booldog::utils::string::mbs::sprintf(mbchar, mbchar->mballocator, format, ap, debuginfo_macros);
+				va_end(ap);
+						
+				::booldog::utils::time::posix::mbs::tostring<16>(dst, dst->mballocator, "%Y%m%d %H:%M:%S,%MS - ", now);
+
+				::booldog::utils::string::mbs::assign<16>(0, dst->mballocator, false, dst->mblen, dst->mbchar, dst->mblen, dst->mbsize
+					, mbchar->mbchar, 0, SIZE_MAX);
+
+				::booldog::utils::string::mbs::assign<16>(0, dst->mballocator, false, dst->mblen, dst->mbchar, dst->mblen, dst->mbsize
+					, "\n", 0, SIZE_MAX);
+
+				size_t written = 0;
+				resfile.file->write(0, (::booldog::byte*)dst->mbchar, dst->mblen, SIZE_MAX, written);
+				resfile.file->close( &resfile );
+			}
+		};
 		rux::uint8 Start( const char* logfile , char error[ 1024 ] , rux::uint8 check_rux_executing_in_current_path )
 		{
-			error[ 0 ] = 0;
-			rux::uint8 is_started = 0;
-#ifdef	__UNIX__
-			if( rux::engine::_globals->_service_globals->_is_autorecovery == 1 )
+			::booldog::allocators::easy::heap heap;
+			::booldog::allocators::single_threaded::mixed<1024> mixed(&heap);
 			{
-				pid_t parent_pid = fork();
-				if( parent_pid < 0 )
-					exit( 1 );
-				else if( parent_pid != 0 )
-					exit( 0 );
-				else
+				::booldog::result_mbchar mbchar0(&mixed), mbchar1(&mixed);
+				
+				boowritelog(&mbchar0, &mbchar1, "Start service/daemon %s", ::rux::engine::_globals->_service_globals->_service_name);
+
+				error[ 0 ] = 0;
+				rux::uint8 is_started = 0;
+	#ifdef	__UNIX__
+				if( rux::engine::_globals->_service_globals->_is_autorecovery == 1 )
 				{
-					umask( 0 );
-					pid_t sid = setsid();
-					if( sid < 0 )
-						exit( 1 );	
-					if( chdir( "/" ) < 0 )
+					pid_t parent_pid = fork();
+					if( parent_pid < 0 )
 						exit( 1 );
-					close( STDIN_FILENO );
-					close( STDOUT_FILENO );
-					close( STDERR_FILENO );
-					rux::int32 stdio_fd = open( "/dev/null" , O_RDWR );
-					dup( stdio_fd );
-					dup( stdio_fd );
-				}
-			}
-			::rux::byte restart = 1;
-			while( restart )
-			{
-				pid_t sid = -1;		
-				pid_t parent_pid = fork();
-				if( parent_pid < 0 )
-					exit( 1 );
-				else if( parent_pid != 0 )
-				{
-					if( rux::engine::_globals->_service_globals->_is_autorecovery == 1 )
+					else if( parent_pid != 0 )
+						exit( 0 );
+					else
 					{
-						rux::int32 status = 0;
-						waitpid( parent_pid , &status , 0 );
-						if( WIFEXITED( status ) )
-							restart = 0;
+						umask( 0 );
+						pid_t sid = setsid();
+						if( sid < 0 )
+							exit( 1 );	
+						if( chdir( "/" ) < 0 )
+							exit( 1 );
+						close( STDIN_FILENO );
+						close( STDOUT_FILENO );
+						close( STDERR_FILENO );
+						rux::int32 stdio_fd = open( "/dev/null" , O_RDWR );
+						dup( stdio_fd );
+						dup( stdio_fd );
+					}
+				}
+				::rux::byte restart = 1;
+				while( restart )
+				{
+					pid_t sid = -1;		
+					pid_t parent_pid = fork();
+					if( parent_pid < 0 )
+						exit( 1 );
+					else if( parent_pid != 0 )
+					{
+						if( rux::engine::_globals->_service_globals->_is_autorecovery == 1 )
+						{
+	#ifdef __LINUX__	
+							::booldog::utils::string::mbs::assign<16>(0, mbchar0.mballocator, false, 0, mbchar0.mbchar, mbchar0.mblen
+								, mbchar0.mbsize, "Watch::", 0, SIZE_MAX);
+							
+							::booldog::utils::string::mbs::assign<16>(0, mbchar0.mballocator, false, mbchar0.mblen, mbchar0.mbchar
+								, mbchar0.mblen, mbchar0.mbsize, ::rux::engine::_globals->_service_globals->_service_name, 0, SIZE_MAX);
+							prctl(PR_SET_NAME, mbchar0.mbchar);
+	#endif
+							rux::int32 status = 0;
+							for(;;)
+							{
+								waitpid(parent_pid, &status, WUNTRACED|WCONTINUED);
+								if(WIFSTOPPED(status))
+								{
+									boowritelog(&mbchar0, &mbchar1, "Child process(%u) stopped by signal SIGSTOP"
+										, (::booldog::uint32)parent_pid);
+									continue;
+								}
+								else if(WIFCONTINUED(status))
+								{
+									boowritelog(&mbchar0, &mbchar1, "Child process(%u) continued by signal SIGCONT"
+										, (::booldog::uint32)parent_pid);
+									continue;
+								}
+								else
+									break;
+							}
+							if(WIFEXITED(status))
+								restart = 0;
+						}
+						else
+							exit( 0 );
 					}
 					else
-						exit( 0 );
-				}
-				else
-				{
-					restart = 0;
-					::rux::engine::initialize();
-					if( rux::service::CanStart() == 1 )
 					{
-						if( check_rux_executing_in_current_path == 0 
-							|| rux_is_already_executing_in_current_path() == 0 )
+						restart = 0;
+						::rux::engine::initialize();
+						if( rux::service::CanStart() == 1 )
 						{
-							rux::engine::_globals->_service_globals->_signo = -1;
-							is_started = 1;
-							declare_stack_variable( char , pid_file , 1024 );
-							umask( 0 );
-							sid = setsid();
-							if( sid < 0 )
-								exit( 1 );	
-							if( chdir( "/" ) < 0 )
-								exit( 1 );
-							close( STDIN_FILENO );
-							close( STDOUT_FILENO );
-							close( STDERR_FILENO );
-							rux::int32 stdio_fd = open( "/dev/null" , O_RDWR );
-							dup( stdio_fd );
-							dup( stdio_fd );	
-							struct rlimit lim;
-							lim.rlim_cur = 16384;
-							lim.rlim_max = 16384;
-							int setrlimit_res = setrlimit( RLIMIT_NOFILE , &lim );
-							if(setrlimit_res == -1)
-								printf("setrlimit, error(%d)", (int)errno);
-							sigemptyset( &rux::engine::_globals->_service_globals->_sigset );
-							sigaddset( &rux::engine::_globals->_service_globals->_sigset , SIGQUIT );
-							sigaddset( &rux::engine::_globals->_service_globals->_sigset , SIGINT );
-							sigaddset( &rux::engine::_globals->_service_globals->_sigset , SIGTERM );
-							sigprocmask( SIG_BLOCK , &rux::engine::_globals->_service_globals->_sigset , NULL );
-							pid_file[ 0 ] = 0;
-							THREAD_REGISTER( "main" );
-							if( rux::engine::_globals->_service_globals->_service_name && rux::engine::_globals->_service_globals->_service_name[ 0 ] != 0 
-								&& rux::engine::_globals->_service_globals->_with_pid_file == 1 )
+							if( check_rux_executing_in_current_path == 0 
+								|| rux_is_already_executing_in_current_path() == 0 )
 							{
-								declare_stack_variable( char , pid_string , 1024 );
-								rux_concatenation( pid_file , "/var/run/" , rux::engine::_globals->_service_globals->_service_name );
-								rux_concatenation( pid_file , "/" );
-								rux_concatenation( pid_file , rux::engine::_globals->_service_globals->_service_name );
-								rux_concatenation( pid_file , ".pid" );
-								::rux::safe_sprintf( pid_string , 1024 , "%u" , getpid() );
-								rux_clear_and_write_to_file( pid_file , pid_string );
-							}
-							if( rux::engine::_globals->_service_globals->_service_task )
-							{
-								CODE_LABEL( NULL , NULL , 100 );
-								rux::int32 argc = 0;
-								char** args = NULL;
-								rux::engine::_globals->_service_globals->_service_task( argc , args );
-							}
-							if( rux::engine::_globals->_service_globals->_signo == -1 )
-							{
-								siginfo_t siginfo;
-								rux::engine::_globals->_service_globals->_signo = sigwaitinfo( 
-									&rux::engine::_globals->_service_globals->_sigset , &siginfo );
-								rux::engine::_globals->_service_globals->_sigpid = siginfo.si_pid;
-							}
-							{
-								::rux::uint64 now = rux_get_now_as_local_unix_time();
-								declare_stack_variable( char , now_string , 64 );
-								rux_unix_time_to_string( now , now_string , 64 );
-
-								declare_stack_variable( char , filename , 1024 );
-								::rux::safe_strncpy( filename , ::rux::engine::_globals->_executable_directory , 1024 );
-								::rux::safe_strncat( filename , "/who_quit_me.txt" , 1024 );
-								if( rux_is_exists_file( filename ) )
-									chmod( filename , 0777 );
-								::rux::uint64 size = rux_get_file_size( filename );
-								if( size >= 1024ULL * 1024ULL )
-									rux_remove_file( filename );		
-								::rux::io::file file( filename , XOpenWriteText );
-								if( file.opened() == false )
-									file.open( filename , XCreateWriteText );
-								if( file.opened() )
+								rux::engine::_globals->_service_globals->_signo = -1;
+								is_started = 1;
+								declare_stack_variable( char , pid_file , 1024 );
+								umask( 0 );
+								sid = setsid();
+								if( sid < 0 )
+									exit( 1 );	
+								if( chdir( "/" ) < 0 )
+									exit( 1 );
+								close( STDIN_FILENO );
+								close( STDOUT_FILENO );
+								close( STDERR_FILENO );
+								rux::int32 stdio_fd = open( "/dev/null" , O_RDWR );
+								dup( stdio_fd );
+								dup( stdio_fd );	
+								struct rlimit lim;
+								lim.rlim_cur = 16384;
+								lim.rlim_max = 16384;
+								int setrlimit_res = setrlimit( RLIMIT_NOFILE , &lim );
+								if(setrlimit_res == -1)
+									boowritelog(&mbchar0, &mbchar1, "setrlimit, error(%d)", (int)errno);
+								sigemptyset( &rux::engine::_globals->_service_globals->_sigset );
+								sigaddset( &rux::engine::_globals->_service_globals->_sigset , SIGQUIT );
+								sigaddset( &rux::engine::_globals->_service_globals->_sigset , SIGINT );
+								sigaddset( &rux::engine::_globals->_service_globals->_sigset , SIGTERM );
+								sigprocmask( SIG_BLOCK , &rux::engine::_globals->_service_globals->_sigset , NULL );
+								pid_file[ 0 ] = 0;
+								THREAD_REGISTER( "main" );
+								if( rux::engine::_globals->_service_globals->_service_name && rux::engine::_globals->_service_globals->_service_name[ 0 ] != 0 
+									&& rux::engine::_globals->_service_globals->_with_pid_file == 1 )
 								{
-									file.seek( file.size() );
-									::rux::uint32 pid = (::rux::uint32)::rux::diagnostics::process::get_process_id();
-									file.write_text( "%s - Process %u send signal %d to me(process %u)\n" , now_string 
-										, (::rux::uint32)rux::engine::_globals->_service_globals->_sigpid
-										, rux::engine::_globals->_service_globals->_signo , pid );
-									file.close();
-									::chmod( filename , 0777 );
+									declare_stack_variable( char , pid_string , 1024 );
+									rux_concatenation( pid_file , "/var/run/" , rux::engine::_globals->_service_globals->_service_name );
+									rux_concatenation( pid_file , "/" );
+									rux_concatenation( pid_file , rux::engine::_globals->_service_globals->_service_name );
+									rux_concatenation( pid_file , ".pid" );
+									::rux::safe_sprintf( pid_string , 1024 , "%u" , getpid() );
+									rux_clear_and_write_to_file( pid_file , pid_string );
 								}
-							}
-							if( rux::engine::_globals->_service_globals->_service_stop )
-								rux::engine::_globals->_service_globals->_service_stop();		
-							if( rux::engine::_globals->_service_globals->_with_pid_file == 1 )
-							{
-								rux::io::file file( pid_file );
-								if( file.opened() )
+								if( rux::engine::_globals->_service_globals->_service_task )
 								{
-									declare_stack_variable( char , pid_string , 64 );
-									size_t readen = 0;
-									if( file.read_text( pid_string , 64 , readen ) )
+									CODE_LABEL( NULL , NULL , 100 );
+									rux::int32 argc = 0;
+									char** args = NULL;
+									rux::engine::_globals->_service_globals->_service_task( argc , args );
+								}
+								if( rux::engine::_globals->_service_globals->_signo == -1 )
+								{
+									siginfo_t siginfo;
+									rux::engine::_globals->_service_globals->_signo = sigwaitinfo( 
+										&rux::engine::_globals->_service_globals->_sigset , &siginfo );
+									rux::engine::_globals->_service_globals->_sigpid = siginfo.si_pid;
+								}
+								{
+									::rux::uint32 pid = (::rux::uint32)::rux::diagnostics::process::get_process_id();
+									boowritelog(&mbchar0, &mbchar1, "Process %u send signal %d to me(process %u)"
+										, (::rux::uint32)rux::engine::_globals->_service_globals->_sigpid
+										, rux::engine::_globals->_service_globals->_signo, pid);
+								}
+								if( rux::engine::_globals->_service_globals->_service_stop )
+									rux::engine::_globals->_service_globals->_service_stop();		
+								if( rux::engine::_globals->_service_globals->_with_pid_file == 1 )
+								{
+									rux::io::file file( pid_file );
+									if( file.opened() )
 									{
-										if( pid_string[ readen - 1 ] == 0 )
+										declare_stack_variable( char , pid_string , 64 );
+										size_t readen = 0;
+										if( file.read_text( pid_string , 64 , readen ) )
 										{
-											rux::uint64 pid = rux::string::to_uint64( pid_string );
-											if( getpid() == pid )
+											if( pid_string[ readen - 1 ] == 0 )
 											{
-												file.close();
-												rux::io::file::remove( pid_file );
+												rux::uint64 pid = rux::string::to_uint64( pid_string );
+												if( getpid() == pid )
+												{
+													file.close();
+													rux::io::file::remove( pid_file );
+												}
 											}
 										}
 									}
 								}
 							}
 						}
+						if( ::rux::engine::_globals && ::rux::engine::_globals->_rux_stop_threads )
+							::rux::engine::_globals->_rux_stop_threads();
+						if( rux::engine::_globals->_service_globals->_service_after_stop )
+							rux::engine::_globals->_service_globals->_service_after_stop();
 					}
-					if( ::rux::engine::_globals && ::rux::engine::_globals->_rux_stop_threads )
-						::rux::engine::_globals->_rux_stop_threads();
-					if( rux::engine::_globals->_service_globals->_service_after_stop )
-						rux::engine::_globals->_service_globals->_service_after_stop();
 				}
-			}
-#endif
-#ifdef __WINDOWS__
-			::rux::engine::initialize();
-			if( check_rux_executing_in_current_path == 0 
-				|| rux_is_already_executing_in_current_path() == 0 )
-			{
-				signal( SIGTERM , rux::service::posix_signal );		
-				signal( SIGINT , rux::service::posix_signal );
-				signal( SIGBREAK , rux::service::posix_signal );
-				SERVICE_TABLE_ENTRYA DispatchTable[] = 
-				{ 
-					{ rux::engine::_globals->_service_globals->_service_name , (LPSERVICE_MAIN_FUNCTIONA)rux::service::service_main } , 
-					{ NULL , NULL }
-				};			
-				if( StartServiceCtrlDispatcherA( DispatchTable ) == 0 )
-					rux::service::private_report_event();
+	#endif
+	#ifdef __WINDOWS__
+				::rux::engine::initialize();
+				if( check_rux_executing_in_current_path == 0 
+					|| rux_is_already_executing_in_current_path() == 0 )
+				{
+					signal( SIGTERM , rux::service::posix_signal );		
+					signal( SIGINT , rux::service::posix_signal );
+					signal( SIGBREAK , rux::service::posix_signal );
+					SERVICE_TABLE_ENTRYA DispatchTable[] = 
+					{ 
+						{ rux::engine::_globals->_service_globals->_service_name , (LPSERVICE_MAIN_FUNCTIONA)rux::service::service_main } , 
+						{ NULL , NULL }
+					};			
+					if( StartServiceCtrlDispatcherA( DispatchTable ) == 0 )
+						rux::service::private_report_event();
+					else
+						is_started = 1;
+				}
 				else
-					is_started = 1;
+					::rux::service::private_report_error_event( ::rux::engine::_globals->_service_globals->_service_name
+					, "already executing in current path" );
+	#endif
+				return is_started;
 			}
-			else
-				::rux::service::private_report_error_event( ::rux::engine::_globals->_service_globals->_service_name
-				, "already executing in current path" );
-#endif
-			return is_started;
 		};
 		bool WaitForExit( void )
 		{
