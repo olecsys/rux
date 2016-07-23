@@ -843,7 +843,7 @@ namespace rux
 			::booldog::result_file resfile;
 			::booldog::param filesearch_paths_params[] =
 			{
-				BOOPARAM_PCHAR("databases"),
+				BOOPARAM_PCHAR(""),
 				BOOPARAM_NONE
 			};
 			::booldog::named_param fileload_params[] =
@@ -958,6 +958,33 @@ namespace rux
 							}
 							if(WIFEXITED(status))
 								restart = 0;
+							else if(WIFSIGNALED(status))
+							{
+								const char* termsignal = "unknown;
+								switch(WTERMSIG(status))
+								{
+								case SIGSEGV: termsignal = "SIGSEGV";break;
+								case SIGILL: termsignal = "SIGILL";break;
+								case SIGFPE: termsignal = "SIGFPE";break;
+								case SIGABRT: termsignal = "SIGABRT";break;
+								case SIGBUS: termsignal = "SIGBUS";break;
+								case SIGHUP: termsignal = "SIGHUP";break;
+								case SIGPIPE: termsignal = "SIGPIPE";break;
+								case SIGTSTP: termsignal = "SIGTSTP";break;
+								case SIGTTIN: termsignal = "SIGTTIN";break;
+								case SIGTTOU: termsignal = "SIGTTOU";break;
+								case SIGUSR1: termsignal = "SIGUSR1";break;
+								case SIGUSR2: termsignal = "SIGUSR2";break;
+								case SIGPROF: termsignal = "SIGPROF";break;
+								case SIGSYS: termsignal = "SIGSYS";break;
+								case SIGVTALRM: termsignal = "SIGVTALRM";break;
+								case SIGXCPU: termsignal = "SIGXCPU";break;
+								case SIGXFSZ: termsignal = "SIGXFSZ";break;
+								case SIGKILL: termsignal = "SIGKILL";break;
+								}
+								boowritelog(&mbchar0, &mbchar1, "Child process(%u) terminated by signal %s"
+								, (::booldog::uint32)parent_pid, termsignal);
+							}
 						}
 						else
 							exit( 0 );
@@ -1061,6 +1088,7 @@ namespace rux
 							rux::engine::_globals->_service_globals->_service_after_stop();
 					}
 				}
+				boowritelog(&mbchar0, &mbchar1, "Stop service/daemon %s", ::rux::engine::_globals->_service_globals->_service_name);
 	#endif
 	#ifdef __WINDOWS__
 				::rux::engine::initialize();
@@ -1081,8 +1109,11 @@ namespace rux
 						is_started = 1;
 				}
 				else
+				{
+					boowritelog(&mbchar0, &mbchar1, "Service/daemon %s already executing in current path", ::rux::engine::_globals->_service_globals->_service_name);
 					::rux::service::private_report_error_event( ::rux::engine::_globals->_service_globals->_service_name
 					, "already executing in current path" );
+				}
 	#endif
 				return is_started;
 			}
@@ -1164,45 +1195,53 @@ namespace rux
 			}
 		};
 		void WINAPI service_main( DWORD , char** )
-		{		
-			::rux::service::private_report_info_event( ::rux::engine::_globals->_service_globals->_service_name
-				, "service_main" );
-			THREAD_REGISTER( "main" );
-			rux::engine::_globals->_service_globals->_service_status_handle = RegisterServiceCtrlHandlerA( rux::engine::_globals->_service_globals->_service_name , rux::service::service_ctrl_handler );
-			if( rux::engine::_globals->_service_globals->_service_status_handle == NULL )
-			{ 
-				rux::service::private_report_event();
-				return; 
-			}
-			else
+		{	
+			::booldog::allocators::easy::heap heap;
+			::booldog::allocators::single_threaded::mixed<1024> mixed(&heap);
 			{
-				rux::engine::_globals->_service_globals->_service_status.dwServiceType = SERVICE_WIN32_OWN_PROCESS; 
-				rux::engine::_globals->_service_globals->_service_status.dwServiceSpecificExitCode = 0;    
-				rux::service::private_report_status( SERVICE_START_PENDING, NO_ERROR , 10000 );		
-				rux::engine::_globals->_service_globals->_service_stop_handle = CreateEvent( NULL , TRUE , FALSE , NULL );
-				if( rux::engine::_globals->_service_globals->_service_stop_handle == NULL )
-				{
-					rux::service::private_report_status( SERVICE_STOPPED , NO_ERROR , 0 );
-					return;
+				::booldog::result_mbchar mbchar0(&mixed), mbchar1(&mixed);
+
+				::rux::service::private_report_info_event( ::rux::engine::_globals->_service_globals->_service_name
+					, "service_main" );
+				THREAD_REGISTER( "main" );
+				rux::engine::_globals->_service_globals->_service_status_handle = RegisterServiceCtrlHandlerA( rux::engine::_globals->_service_globals->_service_name , rux::service::service_ctrl_handler );
+				if( rux::engine::_globals->_service_globals->_service_status_handle == NULL )
+				{ 
+					rux::service::private_report_event();
+					return; 
 				}
-				rux::service::private_report_status( SERVICE_RUNNING , NO_ERROR , 0 );
-				if( rux::engine::_globals->_service_globals->_service_task )
+				else
 				{
-					CODE_LABELS_INITIALIZE();
-					CODE_LABEL( NULL , NULL , 100 );
-					rux::int32 argc = 0;
-					char** args = NULL;
-					rux::engine::_globals->_service_globals->_service_task( argc , args );
-				}
-				WaitForSingleObject( rux::engine::_globals->_service_globals->_service_stop_handle , ::rux::threading::infinite );				
-				rux::service::private_report_status( SERVICE_STOPPED, NO_ERROR, 0 );
-				CloseHandle( rux::engine::_globals->_service_globals->_service_stop_handle );
-				rux::engine::_globals->_service_globals->_service_stop_handle = NULL;
-			}			
-			if( ::rux::engine::_globals && ::rux::engine::_globals->_rux_stop_threads )
-				::rux::engine::_globals->_rux_stop_threads();
-			if( rux::engine::_globals->_service_globals->_service_after_stop )
-				rux::engine::_globals->_service_globals->_service_after_stop();
+					rux::engine::_globals->_service_globals->_service_status.dwServiceType = SERVICE_WIN32_OWN_PROCESS; 
+					rux::engine::_globals->_service_globals->_service_status.dwServiceSpecificExitCode = 0;    
+					rux::service::private_report_status( SERVICE_START_PENDING, NO_ERROR , 10000 );		
+					rux::engine::_globals->_service_globals->_service_stop_handle = CreateEvent( NULL , TRUE , FALSE , NULL );
+					if( rux::engine::_globals->_service_globals->_service_stop_handle == NULL )
+					{
+						rux::service::private_report_status( SERVICE_STOPPED , NO_ERROR , 0 );
+						return;
+					}
+					rux::service::private_report_status( SERVICE_RUNNING , NO_ERROR , 0 );
+					if( rux::engine::_globals->_service_globals->_service_task )
+					{
+						CODE_LABELS_INITIALIZE();
+						CODE_LABEL( NULL , NULL , 100 );
+						rux::int32 argc = 0;
+						char** args = NULL;
+						rux::engine::_globals->_service_globals->_service_task( argc , args );
+					}
+					WaitForSingleObject( rux::engine::_globals->_service_globals->_service_stop_handle , ::rux::threading::infinite );				
+					rux::service::private_report_status( SERVICE_STOPPED, NO_ERROR, 0 );
+					CloseHandle( rux::engine::_globals->_service_globals->_service_stop_handle );
+					rux::engine::_globals->_service_globals->_service_stop_handle = NULL;
+				}			
+				if( ::rux::engine::_globals && ::rux::engine::_globals->_rux_stop_threads )
+					::rux::engine::_globals->_rux_stop_threads();
+				if( rux::engine::_globals->_service_globals->_service_after_stop )
+					rux::engine::_globals->_service_globals->_service_after_stop();
+
+				boowritelog(&mbchar0, &mbchar1, "Stop service/daemon %s", ::rux::engine::_globals->_service_globals->_service_name);
+			}
 		};
 		void private_report_status( rux::uint32 current_state , rux::uint32 exit_code , rux::uint32 wait_hint )
 		{			
