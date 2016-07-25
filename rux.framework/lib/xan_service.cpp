@@ -836,6 +836,63 @@ namespace rux
 			}			
 			return can_start;
 		};
+		void writepid_to_var(::booldog::result_mbchar* pidfilembchar, ::booldog::result_mbchar* mbchar0)
+		{
+			if(rux::engine::_globals->_service_globals->_service_name
+				&& rux::engine::_globals->_service_globals->_service_name[ 0 ] != 0
+				&& rux::engine::_globals->_service_globals->_with_pid_file == 1)
+			{
+				::booldog::result_file resfile;
+				::booldog::utils::string::mbs::assign<16>(0, pidfilembchar->mballocator, false, 0, pidfilembchar->mbchar
+					, pidfilembchar->mblen, pidfilembchar->mbsize, "/var/run/", 0, SIZE_MAX);
+				::booldog::utils::string::mbs::assign<16>(0, pidfilembchar->mballocator, false, pidfilembchar->mblen
+					, pidfilembchar->mbchar, pidfilembchar->mblen, pidfilembchar->mbsize
+					, rux::engine::_globals->_service_globals->_service_name, 0, SIZE_MAX);
+				::booldog::utils::string::mbs::assign<16>(0, pidfilembchar->mballocator, false, pidfilembchar->mblen, pidfilembchar->mbchar
+					, pidfilembchar->mblen, pidfilembchar->mbsize, "/", 0, SIZE_MAX);
+				::booldog::utils::string::mbs::assign<16>(0, pidfilembchar->mballocator, false, pidfilembchar->mblen, pidfilembchar->mbchar
+					, pidfilembchar->mblen, pidfilembchar->mbsize, rux::engine::_globals->_service_globals->_service_name, 0, SIZE_MAX);
+				::booldog::utils::string::mbs::assign<16>(0, pidfilembchar->mballocator, false, pidfilembchar->mblen, pidfilembchar->mbchar
+					, pidfilembchar->mblen, pidfilembchar->mbsize, ".pid", 0, SIZE_MAX);
+
+				if(::booldog::io::file::mbsopen(&resfile, pidfilembchar->mballocator, pidfilembchar->mbchar
+					, ::booldog::enums::io::file_mode_truncate|::booldog::enums::io::file_mode_write
+					, 0) == false)
+				{
+					::booldog::io::file::mbsopen(&resfile, pidfilembchar->mballocator, pidfilembchar->mbchar
+						, ::booldog::enums::io::file_mode_create|::booldog::enums::io::file_mode_truncate|::booldog::enums::io::file_mode_write
+						, 0);
+				}
+				if(resfile.succeeded())
+				{					
+					::booldog::utils::string::mbs::sprintf(mbchar0, mbchar0->mballocator, debuginfo_macros, "%u"
+						, (::booldog::uint32)getpid());
+
+					size_t written = 0;
+					resfile.file->write(0, (::booldog::byte*)mbchar0->mbchar, mbchar0->mblen, SIZE_MAX, written);
+					resfile.file->close( &resfile );
+				}
+			}
+		};
+		void remove_pid_to_var(::booldog::result_mbchar* pidfilembchar, ::booldog::result_mbchar* mbchar0)
+		{
+			::booldog::result_file resfile;
+			if(::booldog::io::file::mbsopen(&resfile, pidfilembchar->mballocator, pidfilembchar->mbchar
+				, ::booldog::enums::io::file_mode_read, 0))
+			{	
+				::booldog::result_buffer resbuf(mbchar0->mballocator);
+				if(resfile.file->readall<16>(&resbuf, resbuf.allocator))
+				{
+					resfile.file->close(0);
+					const ::booldog::byte* ptr = resbuf.buf;
+					::booldog::pid_t pid = ::booldog::utils::decimal_string_to_number< ::booldog::pid_t >(ptr);
+					if(getpid() == pid)
+						::booldog::utils::io::mbs::remove(0, pidfilembchar->mbchar);
+				}
+				else
+					resfile.file->close(0);
+			}
+		};
 		void boowritelog(::booldog::result_mbchar* dst, ::booldog::result_mbchar* mbchar, const char* format, ...)
 		{
 			::booldog::uint64 now = ::booldog::utils::time::posix::now_as_utc();
@@ -888,34 +945,37 @@ namespace rux
 			::booldog::allocators::easy::heap heap;
 			::booldog::allocators::single_threaded::mixed<1024> mixed(&heap);
 			{
-				::booldog::result_mbchar mbchar0(&mixed), mbchar1(&mixed);
+				::booldog::result_mbchar mbchar0(&mixed), mbchar1(&mixed), pidfilembchar(&mixed);
 				
 				boowritelog(&mbchar0, &mbchar1, "Start service/daemon %s", ::rux::engine::_globals->_service_globals->_service_name);
 
 				error[ 0 ] = 0;
 				rux::uint8 is_started = 0;
 	#ifdef	__UNIX__
-				if( rux::engine::_globals->_service_globals->_is_autorecovery == 1 )
+				const char* termsignal = 0;
+				if(rux::engine::_globals->_service_globals->_is_autorecovery == 1)
 				{
 					pid_t parent_pid = fork();
-					if( parent_pid < 0 )
-						exit( 1 );
-					else if( parent_pid != 0 )
-						exit( 0 );
+					if(parent_pid < 0)
+						exit(1);
+					else if(parent_pid != 0)
+						exit(0);
 					else
 					{
-						umask( 0 );
+						umask(0);
 						pid_t sid = setsid();
-						if( sid < 0 )
-							exit( 1 );	
-						if( chdir( "/" ) < 0 )
-							exit( 1 );
-						close( STDIN_FILENO );
-						close( STDOUT_FILENO );
-						close( STDERR_FILENO );
-						rux::int32 stdio_fd = open( "/dev/null" , O_RDWR );
+						if(sid < 0)
+							exit(1);	
+						if(chdir("/") < 0)
+							exit(1);
+						close(STDIN_FILENO);
+						close(STDOUT_FILENO);
+						close(STDERR_FILENO);
+						rux::int32 stdio_fd = open("/dev/null", O_RDWR);
 						dup( stdio_fd );
 						dup( stdio_fd );
+
+						writepid_to_var(&pidfilembchar, &mbchar0);						
 					}
 				}
 				::rux::byte restart = 1, stop_service_write_log = 0;
@@ -923,74 +983,94 @@ namespace rux
 				{
 					pid_t sid = -1;		
 					pid_t parent_pid = fork();
-					if( parent_pid < 0 )
-						exit( 1 );
-					else if( parent_pid != 0 )
+					if(parent_pid < 0)
+						exit(1);
+					else if(parent_pid != 0)
 					{
 						if( rux::engine::_globals->_service_globals->_is_autorecovery == 1 )
 						{
-							{
-								::booldog::result_file resfile;
-								::booldog::param filesearch_paths_params[] =
-								{
-									BOOPARAM_PCHAR(""),
-									BOOPARAM_NONE
-								};
-								::booldog::named_param fileload_params[] =
-								{
-									BOONAMED_PARAM_PPARAM("search_paths", filesearch_paths_params),
-									BOONAMED_PARAM_BOOL("exedir_as_root_path", true),
-									BOONAMED_PARAM_NONE
-								};
-								::booldog::utils::string::mbs::assign<16>(0, mbchar0.mballocator, false, 0, mbchar0.mbchar
-									, mbchar0.mblen, mbchar0.mbsize, "watcher.", 0, SIZE_MAX);
-								::booldog::utils::string::mbs::assign<16>(0, mbchar0.mballocator, false, mbchar0.mblen, mbchar0.mbchar
-									, mbchar0.mblen, mbchar0.mbsize, rux::engine::_globals->_service_globals->_service_name, 0, SIZE_MAX);
-								::booldog::utils::string::mbs::assign<16>(0, mbchar0.mballocator, false, mbchar0.mblen, mbchar0.mbchar
-									, mbchar0.mblen, mbchar0.mbsize, ".pid", 0, SIZE_MAX);
+							sigset_t sigset;
+							sigemptyset(&sigset);
+							sigaddset(&sigset, SIGQUIT);
+							sigaddset(&sigset, SIGINT);
+							sigaddset(&sigset, SIGTERM);
+							sigprocmask(SIG_BLOCK, &sigset, NULL);
 
-								if(::booldog::io::file::mbsopen(&resfile, dst->mballocator, mbchar0.mbchar
-									, ::booldog::enums::io::file_mode_truncate|::booldog::enums::io::file_mode_write
-									, fileload_params) == false)
-								{
-									::booldog::io::file::mbsopen(&resfile, dst->mballocator, mbchar0.mbchar
-										, ::booldog::enums::io::file_mode_create|::booldog::enums::io::file_mode_truncate|::booldog::enums::io::file_mode_write
-										, fileload_params);
-								}
-								if(resfile.succeeded())
-								{					
-									::booldog::utils::string::mbs::sprintf(&mbchar0, mbchar0.mballocator, debuginfo_macros, "%u"
-										, (::booldog::uint32)getpid());
-
-									size_t written = 0;
-									resfile.file->write(0, (::booldog::byte*)mbchar0.mbchar, mbchar0.mblen, SIZE_MAX, written);
-									resfile.file->close( &resfile );
-								}
-							}
-							rux::int32 status = 0;
+							::booldog::pid_t sigpid = 0;
+							int signo = -1;
+							rux::int32 status = 0, tries = 0;
 							for(;;)
 							{
-								waitpid(parent_pid, &status, WUNTRACED|WCONTINUED);
-								if(WIFSTOPPED(status))
+								if(signo == -1)
 								{
-									boowritelog(&mbchar0, &mbchar1, "Child process(%u) stopped by signal SIGSTOP"
-										, (::booldog::uint32)parent_pid);
-									continue;
-								}
-								else if(WIFCONTINUED(status))
-								{
-									boowritelog(&mbchar0, &mbchar1, "Child process(%u) continued by signal SIGCONT"
-										, (::booldog::uint32)parent_pid);
-									continue;
+									struct timespec ts = {0};
+									ts.tv_sec = 0;
+									ts.tv_nsec = 1000000;
+									siginfo_t siginfo;
+									signo = sigtimedwait(&sigset, &siginfo, &ts);
+									if(signo != -1)
+									{
+										sigpid = siginfo.si_pid;
+
+										termsignal = "unknown";
+										switch(WTERMSIG(status))
+										{
+										case SIGSEGV: termsignal = "SIGSEGV";break;
+										case SIGILL: termsignal = "SIGILL";break;
+										case SIGFPE: termsignal = "SIGFPE";break;
+										case SIGABRT: termsignal = "SIGABRT";break;
+										case SIGBUS: termsignal = "SIGBUS";break;
+										case SIGHUP: termsignal = "SIGHUP";break;
+										case SIGPIPE: termsignal = "SIGPIPE";break;
+										case SIGTSTP: termsignal = "SIGTSTP";break;
+										case SIGTTIN: termsignal = "SIGTTIN";break;
+										case SIGTTOU: termsignal = "SIGTTOU";break;
+										case SIGUSR1: termsignal = "SIGUSR1";break;
+										case SIGUSR2: termsignal = "SIGUSR2";break;
+										case SIGPROF: termsignal = "SIGPROF";break;
+										case SIGSYS: termsignal = "SIGSYS";break;
+										case SIGVTALRM: termsignal = "SIGVTALRM";break;
+										case SIGXCPU: termsignal = "SIGXCPU";break;
+										case SIGXFSZ: termsignal = "SIGXFSZ";break;
+										case SIGKILL: termsignal = "SIGKILL";break;
+										}
+										boowritelog(&mbchar0, &mbchar1, "Parent process(%u) terminated by process(%u), signal %s"
+										, (::booldog::uint32)getpid(), (::booldog::uint32)sigpid, termsignal);
+
+										kill(parent_pid, SIGTERM);
+									}
 								}
 								else
-									break;
+								{
+									::booldog::threading::sleep(1000);
+									++tries;
+									if(tries >= 25)
+										kill(parent_pid, SIGKILL);
+								}
+								int waitpidres = waitpid(parent_pid, &status, WUNTRACED|WCONTINUED|WNOHANG);
+								if(waitpidres == parent_pid)
+								{
+									if(WIFSTOPPED(status))
+									{
+										boowritelog(&mbchar0, &mbchar1, "Child process(%u) stopped by signal SIGSTOP"
+											, (::booldog::uint32)parent_pid);
+										continue;
+									}
+									else if(WIFCONTINUED(status))
+									{
+										boowritelog(&mbchar0, &mbchar1, "Child process(%u) continued by signal SIGCONT"
+											, (::booldog::uint32)parent_pid);
+										continue;
+									}
+									else
+										break;
+								}
 							}
-							if(WIFEXITED(status))
+							if(signo != -1)
 								restart = 0;
 							else if(WIFSIGNALED(status))
 							{
-								const char* termsignal = "unknown";
+								termsignal = "unknown";
 								switch(WTERMSIG(status))
 								{
 								case SIGSEGV: termsignal = "SIGSEGV";break;
@@ -1032,7 +1112,7 @@ namespace rux
 							{
 								rux::engine::_globals->_service_globals->_signo = -1;
 								is_started = 1;
-								declare_stack_variable( char , pid_file , 1024 );
+
 								umask( 0 );
 								sid = setsid();
 								if( sid < 0 )
@@ -1044,7 +1124,8 @@ namespace rux
 								close( STDERR_FILENO );
 								rux::int32 stdio_fd = open( "/dev/null" , O_RDWR );
 								dup( stdio_fd );
-								dup( stdio_fd );	
+								dup( stdio_fd );
+
 								struct rlimit lim;
 								lim.rlim_cur = 16384;
 								lim.rlim_max = 16384;
@@ -1056,19 +1137,11 @@ namespace rux
 								sigaddset( &rux::engine::_globals->_service_globals->_sigset , SIGINT );
 								sigaddset( &rux::engine::_globals->_service_globals->_sigset , SIGTERM );
 								sigprocmask( SIG_BLOCK , &rux::engine::_globals->_service_globals->_sigset , NULL );
-								pid_file[ 0 ] = 0;
+								
+								if(rux::engine::_globals->_service_globals->_is_autorecovery == 0)
+									writepid_to_var(&pidfilembchar, &mbchar0);
+
 								THREAD_REGISTER( "main" );
-								if( rux::engine::_globals->_service_globals->_service_name && rux::engine::_globals->_service_globals->_service_name[ 0 ] != 0 
-									&& rux::engine::_globals->_service_globals->_with_pid_file == 1 )
-								{
-									declare_stack_variable( char , pid_string , 1024 );
-									rux_concatenation( pid_file , "/var/run/" , rux::engine::_globals->_service_globals->_service_name );
-									rux_concatenation( pid_file , "/" );
-									rux_concatenation( pid_file , rux::engine::_globals->_service_globals->_service_name );
-									rux_concatenation( pid_file , ".pid" );
-									::rux::safe_sprintf( pid_string , 1024 , "%u" , getpid() );
-									rux_clear_and_write_to_file( pid_file , pid_string );
-								}
 								if( rux::engine::_globals->_service_globals->_service_task )
 								{
 									CODE_LABEL( NULL , NULL , 100 );
@@ -1084,7 +1157,6 @@ namespace rux
 									rux::engine::_globals->_service_globals->_sigpid = siginfo.si_pid;
 								}
 								{
-									::rux::uint32 pid = (::rux::uint32)::rux::diagnostics::process::get_process_id();
 									const char* termsignal = "unknown";
 									switch(rux::engine::_globals->_service_globals->_signo)
 									{
@@ -1107,33 +1179,15 @@ namespace rux
 									case SIGXFSZ: termsignal = "SIGXFSZ";break;
 									case SIGKILL: termsignal = "SIGKILL";break;
 									}
-									boowritelog(&mbchar0, &mbchar1, "Process %u send signal %s to me(process %u)"
-										, (::rux::uint32)rux::engine::_globals->_service_globals->_sigpid
-										, termsignal, pid);
+									boowritelog(&mbchar0, &mbchar1, "Child process(%u) terminated by process(%u), signal %s"
+										, (::booldog::uint32)getpid(), (::rux::uint32)rux::engine::_globals->_service_globals->_sigpid
+										, termsignal);
 								}
 								if( rux::engine::_globals->_service_globals->_service_stop )
-									rux::engine::_globals->_service_globals->_service_stop();		
-								if( rux::engine::_globals->_service_globals->_with_pid_file == 1 )
-								{
-									rux::io::file file( pid_file );
-									if( file.opened() )
-									{
-										declare_stack_variable( char , pid_string , 64 );
-										size_t readen = 0;
-										if( file.read_text( pid_string , 64 , readen ) )
-										{
-											if( pid_string[ readen - 1 ] == 0 )
-											{
-												rux::uint64 pid = rux::string::to_uint64( pid_string );
-												if( getpid() == pid )
-												{
-													file.close();
-													rux::io::file::remove( pid_file );
-												}
-											}
-										}
-									}
-								}
+									rux::engine::_globals->_service_globals->_service_stop();	
+								if(rux::engine::_globals->_service_globals->_is_autorecovery == 0
+									&& pidfilembchar.mbchar)
+									remove_pid_to_var(&pidfilembchar);
 							}
 						}
 						if( ::rux::engine::_globals && ::rux::engine::_globals->_rux_stop_threads )
@@ -1142,8 +1196,11 @@ namespace rux
 							rux::engine::_globals->_service_globals->_service_after_stop();
 					}
 				}
+				if(rux::engine::_globals->_service_globals->_is_autorecovery == 1
+					&& pidfilembchar.mbchar)
+					remove_pid_to_var(&pidfilembchar);
 				if(stop_service_write_log == 0)
-					boowritelog(&mbchar0, &mbchar1, "Stop service/daemon %s", ::rux::engine::_globals->_service_globals->_service_name);
+					boowritelog(&mbchar0, &mbchar1, "Stop service/daemon %s", ::rux::engine::_globals->_service_globals->_service_name);				
 	#endif
 	#ifdef __WINDOWS__
 				::rux::engine::initialize();
