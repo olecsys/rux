@@ -874,7 +874,7 @@ namespace rux
 				}
 			}
 		};
-		void remove_pid_to_var(::booldog::result_mbchar* pidfilembchar, ::booldog::result_mbchar* mbchar0)
+		void remove_pid_to_var(::booldog::result_mbchar* pidfilembchar)
 		{
 			::booldog::result_file resfile;
 			if(::booldog::io::file::mbsopen(&resfile, pidfilembchar->mballocator, pidfilembchar->mbchar
