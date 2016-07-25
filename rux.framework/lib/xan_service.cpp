@@ -918,7 +918,7 @@ namespace rux
 						dup( stdio_fd );
 					}
 				}
-				::rux::byte restart = 1;
+				::rux::byte restart = 1, stop_service_write_log = 0;
 				while( restart )
 				{
 					pid_t sid = -1;		
@@ -991,6 +991,8 @@ namespace rux
 					}
 					else
 					{
+						if(rux::engine::_globals->_service_globals->_is_autorecovery == 1)
+							stop_service_write_log = 1;
 						restart = 0;
 						::rux::engine::initialize();
 						if( rux::service::CanStart() == 1 )
@@ -1053,9 +1055,31 @@ namespace rux
 								}
 								{
 									::rux::uint32 pid = (::rux::uint32)::rux::diagnostics::process::get_process_id();
-									boowritelog(&mbchar0, &mbchar1, "Process %u send signal %d to me(process %u)"
+									const char* termsignal = "unknown";
+									switch(rux::engine::_globals->_service_globals->_signo)
+									{
+									case SIGSEGV: termsignal = "SIGSEGV";break;
+									case SIGILL: termsignal = "SIGILL";break;
+									case SIGFPE: termsignal = "SIGFPE";break;
+									case SIGABRT: termsignal = "SIGABRT";break;
+									case SIGBUS: termsignal = "SIGBUS";break;
+									case SIGHUP: termsignal = "SIGHUP";break;
+									case SIGPIPE: termsignal = "SIGPIPE";break;
+									case SIGTSTP: termsignal = "SIGTSTP";break;
+									case SIGTTIN: termsignal = "SIGTTIN";break;
+									case SIGTTOU: termsignal = "SIGTTOU";break;
+									case SIGUSR1: termsignal = "SIGUSR1";break;
+									case SIGUSR2: termsignal = "SIGUSR2";break;
+									case SIGPROF: termsignal = "SIGPROF";break;
+									case SIGSYS: termsignal = "SIGSYS";break;
+									case SIGVTALRM: termsignal = "SIGVTALRM";break;
+									case SIGXCPU: termsignal = "SIGXCPU";break;
+									case SIGXFSZ: termsignal = "SIGXFSZ";break;
+									case SIGKILL: termsignal = "SIGKILL";break;
+									}
+									boowritelog(&mbchar0, &mbchar1, "Process %u send signal %s to me(process %u)"
 										, (::rux::uint32)rux::engine::_globals->_service_globals->_sigpid
-										, rux::engine::_globals->_service_globals->_signo, pid);
+										, termsignal, pid);
 								}
 								if( rux::engine::_globals->_service_globals->_service_stop )
 									rux::engine::_globals->_service_globals->_service_stop();		
@@ -1088,7 +1112,8 @@ namespace rux
 							rux::engine::_globals->_service_globals->_service_after_stop();
 					}
 				}
-				boowritelog(&mbchar0, &mbchar1, "Stop service/daemon %s", ::rux::engine::_globals->_service_globals->_service_name);
+				if(stop_service_write_log == 0)
+					boowritelog(&mbchar0, &mbchar1, "Stop service/daemon %s", ::rux::engine::_globals->_service_globals->_service_name);
 	#endif
 	#ifdef __WINDOWS__
 				::rux::engine::initialize();
