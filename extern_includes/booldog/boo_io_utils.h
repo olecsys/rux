@@ -14,6 +14,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #else
+#include <unistd.h>
 #endif
 namespace booldog
 {	
@@ -21,6 +22,38 @@ namespace booldog
 	{
 		namespace io
 		{	
+			namespace mbs
+			{
+				bool rename(::booldog::result* pres, const char* oldpath, const char* newpath
+					, const ::booldog::debug::info& debuginfo = debuginfo_macros)
+				{
+					debuginfo = debuginfo;
+					::booldog::result locres;
+					BOOINIT_RESULT(::booldog::result);
+#ifdef __WINDOWS__
+					if(MoveFileA(oldpath, newpath) == 0)
+						res->GetLastError();
+#else
+					if(::rename(oldpath, newpath) == -1)
+						res->seterrno();
+#endif
+					return res->succeeded();
+				};
+				bool remove(::booldog::result* pres, const char* path, const ::booldog::debug::info& debuginfo = debuginfo_macros)
+				{
+					debuginfo = debuginfo;
+					::booldog::result locres;
+					BOOINIT_RESULT(::booldog::result);
+#ifdef __WINDOWS__
+					if(DeleteFileA(path) == 0)
+						res->GetLastError();
+#else
+					if(::remove(path) == -1)
+						res->seterrno();
+#endif
+					return res->succeeded();
+				};
+			};
 			namespace path
 			{
 				namespace mbs

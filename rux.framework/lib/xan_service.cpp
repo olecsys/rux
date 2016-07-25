@@ -868,7 +868,7 @@ namespace rux
 				va_list ap;
 				va_start(ap, format);
 				::booldog::utils::string::mbs::sprintf(mbchar, mbchar->mballocator, format, ap, debuginfo_macros);
-				va_end(ap);
+				va_end(ap);				
 						
 				::booldog::utils::time::posix::mbs::tostring<16>(dst, dst->mballocator, "%Y%m%d %H:%M:%S,%MS - ", now);
 
@@ -929,14 +929,44 @@ namespace rux
 					{
 						if( rux::engine::_globals->_service_globals->_is_autorecovery == 1 )
 						{
-	#ifdef __LINUX__	
-							::booldog::utils::string::mbs::assign<16>(0, mbchar0.mballocator, false, 0, mbchar0.mbchar, mbchar0.mblen
-								, mbchar0.mbsize, "Watch::", 0, SIZE_MAX);
-							
-							::booldog::utils::string::mbs::assign<16>(0, mbchar0.mballocator, false, mbchar0.mblen, mbchar0.mbchar
-								, mbchar0.mblen, mbchar0.mbsize, ::rux::engine::_globals->_service_globals->_service_name, 0, SIZE_MAX);
-							prctl(PR_SET_NAME, mbchar0.mbchar);
-	#endif
+							{
+								::booldog::result_file resfile;
+								::booldog::param filesearch_paths_params[] =
+								{
+									BOOPARAM_PCHAR(""),
+									BOOPARAM_NONE
+								};
+								::booldog::named_param fileload_params[] =
+								{
+									BOONAMED_PARAM_PPARAM("search_paths", filesearch_paths_params),
+									BOONAMED_PARAM_BOOL("exedir_as_root_path", true),
+									BOONAMED_PARAM_NONE
+								};
+								::booldog::utils::string::mbs::assign<16>(0, mbchar0.mballocator, false, 0, mbchar0.mbchar
+									, mbchar0.mblen, mbchar0.mbsize, "watcher.", 0, SIZE_MAX);
+								::booldog::utils::string::mbs::assign<16>(0, mbchar0.mballocator, false, mbchar0.mblen, mbchar0.mbchar
+									, mbchar0.mblen, mbchar0.mbsize, rux::engine::_globals->_service_globals->_service_name, 0, SIZE_MAX);
+								::booldog::utils::string::mbs::assign<16>(0, mbchar0.mballocator, false, mbchar0.mblen, mbchar0.mbchar
+									, mbchar0.mblen, mbchar0.mbsize, ".pid", 0, SIZE_MAX);
+
+								if(::booldog::io::file::mbsopen(&resfile, dst->mballocator, mbchar0.mbchar
+									, ::booldog::enums::io::file_mode_truncate|::booldog::enums::io::file_mode_write
+									, fileload_params) == false)
+								{
+									::booldog::io::file::mbsopen(&resfile, dst->mballocator, mbchar0.mbchar
+										, ::booldog::enums::io::file_mode_create|::booldog::enums::io::file_mode_truncate|::booldog::enums::io::file_mode_write
+										, fileload_params);
+								}
+								if(resfile.succeeded())
+								{					
+									::booldog::utils::string::mbs::sprintf(&mbchar0, mbchar0.mballocator, debuginfo_macros, "%u"
+										, (::booldog::uint32)getpid());
+
+									size_t written = 0;
+									resfile.file->write(0, (::booldog::byte*)mbchar0.mbchar, mbchar0.mblen, SIZE_MAX, written);
+									resfile.file->close( &resfile );
+								}
+							}
 							rux::int32 status = 0;
 							for(;;)
 							{
