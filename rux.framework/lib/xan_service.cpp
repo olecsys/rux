@@ -989,6 +989,8 @@ namespace rux
 					{
 						if( rux::engine::_globals->_service_globals->_is_autorecovery == 1 )
 						{
+							boowritelog(&mbchar0, &mbchar1, "Child process(%u) started", parent_pid);
+
 							sigset_t sigset;
 							sigemptyset(&sigset);
 							sigaddset(&sigset, SIGQUIT);
@@ -1063,7 +1065,10 @@ namespace rux
 										continue;
 									}
 									else
+									{
+										boowritelog(&mbchar0, &mbchar1, "Child process(%u) terminated", parent_pid);
 										break;
+									}
 								}
 							}
 							if(signo != -1)
@@ -1189,6 +1194,9 @@ namespace rux
 									&& pidfilembchar.mbchar)
 									remove_pid_to_var(&pidfilembchar);
 							}
+							else
+								boowritelog(&mbchar0, &mbchar1, "Service/daemon %s already executing in current path"
+								, ::rux::engine::_globals->_service_globals->_service_name);
 						}
 						if( ::rux::engine::_globals && ::rux::engine::_globals->_rux_stop_threads )
 							::rux::engine::_globals->_rux_stop_threads();
