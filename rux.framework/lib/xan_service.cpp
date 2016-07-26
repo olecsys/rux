@@ -1007,7 +1007,7 @@ namespace rux
 								{
 									struct timespec ts = {0};
 									ts.tv_sec = 0;
-									ts.tv_nsec = 1000000;
+									ts.tv_nsec = 100000000;
 									siginfo_t siginfo;
 									signo = sigtimedwait(&sigset, &siginfo, &ts);
 									if(signo != -1)

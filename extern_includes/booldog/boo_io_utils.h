@@ -15,6 +15,7 @@
 #include <sys/stat.h>
 #else
 #include <unistd.h>
+#include <stdio.h>
 #endif
 namespace booldog
 {	
@@ -24,7 +25,7 @@ namespace booldog
 		{	
 			namespace mbs
 			{
-				bool rename(::booldog::result* pres, const char* oldpath, const char* newpath
+				booinline bool rename(::booldog::result* pres, const char* oldpath, const char* newpath
 					, const ::booldog::debug::info& debuginfo = debuginfo_macros)
 				{
 					debuginfo = debuginfo;
@@ -39,7 +40,7 @@ namespace booldog
 #endif
 					return res->succeeded();
 				};
-				bool remove(::booldog::result* pres, const char* path, const ::booldog::debug::info& debuginfo = debuginfo_macros)
+				booinline bool remove(::booldog::result* pres, const char* path, const ::booldog::debug::info& debuginfo = debuginfo_macros)
 				{
 					debuginfo = debuginfo;
 					::booldog::result locres;
