@@ -1484,39 +1484,55 @@ void XMemoryManager::write_diagnostics( char* now_string , ::rux::uint8& is_inte
 		::chmod( info_filename , 0777 );
 	}
 };
-void XMemoryManager::private_info_thread( void* param , size_t ___rux__thread_index1986 )
+void XMemoryManager::private_info_thread(void* param, size_t ___rux__thread_index1986, lineid_t _lineid
+	, statement_t _statement, void* udata)
 {	
+	debuginfo_macros_statement(999);
 	XMemoryManager* _this = cpp_ptr_cast(XMemoryManager* , param );
 	::rux::uint64 now = rux_get_now_as_local_unix_time();
 	if( now - _this->_last_diagnostics_time >= ::rux::engine::_diagnostics_timeout * 1000000 )
 	{
+		debuginfo_macros_statement(998);
 		_this->_last_diagnostics_time = now;
 		{
+			debuginfo_macros_statement(997);
 			::rux::uint8 is_interrupt = 0;
 			declare_stack_variable( char , now_string , 64 );
 			rux_unix_time_to_string( now , now_string , 64 );
+			debuginfo_macros_statement(996);
 			_this->write_diagnostics( now_string , is_interrupt );
+			debuginfo_macros_statement(995);
 			XThreadInfo::write_diagnostics( _this , now_string , is_interrupt );
+			debuginfo_macros_statement(994);
 			if( is_interrupt == 0 )
 			{
+				debuginfo_macros_statement(993);
 				declare_stack_variable( char , info_filename , 1024 );
 				::rux::safe_strncpy( info_filename , ::rux::engine::_globals->_executable_directory , 1023 );
 				::rux::safe_strncat( info_filename , "/memory/total." , 1023 );
 				::rux::safe_strncat( info_filename , ::rux::engine::_globals->_executable , 1023 );
 				::rux::safe_strncat( info_filename , ".snapshot" , 1023 );
+				debuginfo_macros_statement(992);
 				if( rux_is_exists_file( info_filename ) )
 					chmod( info_filename , 0777 );
+				debuginfo_macros_statement(991);
 				::rux::uint64 size = rux_get_file_size( info_filename );
 				if( size >= 1024ULL * 1024ULL )
 					rux_remove_file( info_filename );
+				debuginfo_macros_statement(990);
 				::rux::io::file file( info_filename , XOpenWriteText );
 				if( file.opened() == false )
 					file.open( info_filename , XCreateWriteText );
+				debuginfo_macros_statement(989);
 				if( file.opened() )
 				{
+					debuginfo_macros_statement(988);
 					file.seek( file.size() );
+					debuginfo_macros_statement(987);
 					::rux::uint32 pid = (::rux::uint32)::rux::diagnostics::process::get_process_id();
 					file.write_text( "\n%s(process %u)\n=============================\n\n" , now_string , pid );
+
+					debuginfo_macros_statement(986);
 
 					::rux::int64 temp = ::rux::diagnostics::process_info::working_set( ::rux::engine::_globals->_executable , 0 );
 					if( temp > _working_set )
@@ -1525,6 +1541,9 @@ void XMemoryManager::private_info_thread( void* param , size_t ___rux__thread_in
 						file.write_text( "Working set " I64u "(-" I64u ") bytes\n" , temp , _working_set - temp );
 					else
 						file.write_text( "Working set " I64u " bytes\n" , temp );
+
+					debuginfo_macros_statement(985);
+
 					_working_set = temp;			
 					temp = ::rux::diagnostics::process_info::virtual_bytes( ::rux::engine::_globals->_executable , 0 );
 					if( temp > _virtual_bytes )
@@ -1535,6 +1554,8 @@ void XMemoryManager::private_info_thread( void* param , size_t ___rux__thread_in
 						file.write_text( "Virtual bytes " I64u " bytes\n" , temp );
 					_virtual_bytes = temp;
 
+					debuginfo_macros_statement(984);
+
 					temp = ::rux::diagnostics::process_info::threads_count( pid , 0 );
 					if( temp > _process_threads_count )
 						file.write_text( "Threads " I64u "(+" I64u ")\n" , temp , temp - _process_threads_count );
@@ -1543,6 +1564,8 @@ void XMemoryManager::private_info_thread( void* param , size_t ___rux__thread_in
 					else
 						file.write_text( "Threads " I64u "\n" , temp );
 					_process_threads_count = temp;		
+
+					debuginfo_macros_statement(983);
 #ifdef __UNIX__
 					struct rlimit lim;
 					int rlim_cur = 0, rlim_max = 0;
@@ -1552,6 +1575,7 @@ void XMemoryManager::private_info_thread( void* param , size_t ___rux__thread_in
 					{
 						rlim_cur = (int)lim.rlim_cur, rlim_max = (int)lim.rlim_max;
 					}
+					debuginfo_macros_statement(982);
 
 					temp = ::rux::diagnostics::process_info::descriptors_count(pid, 0);
 					if(temp > _process_descriptors_count)
@@ -1563,19 +1587,29 @@ void XMemoryManager::private_info_thread( void* param , size_t ___rux__thread_in
 					file.write_text("Descriptors soft limit %d\n", rlim_cur);
 					file.write_text("Descriptors hard limit %d\n", rlim_max);
 					_process_descriptors_count = temp;
+
+					debuginfo_macros_statement(981);
 #endif
+					debuginfo_macros_statement(980);
 
 					file.write_text( "\n=============================\n" );
 					file.close();
 					::chmod( info_filename , 0777 );
+
+					debuginfo_macros_statement(979);
 				}
 			}
 		}
+		debuginfo_macros_statement(978);
 		XMemoryManager::check_corrupted_memory();
 	}
+	debuginfo_macros_statement(977);
 	XMemoryManager::write_cpu_logs();
+	debuginfo_macros_statement(976);
 	XMemoryManager::check_is_heap_ehough();
+	debuginfo_macros_statement(975);
 	XThreadInfo::check_unknown_threads();
+	debuginfo_macros_statement(974);
 };
 rux::int32 XMemoryManager::register_module( const char* module_name )
 {

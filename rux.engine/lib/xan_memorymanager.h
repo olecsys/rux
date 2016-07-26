@@ -11,6 +11,15 @@
 #include <xan_thread_info.h>
 #define RUX_MAX_MODULES_SIZE 1024
 #define RUX_CPU_LOGS_COUNT 128
+
+typedef void (*statement_t)(void* udata, unsigned int& lineid, unsigned int label, int __booline__);
+typedef unsigned int (*lineid_t)(void* udata, unsigned int label, const char* __boofile__, const char* __boofunction__ 
+	, int __booline__);
+#define debuginfo_macros_statement( label ) \
+{\
+	static unsigned int lineid = _lineid(udata, label, __FILE__, __FUNCTION__, __LINE__);\
+	_statement(udata, lineid, label, __LINE__);\
+}
 class XMemoryManager
 {
 	friend class XThreadInfo;
@@ -57,7 +66,8 @@ public:
 	static void add_descriptor( rux::int32 module_index , const char* file_name_ptr , rux::int32 handle , rux::int32 line );
 	static void remove_descriptor( rux::int32 handle , rux::int32 module_index );
 #endif
-	static void private_info_thread( void* param , size_t ___rux__thread_index1986 );
+	static void private_info_thread(void* param, size_t ___rux__thread_index1986, lineid_t _lineid
+		, statement_t _statement, void* udata);
 	static void add_memory( void* ptr , size_t size , rux::int32 module_index , const char* file_name_ptr , rux::int32 line );
 	static void remove_memory( void* ptr , size_t size , rux::int32 module_index );
 	void start_info_thread( void );

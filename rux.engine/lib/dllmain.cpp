@@ -37,9 +37,9 @@ exports void tempexception_filter( ::rux::byte* palarm_is_addr2line , ::rux::int
 	::rux::debug::debug_posix_death_signal2( signum , siginfo , context );
 };
 #endif
-exports void tempprivate_info_thread( void )
+exports void tempprivate_info_thread(lineid_t _lineid, statement_t _statement, void* udata)
 {
-	XMemoryManager::private_info_thread( g_rux_memory_manager , SIZE_MAX );
+	XMemoryManager::private_info_thread(g_rux_memory_manager, SIZE_MAX, _lineid, _statement, udata);
 };
 exports void temp_set_ruxlog_write( ::rux::log::ruxlog_write_t ruxlog_write )
 {
