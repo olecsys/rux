@@ -880,7 +880,7 @@ namespace rux
 			if(::booldog::io::file::mbsopen(&resfile, pidfilembchar->mballocator, pidfilembchar->mbchar
 				, ::booldog::enums::io::file_mode_read, 0))
 			{	
-				::booldog::result_buffer resbuf(mbchar0->mballocator);
+				::booldog::result_buffer resbuf(pidfilembchar->mballocator);
 				if(resfile.file->readall<16>(&resbuf, resbuf.allocator))
 				{
 					resfile.file->close(0);
