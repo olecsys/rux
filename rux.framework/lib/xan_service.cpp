@@ -1114,7 +1114,10 @@ namespace rux
 					else
 					{
 						if(rux::engine::_globals->_service_globals->_is_autorecovery == 1)
+						{
+							prctl(PR_SET_PDEATHSIG, SIGHUP);
 							stop_service_write_log = 1;
+						}
 						restart = 0;
 						::rux::engine::initialize();
 						if(rux::engine::_globals->_service_globals->_is_autorecovery == 1
