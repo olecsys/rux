@@ -1038,8 +1038,11 @@ namespace rux
 										}
 										boowritelog(&mbchar0, &mbchar1, "Parent process(%u) terminated by process(%u), signal %s"
 										, (::booldog::uint32)getpid(), (::booldog::uint32)sigpid, termsignal);
-
+										
 										kill(parent_pid, SIGTERM);
+
+										boowritelog(&mbchar0, &mbchar1, "Parent process(%u) send SIGTERM to child process(%u)"
+											, (::booldog::uint32)getpid(), parent_pid);
 									}
 								}
 								else
@@ -1047,7 +1050,11 @@ namespace rux
 									::booldog::threading::sleep(1000);
 									++tries;
 									if(tries >= 25)
+									{
 										kill(parent_pid, SIGKILL);
+										boowritelog(&mbchar0, &mbchar1, "Parent process(%u) send SIGKILL to child process(%u)"
+											, (::booldog::uint32)getpid(), parent_pid);
+									}
 								}
 								int waitpidres = waitpid(parent_pid, &status, WUNTRACED|WCONTINUED|WNOHANG);
 								if(waitpidres == parent_pid)
@@ -1110,7 +1117,8 @@ namespace rux
 							stop_service_write_log = 1;
 						restart = 0;
 						::rux::engine::initialize();
-						if( rux::service::CanStart() == 1 )
+						if(rux::engine::_globals->_service_globals->_is_autorecovery == 1
+							|| rux::service::CanStart() == 1)
 						{
 							if( check_rux_executing_in_current_path == 0 
 								|| rux_is_already_executing_in_current_path() == 0 )
