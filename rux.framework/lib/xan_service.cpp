@@ -46,6 +46,7 @@ NAME=\"%s\"\n\
 DAEMON=\"%s\"\n\
 PIDFILE_OPT=%s\n\
 PIDFILE=%s\n\
+COREDUMP=%s\n\
 SCRIPTNAME=/etc/init.d/$NAME\n\
 START_DAEMON=yes\n\
 # Exit if the package is not installed\n\
@@ -125,6 +126,9 @@ do_start()\n\
 	#   1 if daemon was already running\n\
 	#   2 if daemon could not be started\n\
 	if hash ulimit 2>/dev/null; then\n\
+		if [ \"$COREDUMP\" == \"true\" ]; then\n\
+			ulimit -c unlimited\n\
+		fi\n\
 		ulimit -n 16384\n\
 	fi\n\
 	if hash start-stop-daemon 2>/dev/null; then\n\
@@ -241,6 +245,7 @@ namespace rux
 		{
 			globals::globals( void )
 			{
+				_core_dump = 0;
 				_with_pid_file = 1;
 				_is_interactive = 0;
 				_is_autorecovery = 0;
@@ -269,6 +274,10 @@ namespace rux
 		void set_WithPidFile( rux::uint8 with_pid_file )
 		{
 			rux::engine::_globals->_service_globals->_with_pid_file = with_pid_file;
+		};
+		void set_CoreDump(rux::uint8 core_dump)
+		{
+			rux::engine::_globals->_service_globals->_core_dump = core_dump;
 		};
 		void set_ServiceName( const char* service_name )
 		{
@@ -1519,7 +1528,13 @@ namespace rux
 				if( utf8_daemon_desc[ 0 ] != 0 && utf8_daemon_desc[ strlen( utf8_daemon_desc ) - 1 ] == '"' )
 					utf8_daemon_desc[ strlen( utf8_daemon_desc ) - 1 ] = 0;
 				declare_stack_variable( char , init_script_text , 8192 );
-				::rux::safe_sprintf( init_script_text , 8192 , _init_d_daemon_script , utf8_daemon , utf8_daemon , utf8_daemon_desc , utf8_daemon_desc , utf8_daemon_desc , utf8_daemon , executable_file , rux::engine::_globals->_service_globals->_with_pid_file == 1 ? "--pidfile" : "" , rux::engine::_globals->_service_globals->_with_pid_file == 1 ? "/var/run/$NAME/$NAME.pid" : "" , utf8_daemon , utf8_user , rux::engine::_globals->_service_globals->_with_pid_file == 1 ? "true" : "false" , rux::engine::_globals->_service_globals->_is_autorecovery ? "true" : "false" );
+				::rux::safe_sprintf( init_script_text , 8192 , _init_d_daemon_script , utf8_daemon , utf8_daemon 
+					, utf8_daemon_desc , utf8_daemon_desc , utf8_daemon_desc , utf8_daemon , executable_file 
+					, rux::engine::_globals->_service_globals->_with_pid_file == 1 ? "--pidfile" : "" 
+					, rux::engine::_globals->_service_globals->_with_pid_file == 1 ? "/var/run/$NAME/$NAME.pid" : "" 
+					, rux::engine::_globals->_service_globals->_core_dump ? "true" : "false", utf8_daemon, utf8_user
+					, rux::engine::_globals->_service_globals->_with_pid_file == 1 ? "true" : "false" 
+					, rux::engine::_globals->_service_globals->_is_autorecovery ? "true" : "false" );
 				if( rux_is_exists_file_or_link( init_script_filename ) == 0 )
 				{
 					rux_clear_and_write_to_file( init_script_filename , init_script_text );					

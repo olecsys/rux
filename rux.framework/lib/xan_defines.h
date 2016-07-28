@@ -2609,13 +2609,14 @@ public:\
 			if( command && strcmp( command , "reg" ) == 0 )\
 			{\
 				::rux::engine::initialize();\
-				const char* display_name = NULL , * user = NULL , * group = NULL , * interactive = NULL , * autorecovery = NULL , * pidfile = NULL;\
+				const char* display_name = 0, * user = 0, * group = 0, * interactive = 0, * autorecovery = 0, * pidfile = 0, coredump = 0;\
 				rux_native_get_argument( user , argument_names , argument_values , argument_count );\
 				rux_native_get_argument( group , argument_names , argument_values , argument_count );\
 				rux_native_get_argument( display_name , argument_names , argument_values , argument_count );\
 				rux_native_get_argument( interactive , argument_names , argument_values , argument_count );\
 				rux_native_get_argument( autorecovery , argument_names , argument_values , argument_count );\
 				rux_native_get_argument( pidfile , argument_names , argument_values , argument_count );\
+				rux_native_get_argument(coredump, argument_names, argument_values, argument_count);\
 				if( user == NULL || strlen( user ) == 0 )\
 					user = "root";\
 				if( group == NULL || strlen( group ) == 0 )\
@@ -2631,6 +2632,10 @@ public:\
 						::rux::service::set_WithPidFile( 1 );\
 					else\
 						::rux::service::set_WithPidFile( 0 );\
+					if(coredump && strcmp(coredump, "true") == 0)\
+						::rux::service::set_CoreDump(1);\
+					else\
+						::rux::service::set_CoreDump(0);\
 					::rux::service::set_User( user );\
 					::rux::service::set_UserGroup( group );\
 					::rux::service::set_ServiceName( name );\
@@ -2681,13 +2686,14 @@ public:\
 				if( check_rux_executing_in_current_path == 0\
 					|| rux_is_already_executing_in_current_path() == 0 )\
 				{\
-					const char* display_name = NULL , * logfile = NULL , * pidfile = NULL , * autorecovery = NULL , * debug = 0;\
+					const char* display_name = 0, * logfile = 0, * pidfile = 0, * autorecovery = 0, * debug = 0, * coredump = 0;\
 					rux_native_get_argument( name , argument_names , argument_values , argument_count );\
 					rux_native_get_argument( display_name , argument_names , argument_values , argument_count );\
 					rux_native_get_argument( logfile , argument_names , argument_values , argument_count );\
 					rux_native_get_argument( pidfile , argument_names , argument_values , argument_count );\
 					rux_native_get_argument( autorecovery , argument_names , argument_values , argument_count );\
 					rux_native_get_argument( debug , argument_names , argument_values , argument_count );\
+					rux_native_get_argument(coredump, argument_names, argument_values, argument_count);\
 					if( name && name[ 0 ] != 0 )\
 					{\
 						::rux::service::initialize( start , stop );\
@@ -2696,6 +2702,10 @@ public:\
 							::rux::service::set_WithPidFile( 1 );\
 						else\
 							::rux::service::set_WithPidFile( 0 );\
+						if(coredump && strcmp(coredump, "true") == 0)\
+							::rux::service::set_CoreDump(1);\
+						else\
+							::rux::service::set_CoreDump(0);\
 						if( autorecovery && strcmp( autorecovery , "true" ) == 0 )\
 							::rux::service::set_Autorecovery( 1 );\
 						if( display_name && display_name[ 0 ] != 0 )\

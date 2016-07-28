@@ -21,6 +21,7 @@ namespace rux
 				rux_service_stop_t _service_stop;
 				rux_service_stop_t _service_after_stop;
 				rux::uint8 _with_pid_file;
+				rux::byte _core_dump;
 #if defined( __WINDOWS__ )
 				SERVICE_STATUS _service_status;
 				SERVICE_STATUS_HANDLE   _service_status_handle;
@@ -44,6 +45,7 @@ namespace rux
 		void set_ServiceDisplayName( const char* service_display_name );
 		void set_ServiceName( const char* service_name );
 		void set_WithPidFile( rux::uint8 with_pid_file );
+		void set_CoreDump(rux::uint8 core_dump);
 		rux::uint8 Install( char error[ 1024 ] );
 		rux::uint8 Stop( char error[ 1024 ] );
 		rux::uint8 Stop( const char* service_name , char error[ 1024 ] );
