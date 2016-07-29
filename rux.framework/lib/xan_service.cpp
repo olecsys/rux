@@ -115,7 +115,7 @@ if [ -d \"/var/run/$NAME\" ]; then\n\
 	chown -R -- $USER:$GROUP \"/var/run/$NAME\"\n\
 fi\n\
 \n\
-DAEMON_ARGS=\"-d --logfile $LOGFILE --name $NAME --pidfile %s --autorecovery %s $DAEMON_OPTS\"\n\
+DAEMON_ARGS=\"-d --logfile $LOGFILE --name $NAME --pidfile %s --autorecovery %s --coredump $COREDUMP $DAEMON_OPTS\"\n\
 #\n\
 # Function that starts the daemon/service\n\
 #\n\

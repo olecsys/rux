@@ -2609,7 +2609,7 @@ public:\
 			if( command && strcmp( command , "reg" ) == 0 )\
 			{\
 				::rux::engine::initialize();\
-				const char* display_name = 0, * user = 0, * group = 0, * interactive = 0, * autorecovery = 0, * pidfile = 0, coredump = 0;\
+				const char* display_name = 0, * user = 0, * group = 0, * interactive = 0, * autorecovery = 0, * pidfile = 0, * coredump = 0;\
 				rux_native_get_argument( user , argument_names , argument_values , argument_count );\
 				rux_native_get_argument( group , argument_names , argument_values , argument_count );\
 				rux_native_get_argument( display_name , argument_names , argument_values , argument_count );\
