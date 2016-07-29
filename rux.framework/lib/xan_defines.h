@@ -2652,13 +2652,13 @@ public:\
 					if( error[ 0 ] != 0 )\
 					{\
 						main_res = 1;\
-						::booldog::utils::console::err::mbs::printf(0, &mixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , error );\
+						::booldog::utils::console::err::mbs::printf(0, &easymixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , error );\
 					}\
 				}\
 				else\
 				{\
 					main_res = 1;\
-					::booldog::utils::console::err::mbs::printf(0, &mixed, ::booldog::enums::console::red, debuginfo_macros,"%s", "Command 'reg' is failed.Argument 'name' is empty\n");\
+					::booldog::utils::console::err::mbs::printf(0, &easymixed, ::booldog::enums::console::red, debuginfo_macros,"%s", "Command 'reg' is failed.Argument 'name' is empty\n");\
 				}\
 			}\
 			else if( command && strcmp( command , "unreg" ) == 0 )\
@@ -2678,7 +2678,7 @@ public:\
 				else\
 				{\
 					main_res = 1;\
-					::booldog::utils::console::err::mbs::printf(0, &mixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , "Command 'unreg' is failed.Argument 'name' is empty\n" );\
+					::booldog::utils::console::err::mbs::printf(0, &easymixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , "Command 'unreg' is failed.Argument 'name' is empty\n" );\
 				}\
 			}\
 			else if( command && strcmp( command , "-d" ) == 0 )\
@@ -2722,21 +2722,21 @@ public:\
 						{\
 							::rux::service::private_report_error_event( name , "Service could not start" );\
 							main_res = 1;\
-							::booldog::utils::console::err::mbs::printf(0, &mixed, ::booldog::enums::console::red, debuginfo_macros,"%s\n", "Service could not start");\
+							::booldog::utils::console::err::mbs::printf(0, &easymixed, ::booldog::enums::console::red, debuginfo_macros,"%s\n", "Service could not start");\
 						}\
 					}\
 					else\
 					{\
 						::rux::service::private_report_error_event( name , "name is empty" );\
 						main_res = 1;\
-						::booldog::utils::console::err::mbs::printf(0, &mixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , "Service starting is failed.Argument 'name' is empty\n" );\
+						::booldog::utils::console::err::mbs::printf(0, &easymixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , "Service starting is failed.Argument 'name' is empty\n" );\
 					}\
 				}\
 				else\
 				{\
 					::rux::service::private_report_error_event( name , "already executing in current path" );\
 					main_res = 1;\
-					::booldog::utils::console::err::mbs::printf(0, &mixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , module_name" is already executing in current path\n" );\
+					::booldog::utils::console::err::mbs::printf(0, &easymixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , module_name" is already executing in current path\n" );\
 				}\
 			}\
 			else\
@@ -2751,7 +2751,7 @@ public:\
 				else\
 				{\
 					main_res = 1;\
-					::booldog::utils::console::err::mbs::printf(0, &mixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , module_name" is already executing in current path\n" );\
+					::booldog::utils::console::err::mbs::printf(0, &easymixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , module_name" is already executing in current path\n" );\
 				}\
 			}\
 		}\
