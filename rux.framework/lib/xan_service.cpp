@@ -968,7 +968,10 @@ namespace rux
 					if(parent_pid < 0)
 						exit(1);
 					else if(parent_pid != 0)
+					{
+						is_started = 1;
 						exit(0);
+					}
 					else
 					{
 						umask(0);
@@ -990,12 +993,13 @@ namespace rux
 				::rux::byte restart = 1, stop_service_write_log = 0;
 				while( restart )
 				{
-					pid_t sid = -1;		
+					pid_t sid = -1;
 					pid_t parent_pid = fork();
 					if(parent_pid < 0)
 						exit(1);
 					else if(parent_pid != 0)
 					{
+						is_started = 1;
 						if( rux::engine::_globals->_service_globals->_is_autorecovery == 1 )
 						{
 							boowritelog(&mbchar0, &mbchar1, "Child process(%u) started", parent_pid);
