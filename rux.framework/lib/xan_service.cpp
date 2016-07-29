@@ -126,7 +126,7 @@ do_start()\n\
 	#   1 if daemon was already running\n\
 	#   2 if daemon could not be started\n\
 	if hash ulimit 2>/dev/null; then\n\
-		if [ \"$COREDUMP\" == \"true\" ]; then\n\
+		if [ \"$COREDUMP\" = \"true\" ]; then\n\
 			ulimit -c unlimited\n\
 		fi\n\
 		ulimit -n 16384\n\
