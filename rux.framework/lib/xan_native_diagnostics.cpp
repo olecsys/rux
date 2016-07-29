@@ -11,16 +11,47 @@
 #include <xan_log.h>
 #include <xan_error.h>
 #include <xan_path.h>
+
+#ifndef BOOLDOG_HEADER
+#define BOOLDOG_HEADER( header ) <booldog/header>
+#endif
+#include BOOLDOG_HEADER(boo_io_directory.h)
+#include BOOLDOG_HEADER(boo_heap_allocator.h)
+#include BOOLDOG_HEADER(boo_mixed_allocator.h)
+
 namespace rux
 {
 	namespace diagnostics
 	{
+		static bool descriptors_count_callback(::booldog::allocator* allocator, void* udata, const char* pathname
+			, const char* entry_name, ::booldog::enums::io::entry_type entry_type)
+		{
+			++(*(rux::int64*)udata);
+			return true;
+		};
 		::rux::int64 process_info::descriptors_count(::rux::pid_t pid, ::rux::XString* error)
 		{
+			::booldog::allocators::easy::heap easyheap;
+			::booldog::allocators::single_threaded::mixed<1024> easymixed(&easyheap);
 			::rux::int64 threads = 0;
 #ifdef __WINDOWS__
-#else
-			declare_stack_variable( char , pid_string , 64 );
+#else									
+			::booldog::result_mbchar pathname(&easymixed);
+			if(::booldog::utils::string::mbs::sprintf(&pathname, pathname.mballocator, debuginfo_macros, "/path/%u/fd"
+				, (::booldog::uint32)::rux::diagnostics::process::get_process_id()))
+			{
+				if(::booldog::io::directory::mbs::listdir(0, &easymixed, pathname.mbchar
+					, ::rux::diagnostics::descriptors_count_callback, &threads))
+				{
+					if(::booldog::utils::string::mbs::sprintf(&pathname, pathname.mballocator, debuginfo_macros, "/path/%u/maps"
+						, (::booldog::uint32)::rux::diagnostics::process::get_process_id()))
+					{
+						::booldog::io::directory::mbs::listdir(0, &easymixed, pathname.mbchar
+							, ::rux::diagnostics::descriptors_count_callback, &threads);
+					}
+				}
+			}
+			/*declare_stack_variable( char , pid_string , 64 );
 			rux::string::uint32_to_string( pid , pid_string );
 			const char* ps_path = "/usr/bin/lsof";
 			::rux::byte exists = rux_is_exists_file_or_link( ps_path );
@@ -36,7 +67,7 @@ namespace rux
 				args[ 1 ] = pid_string;
 				::rux::diagnostics::process::start_with_redirect(ps_path, args, 2
 					, ::rux::diagnostics::on_lines_count_redirect_stdout_or_stderr_handler, 0, &threads, 0, 0, NULL);
-			}
+			}*/
 #endif
 			return threads;
 		};
