@@ -37,13 +37,13 @@ namespace rux
 #ifdef __WINDOWS__
 #else									
 			::booldog::result_mbchar pathname(&easymixed);
-			if(::booldog::utils::string::mbs::sprintf(&pathname, pathname.mballocator, debuginfo_macros, "/path/%u/fd"
+			if(::booldog::utils::string::mbs::sprintf(&pathname, pathname.mballocator, debuginfo_macros, "/proc/%u/fd"
 				, (::booldog::uint32)::rux::diagnostics::process::get_process_id()))
 			{
 				if(::booldog::io::directory::mbs::listdir(0, &easymixed, pathname.mbchar
 					, ::rux::diagnostics::descriptors_count_callback, &threads))
 				{
-					if(::booldog::utils::string::mbs::sprintf(&pathname, pathname.mballocator, debuginfo_macros, "/path/%u/maps"
+					if(::booldog::utils::string::mbs::sprintf(&pathname, pathname.mballocator, debuginfo_macros, "/proc/%u/maps"
 						, (::booldog::uint32)::rux::diagnostics::process::get_process_id()))
 					{
 						::booldog::io::directory::mbs::listdir(0, &easymixed, pathname.mbchar
