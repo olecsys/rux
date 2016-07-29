@@ -49,7 +49,7 @@ namespace booldog
 		{
 			namespace mbs
 			{
-				static bool listdir(::booldog::result* pres , booldog::allocator* allocator, const char* pathname
+				booinline bool listdir(::booldog::result* pres , booldog::allocator* allocator, const char* pathname
 					, ::booldog::typedefs::listdir_callback_t callback, void* udata
 					, const ::booldog::debug::info& debuginfo = debuginfo_macros)
 				{
@@ -105,6 +105,10 @@ namespace booldog
 					}*/			
 goto_return:
 #else
+					long name_max = 0;
+					size_t dirent_len = 0;
+					int readdir_res = 0;
+					dirent* dirent_result = 0;
 					dirent* dirent_object_ptr = 0;
 					DIR* dir_ptr = opendir(pathname);
 					if(dir_ptr == 0)
@@ -112,21 +116,16 @@ goto_return:
 						res->seterrno();
 						goto goto_return;
 					}
-					long name_max = pathconf(pathname, _PC_NAME_MAX);
+					name_max = pathconf(pathname, _PC_NAME_MAX);
 					if(name_max == -1)
 						name_max = 255;
-					size_t dirent_len = offsetof(struct dirent, d_name) + name_max + 1;
+					dirent_len = offsetof(struct dirent, d_name) + name_max + 1;
 					dirent_object_ptr = (dirent*)allocator->realloc_array< char* >(0, dirent_len, debuginfo);
 					if(dirent_object_ptr == 0)
 					{
 						res->booerr(::booldog::enums::result::booerr_type_cannot_alloc_memory);
 						goto goto_return;
 					}
-
-					::booldog::enums::io::entry_type
-
-					int readdir_res = 0;
-					dirent* dirent_result = 0;
 					for(;;)
 					{
 						readdir_res = readdir_r(dir_ptr, dirent_object_ptr, &dirent_result);
