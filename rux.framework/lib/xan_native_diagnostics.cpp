@@ -51,23 +51,6 @@ namespace rux
 					}
 				}
 			}
-			/*declare_stack_variable( char , pid_string , 64 );
-			rux::string::uint32_to_string( pid , pid_string );
-			const char* ps_path = "/usr/bin/lsof";
-			::rux::byte exists = rux_is_exists_file_or_link( ps_path );
-			if( exists == 0 )
-			{
-				ps_path = "/bin/lsof";
-				exists = rux_is_exists_file_or_link( ps_path );
-			}
-			if( exists )
-			{
-				char* args[ 2 ] = {0};
-				args[ 0 ] = const_cast< char* >( "-p" );
-				args[ 1 ] = pid_string;
-				::rux::diagnostics::process::start_with_redirect(ps_path, args, 2
-					, ::rux::diagnostics::on_lines_count_redirect_stdout_or_stderr_handler, 0, &threads, 0, 0, NULL);
-			}*/
 #endif
 			return threads;
 		};
@@ -93,24 +76,14 @@ namespace rux
 				CloseHandle( toolhelp32snapshot_handle );
 			}
 #else
-			declare_stack_variable( char , pid_string , 64 );
-			rux::string::uint32_to_string( pid , pid_string );
-			const char* ps_path = "/usr/bin/ps";
-			::rux::byte exists = rux_is_exists_file_or_link( ps_path );
-			if( exists == 0 )
+			::booldog::allocators::easy::heap easyheap;
+			::booldog::allocators::single_threaded::mixed<1024> easymixed(&easyheap);
+			::booldog::result_mbchar pathname(&easymixed);
+			if(::booldog::utils::string::mbs::sprintf(&pathname, pathname.mballocator, debuginfo_macros, "/proc/%u/task"
+				, (::booldog::uint32)::rux::diagnostics::process::get_process_id()))
 			{
-				ps_path = "/bin/ps";
-				exists = rux_is_exists_file_or_link( ps_path );
-			}
-			if( exists )
-			{
-				char* args[ 5 ] = {0};
-				args[ 0 ] = const_cast< char* >( "-L" );
-				args[ 1 ] = const_cast< char* >( "-o" );
-				args[ 2 ] = const_cast< char* >( "pid=" );
-				args[ 3 ] = const_cast< char* >( "-p" );
-				args[ 4 ] = pid_string;
-				::rux::diagnostics::process::start_with_redirect( ps_path , args , 5 , ::rux::diagnostics::on_lines_count_redirect_stdout_or_stderr_handler , 0 , &threads , 0 , 0 , NULL );
+				::booldog::io::directory::mbs::listdir(0, &easymixed, pathname.mbchar
+					, ::rux::diagnostics::descriptors_count_callback, &threads);
 			}
 #endif
 			return threads;
