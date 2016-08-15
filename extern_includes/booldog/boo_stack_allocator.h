@@ -83,15 +83,19 @@ namespace booldog
 				_lock.wunlock( debuginfo );
 				return ptr;
 			};
+			virtual bool check_consistency(void)
+			{
+				return _cluster.check_consistency();
+			};
 		};
 		namespace single_threaded
 		{
 			template< size_t s >
 			class stack : public ::booldog::stack_allocator
-			{
+			{	
 				::booldog::byte _data[ s + sizeof( ::booldog::mem::info4 ) ];
+			public:				
 				::booldog::mem::cluster _cluster;
-			public:
 				stack( void )
 					: _cluster( _data , s + sizeof( ::booldog::mem::info4 ) )
 				{
@@ -137,6 +141,10 @@ namespace booldog
 				virtual void* realloc( void* pointer , size_t size , const ::booldog::debug::info& debuginfo = debuginfo_macros )
 				{
 					return _cluster.realloc( pointer , size , debuginfo );
+				};
+				virtual bool check_consistency(void)
+				{
+					return _cluster.check_consistency();
 				};
 			};
 		};

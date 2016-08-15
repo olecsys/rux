@@ -15,23 +15,60 @@
 #include <stdio.h>
 namespace booldog
 {
-	namespace mem
+	namespace enums
 	{
+		namespace log
+		{
+			enum level
+			{
+				level_error = 40000 ,
+				level_warn = 30000 ,
+				level_debug = 10000 ,
+				level_trace = 5000 , 
+				level_verbose = 0
+			};
+		};
+	};
+	namespace typedefs
+	{
+		typedef void (*write_log_t)(::booldog::enums::log::level level, const char* format, va_list ap);
+	};
+	namespace empties
+	{
+		namespace log
+		{
+			booinline void write_log(::booldog::enums::log::level, const char* , va_list){};
+		};
+	};
+	namespace mem
+	{		
 		class cluster
 		{
 			::booldog::byte* _data;
-			size_t _data_size;
+			size_t _data_size;			
+		public:
 			size_t _avail;
 			::booldog::byte* _begin;
-		public:
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+			::booldog::typedefs::write_log_t _write_log;
+			booinline void write_log(const char* format, ...)
+			{
+				va_list ap;
+				va_start(ap, format);
+				_write_log(::booldog::enums::log::level_error, format, ap);
+				va_end( ap );
+			};
+#endif
 			cluster( ::booldog::byte* data , size_t data_size )
 			{
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+				_write_log = ::booldog::empties::log::write_log;
+#endif
 				_data = data;
 				_data_size = data_size;
 				_avail = data_size;
-				size_t s = data_size - sizeof( ::booldog::mem::info4 );
 				_begin = _data;
-				if( s < UINT8_MAX )
+				if(_avail - sizeof( ::booldog::mem::info1 ) < UINT8_MAX )
 				{
 					::booldog::mem::info1* info = (::booldog::mem::info1*)_begin;
 					info->_check = 86;
@@ -40,7 +77,7 @@ namespace booldog
 					info->_size = (::booldog::byte)( _avail - sizeof( ::booldog::mem::info1 ) );
 					_begin[ sizeof( *info ) - 1 ] = info->_flags;
 				}
-				else if( s < UINT16_MAX )
+				else if(_avail - sizeof( ::booldog::mem::info2 ) < UINT16_MAX)
 				{
 					::booldog::mem::info2* info = (::booldog::mem::info2*)_begin;
 					info->_check = 86;
@@ -49,7 +86,7 @@ namespace booldog
 					info->_size = (::booldog::ushort)( _avail - sizeof( ::booldog::mem::info2 ) );
 					_begin[ sizeof( *info ) - 1 ] = info->_flags;
 				}
-				else if( s < UINT32_MAX )
+				else if(_avail - sizeof( ::booldog::mem::info3 ) < UINT32_MAX)
 				{
 					::booldog::mem::info3* info = (::booldog::mem::info3*)_begin;
 					info->_check = 86;
@@ -73,16 +110,49 @@ namespace booldog
 				void* endptr = end();
 				::booldog::byte* info = _data;
 				size_t offsize = 0 , begin_size = 0;
-				from_info( info , offsize , begin_size );
+				from_info(info, offsize, begin_size);
+				printf("Available size=%u(%u), begin(%p), end(%p)\n", (::booldog::uint32)_avail
+					, (::booldog::uint32)_data_size, _begin, endptr);
 				for( ; ; )
 				{
 					if( ::booldog::utils::get_bit( info[ 1 ] , BOOLDOG_MEM_INFO_BUSY ) )
-						printf( "size=%u, total=%u\n" , (::booldog::uint32)begin_size , (::booldog::uint32)offsize );
+						printf("Busy slice, size=%u(%u)\n", (::booldog::uint32)begin_size, (::booldog::uint32)offsize);
+					else
+						printf("Available slice, size=%u(%u)\n", (::booldog::uint32)begin_size, (::booldog::uint32)offsize);
 					info = info + offsize;
 					if( info >= endptr )
 						break;
 					from_info( info , offsize , begin_size );
 				}
+			};
+			booinline bool check_consistency(void)
+			{
+				void* endptr = end();
+				::booldog::byte* info = _data, * prev = 0;
+				size_t offsize = 0 , begin_size = 0, prev_offsize = 0;
+				from_info(info, offsize, begin_size);
+				for(;;)
+				{
+					if(prev)
+					{					
+						size_t diff = (size_t)(info - prev);
+						if(diff <= sizeof(::booldog::mem::info1)
+							|| prev_offsize != diff)
+							return false;
+					}
+					prev = info;
+					info = info + offsize;
+					if(info >= endptr)
+					{
+						size_t diff = (size_t)((::booldog::byte*)endptr - prev);
+						if(diff <= sizeof(::booldog::mem::info1))
+							return false;
+						break;
+					}
+					prev_offsize = offsize;
+					from_info(info, offsize, begin_size);
+				}
+				return true;
 			};
 			booinline void check( void )
 			{
@@ -172,7 +242,7 @@ namespace booldog
 					}
 				}
 
-				if( size < UINT8_MAX )
+				if(size - sizeof( ::booldog::mem::info1 ) < UINT8_MAX)
 				{
 					begin_size = size - sizeof( ::booldog::mem::info1 );
 					::booldog::mem::info1* info = (::booldog::mem::info1*)begin;
@@ -182,7 +252,7 @@ namespace booldog
 					info->_size = (::booldog::byte)begin_size;
 					begin[ sizeof( *info ) - 1 ] = info->_flags;
 				}
-				else if( size < UINT16_MAX )
+				else if(size - sizeof( ::booldog::mem::info2 ) < UINT16_MAX)
 				{
 					begin_size = size - sizeof( ::booldog::mem::info2 );
 					::booldog::mem::info2* info = (::booldog::mem::info2*)begin;
@@ -192,7 +262,7 @@ namespace booldog
 					info->_size = (::booldog::ushort)begin_size;
 					begin[ sizeof( *info ) - 1 ] = info->_flags;
 				}
-				else if( size < UINT32_MAX )
+				else if(size - sizeof( ::booldog::mem::info1 ) < UINT32_MAX)
 				{
 					begin_size = size - sizeof( ::booldog::mem::info3 );
 					::booldog::mem::info3* info = (::booldog::mem::info3*)begin;
@@ -216,12 +286,12 @@ namespace booldog
 			booinline ::booldog::byte* check_alloc( ::booldog::byte* begin , size_t& size , size_t& total )
 			{
 				size_t offsize = 0 , begin_size = 0;
-				from_info( begin , offsize , begin_size );
-				if( begin_size != size && offsize <= total )
-					return 0;
-				if( begin_size == size )
+				from_info(begin, offsize, begin_size);
+				if(begin_size == size && total == offsize)
 					_avail -= total;
-				else if( offsize > total )
+				else if(offsize <= total)
+					return 0;
+				else
 				{
 					size_t diff = offsize - total;		
 					if( diff <= sizeof( ::booldog::mem::info1 ) )
@@ -350,6 +420,9 @@ namespace booldog
 #ifdef BOOLDOG_MEM_CLUSTER_CHECK
 				check();
 #endif
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+				size_t requested_size = size;
+#endif
 				if( size % 4 )
 					size = 4 * ( size / 4 ) + 4;
 
@@ -386,6 +459,9 @@ namespace booldog
 							}
 							from_info( info , offsize , begin_size );
 						}
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+						write_log("mem_cluster::alloc, %pp(%u)", begin + total - size, (::booldog::uint32)requested_size);
+#endif
 						return begin + total - size;
 					}
 					else
@@ -405,7 +481,13 @@ namespace booldog
 								begin = check_alloc( info , size , total );
 							}
 							if( begin )
+							{
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+								write_log("mem_cluster::alloc, %pp(%u)", begin + total - size
+									, (::booldog::uint32)requested_size);
+#endif
 								return begin + total - size;
+							}
 						}
 					}	
 				}
@@ -413,6 +495,9 @@ namespace booldog
 			};
 			void free( void* pointer )
 			{
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+				write_log("mem_cluster::free, %pp", pointer);
+#endif
 #ifdef BOOLDOG_MEM_CLUSTER_CHECK
 				check();
 #endif
@@ -446,28 +531,35 @@ namespace booldog
 				from_pointer( pointer , offsize , size );
 				return offsize;
 			};
-			void* tryrealloc( void* pointer , size_t size , bool free_if_cannot_alloc , void*& oldpointer
-				, const ::booldog::debug::info& debuginfo = debuginfo_macros )
+			void* tryrealloc(void* pointer, size_t size, bool free_if_cannot_alloc, void*& oldpointer
+				, const ::booldog::debug::info& debuginfo = debuginfo_macros)
 			{
 #ifdef BOOLDOG_MEM_CLUSTER_CHECK
 				check();
 #endif
-				if( size == 0 )
+				if(size == 0)
 				{
-					if( pointer )
-						free( pointer );
+					if(pointer)
+						free(pointer);
 					return 0;
 				}
-				if( pointer == 0 )
-					return alloc( size , debuginfo );
-
+				if(pointer == 0)
+					return alloc(size, debuginfo);
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+				size_t requested_size = size;
+#endif
 				if( size % 4 )
 					size = 4 * ( size / 4 ) + 4;
 
 				size_t offsize = 0 , begin_size = 0;
 				::booldog::byte* begin = from_pointer( pointer , offsize , begin_size );
 				if( begin_size == size )
+				{
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+					write_log("mem_cluster::tryrealloc, %pp(%u, %pp)", pointer, (::booldog::uint32)requested_size, pointer);
+#endif
 					return pointer;
+				}
 				else if( begin_size > size )
 				{
 					size_t total = size;
@@ -484,7 +576,13 @@ namespace booldog
 						
 					size_t diff = offsize - total;
 					if( diff <= sizeof( ::booldog::mem::info1 ) )
+					{
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+						write_log("mem_cluster::tryrealloc, %pp(%u, %pp)", pointer, (::booldog::uint32)requested_size
+							, pointer);
+#endif
 						return pointer;
+					}
 					else if( diff - sizeof( ::booldog::mem::info1 ) < UINT8_MAX )
 					{
 						size_t old_offset = offsize - begin_size;
@@ -559,6 +657,10 @@ namespace booldog
 						info->_size = size;
 						begin[ sizeof( *info ) - 1 ] = info->_flags;
 					}
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+					write_log("mem_cluster::tryrealloc, %pp(%u, %pp)", begin + new_offset
+						, (::booldog::uint32)requested_size, pointer);
+#endif
 					return begin + new_offset;
 				}
 				else
@@ -579,6 +681,10 @@ namespace booldog
 							::memcpy( new_pointer , pointer , begin_size );
 							this->free( pointer );
 						}
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+						write_log("mem_cluster::tryrealloc, %pp(%u, %pp)", new_pointer, (::booldog::uint32)requested_size
+							, pointer);
+#endif
 						return new_pointer;
 					}
 					else
@@ -667,6 +773,10 @@ namespace booldog
 								from_info( info , info_offsize , info_begin_size );
 							}
 						}
+#ifdef BOOLDOG_MEM_CLUSTER_LOG
+						write_log("mem_cluster::tryrealloc, again tryrealloc, %pp(%u)", pointer
+							, (::booldog::uint32)requested_size);
+#endif
 						return this->tryrealloc( begin + new_offset , size , free_if_cannot_alloc , oldpointer , debuginfo );
 					}
 				}

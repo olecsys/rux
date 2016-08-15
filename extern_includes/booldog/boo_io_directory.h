@@ -57,6 +57,10 @@ namespace booldog
 					BOOINIT_RESULT(::booldog::result);
 					::booldog::enums::io::entry_type entry_type = ::booldog::enums::io::unknown;
 #ifdef __WINDOWS__		
+					udata = udata;
+					callback = callback;
+					entry_type = entry_type;
+
 					::booldog::result_mbchar pathname_mbchar(allocator);
 					if(::booldog::utils::string::mbs::assign<16>(res, allocator, false, 0, pathname_mbchar.mbchar
 						, pathname_mbchar.mblen, pathname_mbchar.mbsize, pathname, 0, SIZE_MAX, debuginfo) == false)

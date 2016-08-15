@@ -16,6 +16,9 @@
 #include BOOLDOG_HEADER(boo_bits_utils.h)
 
 #include <math.h>
+
+//TEMP
+#include <stdio.h>
 namespace booldog
 {
 	namespace consts
@@ -5223,6 +5226,7 @@ goto_go_away_from_ws0:
 						}
 	goto_object_name_parse_next1:
 						node = ::booldog::data::json::newnode< step >( res , this , curnode , parentnode , size , debuginfo );
+
 						if( node == 0 )
 							goto goto_return;
 														
@@ -5289,6 +5293,7 @@ goto_go_away_from_ws0:
 						}
 						
 						node = ::booldog::data::json::newnode< step >( res , this , curnode , parentnode , size , debuginfo );
+
 						if( node == 0 )
 							goto goto_return;
 														
@@ -5350,6 +5355,7 @@ goto_go_away_from_ws0:
 						}
 						
 						node = ::booldog::data::json::newnode< step >( res , this , curnode , parentnode , size , debuginfo );
+
 						if( node == 0 )
 							goto goto_return;
 														
@@ -5411,6 +5417,7 @@ goto_go_away_from_ws0:
 						}
 
 						node = ::booldog::data::json::newnode< step >( res , this , curnode , parentnode , size , debuginfo );
+
 						if( node == 0 )
 							goto goto_return;
 														
@@ -5646,6 +5653,7 @@ goto_exponent_parse:
 						}
 goto_number_create:
 						node = ::booldog::data::json::newnode< step >( res , this , curnode , parentnode , size , debuginfo );
+
 						if( node == 0 )
 							goto goto_return;
 														
@@ -5712,6 +5720,7 @@ goto_go_away_from_ws3:
 					size = ptr - begin;
 					::booldog::mem::remove< char >( (size_t)( begin - slow.json ) , slow.json , slow.jsonsize
 						, size );
+
 					slow.jsonlen -= size;
 					slow.json[ slow.jsonlen ] = 0;
 					ptr = begin;
@@ -5803,6 +5812,7 @@ goto_go_away_from_ws1:
 					size = ptr - begin;
 					::booldog::mem::remove< char >( (size_t)( begin - slow.json ) , slow.json , slow.jsonsize
 						, size );
+
 					slow.jsonlen -= size;
 					slow.json[ slow.jsonlen ] = 0;
 					ptr = begin;
@@ -6030,6 +6040,7 @@ goto_go_away_from_ws1:
 										::booldog::mem::insert< char >( begin - slow.json , slow.json 
 											, slow.jsonlen + 1 , slow.jsonsize
 											, size , utf8 , utf8bytes );
+
 										slow.jsonlen -= size - utf8bytes;
 										slow.json[ slow.jsonlen ] = 0;
 										ptr = begin + utf8bytes;
@@ -6105,6 +6116,7 @@ goto_go_away_from_ws2:
 					size = ptr - begin;
 					::booldog::mem::remove< char >( (size_t)( begin - slow.json ) , slow.json , slow.jsonsize
 						, size );
+
 					slow.jsonlen -= size;
 					slow.json[ slow.jsonlen ] = 0;
 					ptr = begin;
@@ -6147,6 +6159,7 @@ goto_go_away_from_ws4:
 					size = ptr - begin;
 					::booldog::mem::remove< char >( (size_t)( begin - slow.json ) , slow.json , slow.jsonsize
 						, size );
+
 					slow.jsonlen -= size;
 					slow.json[ slow.jsonlen ] = 0;
 				}
@@ -6161,7 +6174,7 @@ goto_return:
 				::booldog::data::json::result locres( &serializator );
 				BOOINIT_RESULT( ::booldog::data::json::result );
 				if( js && js[ 0 ] != 0 )
-				{		
+				{	
 					const char* ptr = js;
 					for( ; ; )
 					{
@@ -6171,7 +6184,7 @@ goto_return:
 							goto goto_next;
 						}
 					}
-	goto_next:
+goto_next:
 					size_t size = ptr - js;
 					res->serializator->slow.jsonlen = size - 1;
 					if( size > res->serializator->slow.jsonsize )
