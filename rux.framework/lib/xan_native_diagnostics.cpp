@@ -88,7 +88,7 @@ namespace rux
 #endif
 			return threads;
 		};
-		::rux::int64 working_set(::rux::pid_t pid, ::rux::XString* error)
+		::rux::int64 process_info::working_set(::rux::pid_t pid, ::rux::XString* error)
 		{
 			::rux::int64 value = 0LL;
 #ifdef __WINDOWS__
@@ -118,7 +118,7 @@ namespace rux
 #endif			
 			return value;
 		};
-		::rux::int64 virtual_bytes(::rux::pid_t pid, ::rux::XString* error)
+		::rux::int64 process_info::virtual_bytes(::rux::pid_t pid, ::rux::XString* error)
 		{
 			::rux::int64 value = 0LL;
 #ifdef __WINDOWS__
