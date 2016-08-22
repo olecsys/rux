@@ -1533,8 +1533,11 @@ void XMemoryManager::private_info_thread(void* param, size_t ___rux__thread_inde
 					file.write_text( "\n%s(process %u)\n=============================\n\n" , now_string , pid );
 
 					debuginfo_macros_statement(986);
-
+#ifdef __WINDOWS__
 					::rux::int64 temp = ::rux::diagnostics::process_info::working_set( ::rux::engine::_globals->_executable , 0 );
+#else
+					::rux::int64 temp = ::rux::diagnostics::process_info::working_set(pid, 0);
+#endif
 					if( temp > _working_set )
 						file.write_text( "Working set " I64u "(+" I64u ") bytes\n" , temp , temp - _working_set );
 					else if( temp < _working_set )
@@ -1544,8 +1547,12 @@ void XMemoryManager::private_info_thread(void* param, size_t ___rux__thread_inde
 
 					debuginfo_macros_statement(985);
 
-					_working_set = temp;			
+					_working_set = temp;
+#ifdef __WINDOWS__
 					temp = ::rux::diagnostics::process_info::virtual_bytes( ::rux::engine::_globals->_executable , 0 );
+#else
+					temp = ::rux::diagnostics::process_info::virtual_bytes(pid, 0);
+#endif
 					if( temp > _virtual_bytes )
 						file.write_text( "Virtual bytes " I64u "(+" I64u ") bytes\n" , temp , temp - _virtual_bytes );
 					else if( temp < _virtual_bytes )

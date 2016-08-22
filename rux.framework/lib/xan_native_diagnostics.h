@@ -11,6 +11,8 @@ namespace rux
 		class process_info
 		{
 		public:
+			static ::rux::int64 working_set(::rux::pid_t pid, ::rux::XString* error);
+			static ::rux::int64 virtual_bytes(::rux::pid_t pid, ::rux::XString* error);
 			static ::rux::int64 working_set( const char* process_name , ::rux::XString* error );
 			static ::rux::int64 virtual_bytes( const char* process_name , ::rux::XString* error );
 			static pid_t pidof( const char* process_name , ::rux::pid_t include_pid = 0 , ::rux::pid_t except_pid = 0 

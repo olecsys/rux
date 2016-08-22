@@ -88,6 +88,66 @@ namespace rux
 #endif
 			return threads;
 		};
+		::rux::int64 working_set(::rux::pid_t pid, ::rux::XString* error)
+		{
+			::rux::int64 value = 0LL;
+#ifdef __WINDOWS__
+#else
+			declare_stack_variable( char , filename , 2048 );
+			::rux::safe_sprintf( filename , 2048 , "/proc/%u/status" , (::rux::uint32)pid );
+			FILE* file = fopen( filename , "r" );
+			if( file )
+			{
+				while( fgets( filename , 2048 , file ) != NULL )
+				{
+					if( strncmp( filename , "VmRSS:" , 6 ) == 0 )
+					{
+						char* begin = filename;
+						while( *begin != 0 && ( *begin < '0' || *begin > '9' ) )
+							begin++;
+						char* end = begin;
+						while( *end != 0 && *end >= '0' && *end <= '9' )
+							end++;
+						*end = 0;
+						value = ::rux::string::to_int64( begin ) * 1024LL;
+						break;
+					}
+				}
+				fclose(file);
+			}
+#endif			
+			return value;
+		};
+		::rux::int64 virtual_bytes(::rux::pid_t pid, ::rux::XString* error)
+		{
+			::rux::int64 value = 0LL;
+#ifdef __WINDOWS__
+#else
+			declare_stack_variable( char , filename , 2048 );
+			::rux::safe_sprintf( filename , 2048 , "/proc/%u/status" , (::rux::uint32)pid );
+			FILE* file = fopen( filename , "r" );
+			if( file )
+			{
+				while( fgets( filename , 2048 , file ) != NULL )
+				{
+					if( strncmp( filename , "VmSize:" , 7 ) == 0 )
+					{
+						char* begin = filename;
+						while( *begin != 0 && ( *begin < '0' || *begin > '9' ) )
+							begin++;
+						char* end = begin;
+						while( *end != 0 && *end >= '0' && *end <= '9' )
+							end++;
+						*end = 0;
+						value = ::rux::string::to_int64( begin ) * 1024LL;
+						break;
+					}
+				}
+				fclose(file);
+			}
+#endif
+			return value;
+		};
 		::rux::int64 process_info::working_set( const char* instance_name , ::rux::XString* error )
 		{
 			::rux::int64 value = 0LL;

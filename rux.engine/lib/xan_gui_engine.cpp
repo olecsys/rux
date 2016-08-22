@@ -1531,6 +1531,7 @@ namespace rux
 					{
 						switch( wparam )
 						{
+							case SC_CLOSE:
 							case SC_SCREENSAVE:
 							case SC_MONITORPOWER:
 								{

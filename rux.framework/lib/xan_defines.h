@@ -2605,6 +2605,13 @@ public:\
 					argument_count++;\
 				}\
 			}\
+			const char* debug = 0;\
+			rux_native_get_argument(debug, argument_names, argument_values, argument_count);\
+			if(debug && strcmp(debug, "true") == 0 )\
+			{\
+				::rux::threading::XThread::Sleep(10000);\
+				_rux_is_debug = 1;\
+			}\
 			const char* name = 0;\
 			rux_native_get_argument( name , argument_names , argument_values , argument_count );\
 			::rux::service::private_report_info_event( name , "started" );\
@@ -2688,13 +2695,12 @@ public:\
 				if( check_rux_executing_in_current_path == 0\
 					|| rux_is_already_executing_in_current_path() == 0 )\
 				{\
-					const char* display_name = 0, * logfile = 0, * pidfile = 0, * autorecovery = 0, * debug = 0, * coredump = 0;\
+					const char* display_name = 0, * logfile = 0, * pidfile = 0, * autorecovery = 0, * coredump = 0;\
 					rux_native_get_argument( name , argument_names , argument_values , argument_count );\
 					rux_native_get_argument( display_name , argument_names , argument_values , argument_count );\
 					rux_native_get_argument( logfile , argument_names , argument_values , argument_count );\
 					rux_native_get_argument( pidfile , argument_names , argument_values , argument_count );\
 					rux_native_get_argument( autorecovery , argument_names , argument_values , argument_count );\
-					rux_native_get_argument( debug , argument_names , argument_values , argument_count );\
 					rux_native_get_argument(coredump, argument_names, argument_values, argument_count);\
 					if( name && name[ 0 ] != 0 )\
 					{\
@@ -2714,8 +2720,6 @@ public:\
 							::rux::service::set_ServiceDisplayName( display_name );\
 						else\
 							::rux::service::set_ServiceDisplayName( name );\
-						if( debug && strcmp( debug , "true" ) == 0 )\
-							_rux_is_debug = 1;\
 						declare_stack_variable( char , error , 1024 );\
 						_rux_is_service = 1;\
 						if( ::rux::service::Start( logfile , error , check_rux_executing_in_current_path ) == 0 )\
