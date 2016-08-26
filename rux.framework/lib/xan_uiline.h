@@ -64,6 +64,9 @@ namespace rux
 				::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_left_mouse_button_down;
 				::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_left_mouse_button_up;	
 				::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_right_mouse_button_down;
+				::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_mouse_wheel_down;
+				::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_mouse_wheel_up;
+				::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_mouse_wheel_double_click;
 				::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_right_mouse_button_up;	
 				::rux::EventHandler< ::rux::gui::events::on_event_t > _on_activated;
 				::rux::EventHandler< ::rux::gui::events::on_deactivated_event_t > _on_deactivated;
@@ -154,6 +157,7 @@ namespace rux
 				::rux::uint32 get_ControlNameHash( void );
 				void set_OnLeftMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_down );
 				void set_OnRightMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_down );
+				void set_OnMouseWheelDown( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_down );
 				void set_OnMouseEnter( ::rux::gui::events::on_event_t on_mouse_enter_callback );
 				void set_OnMouseLeave( ::rux::gui::events::on_mouse_event_t on_mouse_leave_callback );
 				::rux::gui::ParentBase* get_ParentControl( ::rux::byte lock = 1 , ::rux::byte real_parent = 0 );

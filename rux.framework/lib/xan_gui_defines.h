@@ -184,7 +184,9 @@ namespace rux
 			XEnum_EventType_WindowMouseWheelUp = 22 , 
 			XEnum_EventType_WindowRightMouseButtonDown = 23 ,
 			XEnum_EventType_WindowRightMouseButtonUp = 24 ,
-			XEnum_EventType_WindowRightMouseButtonDoubleClick = 25
+			XEnum_EventType_WindowRightMouseButtonDoubleClick = 25,
+			XEnum_EventType_WindowMouseWheelDown = 26,
+			XEnum_EventType_WindowMouseWheelDoubleClick = 27
 		};
 		enum XEnum_WindowState
 		{

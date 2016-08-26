@@ -34,6 +34,17 @@ namespace booldog
 				_first = 0;
 				_count = 0;
 			};
+			bool exists(T* item)
+			{
+				T* next = _first;
+				for(;;)
+				{
+					if(next == 0 || next == item)
+						break;
+					next = next->_doubly_linked_list_next;
+				}
+				return next != 0;
+			};
 			void remove( T* item )
 			{
 				if( item == _first )
@@ -46,7 +57,18 @@ namespace booldog
 					item->_doubly_linked_list_next->_doubly_linked_list_prev = item->_doubly_linked_list_prev;				
 				_count--;
 			};
-			size_t add( T* item )
+			void insert_before(T* item, T* insertion_item)
+			{
+				if(_first == item)
+					_first = insertion_item;
+				else
+					item->_doubly_linked_list_prev->_doubly_linked_list_next = insertion_item;
+				insertion_item->_doubly_linked_list_prev = item->_doubly_linked_list_prev;
+				insertion_item->_doubly_linked_list_next = item;
+				item->_doubly_linked_list_prev = insertion_item;
+				++_count;
+			};
+			size_t add(T* item)
 			{
 				if( _first == 0 )
 					_first = item;
@@ -57,13 +79,13 @@ namespace booldog
 				_last = item;
 				return _count++;
 			};
-			void remove( T& item )
+			void remove(T& item)
 			{
-				remove( &item );
+				remove(&item);
 			};
-			size_t add( T& item )
+			size_t add(T& item)
 			{
-				return add( &item );
+				return add(&item);
 			};
 			T* first( void )
 			{

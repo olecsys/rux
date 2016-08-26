@@ -194,6 +194,19 @@ namespace rux
 			{
 				_group_main()->raise_OnRightMouseButtonUp( window_event , explicit_event );
 			};
+			void UserControl::raise_OnMouseWheelDown(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event)
+			{
+				_group_main()->raise_OnMouseWheelDown(window_event, explicit_event);
+			};
+			void UserControl::raise_OnMouseWheelDoubleClick(::rux::gui::WindowMouseEvent* window_event
+				, ::rux::byte explicit_event)
+			{
+				_group_main()->raise_OnMouseWheelDoubleClick(window_event, explicit_event);
+			};
+			void UserControl::raise_OnMouseWheelUp(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event)
+			{
+				_group_main()->raise_OnMouseWheelUp(window_event, explicit_event);
+			};
 			void UserControl::raise_OnLeftMouseButtonDown( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event )
 			{
 				_group_main()->raise_OnLeftMouseButtonDown( window_event , explicit_event );
@@ -421,6 +434,10 @@ namespace rux
 			{
 				_group_main.set_OnRightMouseButtonDown( on_left_mouse_button_down );
 			}
+			void UserControl::set_OnMouseWheelDown(::rux::gui::events::on_mouse_event_t on_left_mouse_button_down)
+			{
+				_group_main.set_OnMouseWheelDown(on_left_mouse_button_down);
+			}
 			::rux::int32 UserControl::get_TabIndex( void )
 			{
 				return _group_main.get_TabIndex();
@@ -468,6 +485,10 @@ namespace rux
 			void UserControl::set_OnRightMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_right_mouse_button_up )
 			{
 				_group_main.set_OnRightMouseButtonUp( on_right_mouse_button_up );
+			}
+			void UserControl::set_OnMouseWheelUp( ::rux::gui::events::on_mouse_event_t on_right_mouse_button_up )
+			{
+				_group_main.set_OnMouseWheelUp( on_right_mouse_button_up );
 			}
 			void UserControl::set_OnMouseLeave( ::rux::gui::events::on_mouse_event_t on_mouse_leave_callback )
 			{

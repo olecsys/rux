@@ -229,6 +229,27 @@ namespace rux
 					window->raise_OnRightMouseButtonUp( window_event , 1 );	
 					break;
 				}
+			case ::rux::gui::XEnum_EventType_WindowMouseWheelDown:
+				{					
+					rux::gui::WindowMouseEvent* window_event = (rux::gui::WindowMouseEvent*)&xevent;
+					rux::gui::Window* window = (rux::gui::Window*)window_event->_window->get_Owner();
+					window->raise_OnMouseWheelDown(window_event, 1);
+					break;
+				}
+			case ::rux::gui::XEnum_EventType_WindowMouseWheelUp:
+				{					
+					rux::gui::WindowMouseEvent* window_event = (rux::gui::WindowMouseEvent*)&xevent;
+					rux::gui::Window* window = (rux::gui::Window*)window_event->_window->get_Owner();
+					window->raise_OnMouseWheelUp(window_event, 1);	
+					break;
+				}
+			case ::rux::gui::XEnum_EventType_WindowMouseWheelDoubleClick:
+				{					
+					rux::gui::WindowMouseEvent* window_event = (rux::gui::WindowMouseEvent*)&xevent;
+					rux::gui::Window* window = (rux::gui::Window*)window_event->_window->get_Owner();
+					window->raise_OnMouseWheelDoubleClick(window_event, 1);
+					break;
+				}
 			case ::rux::gui::XEnum_EventType_WindowRightMouseButtonDoubleClick:
 				{					
 					rux::gui::WindowMouseEvent* window_event = (rux::gui::WindowMouseEvent*)&xevent;

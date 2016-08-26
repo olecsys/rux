@@ -482,6 +482,22 @@ namespace rux
 			{
 				_on_right_mouse_button_up.raise< const ::rux::gui::events::MouseEvent& >( ::rux::gui::events::MouseEvent( *this , window_event , explicit_event ) );
 			};
+			void Line::raise_OnMouseWheelDown(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event)
+			{
+				_on_mouse_wheel_down.raise< const ::rux::gui::events::MouseEvent& >(
+					::rux::gui::events::MouseEvent(*this, window_event, explicit_event));
+			};
+			void Line::raise_OnMouseWheelDoubleClick(::rux::gui::WindowMouseEvent* window_event
+				, ::rux::byte explicit_event)
+			{
+				_on_mouse_wheel_double_click.raise< const ::rux::gui::events::MouseEvent& >(
+					::rux::gui::events::MouseEvent(*this, window_event, explicit_event));
+			};
+			void Line::raise_OnMouseWheelUp(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event)
+			{
+				_on_mouse_wheel_up.raise< const ::rux::gui::events::MouseEvent& >(
+					::rux::gui::events::MouseEvent(*this, window_event, explicit_event));
+			};
 			void Line::raise_OnLeftMouseButtonDown( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event )
 			{
 				_on_left_mouse_button_down.raise< const ::rux::gui::events::MouseEvent& >( ::rux::gui::events::MouseEvent( *this , window_event , 1 ) );
@@ -493,6 +509,10 @@ namespace rux
 			void XLine::set_OnRightMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_down )
 			{
 				(*this)()->set_OnRightMouseButtonDown( on_left_mouse_button_down );
+			};
+			void XLine::set_OnMouseWheelDown(::rux::gui::events::on_mouse_event_t on_left_mouse_button_down)
+			{
+				(*this)()->set_OnMouseWheelDown(on_left_mouse_button_down);
 			};
 			void XLine::set_OnMouseEnter( ::rux::gui::events::on_event_t on_mouse_enter_callback )
 			{

@@ -734,6 +734,86 @@ namespace rux
 			over_control->GCRefRelease( __FILE__ , __LINE__ );
 			Release();
 		};
+		void Window::raise_OnMouseWheelDown(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event)
+		{
+
+			AddRef();
+			_drag_and_drop_control = 0;
+			_drag_and_drop_object = 0;
+			StopCaret();
+
+			WRITE_LOCK( _cs_over_control );
+			if( _over_control == 0 || _over_control == (::rux::gui::CommonBase*)this )
+			{
+				::rux::gui::ControlBase* temp_control = _group();
+				::rux::byte enter_raised = 0;
+				::rux::gui::controls::rux_try_mouse_move( this , temp_control , window_event , enter_raised );
+			}
+			::rux::gui::CommonBase* over_control = _over_control;
+			over_control->GCRefAddRef( __FILE__ , __LINE__ );
+			_cs_over_control.WriteUnlock();
+				
+			over_control->GCRefAddRef( __FILE__ , __LINE__ );
+			WRITE_LOCK( _cs_pressed_control );
+			if( _pressed_control )
+				_pressed_control->GCRefRelease( __FILE__ , __LINE__ );
+			_pressed_control = over_control;
+			_cs_pressed_control.WriteUnlock();
+			WRITE_LOCK( _cs_active_control );
+			if( _active_control != over_control )
+			{	
+				rux::gui::CommonBase* active_control = _active_control;
+				over_control->GCRefAddRef( __FILE__ , __LINE__ );
+				_active_control = over_control;
+				_cs_active_control.WriteUnlock();
+				if( active_control )
+				{
+					active_control->raise_OnDeactivate( over_control );
+					active_control->GCRefRelease( __FILE__ , __LINE__ );
+				}
+				over_control->raise_OnActivate();
+			}
+			else
+				_cs_active_control.WriteUnlock();
+			if( over_control == ((::rux::gui::CommonBase*)this) )
+				_on_mouse_wheel_down.raise< const ::rux::gui::events::MouseEvent >( ::rux::gui::events::MouseEvent( *this , window_event , 1 ) );
+			else
+			{
+				over_control->raise_OnMouseWheelDown( window_event , 1 );
+				::rux::gui::ParentBase* parent = over_control->get_ParentControl();
+				if( parent && parent->get_IsWindow() == 0 )
+				{
+					::rux::gui::ParentBase* new_parent = parent;
+					XMallocArray< ::rux::gui::ParentBase* > parents;
+					for( ; ; )
+					{
+						new_parent = new_parent->get_ParentControl();
+						if( new_parent && new_parent->get_IsWindow() == 0 )
+						{
+							new_parent->AddRef( __FILE__ , __LINE__ );
+							parents.Add( new_parent );
+						}
+						else
+							break;
+					}
+					size_t parents_index = 0;
+					for( ; ; )
+					{
+						if( parent->get_IsForwardEvents() == 0 )
+							parent->raise_OnMouseWheelDown( window_event , 0 );
+						if( parents_index > 0 )
+							parent->Release( __FILE__ , __LINE__ );
+						if( parents_index < parents.Count() )
+							parent = parents[ parents_index++ ];
+						else
+							break;
+					}
+				}
+				_on_mouse_wheel_down.raise< const ::rux::gui::events::MouseEvent >( ::rux::gui::events::MouseEvent( *this , window_event , 0 ) );
+			}
+			over_control->GCRefRelease( __FILE__ , __LINE__ );
+			Release();
+		};
 		void Window::raise_OnRightMouseButtonDoubleClick( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event )
 		{
 			StopCaret();
@@ -787,6 +867,60 @@ namespace rux
 			}
 			over_control->GCRefRelease( __FILE__ , __LINE__ );
 		};
+		void Window::raise_OnMouseWheelDoubleClick(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event)
+		{
+			StopCaret();
+
+			WRITE_LOCK( _cs_over_control );
+			if( _over_control == 0 || _over_control == (::rux::gui::CommonBase*)this )
+			{
+				::rux::gui::ControlBase* temp_control = _group();
+				::rux::byte enter_raised = 0;
+				::rux::gui::controls::rux_try_mouse_move( this , temp_control , window_event , enter_raised );
+			}
+			::rux::gui::CommonBase* over_control = _over_control;
+			over_control->GCRefAddRef( __FILE__ , __LINE__ );
+			_cs_over_control.WriteUnlock();
+				
+			if( over_control == ((::rux::gui::CommonBase*)this) )
+				_on_mouse_wheel_double_click.raise< const ::rux::gui::events::MouseEvent >( ::rux::gui::events::MouseEvent( *this , window_event , 1 ) );
+			else
+			{
+				over_control->raise_OnMouseWheelDoubleClick( window_event , 1 );
+				::rux::gui::ParentBase* parent = over_control->get_ParentControl();
+				if( parent && parent->get_IsWindow() == 0 )
+				{
+					::rux::gui::ParentBase* new_parent = parent;
+					XMallocArray< ::rux::gui::ParentBase* > parents;
+					for( ; ; )
+					{
+						new_parent = new_parent->get_ParentControl();
+						if( new_parent && new_parent->get_IsWindow() == 0 )
+						{
+							new_parent->AddRef( __FILE__ , __LINE__ );
+							parents.Add( new_parent );
+						}
+						else
+							break;
+					}
+					size_t parents_index = 0;
+					for( ; ; )
+					{
+						if( parent->get_IsForwardEvents() == 0 )
+							parent->raise_OnMouseWheelDoubleClick( window_event , 0 );
+						if( parents_index > 0 )
+							parent->Release( __FILE__ , __LINE__ );
+						if( parents_index < parents.Count() )
+							parent = parents[ parents_index++ ];
+						else
+							break;
+					}
+				}
+				_on_mouse_wheel_double_click.raise< const ::rux::gui::events::MouseEvent >( ::rux::gui::events::MouseEvent( *this , window_event , 0 ) );
+			}
+			over_control->GCRefRelease( __FILE__ , __LINE__ );
+		};
+		
 		void Window::raise_OnRightMouseButtonUp( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event )
 		{
 			::rux::gui::WindowBase* window_base = get_WindowBase();
@@ -838,6 +972,72 @@ namespace rux
 					}
 					else
 						_on_right_mouse_button_up.raise< const ::rux::gui::events::MouseEvent >( ::rux::gui::events::MouseEvent( *this , window_event , 1 ) );
+				}
+				pressed_control->GCRefRelease( __FILE__ , __LINE__ );
+			}
+			else
+				_cs_pressed_control.WriteUnlock();
+			if( rux_is_object( _drag_and_drop_control , XObject ) == false
+				|| rux_is_object( _drag_and_drop_object , XObject ) == false )
+			{
+				//DROP
+				_drag_and_drop_control = 0;
+				_drag_and_drop_object = 0;
+			}
+		};
+		void Window::raise_OnMouseWheelUp(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event)
+		{
+			::rux::gui::WindowBase* window_base = get_WindowBase();
+			if( window_base )
+				window_base->ReleaseMouse();
+			_old_top = 0xffffffff;
+			_old_left = 0xffffffff;
+			_old_width = 0;
+			_old_cursor_left = 0;
+			_old_height = 0;
+			_old_cursor_top = 0;
+			WRITE_LOCK( _cs_pressed_control );
+			if( _pressed_control )
+			{
+				rux::gui::CommonBase* pressed_control = _pressed_control;
+				_pressed_control = NULL;		
+				_cs_pressed_control.WriteUnlock();
+				{
+					pressed_control->raise_OnMouseWheelUp(window_event, 1);
+					::rux::gui::ParentBase* parent = pressed_control->get_ParentControl();
+					if( parent && parent->get_IsWindow() == 0 )
+					{
+						::rux::gui::ParentBase* new_parent = parent;
+						XMallocArray< ::rux::gui::ParentBase* > parents;
+						for( ; ; )
+						{
+							new_parent = new_parent->get_ParentControl();
+							if( new_parent && new_parent->get_IsWindow() == 0 )
+							{
+								new_parent->AddRef( __FILE__ , __LINE__ );
+								parents.Add( new_parent );
+							}
+							else
+								break;
+						}
+						size_t parents_index = 0;
+						for( ; ; )
+						{
+							if( parent->get_IsForwardEvents() == 0 )
+								parent->raise_OnMouseWheelUp( window_event , 0 );
+							if( parents_index > 0 )
+								parent->Release( __FILE__ , __LINE__ );
+							if( parents_index < parents.Count() )
+								parent = parents[ parents_index++ ];
+							else
+								break;
+						}
+						_on_mouse_wheel_up.raise< const ::rux::gui::events::MouseEvent >( 
+							::rux::gui::events::MouseEvent(*this, window_event, 0));
+					}
+					else
+						_on_mouse_wheel_up.raise< const ::rux::gui::events::MouseEvent >(
+						::rux::gui::events::MouseEvent(*this, window_event, 1));
 				}
 				pressed_control->GCRefRelease( __FILE__ , __LINE__ );
 			}
@@ -1652,6 +1852,16 @@ namespace rux
 		void Window::set_OnRightMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_right_mouse_button_down_callback )
 		{
 			_on_right_mouse_button_down = on_right_mouse_button_down_callback;
+		};
+		implement_duplicate_internal_function_1(Window , set_OnMouseWheelDown, ::rux::gui::events::on_mouse_event_t);
+		void Window::set_OnMouseWheelDown(::rux::gui::events::on_mouse_event_t on_mouse_wheel_down_callback)
+		{
+			_on_mouse_wheel_down = on_mouse_wheel_down_callback;
+		};
+		implement_duplicate_internal_function_1(Window , set_OnMouseWheelUp, ::rux::gui::events::on_mouse_event_t);
+		void Window::set_OnMouseWheelUp(::rux::gui::events::on_mouse_event_t on_mouse_wheel_up_callback)
+		{
+			_on_mouse_wheel_up = on_mouse_wheel_up_callback;
 		};
 		implement_duplicate_internal_function_1( Window , set_OnLeftMouseButtonUp , ::rux::gui::events::on_mouse_event_t );
 		void Window::set_OnLeftMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up_callback )

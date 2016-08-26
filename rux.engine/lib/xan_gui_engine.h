@@ -419,8 +419,10 @@ namespace rux
 			extern dll_internal Atom _wm_protocols;
 			extern dll_internal rux::uint8 _is_mouse_down;
 			extern dll_internal ::rux::byte _is_right_mouse_down;
+			extern dll_internal ::rux::byte _is_middle_mouse_down;
 			extern dll_internal rux::uint64 _mouse_down_time;
 			extern dll_internal ::rux::uint64 _right_mouse_down_time;
+			extern dll_internal ::rux::uint64 _middle_mouse_down_time;
 			dll_internal bool lock_display( rux::gui::WindowBase* window_base = NULL );
 			dll_internal void unlock_display( void );
 			dll_internal rux::uint8 is_allowed_atom( Display* display , ::Window xwindow , Atom atom );

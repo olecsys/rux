@@ -105,6 +105,9 @@ namespace rux
 			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_right_mouse_button_down;
 			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_right_mouse_button_up;
 			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_right_mouse_button_double_click;
+			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_mouse_wheel_down;
+			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_mouse_wheel_up;
+			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_mouse_wheel_double_click;
 			::rux::EventHandler< ::rux::gui::events::on_event_t > _on_location;
 			::rux::EventHandler< ::rux::gui::events::on_event_t > _on_resize;
 			::rux::EventHandler< ::rux::gui::events::on_event_t > _on_shown;	
@@ -151,6 +154,8 @@ namespace rux
 			void set_OnLeftMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up_callback );
 			void set_OnRightMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_down_callback );
 			void set_OnRightMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up_callback );
+			void set_OnMouseWheelDown( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_down_callback );
+			void set_OnMouseWheelUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up_callback );
 			void set_OnResize( ::rux::gui::events::on_event_t on_resize_callback );
 			void set_OnLocationChanged( ::rux::gui::events::on_event_t on_location_callback );
 			void set_OnShown( ::rux::gui::events::on_event_t on_shown_callback );
@@ -218,7 +223,10 @@ namespace rux
 			void raise_OnKeyDown( ::rux::gui::XEnum_Keys key , ::rux::uint8 shift , ::rux::uint8 control , ::rux::uint8 alt , ::rux::uint32 value , ::rux::byte explicit_event );
 			void private_KeyUp( ::rux::gui::XEnum_Keys key , ::rux::uint8 shift , ::rux::uint8 control , ::rux::uint8 alt , ::rux::uint32 value , ::rux::byte explicit_event );
 			void raise_OnRightMouseButtonDown( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );
+			void raise_OnMouseWheelDown(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event);
 			void raise_OnRightMouseButtonUp( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );
+			void raise_OnMouseWheelUp(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event);
+			void raise_OnMouseWheelDoubleClick(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event);
 			void raise_OnRightMouseButtonDoubleClick( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );
 			void raise_OnLeftMouseButtonDown( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );
 			void raise_OnLeftMouseButtonUp( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );
@@ -382,6 +390,8 @@ namespace rux
 			void set_OnLeftMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up_callback );
 			void set_OnRightMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_down_callback );
 			void set_OnRightMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up_callback );
+			void set_OnMouseWheelDown( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_down_callback );
+			void set_OnMouseWheelUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up_callback );
 			void set_OnResize( ::rux::gui::events::on_event_t on_resize_callback );
 			void set_OnLocationChanged( ::rux::gui::events::on_event_t on_location_callback );
 			void set_OnShown( ::rux::gui::events::on_event_t on_shown_callback );

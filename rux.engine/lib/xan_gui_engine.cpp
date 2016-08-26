@@ -698,8 +698,10 @@ namespace rux
 			dll_internal Atom _wm_protocols = None;
 			dll_internal ::rux::uint8 _is_mouse_down = 0;
 			dll_internal ::rux::byte _is_right_mouse_down = 0;
+			dll_internal ::rux::byte _is_middle_mouse_down = 0;
 			dll_internal ::rux::uint64 _mouse_down_time = 0ULL;
 			dll_internal ::rux::uint64 _right_mouse_down_time = 0ULL;
+			dll_internal ::rux::uint64 _middle_mouse_down_time = 0ULL;
 #endif
 #endif
 			dll_internal void initialize( void )
@@ -2030,6 +2032,32 @@ namespace rux
 							window->Release();
 						return 0;
 					}
+				case WM_MBUTTONDBLCLK:
+					{
+						rux::uint8 shift = ( ( HIWORD( GetKeyState( VK_LSHIFT ) ) ) & 128 ) == 128 ? 1 : 0;
+						if( shift == 0 )
+							shift = (  ( HIWORD( GetKeyState( VK_RSHIFT ) ) ) & 128 ) == 128 ? 1 : 0;
+						rux::uint8 control = ( ( HIWORD( GetKeyState( VK_LCONTROL ) ) ) & 128 ) == 128 ? 1 : 0;
+						if( control == 0 )
+							control = ( ( HIWORD( GetKeyState( VK_RCONTROL ) ) ) & 128 ) == 128 ? 1 : 0;
+						rux::uint8 alt = ( ( HIWORD( GetKeyState( VK_LMENU ) ) ) & 128 ) == 128 ? 1 : 0;
+						if( alt == 0 )
+							alt = ( ( HIWORD( GetKeyState( VK_RMENU ) ) ) & 128 ) == 128 ? 1 : 0;
+						rux::uint8 left_mouse_button_pressed = wparam & MK_LBUTTON;
+						rux::uint8 middle_mouse_button_pressed = wparam & MK_MBUTTON;
+						rux::uint8 right_mouse_button_pressed = wparam & MK_RBUTTON;
+						rux::uint8 x_button1_pressed = wparam & MK_XBUTTON1;
+						rux::uint8 x_button2_pressed = wparam & MK_XBUTTON2;
+						rux::int16 x = LOWORD( lparam );
+						rux::int16 y = HIWORD( lparam );
+						rux::gui::WindowMouseEvent xevent(::rux::gui::XEnum_EventType_WindowMouseWheelDoubleClick, window
+							, 0, x, y, alt, control, shift, left_mouse_button_pressed, middle_mouse_button_pressed
+							, right_mouse_button_pressed, x_button1_pressed, x_button2_pressed);
+						window->raise_event(xevent);
+						if(window && need_release)
+							window->Release();
+						return 0;
+					}
 				case WM_MBUTTONUP:
 					{
 						rux::uint8 shift = ( ( HIWORD( GetKeyState( VK_LSHIFT ) ) ) & 128 ) == 128 ? 1 : 0;
@@ -2048,16 +2076,36 @@ namespace rux
 						rux::uint8 x_button2_pressed = wparam & MK_XBUTTON2;
 						rux::int16 x = LOWORD( lparam );
 						rux::int16 y = HIWORD( lparam );
-						if( window->_left <= x
-							&& window->_left + window->_width >= x
-							&& window->_top <= y
-							&& window->_top + window->_height >= y )
-						{
-							rux::gui::WindowMouseEvent xevent( ::rux::gui::XEnum_EventType_WindowMouseWheelUp , window , 0 , x - window->_left , y - window->_top , alt , control , shift , 
-								left_mouse_button_pressed , middle_mouse_button_pressed , 
-								right_mouse_button_pressed , x_button1_pressed , x_button2_pressed );
-							window->raise_event( xevent );
-						}
+						rux::gui::WindowMouseEvent xevent(::rux::gui::XEnum_EventType_WindowMouseWheelUp, window, 0, x, y
+							, alt, control, shift, left_mouse_button_pressed, middle_mouse_button_pressed
+							, right_mouse_button_pressed, x_button1_pressed, x_button2_pressed);
+						window->raise_event( xevent );
+						if( window && need_release )
+							window->Release();
+						return 0;
+					}
+				case WM_MBUTTONDOWN:
+					{
+						rux::uint8 shift = ( ( HIWORD( GetKeyState( VK_LSHIFT ) ) ) & 128 ) == 128 ? 1 : 0;
+						if( shift == 0 )
+							shift = (  ( HIWORD( GetKeyState( VK_RSHIFT ) ) ) & 128 ) == 128 ? 1 : 0;
+						rux::uint8 control = ( ( HIWORD( GetKeyState( VK_LCONTROL ) ) ) & 128 ) == 128 ? 1 : 0;
+						if( control == 0 )
+							control = ( ( HIWORD( GetKeyState( VK_RCONTROL ) ) ) & 128 ) == 128 ? 1 : 0;
+						rux::uint8 alt = ( ( HIWORD( GetKeyState( VK_LMENU ) ) ) & 128 ) == 128 ? 1 : 0;
+						if( alt == 0 )
+							alt = ( ( HIWORD( GetKeyState( VK_RMENU ) ) ) & 128 ) == 128 ? 1 : 0;
+						rux::uint8 left_mouse_button_pressed = wparam & MK_LBUTTON;
+						rux::uint8 middle_mouse_button_pressed = wparam & MK_MBUTTON;
+						rux::uint8 right_mouse_button_pressed = wparam & MK_RBUTTON;
+						rux::uint8 x_button1_pressed = wparam & MK_XBUTTON1;
+						rux::uint8 x_button2_pressed = wparam & MK_XBUTTON2;
+						rux::int16 x = LOWORD( lparam );
+						rux::int16 y = HIWORD( lparam );
+						rux::gui::WindowMouseEvent xevent(::rux::gui::XEnum_EventType_WindowMouseWheelDown, window, 0, x, y
+							, alt, control, shift, left_mouse_button_pressed, middle_mouse_button_pressed
+							, right_mouse_button_pressed, x_button1_pressed, x_button2_pressed);
+						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
 						return 0;
@@ -2864,6 +2912,31 @@ namespace rux
 									rux::gui::engine::_mouse_down_time = event.xbutton.time;
 								}
 							}
+							else if(event.xbutton.button == Button2)
+							{
+								middle_mouse_button_pressed = 1;
+								if(event.xbutton.time - ::rux::gui::engine::_mouse_down_time < 250)
+								{
+									rux::gui::WindowMouseEvent xevent(
+										::rux::gui::XEnum_EventType_WindowMouseWheelDoubleClick, window, 0										
+										, event.xbutton.x, event.xbutton.y, alt, control, shift
+										, left_mouse_button_pressed, middle_mouse_button_pressed
+										, right_mouse_button_pressed, x_button1_pressed, x_button2_pressed);
+									window->raise_event(xevent);
+									rux::gui::engine::_is_middle_mouse_down = 0;
+								}
+								else
+								{
+									rux::gui::WindowMouseEvent xevent(::rux::gui::XEnum_EventType_WindowMouseWheelDown 
+										, window, 0, event.xbutton.x, event.xbutton.y, alt, control, shift, 1 
+										, middle_mouse_button_pressed, right_mouse_button_pressed, x_button1_pressed
+										, x_button2_pressed);
+									window->CaptureMouse();
+									window->raise_event( xevent );
+									rux::gui::engine::_is_middle_mouse_down = 1;
+									rux::gui::engine::_middle_mouse_down_time = event.xbutton.time;
+								}
+							}
 							else if( event.xbutton.button == Button3 )
 							{
 								right_mouse_button_pressed = 1;
@@ -2931,6 +3004,20 @@ namespace rux
 									rux::gui::engine::_is_mouse_down = 0;
 								}
 							}
+							else if(event.xbutton.button == Button2)
+							{
+								middle_mouse_button_pressed = 0;
+								if(::rux::gui::engine::_is_middle_mouse_down == 1)
+								{
+									rux::gui::WindowMouseEvent xevent(::rux::gui::XEnum_EventType_WindowWheelMouseButtonUp 
+										, window, 0, event.xbutton.x, event.xbutton.y, alt, control, shift
+										, left_mouse_button_pressed, middle_mouse_button_pressed
+										, right_mouse_button_pressed, x_button1_pressed, x_button2_pressed);
+									window->ReleaseMouse();
+									window->raise_event(xevent);
+									rux::gui::engine::_is_middle_mouse_down = 0;
+								}
+							}	
 							else if( event.xbutton.button == Button3 )
 							{
 								right_mouse_button_pressed = 0;

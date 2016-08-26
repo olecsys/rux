@@ -660,6 +660,22 @@ namespace rux
 			{
 				_on_right_mouse_button_up.raise< const ::rux::gui::events::MouseEvent& >( ::rux::gui::events::MouseEvent( *this , window_event , explicit_event ) );
 			};
+			void Select::raise_OnMouseWheelDown(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event)
+			{
+				_on_mouse_wheel_down.raise< const ::rux::gui::events::MouseEvent& >(
+					::rux::gui::events::MouseEvent(*this, window_event, explicit_event));
+			};
+			void Select::raise_OnMouseWheelDoubleClick(::rux::gui::WindowMouseEvent* window_event
+				, ::rux::byte explicit_event)
+			{
+				_on_mouse_wheel_double_click.raise< const ::rux::gui::events::MouseEvent& >(
+					::rux::gui::events::MouseEvent(*this, window_event, explicit_event));
+			};
+			void Select::raise_OnMouseWheelUp(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event)
+			{
+				_on_mouse_wheel_up.raise< const ::rux::gui::events::MouseEvent& >(
+					::rux::gui::events::MouseEvent(*this, window_event, explicit_event));
+			};
 			void Select::raise_OnLeftMouseButtonDoubleClick( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event )
 			{
 				raise_OnLeftMouseButtonDown( window_event , 1 );

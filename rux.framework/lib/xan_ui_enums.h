@@ -94,6 +94,10 @@ namespace rux
 			virtual void raise_OnRightMouseButtonDown( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event ) = 0;
 			virtual void raise_OnRightMouseButtonDoubleClick( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event ) = 0;
 			virtual void raise_OnRightMouseButtonUp( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event ) = 0;
+			virtual void raise_OnMouseWheelDown(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event) = 0;
+			virtual void raise_OnMouseWheelDoubleClick(::rux::gui::WindowMouseEvent* window_event
+				, ::rux::byte explicit_event) = 0;
+			virtual void raise_OnMouseWheelUp(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event) = 0;
 			virtual void set_OnDeactivated( ::rux::gui::events::on_deactivated_event_t on_activated ) = 0;
 		};
 		class ControlBase : public CommonBase
@@ -166,6 +170,10 @@ namespace rux
 			virtual void raise_OnRightMouseButtonDown( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event ) = 0;
 			virtual void raise_OnRightMouseButtonDoubleClick( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event ) = 0;
 			virtual void raise_OnRightMouseButtonUp( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event ) = 0;
+			virtual void raise_OnMouseWheelDown(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event) = 0;
+			virtual void raise_OnMouseWheelDoubleClick(::rux::gui::WindowMouseEvent* window_event
+				, ::rux::byte explicit_event) = 0;
+			virtual void raise_OnMouseWheelUp(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event) = 0;
 			virtual void* DynamicCast( ::rux::int32 class_type ) const = 0;
 			virtual void private_set_Tag( const XObject& tag ) const = 0;
 			virtual Object& private_get_Tag( void ) = 0;
@@ -215,6 +223,10 @@ namespace rux
 			virtual void raise_OnRightMouseButtonDown( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event ) = 0;
 			virtual void raise_OnRightMouseButtonDoubleClick( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event ) = 0;
 			virtual void raise_OnRightMouseButtonUp( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event ) = 0;
+			virtual void raise_OnMouseWheelDown(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event) = 0;
+			virtual void raise_OnMouseWheelDoubleClick(::rux::gui::WindowMouseEvent* window_event
+				, ::rux::byte explicit_event) = 0;
+			virtual void raise_OnMouseWheelUp(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event) = 0;
 			virtual Window* get_ParentWindow( void ) const = 0;
 			virtual float get_Width( float* cache_width_ptr = NULL ) = 0;
 			virtual float get_Height( float* cache_height_ptr = NULL ) = 0;
@@ -475,6 +487,14 @@ namespace rux
 			void rux_class::set_OnRightMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_right_mouse_button_down )\
 			{\
 				_on_right_mouse_button_down = on_right_mouse_button_down;\
+			}\
+			void rux_class::set_OnMouseWheelDown(::rux::gui::events::on_mouse_event_t on_mouse_wheel_down)\
+			{\
+				_on_mouse_wheel_down = on_mouse_wheel_down;\
+			}\
+			void rux_class::set_OnMouseWheelUp(::rux::gui::events::on_mouse_event_t on_mouse_wheel_up)\
+			{\
+				_on_mouse_wheel_up = on_mouse_wheel_up;\
 			}\
 			::rux::int32 rux_class::get_TabIndex( void )\
 			{\
@@ -1001,6 +1021,14 @@ namespace rux
 			{\
 				_on_right_mouse_button_down = on_right_mouse_button_down;\
 			}\
+			void rux_class::set_OnMouseWheelDown(::rux::gui::events::on_mouse_event_t on_mouse_wheel_down)\
+			{\
+				_on_mouse_wheel_down = on_mouse_wheel_down;\
+			}\
+			void rux_class::set_OnMouseWheelUp(::rux::gui::events::on_mouse_event_t on_mouse_wheel_up)\
+			{\
+				_on_mouse_wheel_up = on_mouse_wheel_up;\
+			}\
 			::rux::int32 rux_class::get_TabIndex( void )\
 			{\
 				return _tab_index;\
@@ -1324,6 +1352,10 @@ namespace rux
 			virtual void raise_OnRightMouseButtonDown( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );\
 			virtual void raise_OnRightMouseButtonDoubleClick( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );\
 			virtual void raise_OnRightMouseButtonUp( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );\
+			virtual void raise_OnMouseWheelDown(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event);\
+			virtual void raise_OnMouseWheelDoubleClick(::rux::gui::WindowMouseEvent* window_event\
+				, ::rux::byte explicit_event);\
+			virtual void raise_OnMouseWheelUp(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event);\
 			virtual void raise_OnKeyChar( const ::rux::XString& symbol , ::rux::uint8 shift , ::rux::uint8 control , ::rux::uint8 alt );\
 			virtual void raise_OnKeyDown( ::rux::gui::XEnum_Keys key , ::rux::uint8 shift , ::rux::uint8 control , ::rux::uint8 alt , ::rux::uint32 value , ::rux::byte explicit_event );\
 			virtual void raise_OnLeftMouseButtonUp( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );\
@@ -1357,6 +1389,7 @@ namespace rux
 			virtual void set_OnMouseLeave( ::rux::gui::events::on_mouse_event_t on_mouse_leave_callback );\
 			virtual void set_OnLeftMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_mouse_double_click );\
 			virtual void set_OnRightMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_mouse_double_click );\
+			virtual void set_OnMouseWheelDown( ::rux::gui::events::on_mouse_event_t on_mouse_double_click );\
 			virtual void set_OnActivated( ::rux::gui::events::on_event_t on_activated );\
 			virtual void set_OnDeactivated( ::rux::gui::events::on_deactivated_event_t on_activated );\
 			virtual void set_TabIndex( ::rux::int32 tab_index );\
@@ -1366,6 +1399,7 @@ namespace rux
 			virtual void set_OnMouseWheel( ::rux::gui::events::on_mouse_event_t on_mouse_wheel_callback );\
 			virtual void set_OnLeftMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up );\
 			virtual void set_OnRightMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up );\
+			virtual void set_OnMouseWheelUp(::rux::gui::events::on_mouse_event_t on_left_mouse_button_up);\
 			void set_RightSticker( float val );\
 			void set_BottomSticker( float val );\
 			void ResetRightSticker( void );\
@@ -1457,6 +1491,10 @@ namespace rux
 			virtual void raise_OnRightMouseButtonDown( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );\
 			virtual void raise_OnRightMouseButtonDoubleClick( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );\
 			virtual void raise_OnRightMouseButtonUp( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );\
+			virtual void raise_OnMouseWheelDown(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event);\
+			virtual void raise_OnMouseWheelDoubleClick(::rux::gui::WindowMouseEvent* window_event\
+				, ::rux::byte explicit_event);\
+			virtual void raise_OnMouseWheelUp(::rux::gui::WindowMouseEvent* window_event, ::rux::byte explicit_event);\
 			virtual void raise_OnKeyChar( const ::rux::XString& symbol , ::rux::uint8 shift , ::rux::uint8 control , ::rux::uint8 alt );\
 			virtual void raise_OnKeyDown( ::rux::gui::XEnum_Keys key , ::rux::uint8 shift , ::rux::uint8 control , ::rux::uint8 alt , ::rux::uint32 value , ::rux::byte explicit_event );\
 			virtual void raise_OnLeftMouseButtonUp( ::rux::gui::WindowMouseEvent* window_event , ::rux::byte explicit_event );\
@@ -1490,6 +1528,7 @@ namespace rux
 			virtual void set_OnMouseLeave( ::rux::gui::events::on_mouse_event_t on_mouse_leave_callback );\
 			virtual void set_OnLeftMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_mouse_double_click );\
 			virtual void set_OnRightMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_mouse_double_click );\
+			virtual void set_OnMouseWheelDown( ::rux::gui::events::on_mouse_event_t on_mouse_double_click );\
 			virtual void set_OnActivated( ::rux::gui::events::on_event_t on_activated );\
 			virtual void set_OnDeactivated( ::rux::gui::events::on_deactivated_event_t on_activated );\
 			virtual void set_TabIndex( ::rux::int32 tab_index );\
@@ -1499,6 +1538,7 @@ namespace rux
 			virtual void set_OnMouseWheel( ::rux::gui::events::on_mouse_event_t on_mouse_wheel_callback );\
 			virtual void set_OnLeftMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up );\
 			virtual void set_OnRightMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up );\
+			virtual void set_OnMouseWheelUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up );\
 			template< class T >\
 			friend rux_inline float rux_try_get_left( T* control , ::rux::uint8 relative_to_parent , float* cache_left_ptr );\
 			template< class T >\
@@ -1595,6 +1635,9 @@ namespace rux
 			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_left_mouse_button_down;\
 			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_right_mouse_button_double_click;\
 			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_right_mouse_button_down;\
+			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_mouse_wheel_down;\
+			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_mouse_wheel_double_click;\
+			::rux::EventHandler< ::rux::gui::events::on_mouse_event_t > _on_mouse_wheel_up;\
 			::rux::EventHandler< ::rux::gui::events::on_event_t > _on_activated;\
 			::rux::EventHandler< ::rux::gui::events::on_deactivated_event_t > _on_deactivated;\
 			::rux::int32 _tab_index;\
@@ -1675,6 +1718,7 @@ namespace rux
 			void set_OnMouseLeave( ::rux::gui::events::on_mouse_event_t on_mouse_leave_callback );\
 			void set_OnLeftMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_mouse_double_click );\
 			void set_OnRightMouseButtonDown( ::rux::gui::events::on_mouse_event_t on_mouse_double_click );\
+			void set_OnMouseWheelDown( ::rux::gui::events::on_mouse_event_t on_mouse_double_click );\
 			void set_OnActivated( ::rux::gui::events::on_event_t on_activated );\
 			void set_OnDeactivated( ::rux::gui::events::on_deactivated_event_t on_activated );\
 			void set_TabIndex( ::rux::int32 tab_index );\
@@ -1686,6 +1730,7 @@ namespace rux
 			void set_OnMouseWheel( ::rux::gui::events::on_mouse_event_t on_mouse_wheel_callback );\
 			void set_OnLeftMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up );\
 			void set_OnRightMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up );\
+			void set_OnMouseWheelUp( ::rux::gui::events::on_mouse_event_t on_left_mouse_button_up );\
 			::rux::uint8 get_IsTransparent( void );\
 			void set_RightSticker( float val );\
 			void ResetRightSticker( void );\
@@ -1875,6 +1920,10 @@ namespace rux
 			{\
 				(*this)()->set_OnRightMouseButtonDown( on_mouse_double_click );\
 			}\
+			void rux_class::set_OnMouseWheelDown(::rux::gui::events::on_mouse_event_t on_mouse_double_click)\
+			{\
+				(*this)()->set_OnMouseWheelDown(on_mouse_double_click);\
+			}\
 			::rux::int32 rux_class::get_TabIndex( void )\
 			{\
 				return (*this)()->get_TabIndex();\
@@ -1918,6 +1967,10 @@ namespace rux
 			void rux_class::set_OnRightMouseButtonUp( ::rux::gui::events::on_mouse_event_t on_right_mouse_button_up )\
 			{\
 				(*this)()->set_OnRightMouseButtonUp( on_right_mouse_button_up );\
+			}\
+			void rux_class::set_OnMouseWheelUp( ::rux::gui::events::on_mouse_event_t on_right_mouse_button_up )\
+			{\
+				(*this)()->set_OnMouseWheelUp( on_right_mouse_button_up );\
 			}\
 			void rux_class::set_OnResized( ::rux::gui::events::on_event_t on_resized_callback )\
 			{\
