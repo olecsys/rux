@@ -3009,7 +3009,7 @@ namespace rux
 								middle_mouse_button_pressed = 0;
 								if(::rux::gui::engine::_is_middle_mouse_down == 1)
 								{
-									rux::gui::WindowMouseEvent xevent(::rux::gui::XEnum_EventType_WindowWheelMouseButtonUp 
+									rux::gui::WindowMouseEvent xevent(::rux::gui::XEnum_EventType_WindowMouseWheelUp 
 										, window, 0, event.xbutton.x, event.xbutton.y, alt, control, shift
 										, left_mouse_button_pressed, middle_mouse_button_pressed
 										, right_mouse_button_pressed, x_button1_pressed, x_button2_pressed);
