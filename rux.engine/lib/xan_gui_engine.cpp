@@ -2892,6 +2892,7 @@ namespace rux
 							rux::uint8 x_button2_pressed = event.xbutton.state & Button5Mask ? 1 : 0;						
 							if( event.xbutton.button == Button1 )
 							{
+								::rux::log::WriteTrace("ButtonPress Button1");
 								left_mouse_button_pressed = 1;
 								if( event.xbutton.time - ::rux::gui::engine::_mouse_down_time < 250 )
 								{
@@ -2914,6 +2915,7 @@ namespace rux
 							}
 							else if(event.xbutton.button == Button2)
 							{
+								::rux::log::WriteTrace("ButtonPress Button2");
 								middle_mouse_button_pressed = 1;
 								if(event.xbutton.time - ::rux::gui::engine::_mouse_down_time < 250)
 								{
@@ -2939,6 +2941,7 @@ namespace rux
 							}
 							else if( event.xbutton.button == Button3 )
 							{
+								::rux::log::WriteTrace("ButtonPress Button3");
 								right_mouse_button_pressed = 1;
 								if( event.xbutton.time - ::rux::gui::engine::_right_mouse_down_time < 250 )
 								{
@@ -2961,6 +2964,7 @@ namespace rux
 							}
 							else if( event.xbutton.button == Button4 )
 							{
+								::rux::log::WriteTrace("ButtonPress Button4");
 								rux::gui::WindowMouseEvent xevent( ::rux::gui::XEnum_EventType_WindowMouseWheel , window , 120 , event.xbutton.x , event.xbutton.y , alt , control , shift , 
 									left_mouse_button_pressed , 1 , 
 									right_mouse_button_pressed , x_button1_pressed , x_button2_pressed );
@@ -2968,6 +2972,7 @@ namespace rux
 							}
 							else if( event.xbutton.button == Button5 )
 							{
+								::rux::log::WriteTrace("ButtonPress Button5");
 								rux::gui::WindowMouseEvent xevent( ::rux::gui::XEnum_EventType_WindowMouseWheel , window , -120 , event.xbutton.x , event.xbutton.y , alt , control , shift , 
 									left_mouse_button_pressed , 1 , 
 									right_mouse_button_pressed , x_button1_pressed , x_button2_pressed );
