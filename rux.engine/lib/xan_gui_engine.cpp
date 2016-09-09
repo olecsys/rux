@@ -2905,7 +2905,7 @@ namespace rux
 								else
 								{
 									rux::gui::WindowMouseEvent xevent( ::rux::gui::XEnum_EventType_WindowLeftMouseButtonDown , window , 0 , event.xbutton.x , event.xbutton.y , alt , control , shift , 
-										1 , middle_mouse_button_pressed , 
+										left_mouse_button_pressed , middle_mouse_button_pressed , 
 										right_mouse_button_pressed , x_button1_pressed , x_button2_pressed );
 									window->CaptureMouse();
 									window->raise_event( xevent );
@@ -2930,9 +2930,9 @@ namespace rux
 								else
 								{
 									rux::gui::WindowMouseEvent xevent(::rux::gui::XEnum_EventType_WindowMouseWheelDown 
-										, window, 0, event.xbutton.x, event.xbutton.y, alt, control, shift, 1 
-										, middle_mouse_button_pressed, right_mouse_button_pressed, x_button1_pressed
-										, x_button2_pressed);
+										, window, 0, event.xbutton.x, event.xbutton.y, alt, control, shift
+										, left_mouse_button_pressed, middle_mouse_button_pressed
+										, right_mouse_button_pressed, x_button1_pressed, x_button2_pressed);
 									window->CaptureMouse();
 									window->raise_event( xevent );
 									rux::gui::engine::_is_middle_mouse_down = 1;
@@ -2955,7 +2955,7 @@ namespace rux
 								{
 									rux::gui::WindowMouseEvent xevent( ::rux::gui::XEnum_EventType_WindowRightMouseButtonDown , window , 0 , event.xbutton.x , event.xbutton.y , alt , control , shift , 
 										left_mouse_button_pressed , middle_mouse_button_pressed , 
-										1 , x_button1_pressed , x_button2_pressed );
+										right_mouse_button_pressed , x_button1_pressed , x_button2_pressed );
 									window->CaptureMouse();
 									window->raise_event( xevent );
 									rux::gui::engine::_is_right_mouse_down = 1;
