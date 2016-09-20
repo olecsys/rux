@@ -1198,6 +1198,9 @@ namespace rux
 				, stable_toremove_mbchar(mbchar0->mballocator), toremove_mbchar(mbchar0->mballocator);
 
 			::booldog::utils::executable::mbs::directory<16>(&exe_dir, exe_dir.mballocator);
+			
+			::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir.mblen, exe_dir.mbchar
+				, exe_dir.mblen, exe_dir.mbsize, &::booldog::io::mbs::slash, 0, 1);
 
 			size_t exe_dir_len = exe_dir.mblen;
 		
@@ -1449,6 +1452,7 @@ namespace rux
 									}
 								}
 							}
+							waitpidres = waitpid(parent_pid, &status);
 							if(signo != -1)
 								restart = 0;
 							else if(WIFSIGNALED(status))
