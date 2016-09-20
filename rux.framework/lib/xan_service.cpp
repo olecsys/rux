@@ -910,25 +910,24 @@ namespace rux
 			::booldog::uint64 now = ::booldog::utils::time::posix::now_as_utc();
 
 			::booldog::result_file resfile;
-			::booldog::param filesearch_paths_params[] =
-			{
-				BOOPARAM_PCHAR(""),
-				BOOPARAM_NONE
-			};
-			::booldog::named_param fileload_params[] =
-			{
-				BOONAMED_PARAM_PPARAM("search_paths", filesearch_paths_params),
-				BOONAMED_PARAM_BOOL("exedir_as_root_path", true),
-				BOONAMED_PARAM_NONE
-			};
+			
+			::booldog::utils::executable::mbs::directory<16>(mbchar, mbchar->mballocator);
 
-			if(::booldog::io::file::mbsopen(&resfile, dst->mballocator, "service.daemon.logs.txt"
-				, ::booldog::enums::io::file_mode_append|::booldog::enums::io::file_mode_write
-				, fileload_params) == false)
+			::booldog::utils::string::mbs::assign<16>(0, mbchar->mballocator, false, mbchar->mblen, mbchar->mbchar
+				, mbchar->mblen, mbchar->mbsize, &::booldog::io::mbs::slash, 0, 1);
+
+			::booldog::utils::string::mbs::assign<16>(0, mbchar->mballocator, false, mbchar->mblen, mbchar->mbchar
+				, mbchar->mblen, mbchar->mbsize, "service.daemon.logs.txt", 0, SIZE_MAX);
+			
+			int flags = ::booldog::enums::io::file_mode_append|::booldog::enums::io::file_mode_write;
+			::rux::uint64 size = rux_get_file_size(mbchar->mbchar);
+			if(size >= 1024ULL * 1024ULL)
+				flags |= ::booldog::enums::io::file_mode_truncate;
+			
+			if(::booldog::io::file::mbsopen(&resfile, dst->mballocator, mbchar->mbchar, flags) == false)
 			{
-				::booldog::io::file::mbsopen(&resfile, dst->mballocator, "service.daemon.logs.txt"
-					, ::booldog::enums::io::file_mode_create|::booldog::enums::io::file_mode_append|::booldog::enums::io::file_mode_write
-					, fileload_params);
+				flags |= ::booldog::enums::io::file_mode_create;
+				::booldog::io::file::mbsopen(&resfile, dst->mballocator, mbchar->mbchar, flags);
 			}
 			if(resfile.succeeded())
 			{					
