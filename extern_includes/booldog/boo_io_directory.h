@@ -57,10 +57,10 @@ namespace booldog
 					BOOINIT_RESULT(::booldog::result);
 					::booldog::enums::io::entry_type entry_type = ::booldog::enums::io::unknown;
 					::booldog::result_mbchar pathname_mbchar(allocator);
+#ifdef __WINDOWS__
 					if(::booldog::utils::string::mbs::assign<16>(res, allocator, false, 0, pathname_mbchar.mbchar
 						, pathname_mbchar.mblen, pathname_mbchar.mbsize, pathname, 0, SIZE_MAX, debuginfo) == false)
 						goto goto_return;
-#ifdef __WINDOWS__
 					if(pathname_mbchar.mblen > 0)
 					{
 						size_t pathname_mbchar_mblen = pathname_mbchar.mblen;
@@ -123,6 +123,9 @@ goto_return:
 					dirent* dirent_result = 0;
 					dirent* dirent_object_ptr = 0;
 					DIR* dir_ptr = opendir(pathname);
+					if(::booldog::utils::string::mbs::assign<16>(res, allocator, false, 0, pathname_mbchar.mbchar
+						, pathname_mbchar.mblen, pathname_mbchar.mbsize, pathname, 0, SIZE_MAX, debuginfo) == false)
+						goto goto_return;
 					if(dir_ptr == 0)
 					{
 						res->seterrno();
