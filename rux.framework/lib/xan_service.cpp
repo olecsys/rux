@@ -1452,7 +1452,7 @@ namespace rux
 									}
 								}
 							}
-							waitpidres = waitpid(parent_pid, &status);
+							waitpidres = waitpid(parent_pid, &status, WUNTRACED);
 							if(signo != -1)
 								restart = 0;
 							else if(WIFSIGNALED(status))
