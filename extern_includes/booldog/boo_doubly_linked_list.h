@@ -36,6 +36,9 @@ namespace booldog
 			};
 			bool exists(T* item)
 			{
+#ifdef BOOLDOG_DOUBLY_LINKED_PARENT_ENABLE
+				return item->_doubly_linked_list_parent == this;
+#else
 				T* next = _first;
 				for(;;)
 				{
@@ -44,6 +47,7 @@ namespace booldog
 					next = next->_doubly_linked_list_next;
 				}
 				return next != 0;
+#endif
 			};
 			void remove( T* item )
 			{
@@ -54,7 +58,10 @@ namespace booldog
 				if( item == _last )
 					_last = item->_doubly_linked_list_prev;
 				else
-					item->_doubly_linked_list_next->_doubly_linked_list_prev = item->_doubly_linked_list_prev;				
+					item->_doubly_linked_list_next->_doubly_linked_list_prev = item->_doubly_linked_list_prev;	
+#ifdef BOOLDOG_DOUBLY_LINKED_PARENT_ENABLE
+				item->_doubly_linked_list_parent = 0;
+#endif
 				_count--;
 			};
 			void insert_before(T* item, T* insertion_item)
@@ -66,6 +73,9 @@ namespace booldog
 				insertion_item->_doubly_linked_list_prev = item->_doubly_linked_list_prev;
 				insertion_item->_doubly_linked_list_next = item;
 				item->_doubly_linked_list_prev = insertion_item;
+#ifdef BOOLDOG_DOUBLY_LINKED_PARENT_ENABLE
+				insertion_item->_doubly_linked_list_parent = this;
+#endif
 				++_count;
 			};
 			size_t add(T* item)
@@ -77,6 +87,9 @@ namespace booldog
 				item->_doubly_linked_list_prev = _last;
 				item->_doubly_linked_list_next = 0;
 				_last = item;
+#ifdef BOOLDOG_DOUBLY_LINKED_PARENT_ENABLE
+				item->_doubly_linked_list_parent = this;
+#endif
 				return _count++;
 			};
 			void remove(T& item)

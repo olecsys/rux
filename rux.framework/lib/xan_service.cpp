@@ -20,6 +20,9 @@
 #include BOOLDOG_HEADER(boo_mixed_allocator.h)
 #include BOOLDOG_HEADER(boo_io_file.h)
 #include BOOLDOG_HEADER(boo_time_utils.h)
+#include BOOLDOG_HEADER(boo_io_directory.h)
+#include BOOLDOG_HEADER(boo_directory_utils.h)
+#include BOOLDOG_HEADER(boo_error_format.h)
 
 const char* _init_d_daemon_script = 
 "#!/bin/sh\n\
@@ -949,6 +952,362 @@ namespace rux
 				resfile.file->close( &resfile );
 			}
 		};
+		struct listdir_info
+		{
+			::booldog::result_mbchar* stable_toremove_mbchar;
+			int stable_count;
+			::booldog::result_mbchar* memory_toremove_mbchar;
+			int memory_count;
+			::booldog::result_mbchar* mbchar0;
+			::booldog::result_mbchar* mbchar1;
+		};
+		bool listdir_remove(::booldog::allocator* allocator, void* udata, const char* pathname
+			, const char* entry_name, ::booldog::enums::io::entry_type entry_type)
+		{
+			{
+				if(entry_type == ::booldog::enums::io::directory)
+				{
+					listdir_info* info00 = (listdir_info*)udata;
+			
+					::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false, 0
+						, info00->memory_toremove_mbchar->mbchar, info00->memory_toremove_mbchar->mblen
+						, info00->memory_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
+					if(info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '/'
+						&& info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '\\')
+					{
+						::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
+							, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
+							, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize
+							, &::booldog::io::mbs::slash, 0, 1);
+					}
+					::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
+						, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
+						, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize, entry_name, 0
+						, SIZE_MAX);
+
+					::booldog::io::directory::mbs::listdir(0, info00->memory_toremove_mbchar->mballocator
+						, info00->memory_toremove_mbchar->mbchar, listdir_remove, info00);
+
+					::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false, 0
+						, info00->memory_toremove_mbchar->mbchar, info00->memory_toremove_mbchar->mblen
+						, info00->memory_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
+					if(info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '/'
+						&& info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '\\')
+					{
+						::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
+							, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
+							, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize
+							, &::booldog::io::mbs::slash, 0, 1);
+					}
+					::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
+						, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
+						, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize, entry_name, 0
+						, SIZE_MAX);
+
+					::booldog::result res;
+					if(::booldog::utils::io::mbs::rmdir(&res, info00->memory_toremove_mbchar->mbchar) == false)
+					{
+						size_t error_string_len = 0, error_string_size = 0;
+						char* error_string = 0;
+						::booldog::error::format(0, allocator, error_string, error_string_len, error_string_size);
+						boowritelog(info00->mbchar0, info00->mbchar1, "rmdir %s, errno %s", info00->memory_toremove_mbchar->mbchar, error_string);
+					}
+				}
+				else if(entry_type == ::booldog::enums::io::file)
+				{
+					listdir_info* info00 = (listdir_info*)udata;
+
+					::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false, 0
+						, info00->memory_toremove_mbchar->mbchar, info00->memory_toremove_mbchar->mblen
+						, info00->memory_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
+					if(info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '/'
+						&& info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '\\')
+					{
+						::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
+							, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
+							, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize
+							, &::booldog::io::mbs::slash, 0, 1);
+					}
+					::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
+						, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
+						, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize, entry_name, 0
+						, SIZE_MAX);
+
+					::booldog::result res;
+					if(::booldog::utils::io::mbs::remove(&res, info00->memory_toremove_mbchar->mbchar) == false)
+					{
+						size_t error_string_len = 0, error_string_size = 0;
+						char* error_string = 0;
+						::booldog::error::format(0, allocator, error_string, error_string_len, error_string_size);
+						boowritelog(info00->mbchar0, info00->mbchar1, "remove %s, errno %s", info00->memory_toremove_mbchar->mbchar, error_string);
+					}
+				}
+			}
+			return true;
+		};
+		bool listdir_count(::booldog::allocator* allocator, void* udata, const char* pathname
+			, const char* entry_name, ::booldog::enums::io::entry_type entry_type)
+		{
+			{
+				if(entry_type == ::booldog::enums::io::directory)
+				{
+					listdir_info* info00 = (listdir_info*)udata;
+					::booldog::result_size ressize;
+					if(info00->stable_toremove_mbchar)
+						::booldog::utils::string::mbs::indexof(&ressize, false, entry_name, 0, SIZE_MAX, "stable_", 0
+						, SIZE_MAX);
+					else
+						ressize.sres = SIZE_MAX;
+					if(ressize.sres == 0)
+					{
+						if(strcmp(entry_name, "stable_last") == 0)
+						{
+							::booldog::result_mbchar mbchar(allocator), toremove_mbchar(allocator);
+							::booldog::utils::string::mbs::assign<16>(0, mbchar.mballocator, false, 0
+								, mbchar.mbchar, mbchar.mblen
+								, mbchar.mbsize, pathname, 0, SIZE_MAX);
+							if(mbchar.mbchar[mbchar.mblen - 1] != '/'
+								&& mbchar.mbchar[mbchar.mblen - 1] != '\\')
+							{
+								::booldog::utils::string::mbs::assign<16>(0, mbchar.mballocator, false
+									, mbchar.mblen, mbchar.mbchar
+									, mbchar.mblen, mbchar.mbsize
+									, &::booldog::io::mbs::slash, 0, 1);
+							}
+							::booldog::utils::string::mbs::assign<16>(0, mbchar.mballocator, false
+								, mbchar.mblen, mbchar.mbchar
+								, mbchar.mblen, mbchar.mbsize, entry_name, 0
+								, SIZE_MAX);
+					
+							listdir_info info_;
+							info_.mbchar0 = info00->mbchar0;
+							info_.mbchar1 = info00->mbchar1;
+							info_.memory_toremove_mbchar = &toremove_mbchar;					
+							::booldog::io::directory::mbs::listdir(0, allocator, mbchar.mbchar, listdir_remove, &info_);
+							::booldog::result res;
+							if(::booldog::utils::io::mbs::rmdir(&res, mbchar.mbchar) == false)
+							{
+								size_t error_string_len = 0, error_string_size = 0;
+								char* error_string = 0;
+								::booldog::error::format(0, allocator, error_string, error_string_len, error_string_size);
+								boowritelog(info00->mbchar0, info00->mbchar1, "rmdir %s, errno %s", mbchar.mbchar
+									, error_string);
+							}
+						}
+						else
+						{
+							++info00->stable_count;
+							if(info00->stable_toremove_mbchar->mblen == 0 
+								|| strcmp(info00->stable_toremove_mbchar->mbchar, entry_name) > 0)
+							{
+								::booldog::utils::string::mbs::assign<16>(0, info00->stable_toremove_mbchar->mballocator, false, 0
+									, info00->stable_toremove_mbchar->mbchar, info00->stable_toremove_mbchar->mblen
+									, info00->stable_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
+								if(info00->stable_toremove_mbchar->mbchar[info00->stable_toremove_mbchar->mblen - 1] != '/'
+									&& info00->stable_toremove_mbchar->mbchar[info00->stable_toremove_mbchar->mblen - 1] != '\\')
+								{
+									::booldog::utils::string::mbs::assign<16>(0, info00->stable_toremove_mbchar->mballocator, false
+										, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbchar
+										, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbsize
+										, &::booldog::io::mbs::slash, 0, 1);
+								}
+								::booldog::utils::string::mbs::assign<16>(0, info00->stable_toremove_mbchar->mballocator, false
+									, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbchar
+									, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbsize, entry_name, 0
+									, SIZE_MAX);
+							}
+						}
+					}
+					else
+					{
+						if(info00->memory_toremove_mbchar)
+							::booldog::utils::string::mbs::indexof(&ressize, false, entry_name, 0, SIZE_MAX, "memory_", 0
+							, SIZE_MAX);
+						else
+							ressize.sres = SIZE_MAX;
+						if(ressize.sres == 0)
+						{
+							if(strcmp(entry_name, "memory_last") == 0)
+							{
+								::booldog::result_mbchar mbchar(allocator), toremove_mbchar(allocator);
+								::booldog::utils::string::mbs::assign<16>(0, mbchar.mballocator, false, 0
+									, mbchar.mbchar, mbchar.mblen
+									, mbchar.mbsize, pathname, 0, SIZE_MAX);
+								if(mbchar.mbchar[mbchar.mblen - 1] != '/'
+									&& mbchar.mbchar[mbchar.mblen - 1] != '\\')
+								{
+									::booldog::utils::string::mbs::assign<16>(0, mbchar.mballocator, false
+										, mbchar.mblen, mbchar.mbchar
+										, mbchar.mblen, mbchar.mbsize
+										, &::booldog::io::mbs::slash, 0, 1);
+								}
+								::booldog::utils::string::mbs::assign<16>(0, mbchar.mballocator, false
+									, mbchar.mblen, mbchar.mbchar
+									, mbchar.mblen, mbchar.mbsize, entry_name, 0
+									, SIZE_MAX);
+					
+								listdir_info info_;
+								info_.mbchar0 = info00->mbchar0;
+								info_.mbchar1 = info00->mbchar1;
+								info_.memory_toremove_mbchar = &toremove_mbchar;					
+								::booldog::io::directory::mbs::listdir(0, allocator, mbchar.mbchar, listdir_remove, &info_);
+								::booldog::result res;
+								if(::booldog::utils::io::mbs::rmdir(&res, mbchar.mbchar) == false)
+								{
+									size_t error_string_len = 0, error_string_size = 0;
+									char* error_string = 0;
+									::booldog::error::format(0, allocator, error_string, error_string_len
+										, error_string_size);
+									boowritelog(info00->mbchar0, info00->mbchar1, "rmdir %s, errno %s", mbchar.mbchar, error_string);
+								}
+							}
+							else
+							{
+								++info00->memory_count;
+								if(info00->memory_toremove_mbchar->mblen == 0 
+									|| strcmp(info00->memory_toremove_mbchar->mbchar, entry_name) > 0)
+								{
+									::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false, 0
+										, info00->memory_toremove_mbchar->mbchar, info00->memory_toremove_mbchar->mblen
+										, info00->memory_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
+									if(info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '/'
+										&& info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '\\')
+									{
+										::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
+											, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
+											, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize
+											, &::booldog::io::mbs::slash, 0, 1);
+									}
+									::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
+										, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
+										, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize, entry_name, 0
+										, SIZE_MAX);
+								}
+							}
+						}
+					}
+				}
+			}
+			return true;
+		};
+		void rename_stable_and_memory(::booldog::result_mbchar* mbchar0, ::booldog::result_mbchar* mbchar1)
+		{
+			::booldog::result res;
+			::booldog::result_bool resbool;
+			::booldog::result_mbchar exe_dir(mbchar0->mballocator), time_mbchar(mbchar0->mballocator)
+				, dst(mbchar0->mballocator), memory_toremove_mbchar(mbchar0->mballocator)
+				, stable_toremove_mbchar(mbchar0->mballocator), toremove_mbchar(mbchar0->mballocator);
+
+			::booldog::utils::executable::mbs::directory<16>(&exe_dir, exe_dir.mballocator);
+
+			size_t exe_dir_len = exe_dir.mblen;
+		
+			::booldog::uint64 now = ::booldog::utils::time::posix::now_as_utc();
+			now = ::booldog::utils::time::posix::tolocal(now);		
+			::booldog::utils::time::posix::mbs::tostring<16>(&time_mbchar, time_mbchar.mballocator, "_%Y%m%d_%H%M%S%MS"
+				, now);
+		
+			::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, 0, dst.mbchar
+				, dst.mblen, dst.mbsize, exe_dir.mbchar, 0, SIZE_MAX);
+
+
+			::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir_len, exe_dir.mbchar
+				, exe_dir.mblen, exe_dir.mbsize, "stable", 0, SIZE_MAX);
+		
+			bool stable_renamed = false;
+
+			::booldog::utils::io::directory::mbs::exists(&resbool, mbchar0->mballocator, exe_dir.mbchar, debuginfo_macros);
+			if(resbool.bres)
+			{
+				::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, exe_dir_len, dst.mbchar
+					, dst.mblen, dst.mbsize, "stable", 0, SIZE_MAX);
+				::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, dst.mblen, dst.mbchar
+					, dst.mblen, dst.mbsize, time_mbchar.mbchar, 0, SIZE_MAX);
+						
+				if(::booldog::utils::io::mbs::rename(&res, exe_dir.mbchar, dst.mbchar) == false)
+				{
+					size_t error_string_len = 0, error_string_size = 0;
+					char* error_string = 0;
+					::booldog::error::format(0, mbchar0->mballocator, error_string, error_string_len, error_string_size);
+					boowritelog(mbchar0, mbchar1, "rename '%s' to '%s', errno %s", exe_dir.mbchar, dst.mbchar, error_string);
+				}
+				else
+				{
+					stable_renamed = true;
+		#ifdef __WINDOWS__
+					::_chmod(dst.mbchar, 0777);
+		#else
+					::chmod(dst.mbchar, 0777);
+		#endif
+				}
+			}
+
+			::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir_len, exe_dir.mbchar
+				, exe_dir.mblen, exe_dir.mbsize, "memory", 0, SIZE_MAX);
+
+			bool memory_renamed = false;
+			::booldog::utils::io::directory::mbs::exists(&resbool, mbchar0->mballocator, exe_dir.mbchar, debuginfo_macros);
+			if(resbool.bres)
+			{
+				::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, exe_dir_len, dst.mbchar
+					, dst.mblen, dst.mbsize, "memory", 0, SIZE_MAX);
+				::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, dst.mblen, dst.mbchar
+					, dst.mblen, dst.mbsize, time_mbchar.mbchar, 0, SIZE_MAX);
+
+				if(::booldog::utils::io::mbs::rename(&res, exe_dir.mbchar, dst.mbchar) == false)
+				{
+					size_t error_string_len = 0, error_string_size = 0;
+					char* error_string = 0;
+					::booldog::error::format(0, mbchar0->mballocator, error_string, error_string_len, error_string_size);
+					boowritelog(mbchar0, mbchar1, "rename '%s' to '%s', errno %s", exe_dir.mbchar, dst.mbchar
+					, error_string);
+				}
+				else
+				{
+					memory_renamed = true;
+		#ifdef __WINDOWS__
+					::_chmod(dst.mbchar, 0777);
+		#else
+					::chmod(dst.mbchar, 0777);
+		#endif
+				}
+			}
+			listdir_info info;
+			info.mbchar0 = mbchar0;
+			info.mbchar1 = mbchar1;
+			info.stable_count = 0;
+			info.memory_count = 0;
+			info.memory_toremove_mbchar = memory_renamed ? &memory_toremove_mbchar : 0;
+			info.stable_toremove_mbchar = stable_renamed ? &stable_toremove_mbchar : 0;
+			exe_dir.mbchar[exe_dir_len] = 0;
+			::booldog::io::directory::mbs::listdir(0, mbchar0->mballocator, exe_dir.mbchar, listdir_count, &info);
+			if(info.stable_count >= 4)
+			{
+				info.memory_toremove_mbchar = &toremove_mbchar;
+				::booldog::io::directory::mbs::listdir(0, mbchar0->mballocator, stable_toremove_mbchar.mbchar
+					, listdir_remove, &info);
+				if(::booldog::utils::io::mbs::rmdir(&res, stable_toremove_mbchar.mbchar) == false)
+				{
+					size_t error_string_len = 0, error_string_size = 0;
+					char* error_string = 0;
+					::booldog::error::format(0, mbchar0->mballocator, error_string, error_string_len, error_string_size);
+					boowritelog(mbchar0, mbchar1, "rmdir %s, errno %s", stable_toremove_mbchar.mbchar, error_string);
+				}
+			}
+			if(info.memory_count >= 4)
+			{
+				info.memory_toremove_mbchar = &toremove_mbchar;
+				::booldog::io::directory::mbs::listdir(0, mbchar0->mballocator, memory_toremove_mbchar.mbchar
+					, listdir_remove, &info);
+				if(::booldog::utils::io::mbs::rmdir(&res, memory_toremove_mbchar.mbchar) == false)
+				{
+					size_t error_string_len = 0, error_string_size = 0;
+					char* error_string = 0;
+					::booldog::error::format(0, mbchar0->mballocator, error_string, error_string_len, error_string_size);
+					boowritelog(mbchar0, mbchar1, "rmdir %s, errno %s", memory_toremove_mbchar.mbchar, error_string);
+				}
+			}
+		};
 		rux::uint8 Start( const char* logfile , char error[ 1024 ] , rux::uint8 check_rux_executing_in_current_path )
 		{
 			::booldog::allocators::easy::heap heap;
@@ -1126,6 +1485,7 @@ namespace rux
 					}
 					else
 					{
+						rename_stable_and_memory(&mbchar0, &mbchar1);
 						if(rux::engine::_globals->_service_globals->_is_autorecovery == 1)
 						{
 							prctl(PR_SET_PDEATHSIG, SIGHUP);

@@ -980,6 +980,8 @@ namespace rux
 			};
 			dll_internal void pump_message( ::rux::uint8 wait_for_message )
 			{	
+				::rux::uint32 delay_tickcount = ::rux::XTime::GetTickCount();
+
 				::rux::gui::engine::_is_pump_message++;
 				rux::gui::engine::schedule* schedule = 0;
 				if( ::rux::gui::engine::_is_pump_message == 1 )
@@ -998,13 +1000,28 @@ namespace rux
 								if( now - schedule->_execute_time >= schedule->_timeout )
 								{
 									schedule->_execute_time = now;
+
+									::rux::uint32 delay_tickcount = ::rux::XTime::GetTickCount();
+
 									schedule->_dispatcher( schedule->_param );
+
+									delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+									if(delay_tickcount > 100)
+										::rux::log::WriteError("pump_message(schedule), delay=%u ms." 
+										, delay_tickcount);
 								}
 							}
 						}
 					}
 					::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteUnlock();
 				}
+				delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+				if(delay_tickcount > 1000)
+					::rux::log::WriteError("pump_message(schedule cycle), delay=%u ms." 
+					, delay_tickcount);
+
+				delay_tickcount = ::rux::XTime::GetTickCount();
+
 				if( XInterlocked::CompareExchange( &::rux::gui::engine::_dispatchers_count , 0 , 0 ) > 0 )
 				{
 					size_t dispatcher_index = 0;
@@ -1018,7 +1035,16 @@ namespace rux
 							CS_PTR_UNLOCK( ::rux::gui::engine::_cs_dispatchers );
 							XInterlocked::Decrement( &::rux::gui::engine::_dispatchers_count );
 							rux::gui::rux_dispatcher_t rux_dispatcher = (rux::gui::rux_dispatcher_t)user_data3->_udata2;									
+
+							::rux::uint32 delay_tickcount = ::rux::XTime::GetTickCount();
+
 							rux_dispatcher( user_data3->_udata0 );
+
+							delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+							if(delay_tickcount > 100)
+								::rux::log::WriteError("pump_message(dispatcher), delay=%u ms." 
+								, delay_tickcount);
+
 							if( user_data3->_udata1 )
 								( (rux::threading::XEvent*)user_data3->_udata1 )->Set();
 							rux::engine::free_object< XUserData3 >( user_data3 );
@@ -1028,13 +1054,25 @@ namespace rux
 					}
 					CS_PTR_UNLOCK( ::rux::gui::engine::_cs_dispatchers );
 				}
+
+				delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+				if(delay_tickcount > 1000)
+					::rux::log::WriteError("pump_message(dispatcher cycle), delay=%u ms." 
+					, delay_tickcount);
+
 #ifdef __WINDOWS__
+				delay_tickcount = ::rux::XTime::GetTickCount();
+
 				MSG msg;				
 				if( PeekMessageA( &msg , NULL , 0 , 0 , PM_REMOVE ) )
 				{
 					TranslateMessage( &msg ); 
 					DispatchMessageA( &msg );
-				}	
+				}
+				delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+				if(delay_tickcount > 100)
+					::rux::log::WriteError("pump_message(PeekMessageA), delay=%u ms." 
+					, delay_tickcount);
 #else
 #ifdef __ANDROID__
 #else
@@ -1456,6 +1494,8 @@ namespace rux
 			};
 			LRESULT CALLBACK WndProc( HWND hwnd , ::rux::uint32 msg , WPARAM wparam , LPARAM lparam )
 			{
+				::rux::uint32 delay_tickcount = ::rux::XTime::GetTickCount();
+
 				if( rux::gui::engine::_winapi_trace && hwnd )
 					::rux::log::WriteTrace( "WndProc, hwnd=%p, msg=0x%x" , hwnd , msg );
 				::rux::byte need_release = 0;
@@ -1527,6 +1567,11 @@ namespace rux
 						}		
 						if( window && need_release )
 							window->Release();
+
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_ACTIVATE), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_SYSCOMMAND:
@@ -1539,6 +1584,10 @@ namespace rux
 								{
 									if( window && need_release )
 										window->Release();
+									delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+									if(delay_tickcount > 100)
+										::rux::log::WriteError("WndProc(SC_CLOSE), delay=%u ms." 
+										, delay_tickcount);
 									return 0;
 								}
 							case SC_MAXIMIZE:
@@ -1587,9 +1636,17 @@ namespace rux
 							{
 								if( need_release )
 									window->Release();
+								delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+								if(delay_tickcount > 100)
+									::rux::log::WriteError("WndProc(WM_CLOSE), delay=%u ms." 
+									, delay_tickcount);
 								return 1;
 							}
 						}
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_CLOSE), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_SYSKEYDOWN:
@@ -1679,6 +1736,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_KEYDOWN), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_SYSKEYUP:
@@ -1768,6 +1829,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_KEYUP), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_CHAR:
@@ -1882,6 +1947,10 @@ namespace rux
 						}
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_CHAR), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_WINDOWPOSCHANGING:
@@ -1979,6 +2048,10 @@ namespace rux
 						}
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_SIZE), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_MOVE:
@@ -2001,18 +2074,30 @@ namespace rux
 						}
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_MOVE), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_ERASEBKGND:		
 					{
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_ERASEBKGND), delay=%u ms." 
+							, delay_tickcount);
 						return TRUE;
 					}
 				case WM_NCPAINT:
 					{
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_NCPAINT), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_PAINT:
@@ -2030,6 +2115,10 @@ namespace rux
 						}*/
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_PAINT), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_MBUTTONDBLCLK:
@@ -2056,6 +2145,10 @@ namespace rux
 						window->raise_event(xevent);
 						if(window && need_release)
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_MBUTTONDBLCLK), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_MBUTTONUP:
@@ -2082,6 +2175,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_MBUTTONUP), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_MBUTTONDOWN:
@@ -2108,6 +2205,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_MBUTTONDOWN), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_MOUSEWHEEL:
@@ -2143,6 +2244,10 @@ namespace rux
 						}
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_MOUSEWHEEL), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_MOUSEMOVE:
@@ -2169,6 +2274,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_MOUSEMOVE), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_LBUTTONDOWN:
@@ -2196,6 +2305,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_LBUTTONDOWN), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_LBUTTONUP:
@@ -2223,6 +2336,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_LBUTTONUP), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_LBUTTONDBLCLK:
@@ -2249,6 +2366,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_LBUTTONDBLCLK), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_RBUTTONDOWN:
@@ -2276,6 +2397,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_RBUTTONDOWN), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_RBUTTONUP:
@@ -2303,6 +2428,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_RBUTTONUP), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_RBUTTONDBLCLK:
@@ -2329,6 +2458,10 @@ namespace rux
 						window->raise_event( xevent );
 						if( window && need_release )
 							window->Release();
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_RBUTTONDBLCLK), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				case WM_SETCURSOR:
@@ -2339,6 +2472,10 @@ namespace rux
 							if( need_release )
 								window->Release();
 						}
+						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+						if(delay_tickcount > 100)
+							::rux::log::WriteError("WndProc(WM_SETCURSOR), delay=%u ms." 
+							, delay_tickcount);
 						return 0;
 					}
 				default:
@@ -2348,6 +2485,10 @@ namespace rux
 				}	
 				if( window && need_release )
 					window->Release();
+				delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
+				if(delay_tickcount > 100)
+					::rux::log::WriteError("WndProc(DefWindowProc), delay=%u ms." 
+					, delay_tickcount);
 				return DefWindowProc( hwnd, msg, wparam, lparam );
 			};
 #elif defined( __UNIX__ )
