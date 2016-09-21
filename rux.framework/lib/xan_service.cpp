@@ -1040,8 +1040,6 @@ namespace rux
 						::booldog::error::format(0, allocator, error_string, error_string_len, error_string_size);
 						boowritelog(info00->mbchar0, info00->mbchar1, "remove %s, errno %s", info00->memory_toremove_mbchar->mbchar, error_string);
 					}
-					else
-						boowritelog(info00->mbchar0, info00->mbchar1, "remove %s succeeded", info00->memory_toremove_mbchar->mbchar);
 				}
 			}
 			return true;
