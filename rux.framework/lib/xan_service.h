@@ -5,6 +5,15 @@
 #endif
 #include <xan_string.h>
 #include <xan_keyvaluepair.h>
+
+#ifndef BOOLDOG_NETWORK
+#define BOOLDOG_NETWORK
+#endif
+#ifndef BOOLDOG_HEADER
+#define BOOLDOG_HEADER( header ) <booldog/header>
+#endif
+#include BOOLDOG_HEADER(boo_string_utils.h)
+
 namespace rux
 {
 	namespace service
@@ -64,6 +73,7 @@ namespace rux
 		void WINAPI service_ctrl_handler( DWORD ctrl );
 		void posix_signal( ::rux::int32 signum );
 #endif
+		void rename_stable_and_memory(::booldog::result_mbchar* mbchar0, ::booldog::result_mbchar* mbchar1);
 	};
 };
 #endif

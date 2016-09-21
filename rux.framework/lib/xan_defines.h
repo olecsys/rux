@@ -2589,6 +2589,7 @@ public:\
 		::booldog::allocators::single_threaded::mixed<2048> easymixed(&easyheap);\
 		::rux::int32 main_res = 0;\
 		{\
+			::booldog::result_mbchar mbchar0(&easymixed), mbchar1(&easymixed);\
 			::rux::int32 index0 = 0;\
 			const char* command = NULL;\
 			size_t argument_count = 0;\
@@ -2691,6 +2692,7 @@ public:\
 			else if( command && strcmp( command , "-d" ) == 0 )\
 			{\
 				::rux::XConsole::DeInitialize();\
+				::rux::service::initialize(&mbchar0, &mbchar1);\
 				::rux::engine::load_engine();\
 				if( check_rux_executing_in_current_path == 0\
 					|| rux_is_already_executing_in_current_path() == 0 )\
