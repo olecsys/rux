@@ -2692,7 +2692,7 @@ public:\
 			else if( command && strcmp( command , "-d" ) == 0 )\
 			{\
 				::rux::XConsole::DeInitialize();\
-				::rux::service::initialize(&mbchar0, &mbchar1);\
+				::rux::service::rename_stable_and_memory(&mbchar0, &mbchar1);\
 				::rux::engine::load_engine();\
 				if( check_rux_executing_in_current_path == 0\
 					|| rux_is_already_executing_in_current_path() == 0 )\
