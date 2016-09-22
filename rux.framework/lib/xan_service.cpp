@@ -1096,24 +1096,28 @@ namespace rux
 						else
 						{
 							++info00->stable_count;
-							if(info00->stable_toremove_mbchar->mblen == 0 
-								|| strcmp(info00->stable_toremove_mbchar->mbchar, entry_name) > 0)
+							if(info00->stable_toremove_mbchar->mblen == 0)
 							{
-								::booldog::utils::string::mbs::assign<16>(0, info00->stable_toremove_mbchar->mballocator, false, 0
-									, info00->stable_toremove_mbchar->mbchar, info00->stable_toremove_mbchar->mblen
-									, info00->stable_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
-								if(info00->stable_toremove_mbchar->mbchar[info00->stable_toremove_mbchar->mblen - 1] != '/'
-									&& info00->stable_toremove_mbchar->mbchar[info00->stable_toremove_mbchar->mblen - 1] != '\\')
+								::booldog::utils::io::path::mbs::filename(info00->mbchar0, info00->mbchar0->mballocator
+									, info00->stable_toremove_mbchar->mbchar, 0, SIZE_MAX);
+								if(strcmp(info00->mbchar0->mbchar, entry_name) > 0)
 								{
+									::booldog::utils::string::mbs::assign<16>(0, info00->stable_toremove_mbchar->mballocator, false, 0
+										, info00->stable_toremove_mbchar->mbchar, info00->stable_toremove_mbchar->mblen
+										, info00->stable_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
+									if(info00->stable_toremove_mbchar->mbchar[info00->stable_toremove_mbchar->mblen - 1] != '/'
+										&& info00->stable_toremove_mbchar->mbchar[info00->stable_toremove_mbchar->mblen - 1] != '\\')
+									{
+										::booldog::utils::string::mbs::assign<16>(0, info00->stable_toremove_mbchar->mballocator, false
+											, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbchar
+											, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbsize
+											, &::booldog::io::mbs::slash, 0, 1);
+									}
 									::booldog::utils::string::mbs::assign<16>(0, info00->stable_toremove_mbchar->mballocator, false
 										, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbchar
-										, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbsize
-										, &::booldog::io::mbs::slash, 0, 1);
+										, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbsize, entry_name, 0
+										, SIZE_MAX);
 								}
-								::booldog::utils::string::mbs::assign<16>(0, info00->stable_toremove_mbchar->mballocator, false
-									, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbchar
-									, info00->stable_toremove_mbchar->mblen, info00->stable_toremove_mbchar->mbsize, entry_name, 0
-									, SIZE_MAX);
 							}
 						}
 					}
@@ -1163,24 +1167,29 @@ namespace rux
 							else
 							{
 								++info00->memory_count;
-								if(info00->memory_toremove_mbchar->mblen == 0 
-									|| strcmp(info00->memory_toremove_mbchar->mbchar, entry_name) > 0)
+								if(info00->memory_toremove_mbchar->mblen == 0)
 								{
-									::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false, 0
-										, info00->memory_toremove_mbchar->mbchar, info00->memory_toremove_mbchar->mblen
-										, info00->memory_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
-									if(info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '/'
-										&& info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '\\')
+									::booldog::utils::io::path::mbs::filename(info00->mbchar0, info00->mbchar0->mballocator
+										, info00->memory_toremove_mbchar->mbchar, 0, SIZE_MAX);
+
+									if(strcmp(info00->mbchar0->mbchar, entry_name) > 0)
 									{
+										::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false, 0
+											, info00->memory_toremove_mbchar->mbchar, info00->memory_toremove_mbchar->mblen
+											, info00->memory_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
+										if(info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '/'
+											&& info00->memory_toremove_mbchar->mbchar[info00->memory_toremove_mbchar->mblen - 1] != '\\')
+										{
+											::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
+												, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
+												, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize
+												, &::booldog::io::mbs::slash, 0, 1);
+										}
 										::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
 											, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
-											, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize
-											, &::booldog::io::mbs::slash, 0, 1);
+											, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize, entry_name, 0
+											, SIZE_MAX);
 									}
-									::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false
-										, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
-										, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize, entry_name, 0
-										, SIZE_MAX);
 								}
 							}
 						}
