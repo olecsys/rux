@@ -1338,6 +1338,7 @@ namespace rux
 				error[ 0 ] = 0;
 				rux::uint8 is_started = 0;
 	#ifdef	__UNIX__
+				bool first_start = true;
 				const char* termsignal = 0;
 				if(rux::engine::_globals->_service_globals->_is_autorecovery == 1)
 				{
@@ -1376,6 +1377,7 @@ namespace rux
 						exit(1);
 					else if(parent_pid != 0)
 					{
+						first_start = false;
 						is_started = 1;
 						if( rux::engine::_globals->_service_globals->_is_autorecovery == 1 )
 						{
@@ -1504,7 +1506,8 @@ namespace rux
 					}
 					else
 					{
-						rename_stable_and_memory(&mbchar0, &mbchar1);
+						if(first_start == false)
+							rename_stable_and_memory(&mbchar0, &mbchar1);
 						if(rux::engine::_globals->_service_globals->_is_autorecovery == 1)
 						{
 							prctl(PR_SET_PDEATHSIG, SIGHUP);
