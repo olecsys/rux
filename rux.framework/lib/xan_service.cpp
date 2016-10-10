@@ -1008,7 +1008,7 @@ namespace rux
 					{
 						size_t error_string_len = 0, error_string_size = 0;
 						char* error_string = 0;
-						::booldog::error::format(0, allocator, error_string, error_string_len, error_string_size);
+						::booldog::error::format(&res, allocator, error_string, error_string_len, error_string_size);
 						boowritelog(info00->mbchar0, info00->mbchar1, "rmdir %s, errno %s", info00->memory_toremove_mbchar->mbchar, error_string);
 					}
 				}
@@ -1037,7 +1037,7 @@ namespace rux
 					{
 						size_t error_string_len = 0, error_string_size = 0;
 						char* error_string = 0;
-						::booldog::error::format(0, allocator, error_string, error_string_len, error_string_size);
+						::booldog::error::format(&res, allocator, error_string, error_string_len, error_string_size);
 						boowritelog(info00->mbchar0, info00->mbchar1, "remove %s, errno %s", info00->memory_toremove_mbchar->mbchar, error_string);
 					}
 				}
@@ -1088,7 +1088,7 @@ namespace rux
 							{
 								size_t error_string_len = 0, error_string_size = 0;
 								char* error_string = 0;
-								::booldog::error::format(0, allocator, error_string, error_string_len, error_string_size);
+								::booldog::error::format(&res, allocator, error_string, error_string_len, error_string_size);
 								boowritelog(info00->mbchar0, info00->mbchar1, "rmdir %s, errno %s", mbchar.mbchar
 									, error_string);
 							}
@@ -1163,7 +1163,7 @@ namespace rux
 								{
 									size_t error_string_len = 0, error_string_size = 0;
 									char* error_string = 0;
-									::booldog::error::format(0, allocator, error_string, error_string_len
+									::booldog::error::format(&res, allocator, error_string, error_string_len
 										, error_string_size);
 									boowritelog(info00->mbchar0, info00->mbchar1, "rmdir %s, errno %s", mbchar.mbchar, error_string);
 								}
@@ -1205,6 +1205,35 @@ namespace rux
 			}
 			return true;
 		};
+		bool try_get_process_name_by_pid(::booldog::result_mbchar* mbchar0, ::booldog::result_mbchar* mbchar1
+			, ::booldog::pid_t pid)
+		{
+			bool res = false;
+			{
+				::booldog::utils::string::mbs::assign<16>(0, mbchar0->mballocator, false, 0, mbchar0->mbchar,
+					mbchar0->mblen, mbchar0->mbsize, "/proc/", 0, SIZE_MAX);
+				::booldog::utils::string::mbs::tostring< ::booldog::pid_t >(mbchar1, mbchar1->mballocator, pid);
+				::booldog::utils::string::mbs::assign<16>(0, mbchar0->mballocator, false, mbchar0->mblen, mbchar0->mbchar,
+					mbchar0->mblen, mbchar0->mbsize, mbchar1->mbchar, 0, SIZE_MAX);
+				::booldog::utils::string::mbs::assign<16>(0, mbchar0->mballocator, false, mbchar0->mblen, mbchar0->mbchar,
+					mbchar0->mblen, mbchar0->mbsize, "status", 0, SIZE_MAX);
+
+				::booldog::result_file resfile;
+				if(::booldog::io::file::mbsopen(&resfile, mbchar0->mballocator, mbchar0->mbchar
+					, ::booldog::enums::io::file_mode_read, 0))
+				{
+					::booldog::result_buffer resbuf(mbchar0->mballocator);
+					if(resfile.file->readline<16>(&resbuf, resbuf.allocator))
+					{
+						::booldog::utils::string::mbs::assign<16>(0, mbchar0->mballocator, false, 0, mbchar0->mbchar,
+							mbchar0->mblen, mbchar0->mbsize, (char*)resbuf.buf, 0, SIZE_MAX);
+						res = true;
+					}
+					resfile.file->close(0);
+				}
+			}
+			return res;
+		}
 		void rename_stable_and_memory(::booldog::result_mbchar* mbchar0, ::booldog::result_mbchar* mbchar1)
 		{
 			::booldog::result res;
@@ -1246,7 +1275,7 @@ namespace rux
 				{
 					size_t error_string_len = 0, error_string_size = 0;
 					char* error_string = 0;
-					::booldog::error::format(0, mbchar0->mballocator, error_string, error_string_len, error_string_size);
+					::booldog::error::format(&res, mbchar0->mballocator, error_string, error_string_len, error_string_size);
 					boowritelog(mbchar0, mbchar1, "rename '%s' to '%s', errno %s", exe_dir.mbchar, dst.mbchar, error_string);
 				}
 				else
@@ -1276,7 +1305,7 @@ namespace rux
 				{
 					size_t error_string_len = 0, error_string_size = 0;
 					char* error_string = 0;
-					::booldog::error::format(0, mbchar0->mballocator, error_string, error_string_len, error_string_size);
+					::booldog::error::format(&res, mbchar0->mballocator, error_string, error_string_len, error_string_size);
 					boowritelog(mbchar0, mbchar1, "rename '%s' to '%s', errno %s", exe_dir.mbchar, dst.mbchar
 					, error_string);
 				}
@@ -1308,7 +1337,7 @@ namespace rux
 				{
 					size_t error_string_len = 0, error_string_size = 0;
 					char* error_string = 0;
-					::booldog::error::format(0, mbchar0->mballocator, error_string, error_string_len, error_string_size);
+					::booldog::error::format(&res, mbchar0->mballocator, error_string, error_string_len, error_string_size);
 					boowritelog(mbchar0, mbchar1, "rmdir %s, errno %s", stable_toremove_mbchar.mbchar, error_string);
 				}
 			}
@@ -1321,7 +1350,7 @@ namespace rux
 				{
 					size_t error_string_len = 0, error_string_size = 0;
 					char* error_string = 0;
-					::booldog::error::format(0, mbchar0->mballocator, error_string, error_string_len, error_string_size);
+					::booldog::error::format(&res, mbchar0->mballocator, error_string, error_string_len, error_string_size);
 					boowritelog(mbchar0, mbchar1, "rmdir %s, errno %s", memory_toremove_mbchar.mbchar, error_string);
 				}
 			}
@@ -1331,7 +1360,7 @@ namespace rux
 			::booldog::allocators::easy::heap heap;
 			::booldog::allocators::single_threaded::mixed<1024> mixed(&heap);
 			{
-				::booldog::result_mbchar mbchar0(&mixed), mbchar1(&mixed), pidfilembchar(&mixed);
+				::booldog::result_mbchar mbchar0(&mixed), mbchar1(&mixed), pidfilembchar(&mixed), mbchar2(&mixed);
 				
 				boowritelog(&mbchar0, &mbchar1, "Start service/daemon %s", ::rux::engine::_globals->_service_globals->_service_name);
 
@@ -1427,9 +1456,16 @@ namespace rux
 										case SIGXCPU: termsignal = "SIGXCPU";break;
 										case SIGXFSZ: termsignal = "SIGXFSZ";break;
 										case SIGKILL: termsignal = "SIGKILL";break;
+										case SIGINT: termsignal = "SIGINT";break;
+										case SIGTERM: termsignal = "SIGTERM";break;
+										case SIGQUIT: termsignal = "SIGQUIT";break;
 										}
-										boowritelog(&mbchar0, &mbchar1, "Parent process(%u) terminated by process(%u), signal %s"
-										, (::booldog::uint32)getpid(), (::booldog::uint32)sigpid, termsignal);
+										if(try_get_process_name_by_pid(&mbchar2, &mbchar1, sigpid))
+											boowritelog(&mbchar0, &mbchar1, "Parent process(%u) terminated by process(%u, %s), signal %s"
+											, (::booldog::uint32)getpid(), (::booldog::uint32)sigpid, mbchar2.mbchar, termsignal);
+										else
+											boowritelog(&mbchar0, &mbchar1, "Parent process(%u) terminated by process(%u), signal %s"
+											, (::booldog::uint32)getpid(), (::booldog::uint32)sigpid, termsignal);
 										
 										kill(parent_pid, SIGTERM);
 
@@ -1496,6 +1532,9 @@ namespace rux
 								case SIGXCPU: termsignal = "SIGXCPU";break;
 								case SIGXFSZ: termsignal = "SIGXFSZ";break;
 								case SIGKILL: termsignal = "SIGKILL";break;
+								case SIGINT: termsignal = "SIGINT";break;
+								case SIGTERM: termsignal = "SIGTERM";break;
+								case SIGQUIT: termsignal = "SIGQUIT";break;
 								}
 								boowritelog(&mbchar0, &mbchar1, "Child process(%u) terminated by signal %s"
 								, (::booldog::uint32)parent_pid, termsignal);
@@ -1589,8 +1628,17 @@ namespace rux
 									case SIGXCPU: termsignal = "SIGXCPU";break;
 									case SIGXFSZ: termsignal = "SIGXFSZ";break;
 									case SIGKILL: termsignal = "SIGKILL";break;
+									case SIGINT: termsignal = "SIGINT";break;
+									case SIGTERM: termsignal = "SIGTERM";break;
+									case SIGQUIT: termsignal = "SIGQUIT";break;
 									}
-									boowritelog(&mbchar0, &mbchar1, "Child process(%u) terminated by process(%u), signal %s"
+									if(try_get_process_name_by_pid(&mbchar2, &mbchar1
+										, (::rux::uint32)rux::engine::_globals->_service_globals->_sigpid))
+										boowritelog(&mbchar0, &mbchar1, "Child process(%u) terminated by process(%u, %s), signal %s"
+										, (::booldog::uint32)getpid(), (::rux::uint32)rux::engine::_globals->_service_globals->_sigpid
+										, mbchar2.mbchar, termsignal);
+									else
+										boowritelog(&mbchar0, &mbchar1, "Child process(%u) terminated by process(%u), signal %s"
 										, (::booldog::uint32)getpid(), (::rux::uint32)rux::engine::_globals->_service_globals->_sigpid
 										, termsignal);
 								}
