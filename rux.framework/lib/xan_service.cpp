@@ -1216,10 +1216,8 @@ namespace rux
 				::booldog::utils::string::mbs::assign<16>(0, mbchar0->mballocator, false, mbchar0->mblen, mbchar0->mbchar,
 					mbchar0->mblen, mbchar0->mbsize, mbchar1->mbchar, 0, SIZE_MAX);
 				::booldog::utils::string::mbs::assign<16>(0, mbchar0->mballocator, false, mbchar0->mblen, mbchar0->mbchar,
-					mbchar0->mblen, mbchar0->mbsize, "status", 0, SIZE_MAX);
-
-				boowritelog(mbchar1, mbchar2, "try_get_process_name_by_pid(%s)", mbchar0->mbchar);
-
+					mbchar0->mblen, mbchar0->mbsize, "/status", 0, SIZE_MAX);
+				
 				::booldog::result_file resfile;
 				if(::booldog::io::file::mbsopen(&resfile, mbchar0->mballocator, mbchar0->mbchar
 					, ::booldog::enums::io::file_mode_read, 0))
