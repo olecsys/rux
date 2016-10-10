@@ -1206,7 +1206,7 @@ namespace rux
 			return true;
 		};
 		bool try_get_process_name_by_pid(::booldog::result_mbchar* mbchar0, ::booldog::result_mbchar* mbchar1
-			, ::booldog::pid_t pid)
+			, ::booldog::result_mbchar* mbchar2, ::booldog::pid_t pid)
 		{
 			bool res = false;
 			{
@@ -1217,6 +1217,8 @@ namespace rux
 					mbchar0->mblen, mbchar0->mbsize, mbchar1->mbchar, 0, SIZE_MAX);
 				::booldog::utils::string::mbs::assign<16>(0, mbchar0->mballocator, false, mbchar0->mblen, mbchar0->mbchar,
 					mbchar0->mblen, mbchar0->mbsize, "status", 0, SIZE_MAX);
+
+				boowritelog(mbchar1, mbchar2, "try_get_process_name_by_pid(%s)", mbchar0->mbchar);
 
 				::booldog::result_file resfile;
 				if(::booldog::io::file::mbsopen(&resfile, mbchar0->mballocator, mbchar0->mbchar
@@ -1229,7 +1231,19 @@ namespace rux
 							mbchar0->mblen, mbchar0->mbsize, (char*)resbuf.buf, 0, SIZE_MAX);
 						res = true;
 					}
+					else
+					{
+						::booldog::error::format(&resbuf, mbchar0->mballocator, mbchar0->mbchar, mbchar0->mblen
+							, mbchar0->mbsize);
+						boowritelog(mbchar1, mbchar2, "try_get_process_name_by_pid, readline error(%s)", mbchar0->mbchar);
+					}
 					resfile.file->close(0);
+				}
+				else
+				{
+					::booldog::error::format(&resfile, mbchar0->mballocator, mbchar0->mbchar, mbchar0->mblen
+						, mbchar0->mbsize);
+					boowritelog(mbchar1, mbchar2, "try_get_process_name_by_pid, mbsopen error(%s)", mbchar0->mbchar);
 				}
 			}
 			return res;
@@ -1436,7 +1450,7 @@ namespace rux
 										sigpid = siginfo.si_pid;
 
 										termsignal = "unknown";
-										switch(WTERMSIG(status))
+										switch(siginfo.si_signo)
 										{
 										case SIGSEGV: termsignal = "SIGSEGV";break;
 										case SIGILL: termsignal = "SIGILL";break;
@@ -1459,8 +1473,15 @@ namespace rux
 										case SIGINT: termsignal = "SIGINT";break;
 										case SIGTERM: termsignal = "SIGTERM";break;
 										case SIGQUIT: termsignal = "SIGQUIT";break;
+										case SIGALRM: termsignal = "SIGALRM";break;
+										case SIGCHLD: termsignal = "SIGCHLD";break;
+										case SIGCONT: termsignal = "SIGCONT";break;
+										case SIGSTOP: termsignal = "SIGSTOP";break;
+										case SIGPOLL: termsignal = "SIGPOLL";break;
+										case SIGTRAP: termsignal = "SIGTRAP";break;
+										case SIGURG: termsignal = "SIGURG";break;
 										}
-										if(try_get_process_name_by_pid(&mbchar2, &mbchar1, sigpid))
+										if(try_get_process_name_by_pid(&mbchar2, &mbchar1, &mbchar0, sigpid))
 											boowritelog(&mbchar0, &mbchar1, "Parent process(%u) terminated by process(%u, %s), signal %s"
 											, (::booldog::uint32)getpid(), (::booldog::uint32)sigpid, mbchar2.mbchar, termsignal);
 										else
@@ -1535,6 +1556,13 @@ namespace rux
 								case SIGINT: termsignal = "SIGINT";break;
 								case SIGTERM: termsignal = "SIGTERM";break;
 								case SIGQUIT: termsignal = "SIGQUIT";break;
+								case SIGALRM: termsignal = "SIGALRM";break;
+								case SIGCHLD: termsignal = "SIGCHLD";break;
+								case SIGCONT: termsignal = "SIGCONT";break;
+								case SIGSTOP: termsignal = "SIGSTOP";break;
+								case SIGPOLL: termsignal = "SIGPOLL";break;
+								case SIGTRAP: termsignal = "SIGTRAP";break;
+								case SIGURG: termsignal = "SIGURG";break;
 								}
 								boowritelog(&mbchar0, &mbchar1, "Child process(%u) terminated by signal %s"
 								, (::booldog::uint32)parent_pid, termsignal);
@@ -1631,8 +1659,15 @@ namespace rux
 									case SIGINT: termsignal = "SIGINT";break;
 									case SIGTERM: termsignal = "SIGTERM";break;
 									case SIGQUIT: termsignal = "SIGQUIT";break;
+									case SIGALRM: termsignal = "SIGALRM";break;
+									case SIGCHLD: termsignal = "SIGCHLD";break;
+									case SIGCONT: termsignal = "SIGCONT";break;
+									case SIGSTOP: termsignal = "SIGSTOP";break;
+									case SIGPOLL: termsignal = "SIGPOLL";break;
+									case SIGTRAP: termsignal = "SIGTRAP";break;
+									case SIGURG: termsignal = "SIGURG";break;
 									}
-									if(try_get_process_name_by_pid(&mbchar2, &mbchar1
+									if(try_get_process_name_by_pid(&mbchar2, &mbchar1, &mbchar0
 										, (::rux::uint32)rux::engine::_globals->_service_globals->_sigpid))
 										boowritelog(&mbchar0, &mbchar1, "Child process(%u) terminated by process(%u, %s), signal %s"
 										, (::booldog::uint32)getpid(), (::rux::uint32)rux::engine::_globals->_service_globals->_sigpid
