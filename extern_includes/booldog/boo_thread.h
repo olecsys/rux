@@ -15,6 +15,7 @@
 #include <process.h>
 #else
 #include <pthread.h>
+#include <unistd.h>
 #endif
 namespace booldog
 {
@@ -130,7 +131,15 @@ namespace booldog
 					}
 					if(stack_size != 0)
 					{
-						result = pthread_attr_setstacksize(&pthread_attr, stack_size);
+						if(stack_size < PTHREAD_STACK_MIN)
+							stack_size = PTHREAD_STACK_MIN;
+						else
+						{
+							long sz = sysconf(_SC_PAGESIZE);
+							if(stack_size % sz)
+								stack_size = sz * (stack_size / sz) + sz;				
+						}							
+						result = pthread_attr_setstacksize(&pthread_attr, stack_size);							
 						if(result != 0)
 						{
 							res->setpthreaderror(result);

@@ -20,6 +20,16 @@ namespace rux
 			private:
 				DECLARE_BASE_UI_MEMBERS();
 				DECLARE_RUX_BASE_UI_FUNCTIONS( Select );
+
+				::rux::gui::ColorBase* _item_background;
+				::rux::gui::ColorBase* _item_over_background;
+				::rux::gui::ColorBase* _item_pressed_background;
+				::rux::gui::Color* _item_foreground;
+				::rux::gui::Color* _item_over_foreground;
+				::rux::gui::Color* _item_pressed_foreground;
+				::rux::gui::ColorBase* _selected_item_background;
+				::rux::gui::ColorBase* _selected_item_over_background;
+
 				rux::gui::RenderCacheBase* _ui_border_cache;
 				rux::gui::RenderCacheBase* _ui_cache;
 				rux::gui::ColorBase* _combobox_background;
@@ -96,6 +106,16 @@ namespace rux
 				void set_MaxVisibleItems( size_t max_visible_items );
 				void set_StartVisibleIndex( size_t start_visible_index );
 				
+				void set_ItemForeground(::rux::gui::Color* foreground);
+				void set_ItemOverForeground(::rux::gui::Color* foreground);
+				void set_ItemPressedForeground(::rux::gui::Color* foreground);
+				void set_ItemBackground(::rux::gui::ColorBase* background);
+				void set_ItemOverBackground(::rux::gui::ColorBase* background);
+				void set_ItemPressedBackground(::rux::gui::ColorBase* background);
+
+				void set_SelectedItemBackground(::rux::gui::ColorBase* background);
+				void set_SelectedItemOverBackground(::rux::gui::ColorBase* background);
+
 				void set_Foreground( ::rux::gui::ColorBase* foreground );
 				void set_TextVerticalAlignment( ::rux::gui::XEnum_Alignment text_alignment );
 				void set_TextHorizontalAlignment( ::rux::gui::XEnum_Alignment text_alignment );
@@ -109,6 +129,7 @@ namespace rux
 				void set_Font( const char* font_file_name ,
 					::rux::uint32 font_size_height ,
 					::rux::uint32 font_size_width );
+				void set_ItemContainerBackground(::rux::gui::ColorBase* background);
 			};
 			class XSelect : public XGCHandle<Select>
 			{
@@ -151,6 +172,15 @@ namespace rux
 				void set_Font( const char* font_file_name ,
 					::rux::uint32 font_size_height ,
 					::rux::uint32 font_size_width );
+				void set_ItemContainerBackground(::rux::gui::ColorBase* background);
+				void set_ItemForeground(::rux::gui::Color* foreground);
+				void set_ItemOverForeground(::rux::gui::Color* foreground);
+				void set_ItemPressedForeground(::rux::gui::Color* foreground);
+				void set_ItemBackground(::rux::gui::ColorBase* background);
+				void set_ItemOverBackground(::rux::gui::ColorBase* background);
+				void set_ItemPressedBackground(::rux::gui::ColorBase* background);
+				void set_SelectedItemBackground(::rux::gui::ColorBase* background);
+				void set_SelectedItemOverBackground(::rux::gui::ColorBase* background);
 				DECLARE_BASE_UI_FUNCTIONS();
 			public:
 			};

@@ -352,6 +352,23 @@ goto_next:
 			_obj_->error_type = ::booldog::enums::result::error_type_no_error;
 			_obj_->bufdatasize = 0;
 		};
+		bool copyfrom(const result_buffer& resbuf)
+		{
+			if(resbuf.bufdatasize)
+			{
+				if(bufsize < resbuf.bufdatasize)
+				{
+					bufsize = resbuf.bufdatasize;
+					buf = allocator->realloc_array<unsigned char>(buf, bufsize);
+					if(buf == 0)
+						return false;
+				}
+				bufdatasize = resbuf.bufdatasize;
+				::memcpy(buf, resbuf.buf, resbuf.bufdatasize);
+				return true;
+			}
+			return false;
+		};
 	};
 	class result_bool : public ::booldog::result
 	{

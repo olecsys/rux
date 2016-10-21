@@ -17,12 +17,16 @@ begin_implement_rux_class_with_properties_ns_base_class( Button , rux::gui::cont
 	_private_tag.set_Info( "private_tag" , __file__ , __line__ );
 	IMPLEMENT_BASE_UI_MEMBERS();
 	_corner = ::rux::gui::Thickness( 0.2f , 0.2f , 0.2f , 0.2f );
-	copy_color( _foreground , create_color( 255 , 255 , 255 , 255 ) );
+	copy_color(_foreground, ::rux::gui::Colors::White());
+	copy_color(_over_foreground, ::rux::gui::Colors::White());
+	copy_color(_pressed_foreground, ::rux::gui::Colors::White());
+	copy_color(_disabled_foreground, ::rux::gui::Colors::White());
 	copy_color( _background , ::rux::gui::Colors::ButtonNormalColor() );
 	copy_color( _over_background , ::rux::gui::Colors::ButtonOverColor() );
 	copy_color( _pressed_background , ::rux::gui::Colors::ButtonDownColor() );
 	copy_color( _disabled_background , ::rux::gui::Colors::ButtonDisabledColor() );
 	_active_state_background = _background;
+	_active_state_foreground = _foreground;
 	_on_click_callback = NULL;	
 	_ui_font = ::rux::engine::_globals->_gui_globals->_rux_gui_create_font( "tahoma.ttf" , 0 , 11 );	
 	_is_repeat_until_mouse_up = 0;
@@ -50,6 +54,12 @@ namespace rux
 					_border_color->Release();
 				if( _foreground )
 					_foreground->Release();
+				if(_over_foreground )
+					_over_foreground->Release();
+				if( _pressed_foreground )
+					_pressed_foreground->Release();
+				if( _disabled_foreground )
+					_disabled_foreground->Release();
 			};
 			::rux::gui::ColorBase* Button::get_Background( void )
 			{
@@ -109,6 +119,10 @@ namespace rux
 			implement_duplicate_internal_function_1( Button , set_OverBackground , ::rux::gui::ColorBase* );
 			implement_duplicate_internal_function_1( Button , set_PressedBackground , ::rux::gui::ColorBase* );
 			implement_duplicate_internal_function_1( Button , set_DisabledBackground , ::rux::gui::ColorBase* );
+			implement_duplicate_internal_function_1(Button, set_Foreground, ::rux::gui::Color*);
+			implement_duplicate_internal_function_1(Button, set_OverForeground, ::rux::gui::Color*);
+			implement_duplicate_internal_function_1(Button, set_PressedForeground, ::rux::gui::Color*);
+			implement_duplicate_internal_function_1(Button, set_DisabledForeground, ::rux::gui::Color*);
 			implement_duplicate_internal_function_1( Button , set_Content , const XObject& );
 			implement_duplicate_internal_function_1( Button , set_Content , const Object& );
 			implement_duplicate_internal_function_1( Button , set_Content , const XGCRef& );
@@ -143,17 +157,6 @@ namespace rux
 				}
 				else
 					_cs_content.ReadUnlock();
-			};
-			void Button::set_Background( ::rux::gui::ColorBase* background )
-			{	
-				_cs_drawing_elements.wlock( debuginfo_macros );
-				if( _active_state_background == _background )
-				{
-					_active_state_background = background;					
-					Invalidate();
-				}
-				::rux::gui::copy_color( _background , background );
-				_cs_drawing_elements.wunlock( debuginfo_macros );
 			};
 			void Button::set_ContentOpacity( float opacity )
 			{
@@ -281,6 +284,17 @@ namespace rux
 				else
 					_cs_content.ReadUnlock();
 			};
+			void Button::set_Background( ::rux::gui::ColorBase* background )
+			{	
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				if( _active_state_background == _background )
+				{
+					_active_state_background = background;					
+					Invalidate();
+				}
+				::rux::gui::copy_color( _background , background );
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
 			void Button::set_OverBackground( ::rux::gui::ColorBase* over_background )
 			{	
 				_cs_drawing_elements.wlock( debuginfo_macros );
@@ -303,6 +317,52 @@ namespace rux
 				rux::gui::copy_color( _pressed_background , pressed_background );
 				_cs_drawing_elements.wunlock( debuginfo_macros );
 			};
+
+			void Button::set_Foreground(::rux::gui::Color* foreground)
+			{	
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				if(_active_state_foreground == _foreground )
+				{
+					_active_state_foreground = foreground;					
+					Invalidate();
+				}
+				::rux::gui::copy_color(_foreground, foreground);
+				_cs_drawing_elements.wunlock(debuginfo_macros);
+			};
+			void Button::set_OverForeground(::rux::gui::Color* over_foreground)
+			{	
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				if(_active_state_foreground == _over_background)
+				{
+					_active_state_foreground = over_foreground;
+					Invalidate();
+				}
+				rux::gui::copy_color(_over_foreground, over_foreground);
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
+			void Button::set_PressedForeground(::rux::gui::Color* pressed_foreground)
+			{	
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				if(_active_state_foreground == _pressed_foreground)
+				{
+					_active_state_foreground = pressed_foreground;
+					Invalidate();
+				}
+				rux::gui::copy_color(_pressed_foreground, pressed_foreground);
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
+			void Button::set_DisabledForeground(::rux::gui::Color* foreground)
+			{	
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				if(_active_state_foreground == _disabled_foreground)
+				{
+					_active_state_foreground = _disabled_foreground;
+					Invalidate();
+				}
+				rux::gui::copy_color(_disabled_foreground, foreground);
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
+
 			::rux::uint8 Button::get_IsSupportContentSize( void )
 			{
 				return 1;
@@ -422,9 +482,11 @@ namespace rux
 					ui_textblock()->_top = 0;
 					ui_textblock()->_width = width;
 					ui_textblock()->_height = height;
+					_cs_drawing_elements.wlock( debuginfo_macros );
 					ui_textblock()->_cs_drawing_elements.wlock( debuginfo_macros );
-					rux::gui::copy_color( ui_textblock()->_foreground , _foreground );		
+					rux::gui::copy_color(ui_textblock()->_foreground, _active_state_foreground);
 					ui_textblock()->_cs_drawing_elements.wunlock( debuginfo_macros );
+					_cs_drawing_elements.wunlock( debuginfo_macros );
 					ui_textblock()->render( render_context , opacity * _opacity , _selected_z_index , ___rux__thread_index1986 );
 				}
 				else if( rux_is_object( _content, ::rux::gui::controls::XGroup ) )
@@ -506,6 +568,7 @@ namespace rux
 			{
 				_cs_drawing_elements.wlock( debuginfo_macros );
 				_active_state_background = _over_background;
+				_active_state_foreground = _over_foreground;
 				_cs_drawing_elements.wunlock( debuginfo_macros );
 				_on_mouse_enter.raise< const ::rux::gui::events::Event& >( ::rux::gui::events::Event( *this , explicit_event ) );				
 				Invalidate();
@@ -515,6 +578,7 @@ namespace rux
 			{
 				_cs_drawing_elements.wlock( debuginfo_macros );
 				_active_state_background = _background;
+				_active_state_foreground = _foreground;
 				_cs_drawing_elements.wunlock( debuginfo_macros );
 				_on_mouse_leave_callback.raise< const ::rux::gui::events::MouseEvent& >( ::rux::gui::events::MouseEvent( *this , window_event , explicit_event ) );
 				Invalidate();
@@ -558,6 +622,7 @@ namespace rux
 				_on_left_mouse_button_down.raise< const ::rux::gui::events::MouseEvent& >( ::rux::gui::events::MouseEvent( *this , window_event , 1 ) );
 				_cs_drawing_elements.wlock( debuginfo_macros );
 				_active_state_background = _pressed_background;
+				_active_state_foreground = _pressed_foreground;
 				_cs_drawing_elements.wunlock( debuginfo_macros );
 				Invalidate();	
 				if( _is_repeat_until_mouse_up == 1 )
@@ -581,6 +646,7 @@ namespace rux
 			{
 				_cs_drawing_elements.wlock( debuginfo_macros );
 				_active_state_background = _pressed_background;
+				_active_state_foreground = _pressed_foreground;
 				_cs_drawing_elements.wunlock( debuginfo_macros );
 				Invalidate();
 				_on_click_callback.raise< const ::rux::gui::events::Event& >( ::rux::gui::events::Event( *this , 1 ) );
@@ -594,12 +660,14 @@ namespace rux
 				{
 					_cs_drawing_elements.wlock( debuginfo_macros );
 					_active_state_background = _over_background;
+					_active_state_foreground = _over_foreground;
 					_cs_drawing_elements.wunlock( debuginfo_macros );
 				}
 				else
 				{
 					_cs_drawing_elements.wlock( debuginfo_macros );
 					_active_state_background = _background;
+					_active_state_foreground = _foreground;
 					_cs_drawing_elements.wunlock( debuginfo_macros );
 				}	
 				Invalidate();
@@ -766,12 +834,6 @@ namespace rux
 					font_size_height ,
 					font_size_width );
 				(*this)()->Invalidate();
-			};
-			void XButton::set_Foreground( ::rux::gui::Color* foreground )
-			{
-				(*this)()->_cs_drawing_elements.wlock( debuginfo_macros );
-				rux::gui::copy_color( (*this)()->_foreground , foreground );
-				(*this)()->_cs_drawing_elements.wunlock( debuginfo_macros );
 			};
 			implement_duplicate_internal_function_1( Button , set_OnClick , ::rux::gui::events::on_event_t );
 			void Button::set_OnClick( ::rux::gui::events::on_event_t on_click_callback )

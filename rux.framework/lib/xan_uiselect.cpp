@@ -11,7 +11,7 @@
 #include <xan_keyvaluepair.h>
 #include <xan_image.h>
 #include <xan_uiimage.h>
-begin_implement_rux_class_with_properties_ns_base_class( Select , rux::gui::controls , rux::gui::ControlBase )
+begin_implement_rux_class_with_properties_ns_base_class(Select, rux::gui::controls, rux::gui::ControlBase)
 	_binding_source.set_Info( "binding_source" , __file__ , __line__ );
 	_tag.set_Info( "tag" , __file__ , __line__ );
 	_private_tag.set_Info( "private_tag" , __file__ , __line__ );
@@ -24,9 +24,20 @@ begin_implement_rux_class_with_properties_ns_base_class( Select , rux::gui::cont
 	copy_color( _combobox_border , ::rux::gui::Colors::Transparent() );
 	copy_color( _content_background , create_color( 255 , 255 , 255 , (uint8)( 255.0 * 0.7 ) ) );
 	copy_color( _content_over_background , ::rux::gui::Colors::White() );
-	rux::gui::copy_color( _content_active_background , _content_background );
+	::rux::gui::copy_color( _content_active_background , _content_background );
 	copy_color( _items_container_background , create_color( 0x33 , 0x33 , 0x33 , 128 ) );
 	copy_color( _items_container_border , ::rux::gui::Colors::Transparent() );
+	
+	copy_color(_item_background, create_color(255, 255, 255, (uint8)(255.0 * 0.2)));
+	copy_color(_item_over_background, create_color(255, 255, 255, 0x66));
+	copy_color(_item_pressed_background, create_color(0x42, 0xB6, 0xE4, 0xff));
+	copy_color(_item_foreground, ::rux::gui::Colors::White());
+	copy_color(_item_over_foreground, ::rux::gui::Colors::White());
+	copy_color(_item_pressed_foreground, ::rux::gui::Colors::White());
+
+	copy_color(_selected_item_background, create_color(0x42, 0xB6, 0xE4, 0xff));
+	copy_color(_selected_item_over_background, create_color(0x42, 0xB6, 0xE4, 0xff));
+
 	_is_editable = 0;
 	_on_item_selected = NULL;
 	_items_container_height = 100.f;
@@ -164,11 +175,67 @@ namespace rux
 				rux::gui::copy_color( _selected_text_foreground , foreground );
 				_cs_drawing_elements.wunlock( debuginfo_macros );
 			};
+			void Select::set_ItemForeground(::rux::gui::Color* foreground)
+			{
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				rux::gui::copy_color(_item_foreground, foreground);
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
+			void Select::set_ItemOverForeground(::rux::gui::Color* foreground)
+			{
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				rux::gui::copy_color(_item_over_foreground, foreground);
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
+			void Select::set_ItemPressedForeground(::rux::gui::Color* foreground)
+			{
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				rux::gui::copy_color(_item_pressed_foreground, foreground);
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
+			void Select::set_ItemBackground(::rux::gui::ColorBase* background)
+			{
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				::rux::gui::copy_color(_item_background, background);
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
+			void Select::set_ItemOverBackground(::rux::gui::ColorBase* background)
+			{
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				::rux::gui::copy_color(_item_over_background, background);
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
+			void Select::set_ItemPressedBackground(::rux::gui::ColorBase* background)
+			{
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				::rux::gui::copy_color(_item_pressed_background, background);
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
+			void Select::set_SelectedItemBackground(::rux::gui::ColorBase* background)
+			{
+				_cs_drawing_elements.wlock(debuginfo_macros);
+				::rux::gui::copy_color(_selected_item_background, background);
+				_cs_drawing_elements.wunlock(debuginfo_macros);
+			};
+			void Select::set_SelectedItemOverBackground(::rux::gui::ColorBase* background)
+			{
+				_cs_drawing_elements.wlock( debuginfo_macros );
+				::rux::gui::copy_color(_selected_item_over_background, background);
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+			};
+
 			void Select::set_Background( ::rux::gui::ColorBase* background )
 			{
 				_cs_drawing_elements.wlock( debuginfo_macros );
-				rux::gui::copy_color( _combobox_background , background );
+				::rux::gui::copy_color( _combobox_background , background );
 				_cs_drawing_elements.wunlock( debuginfo_macros );
+				private_ResetCache();
+			};
+			void Select::set_ItemContainerBackground(::rux::gui::ColorBase* background)
+			{
+				_cs_drawing_elements.wlock(debuginfo_macros);
+				::rux::gui::copy_color(_items_container_background, background);
+				_cs_drawing_elements.wunlock(debuginfo_macros);
 				private_ResetCache();
 			};
 			void Select::render( ::rux::gui::RenderContextBase* render_context , float opacity , float& _selected_z_index , size_t ___rux__thread_index1986 )
@@ -273,9 +340,15 @@ namespace rux
 			implement_duplicate_internal_function_1( Select ,set_TextVerticalAlignment , ::rux::gui::XEnum_Alignment );
 			implement_duplicate_internal_function_1( Select , set_TextHorizontalAlignment , ::rux::gui::XEnum_Alignment );
 			implement_duplicate_internal_function_1( Select , set_Background , ::rux::gui::ColorBase* );
-
-
-
+			implement_duplicate_internal_function_1(Select, set_ItemContainerBackground, ::rux::gui::ColorBase*);
+			implement_duplicate_internal_function_1(Select, set_ItemForeground, ::rux::gui::Color*);
+			implement_duplicate_internal_function_1(Select, set_ItemOverForeground, ::rux::gui::Color*);
+			implement_duplicate_internal_function_1(Select, set_ItemPressedForeground, ::rux::gui::Color*);
+			implement_duplicate_internal_function_1(Select, set_ItemBackground, ::rux::gui::ColorBase*);
+			implement_duplicate_internal_function_1(Select, set_ItemOverBackground, ::rux::gui::ColorBase*);
+			implement_duplicate_internal_function_1(Select, set_ItemPressedBackground, ::rux::gui::ColorBase*);
+			implement_duplicate_internal_function_1(Select, set_SelectedItemBackground, ::rux::gui::ColorBase*);
+			implement_duplicate_internal_function_1(Select, set_SelectedItemOverBackground, ::rux::gui::ColorBase*);
 
 			void Select::set_MaxVisibleItems( size_t max_visible_items )
 			{
@@ -354,7 +427,7 @@ namespace rux
 					if( paths.Count() > 0 )
 					{
 						::rux::uint8 found = 0;
-						rux::data::XDataObject json_object( _binding_source );
+						::rux::data::XDataObject json_object( _binding_source );
 						if( paths.Count() > 1 )
 						{
 							for( ::rux::uint32 index0 = 0 ; index0 < paths.Count() - 1 ; index0++ )
@@ -371,12 +444,21 @@ namespace rux
 					ItemsClear();
 				}
 				CRITICAL_SECTION_UNLOCK( _cs_items );
-				rux::XString error;
+				::rux::XString error;
 				declare_variable_param( ::rux::gui::controls::XGroup , items_group , _items_container.get_ControlAt( 1 ) );		
 				if( _start_visible_items != 0 )
 				{
-					rux::gui::controls::XButton back_button;
-					back_button = XPrimitives::TransparentButton();
+					::rux::gui::controls::XButton back_button;
+					
+					_cs_drawing_elements.rlock(debuginfo_macros);
+					back_button.set_Background(_item_background);
+					back_button.set_OverBackground(_item_over_background);
+					back_button.set_PressedBackground(_item_pressed_background);
+					back_button.set_Foreground(_item_foreground);
+					back_button.set_OverForeground(_item_over_foreground);
+					back_button.set_PressedForeground(_item_pressed_foreground);
+					_cs_drawing_elements.runlock(debuginfo_macros);
+
 					back_button.set_OnClick( Select::on_item_button_click );
 					back_button.set_VerticalAlignment( XEnum_Alignment_LeftOrTop );
 					back_button.set_HorizontalFilling( XEnum_Filling_Auto );
@@ -427,8 +509,15 @@ namespace rux
 				}
 				if( _start_visible_items + _max_visible_items < _items.Count() )
 				{
-					rux::gui::controls::XButton forward_button;
-					forward_button = XPrimitives::TransparentButton();
+					::rux::gui::controls::XButton forward_button;
+					_cs_drawing_elements.rlock(debuginfo_macros);
+					forward_button.set_Background(_item_background);
+					forward_button.set_OverBackground(_item_over_background);
+					forward_button.set_PressedBackground(_item_pressed_background);
+					forward_button.set_Foreground(_item_foreground);
+					forward_button.set_OverForeground(_item_over_foreground);
+					forward_button.set_PressedForeground(_item_pressed_foreground);
+					_cs_drawing_elements.runlock(debuginfo_macros);
 					forward_button.set_OnClick( Select::on_item_button_click );
 					forward_button.set_VerticalAlignment( XEnum_Alignment_LeftOrTop );
 					forward_button.set_HorizontalFilling( XEnum_Filling_Auto );
@@ -550,7 +639,7 @@ namespace rux
 			{
 				if( _items_container.get_ControlsCount() == 0 )
 					create( 0 );
-				rux::XString item_string;
+				::rux::XString item_string;
 				if( rux_is_object( item , ::rux::XString ) )
 				{
 					CRITICAL_SECTION_LOCK( _cs_items );
@@ -563,7 +652,7 @@ namespace rux
 				}
 				else if( rux_is_object( item , ::rux::data::XDataObject ) )
 				{
-					rux::data::XDataObject json_object( item );
+					::rux::data::XDataObject json_object( item );
 					::rux::uint8 found = 0;
 					item_string.set_ByRef( json_object.GetValue< ::rux::XString >( _binding_source_display_property_name , found , SIZE_MAX , "->" ) );
 					CRITICAL_SECTION_LOCK( _cs_items );
@@ -573,8 +662,15 @@ namespace rux
 					_items_tags.AddByRef( XObject( "" , __FILE__ , __LINE__ ) );
 					CRITICAL_SECTION_UNLOCK( _cs_items );
 				}
-				rux::gui::controls::XButton item_button;
-				item_button = XPrimitives::TransparentButton();
+				::rux::gui::controls::XButton item_button;
+				_cs_drawing_elements.rlock(debuginfo_macros);
+				item_button.set_Background(_item_background);
+				item_button.set_OverBackground(_item_over_background);
+				item_button.set_PressedBackground(_item_pressed_background);
+				item_button.set_Foreground(_item_foreground);
+				item_button.set_OverForeground(_item_over_foreground);
+				item_button.set_PressedForeground(_item_pressed_foreground);
+				_cs_drawing_elements.runlock(debuginfo_macros);
 				item_button.set_OnClick( Select::on_item_button_click );
 				item_button.set_VerticalAlignment( XEnum_Alignment_LeftOrTop );
 				item_button.set_HorizontalFilling( XEnum_Filling_Auto );
@@ -583,13 +679,18 @@ namespace rux
 				item_button.set_Margin( ::rux::gui::Margin( 3.f , 0.f , 1.f , 2.f ) );	
 				if( selected == 1 )
 				{
-					item_button.set_Background( create_color( 0x42 , 0xB6 , 0xE4 , 0xff ) );
-					item_button.set_OverBackground( create_color( 0x42 , 0xB6 , 0xE4 , 0xff ) );
+					_cs_drawing_elements.rlock(debuginfo_macros);
+
+					item_button.set_Background(_selected_item_background);
+					item_button.set_OverBackground(_selected_item_over_background);
+
+					_cs_drawing_elements.runlock(debuginfo_macros);
+
 					_cs_drawing_elements.wlock( debuginfo_macros );
 					_selected_text.set_ByRef( item_string.ConvertToUTF8() );
 					_cs_drawing_elements.wunlock( debuginfo_macros );
 				}
-				rux::XString error;
+				::rux::XString error;
 				declare_variable_param( ::rux::gui::controls::XGroup , items , _items_container.get_ControlAt( 1 ) );		
 				items.AddControl( item_button , error );
 				_cs_drawing_elements.wlock( debuginfo_macros );
@@ -604,13 +705,16 @@ namespace rux
 				declare_variable_param( ::rux::gui::controls::XGroup , group , animation.get_Control() );
 				declare_variable_param( ::rux::gui::controls::XGroup , items , group.get_ControlAt( 1 ) );
 				Select* combobox = (Select*)group.get_TagPtr();
-				if( items.get_ControlsCount() > combobox->_selected_index )
+				if(items.get_ControlsCount() > combobox->_selected_index)
 				{
-					XObject object( items.get_ControlAt( combobox->_selected_index ) );
-					if( rux_is_object( object , XTextBlock ) )
+					XObject object(items.get_ControlAt(combobox->_selected_index));
+					if(rux_is_object(object, XTextBlock))
 					{
-						XTextBlock textblock( object );
-						textblock.set_Background( ::rux::gui::Colors::ButtonDownColor() );
+						XTextBlock textblock(object);
+						combobox->_cs_drawing_elements.rlock(debuginfo_macros);
+						textblock.set_Background(combobox->_selected_item_background);
+						//textblock.set_Background( ::rux::gui::Colors::ButtonDownColor() );
+						combobox->_cs_drawing_elements.runlock(debuginfo_macros);
 					}
 				}
 			};
@@ -634,6 +738,22 @@ namespace rux
 					_items_container_border->Release();
 				if( _selected_text_foreground )
 					_selected_text_foreground->Release();
+				if(_item_background)
+					_item_background->Release();
+				if(_item_over_background)
+					_item_over_background->Release();
+				if(_item_pressed_background)
+					_item_pressed_background->Release();
+				if(_item_foreground)
+					_item_foreground->Release();
+				if(_item_over_foreground)
+					_item_over_foreground->Release();
+				if(_item_pressed_foreground)
+					_item_pressed_foreground->Release();
+				if(_selected_item_background)
+					_selected_item_background->Release();
+				if(_selected_item_over_background)
+					_selected_item_over_background->Release();
 			};
 			void Select::UpdateParentWindow( void )
 			{
@@ -704,11 +824,17 @@ namespace rux
 					items_container_back.set_Top( 0 );
 					items_container_back.set_HorizontalFilling( XEnum_Filling_Auto );
 					items_container_back.set_VerticalFilling( XEnum_Filling_Auto );
+
+					_cs_drawing_elements.wlock(debuginfo_macros);
+
 					items_container_back.set_Background( _items_container_background );	
 					items_container_back.set_BorderColor( _items_container_border );
 					items_container_back.set_BorderWidth( _items_container_border_width );
 					items_container_back.set_Corner( _items_container_thickness );
-					rux::XString error;
+
+					_cs_drawing_elements.wunlock(debuginfo_macros);
+
+					::rux::XString error;
 					_items_container.AddControl( items_container_back , error );
 					declare_variable( ::rux::gui::controls::XGroup , items );
 					items.set_ChildLocationType( XEnum_Child_Location_Type_VerticalStack );	
@@ -742,7 +868,7 @@ namespace rux
 						animation.AddTimeline( 100000ULL , XFloat( height ) );				
 						_items_container_group_animation.set_AnimationType( XEnum_AnimationType_OneTime );
 						_items_container_group_animation.AddAnimation( animation );						
-						rux::XString error;
+						::rux::XString error;
 						window->AddControl( _items_container , error );
 						_items_container.set_IsVisible( 1 );
 						_items_container_group_animation.Start();
@@ -958,7 +1084,7 @@ namespace rux
 				CRITICAL_SECTION_LOCK( _cs_items );
 				if( _items.Count() > _selected_index )
 				{
-					rux::XString item_string;
+					::rux::XString item_string;
 					if( rux_is_object( _items[ _selected_index ] , ::rux::XString ) )
 						item_string.set_ByRef( _items[ _selected_index ] );
 					else if( rux_is_object( _items[ _selected_index ] , ::rux::data::XDataObject ) )

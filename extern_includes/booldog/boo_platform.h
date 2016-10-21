@@ -20,14 +20,18 @@
 		#endif
 		#if defined( __arm__ )
 			#ifndef __ARM__
-				#define __ARM__
+				#define __ARM__				
 			#endif
+			#define __x86__
+		#endif
+		#if defined(__aarch64__)
+			#ifndef __ARM__
+				#define __ARM__				
+			#endif
+			#define __x64__
 		#endif
 		#define __LINUX__
 		#define __USE_EPOLL__
-		#ifdef __ARM__
-			#define __x86__
-		#endif
 		#ifdef __i386__
 			#define __x86__
 		#endif

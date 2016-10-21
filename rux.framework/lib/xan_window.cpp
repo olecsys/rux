@@ -46,6 +46,7 @@ namespace rux
 		implement_ctor_and_register_type( Window );
 		Window::Window( const char* , const char* , ::rux::int32 ) 
 			: rux::gui::ParentBase( Window::get_static_Type ) , declare_class_member( _group )
+			, _window_base_state(0)
 		{	
 			_group.set_ControlName( "__WindowGroup" );
 			_already_dispatch_on_resized = 0;
@@ -54,10 +55,10 @@ namespace rux
 			_current_render_index = SIZE_MAX;
 			strcpy( _utf8_control_name , "Window" );
 			_utf8_control_name_hash = ::rux::cryptography::hash::times33_hash( _utf8_control_name , SIZE_MAX );
-			_window_base_state = 0;
+
 			_selected_z_index = 0.f;
 			_window_base = NULL;
-			_closed = 0;
+			//_closed = 0;
 			_pressed_control = NULL;
 			_caret.set_IsVisible( 0 );
 			_caret.set_Color( create_color( 0 , 0 , 0 , 0 ) );
@@ -190,15 +191,22 @@ namespace rux
 		};
 		void Window::private_OnClosed( void )
 		{
-			_on_closed.raise< const ::rux::gui::events::Event& >( ::rux::gui::events::Event( *this , 1 ) );
-			while( XInterlocked::CompareExchange( &_window_base_state , 2 , 1 ) == 2 )
-				::rux::threading::XThread::Sleep( 1 );
-			if( XInterlocked::CompareExchange( &_window_base_state , 0 , 0 ) == 2 )
+			::booldog::interlocked::atomic_return res = 0;
+			for(;;)
 			{
-				FreeResources( 0 );
-				_window_base = NULL;
-				_closed = 1;
-				XInterlocked::CompareExchange( &_window_base_state , 0 , 2 );
+				res = ::booldog::interlocked::compare_exchange(&_window_base_state, 4, 1);
+				if(res == 1)
+				{
+					_on_closed.raise< const ::rux::gui::events::Event& >(::rux::gui::events::Event(*this, 1));
+					::booldog::interlocked::compare_exchange(&_window_base_state, 2, 4);
+					FreeResources(0);
+					_window_base = 0;
+					//_closed = 1;
+					::booldog::interlocked::compare_exchange(&_window_base_state, 3, 2);
+				}
+				else if(res == 2)
+					continue;
+				break;
 			}
 		};
 		void XWindow::set_Width( ::rux::int32 width )
@@ -368,13 +376,17 @@ namespace rux
 			private_ResetChildLocationAndSizeCache( 0 , NULL , 1 , 1 , 1 , 1 );
 			_on_maximized.raise< const ::rux::gui::events::Event& >( ::rux::gui::events::Event( *this , 1 ) );
 		};
+		void Window::cleanup(void)
+		{
+			::booldog::interlocked::exchange(&_window_base_state, 0);
+		};
 		void Window::Show( void )
 		{
-			if( ::rux::gui::application::run( this ) == 1 )
+			if(::rux::gui::application::run( this ) == 1)
 			{
-				_closed = 0;
+				::booldog::interlocked::compare_exchange(&_window_base_state, 0, 3);
 				::rux::gui::WindowBase* window_base = get_WindowBase();
-				if( window_base )
+				if(window_base)
 					window_base->Show();
 			}
 		};
@@ -528,18 +540,23 @@ namespace rux
 		};
 		rux::gui::WindowBase* Window::get_WindowBase( void )
 		{
-			if( _closed == 0 )
+			::booldog::interlocked::atomic_return res = 0;
+			for(;;)
 			{
-				while( XInterlocked::CompareExchange( &_window_base_state , 2 , 0 ) == 2 )
-					rux::threading::XThread::Sleep( 1 );
-				if( XInterlocked::CompareExchange( &_window_base_state , 0 , 0 ) == 2 )
+				res = ::booldog::interlocked::compare_exchange(&_window_base_state, 2, 0);
+				if(res == 0)
 				{
 					AddRef();
 					_over_control = this;			
-					_window_base = ::rux::engine::_globals->_gui_globals->_rux_gui_create_window( ::rux::gui::application::gui_on_event );
-					_window_base->set_Owner( this );
-					XInterlocked::CompareExchange( &_window_base_state , 1 , 2 );
+					_window_base = ::rux::engine::_globals->_gui_globals->_rux_gui_create_window(
+						::rux::gui::application::gui_on_event);
+					_window_base->set_Owner(this);
+					
+					::booldog::interlocked::compare_exchange(&_window_base_state, 1, 2);
 				}
+				else if(res == 2)
+					continue;
+				break;
 			}
 			return _window_base;
 		};

@@ -82,7 +82,7 @@ namespace rux
 		private:
 			::rux::gui::Margin _margin;
 			::rux::gui::controls::XGroup _group;
-			::rux::byte _closed;
+			//::rux::byte _closed;
 			rux::gui::XEnum_Cursors _cursor;
 			char _utf8_control_name[ 128 ];
 			::rux::uint32 _utf8_control_name_hash;
@@ -337,6 +337,7 @@ namespace rux
 			virtual void set_Left( float left ) const;
 			virtual void set_Top( float top ) const;
 			virtual void* get_TagPtr( void ) const;
+			void cleanup(void);
 		};
 		class XWindow : public XGCHandle<Window>
 		{

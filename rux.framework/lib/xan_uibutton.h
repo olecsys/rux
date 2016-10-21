@@ -35,6 +35,10 @@ namespace rux
 				rux::gui::RenderCacheBase* _ui_border_cache;
 				rux::gui::FontBase* _ui_font;
 				rux::gui::Color* _foreground;
+				rux::gui::Color* _over_foreground;
+				rux::gui::Color* _pressed_foreground;
+				rux::gui::Color* _disabled_foreground;
+				rux::gui::Color* _active_state_foreground;
 				::rux::EventHandler< ::rux::gui::events::on_event_t > _on_click_callback;
 				rux::gui::Thickness _corner;
 				::rux::uint8 _is_repeat_until_mouse_up;
@@ -67,6 +71,10 @@ namespace rux
 				void set_OverBackground( ::rux::gui::ColorBase* over_background );
 				void set_PressedBackground( ::rux::gui::ColorBase* pressed_background );
 				void set_DisabledBackground( ::rux::gui::ColorBase* disabled_background );
+				void set_OverForeground(::rux::gui::Color* over_foreground);
+				void set_PressedForeground(::rux::gui::Color* pressed_foreground);
+				void set_DisabledForeground(::rux::gui::Color* disabled_foreground);
+				void set_Foreground(::rux::gui::Color* foreground);
 				::rux::gui::ColorBase* get_Background( void );
 				declare_content_size();
 				::rux::gui::ColorBase* get_DisabledBackground( void );
@@ -116,13 +124,16 @@ namespace rux
 				void set_OverBackground( ::rux::gui::ColorBase* over_background );
 				void set_PressedBackground( ::rux::gui::ColorBase* pressed_background );
 				void set_DisabledBackground( ::rux::gui::ColorBase* disabled_background );
+				void set_OverForeground(::rux::gui::Color* over_foreground);
+				void set_PressedForeground(::rux::gui::Color* pressed_foreground);
+				void set_DisabledForeground(::rux::gui::Color* disabled_foreground);
 				void set_Content( const XObject& content );
 				void set_Content( const Object& content );
 				void set_Content( const XGCRef& content );
 				void set_Font( const char* font_file_name ,
 					::rux::uint32 font_size_height ,
 					::rux::uint32 font_size_width );
-				void set_Foreground( ::rux::gui::Color* foreground );
+				void set_Foreground(::rux::gui::Color* foreground);
 				void set_OnClick( ::rux::gui::events::on_event_t on_click_callback );
 				void set_Corner( const ::rux::gui::Thickness& corner );
 				void get_Clip( ::rux::gui::Rectangle*& clip );
