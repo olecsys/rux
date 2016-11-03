@@ -1243,7 +1243,7 @@ namespace rux
 				if( ::rux::engine::_globals->_gui_globals->_gui_schedule == 0 )
 					::rux::engine::_globals->_gui_globals->_gui_schedule = alloc_object_macros( XMallocArray< ::rux::gui::engine::schedule* > );				
 				::rux::gui::engine::schedule* schedule = alloc_object_macros( ::rux::gui::engine::schedule );
-				schedule->_dispatcher = rux_dispatcher;
+				schedule->_dispatcher = (void*)rux_dispatcher;
 				schedule->_param = param;
 				schedule->_timeout = (rux::uint32)( timeout_in_microseconds / 1000ULL );
 				schedule->_execute_time = 0;
