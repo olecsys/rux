@@ -15,7 +15,7 @@
 typedef void (*statement_t)(void* udata, unsigned int& lineid, unsigned int label, int __booline__);
 typedef unsigned int (*lineid_t)(void* udata, unsigned int label, const char* __boofile__, const char* __boofunction__ 
 	, int __booline__);
-#define debuginfo_macros_statement( label ) \
+#define rux_debuginfo_macros_statement( label ) \
 {\
 	static unsigned int lineid = _lineid(udata, label, __FILE__, __FUNCTION__, __LINE__);\
 	_statement(udata, lineid, label, __LINE__);\

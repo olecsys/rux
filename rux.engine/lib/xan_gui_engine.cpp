@@ -1018,7 +1018,7 @@ namespace rux
 
 									::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteUnlock();
 									fdispatcher(schedule->_param);
-									::booldog::interlocked::exchange_pointer(&schedule->_dispatcher, fdispatcher);
+									::booldog::interlocked::exchange_pointer(&schedule->_dispatcher, (void*)fdispatcher);
 									::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteLock(__FILE__, __FUNCTION__, __LINE__);
 
 									delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
