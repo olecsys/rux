@@ -27,9 +27,9 @@ namespace booldog
 						BOOINIT_RESULT( ::booldog::result_buffer );
 
 						::booldog::uint32 y_count = width * height;
-						::booldog::uint32 y_width = width / 2;
-						::booldog::uint32 uv_width = width / 2;
-						::booldog::uint32 uv_count = width * height / 4;
+                                                //::booldog::uint32 y_width = width / 2;
+                                                //::booldog::uint32 uv_width = width / 2;
+                                                //::booldog::uint32 uv_count = width * height / 4;
 						res->bufdatasize = y_count * 3 / 2;
 						if(res->bufdatasize > res->bufsize)
 						{

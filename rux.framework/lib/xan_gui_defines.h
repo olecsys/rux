@@ -701,7 +701,7 @@ namespace rux
 		{
 			struct schedule
 			{
-				::rux::gui::rux_dispatcher_t _dispatcher;
+				void* volatile _dispatcher;
 				void* _param;
 				::rux::uint32 _timeout;
 				::rux::uint32 _execute_time;

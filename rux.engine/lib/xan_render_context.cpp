@@ -14,6 +14,7 @@ namespace rux
 		namespace engine
 		{
 			RenderContext::RenderContext( ::rux::gui::engine::Window* window , ::rux::uint32 width , ::rux::uint32 height )
+				: _enable_state(1)
 			{
 				::rux::log::WriteDebug( "%s:%d BEGIN" , __FUNCTION__ , __LINE__ );
 				if( ::rux::gui::engine::_displays_count > 0 && ::rux::gui::engine::_display_frequencies[ 0 ] != 0 )
@@ -119,6 +120,28 @@ namespace rux
 				else
 					_render_thread = 0;
 				::rux::log::WriteDebug( "%s:%d END" , __FUNCTION__ , __LINE__ );
+			};
+			void RenderContext::disable_render(void)
+			{
+				for(;;)
+				{
+					::booldog::interlocked::atomic_return res = 
+						::booldog::interlocked::compare_exchange(&_enable_state, 0, 1);
+					if(res == ::booldog::interlocked::max)
+						continue;
+					break;
+				}
+			};
+			void RenderContext::enable_render(void)
+			{
+				for(;;)
+				{
+					::booldog::interlocked::atomic_return res = 
+						::booldog::interlocked::compare_exchange(&_enable_state, 1, 0);
+					if(res == ::booldog::interlocked::max)
+						continue;
+					break;
+				}
 			};
 			void RenderContext::DestroyRenderThread( void )
 			{

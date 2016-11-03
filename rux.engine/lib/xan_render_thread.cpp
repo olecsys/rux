@@ -41,30 +41,35 @@ namespace rux
 			void RenderThread::force_render_thread( void* param , size_t ___rux__thread_index1986 )
 			{
 				RenderContext* render_context = (RenderContext*)param;
-				::rux::uint32 now_tickcount = ::rux::XTime::GetTickCount();
-				if( render_context->_render_time > now_tickcount )
-					render_context->_render_time = now_tickcount;
-				if( now_tickcount - render_context->_render_time >= render_context->_render_timeout )
+				if(::booldog::interlocked::compare_exchange(&render_context->_enable_state, ::booldog::interlocked::max
+					, 1) == 1)
 				{
-					render_context->_render_time = now_tickcount;
-					render_context->_gl->set_CurrentContext( render_context->_window );
-					render_context->Render( ___rux__thread_index1986 );
-					render_context->_gl->SwapBuffers( ___rux__thread_index1986 );
-					if( rux::gui::engine::_log_enable == 1 )
+					::rux::uint32 now_tickcount = ::rux::XTime::GetTickCount();
+					if( render_context->_render_time > now_tickcount )
+						render_context->_render_time = now_tickcount;
+					if( now_tickcount - render_context->_render_time >= render_context->_render_timeout )
 					{
-						if( render_context->_fps.get_Runtime() >= 1000ULL * 10000ULL )
+						render_context->_render_time = now_tickcount;
+						render_context->_gl->set_CurrentContext( render_context->_window );
+						render_context->Render( ___rux__thread_index1986 );
+						render_context->_gl->SwapBuffers( ___rux__thread_index1986 );
+						if( rux::gui::engine::_log_enable == 1 )
 						{
-							::rux::log::WriteTrace( "window, OpenGL render fps=%.1f" , render_context->_fps.get_FPS() );
-							render_context->_fps.Reset();
+							if( render_context->_fps.get_Runtime() >= 1000ULL * 10000ULL )
+							{
+								::rux::log::WriteTrace( "window, OpenGL render fps=%.1f" , render_context->_fps.get_FPS() );
+								render_context->_fps.Reset();
+							}
+							else
+								render_context->_fps.Increment();
 						}
-						else
-							render_context->_fps.Increment();
 					}
+					else
+						render_context->_gl->set_CurrentContext( render_context->_window );
+					render_context->CleanAfterRender();
+					::booldog::interlocked::exchange(&render_context->_enable_state, 1);
+					::rux::threading::XThread::Sleep( 1 );
 				}
-				else
-					render_context->_gl->set_CurrentContext( render_context->_window );
-				render_context->CleanAfterRender();
-				::rux::threading::XThread::Sleep( 1 );
 			};
 		};
 	};

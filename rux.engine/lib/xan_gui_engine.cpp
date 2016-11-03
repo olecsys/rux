@@ -10,6 +10,13 @@
 #ifdef __UNIX__
 #include <X11/extensions/Xrandr.h>
 #endif
+
+#ifndef BOOLDOG_HEADER
+#define BOOLDOG_HEADER(header) <booldog/header>
+#endif
+#include BOOLDOG_HEADER(boo_if.h)
+#include BOOLDOG_HEADER(boo_threading_utils.h)
+
 namespace rux
 {
 	namespace gui
@@ -706,8 +713,8 @@ namespace rux
 #endif
 			dll_internal void initialize( void )
 			{
-				if( ::rux::engine::_globals->_gui_globals->_cs_gui_schedule == 0 )
-					::rux::engine::_globals->_gui_globals->_cs_gui_schedule = alloc_object_macros( ::rux::threading::RdWrLock );
+				if(::rux::engine::_globals->_gui_globals->_cs_gui_schedule == 0)
+					::rux::engine::_globals->_gui_globals->_cs_gui_schedule = alloc_object_macros(::rux::threading::RdWrLock);
 				if( ::rux::engine::_globals->_gui_globals->_gui_schedule == 0 )
 					::rux::engine::_globals->_gui_globals->_gui_schedule = alloc_object_macros( XMallocArray< ::rux::gui::engine::schedule* > );
 #ifdef __WINDOWS__
@@ -989,6 +996,9 @@ namespace rux
 					::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteLock( __FILE__ , __FUNCTION__ , __LINE__ );
 					if( ::rux::engine::_globals->_gui_globals->_gui_schedule->ItemsCount() > 0 )
 					{
+						void* max = (void*)0xffffffff;
+						if(::booldog::compile::If<sizeof(void*) == 8>::test())
+							max = (void*)0xffffffffffffffff;
 						::rux::uint32 now = ::rux::XTime::GetTickCount();
 						for( size_t schedule_index = 0 ; schedule_index < ::rux::engine::_globals->_gui_globals->_gui_schedule->Count() ; schedule_index++ )
 						{
@@ -1003,7 +1013,13 @@ namespace rux
 
 									::rux::uint32 delay_tickcount = ::rux::XTime::GetTickCount();
 
-									schedule->_dispatcher( schedule->_param );
+									::rux::gui::rux_dispatcher_t fdispatcher = (::rux::gui::rux_dispatcher_t)
+										::booldog::interlocked::exchange_pointer(&schedule->_dispatcher, max);
+
+									::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteUnlock();
+									fdispatcher(schedule->_param);
+									::booldog::interlocked::exchange_pointer(&schedule->_dispatcher, fdispatcher);
+									::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteLock(__FILE__, __FUNCTION__, __LINE__);
 
 									delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
 									if(delay_tickcount > 100)
@@ -1225,27 +1241,40 @@ namespace rux
 				if( ::rux::engine::_globals->_gui_globals->_cs_gui_schedule == 0 )
 					::rux::engine::_globals->_gui_globals->_cs_gui_schedule = alloc_object_macros( ::rux::threading::RdWrLock );
 				if( ::rux::engine::_globals->_gui_globals->_gui_schedule == 0 )
-					::rux::engine::_globals->_gui_globals->_gui_schedule = alloc_object_macros( XMallocArray< ::rux::gui::engine::schedule* > );
-				::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteLock( __FILE__ , __FUNCTION__ , __LINE__ );
+					::rux::engine::_globals->_gui_globals->_gui_schedule = alloc_object_macros( XMallocArray< ::rux::gui::engine::schedule* > );				
 				::rux::gui::engine::schedule* schedule = alloc_object_macros( ::rux::gui::engine::schedule );
 				schedule->_dispatcher = rux_dispatcher;
 				schedule->_param = param;
 				schedule->_timeout = (rux::uint32)( timeout_in_microseconds / 1000ULL );
 				schedule->_execute_time = 0;
-				size_t schedule_index = ::rux::engine::_globals->_gui_globals->_gui_schedule->FillEmptyOrAdd( schedule );
+				::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteLock(__FILE__, __FUNCTION__, __LINE__);
+				size_t schedule_index = ::rux::engine::_globals->_gui_globals->_gui_schedule->FillEmptyOrAdd(schedule);
 				::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteUnlock();
 				return schedule_index;
 			};
 			dll_internal void remove_schedule( size_t schedule_index )
 			{
-				::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteLock( __FILE__ , __FUNCTION__ , __LINE__ );
-				if( ::rux::engine::_globals->_gui_globals->_gui_schedule->Count() > schedule_index )
+				::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteLock(__FILE__, __FUNCTION__, __LINE__);
+				if(::rux::engine::_globals->_gui_globals->_gui_schedule->Count() > schedule_index)
 				{
-					::rux::gui::engine::schedule* schedule = ::rux::engine::_globals->_gui_globals->_gui_schedule->operator[]( schedule_index );
-					::rux::engine::_globals->_gui_globals->_gui_schedule->set_EmptyAt( schedule_index );
-					::rux::engine::free_object< ::rux::gui::engine::schedule >( schedule );
+					::rux::gui::engine::schedule* schedule = ::rux::engine::_globals->_gui_globals->_gui_schedule->operator[](
+						schedule_index);
+					::rux::engine::_globals->_gui_globals->_gui_schedule->set_EmptyAt(schedule_index);
+					::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteUnlock();
+
+					if(rux::gui::engine::_message_processing_thread_id != ::booldog::threading::threadid())
+					{
+						void* max = (void*)0xffffffff;
+						if(::booldog::compile::If<sizeof(void*) == 8>::test())
+							max = (void*)0xffffffffffffffff;
+						while(::booldog::interlocked::compare_exchange_pointer(&schedule->_dispatcher, 0, 0) == max)
+							::booldog::threading::sleep(1);
+					}
+
+					::rux::engine::free_object< ::rux::gui::engine::schedule >(schedule);
 				}
-				::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteUnlock();
+				else
+					::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteUnlock();
 			};
 			dll_internal ::rux::uint8 dispatch( ::rux::gui::rux_dispatcher_t rux_dispatcher , void* param , ::rux::gui::WindowBase* window_base , ::rux::uint8 wait )
 			{
@@ -1962,6 +1991,11 @@ namespace rux
 								windowpos->flags |= SWP_NOMOVE;
 							if( window->_is_allow_resize == 0 )
 								windowpos->flags |= SWP_NOSIZE;
+							if((windowpos->flags & SWP_NOSIZE)== false)
+							{
+								if(window->_render_context)
+									window->_render_context->disable_render();
+							}
 							if( ( windowpos->flags & SWP_NOMOVE ) == false && ( windowpos->flags & SWP_NOSIZE ) == false )
 								window->_both_size_and_move_msg = 1;
 							else
@@ -1975,6 +2009,8 @@ namespace rux
 						{
 							rux::int32 width = (int)(short)LOWORD( lparam );
 							rux::int32 height = (int)(short)HIWORD( lparam );
+							if(window->_render_context)
+								window->_render_context->disable_render();
 							if( wparam == SIZE_MAXIMIZED )
 							{
 								if( window->_window_state != ::rux::gui::XEnum_WindowState_Maximized )
@@ -2044,8 +2080,11 @@ namespace rux
 								}
 								rux::gui::WindowSizeEvent xevent( window , window->_width , window->_height );
 								window->raise_event( xevent );
-							}							
+							}			
+							if(window->_render_context)
+								window->_render_context->enable_render();
 						}
+						
 						if( window && need_release )
 							window->Release();
 						delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);

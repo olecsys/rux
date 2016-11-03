@@ -35,8 +35,8 @@ namespace booldog
 	{
 		namespace string
 		{
-			static ::booldog::enums::string::code_page default_code_page = BOOLDOG_STRING_CODE_PAGE;
-		};
-	};
-};
+                        //static ::booldog::enums::string::code_page default_code_page = BOOLDOG_STRING_CODE_PAGE;
+                }
+        }
+}
 #endif

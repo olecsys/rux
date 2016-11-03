@@ -73,9 +73,10 @@ namespace booldog
 		result_file( const ::booldog::result& )
 		{
 		};
-		result_file( const ::booldog::result_file& )
+                result_file(const ::booldog::result_file&)
+                    : result()
 		{
-		};
+                }
 		::booldog::result_file& operator = ( const ::booldog::result_file& )
 		{
 			return *this;

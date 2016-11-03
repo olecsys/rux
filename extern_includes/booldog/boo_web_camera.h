@@ -8,7 +8,10 @@
 #endif
 
 #include BOOLDOG_HEADER(boo_multimedia_enums.h)
+#include BOOLDOG_HEADER(boo_multimedia_video_frame.h)
+#include BOOLDOG_HEADER(boo_time_utils.h)
 #include BOOLDOG_HEADER(boo_error.h)
+#include BOOLDOG_HEADER(boo_result.h)
 
 //#if 1
 #ifdef __LINUX__
@@ -25,9 +28,6 @@
 #ifndef V4L2_PIX_FMT_H264
 #define V4L2_PIX_FMT_H264     v4l2_fourcc('H', '2', '6', '4') /* H264 with start codes */
 #endif
-
-#else
-#include BOOLDOG_HEADER(boo_result.h)
 #endif
 namespace booldog
 {
@@ -83,9 +83,7 @@ namespace booldog
 			typedef bool (*available_formats_callback_t)(::booldog::allocator* allocator, void* udata
 				, ::booldog::uint32 fourcc, ::booldog::uint32 width, ::booldog::uint32 height
 				, ::booldog::uint32 framerate_numerator, ::booldog::uint32 framerate_denominator, const char* description);
-			typedef void (*read_frame_callback_t)(::booldog::allocator* allocator, void* udata, void* frame
-				, ::booldog::uint32 frame_size, ::booldog::uint32 fourcc, ::booldog::uint32 width
-				, ::booldog::uint32 height);
+			typedef void (*read_frame_callback_t)(::booldog::allocator* allocator, void* udata, ::booldog::multimedia::video::frame* vframe);
 		};
 		class web_camera
 		{
@@ -117,6 +115,8 @@ namespace booldog
 				return r;
 			}
 #endif
+			::booldog::uint64 _difference;
+			::booldog::uint64 _timestamp;
 			web_camera(void)
 			{
 			};
@@ -346,6 +346,8 @@ goto_return:
 			{
 				::booldog::result locres;
 				BOOINIT_RESULT(::booldog::result);
+				_timestamp = 0;
+				_difference = 0;
 #ifdef __LINUX__
 				enum v4l2_buf_type v4l2buftype;
 				struct v4l2_buffer v4l2buf;
@@ -657,7 +659,10 @@ goto_return:
 						res->seterrno(resint);
 					}
 					else if(resint != 0)
+					{
+						_timestamp = ::booldog::utils::time::posix::now_as_utc();
 						res->bres = true;
+					}
 					break;
 				}
 #else
@@ -673,6 +678,12 @@ goto_return:
 				::booldog::result locres;
 				BOOINIT_RESULT(::booldog::result);
 #ifdef __LINUX__
+				::booldog::uint64 timestamp = ::booldog::utils::time::posix::now_as_utc();
+				if(_timestamp)
+					timestamp = _timestamp;
+				
+				struct timespec ts;
+				::booldog::multimedia::video::frame vframe;
 				int index = 0;
 				struct v4l2_buffer v4l2buf;
 				switch(_capture_type)
@@ -687,7 +698,7 @@ goto_return:
 					{
 						res->seterrno();
 						return false;
-					}
+					}					
 					for(;index < _buffers_count;++index)
 					{
 						if(v4l2buf.m.userptr == (unsigned long)_buffers[index].start
@@ -695,7 +706,43 @@ goto_return:
 							break;
 					}
 					if(index < _buffers_count)
-						callback(_allocator, udata, (void*)v4l2buf.m.userptr, v4l2buf.bytesused, _fourcc, _width, _height);
+					{
+						vframe.fourcc = _fourcc;
+						vframe.width = _width;
+						vframe.height = _height;
+						vframe.data = (::booldog::byte*)v4l2buf.m.userptr;
+						vframe.size = (::booldog::uint32)v4l2buf.bytesused;
+
+						if(_difference == 0)
+						{
+							_difference = v4l2buf.timestamp.tv_sec * 1000000ULL + v4l2buf.timestamp.tv_usec;
+							if(v4l2buf.flags & V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC)
+							{
+								clock_gettime(CLOCK_MONOTONIC, &ts);
+								_difference = ts.tv_sec * 1000000LL + (ts.tv_nsec / 1000ULL) - _difference;
+								//printf("%d(%x) MONOTONIC(" I64u ", " I64u ", " I64u ")\n", index, v4l2buf.flags, (::booldog::uint64)v4l2buf.timestamp.tv_sec, (::booldog::uint64)v4l2buf.timestamp.tv_usec, _difference);
+							}
+							else
+							{
+								clock_gettime(CLOCK_REALTIME, &ts);
+								_difference = ts.tv_sec * 1000000LL + (ts.tv_nsec / 1000ULL) - _difference;
+							}
+						}
+						timestamp -= _difference;
+
+						/*timestamp = v4l2buf.timestamp.tv_sec * 1000000ULL + v4l2buf.timestamp.tv_usec;
+						if(v4l2buf.flags & V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC)
+						{
+						printf("%d(%x) MONOTONIC(" I64u ", " I64u ")\n", index, v4l2buf.flags, (::booldog::uint64)v4l2buf.timestamp.tv_sec, (::booldog::uint64)v4l2buf.timestamp.tv_usec);
+							clock_gettime(CLOCK_MONOTONIC, &ts);
+							timestamp = ts.tv_sec * 1000000LL + (ts.tv_nsec / 1000ULL) - timestamp;						
+							timestamp = ::booldog::utils::time::posix::now_as_utc() - timestamp;
+						}
+						else
+						printf("UNKNOWN(" I64u ", " I64u ")\n", (::booldog::uint64)v4l2buf.timestamp.tv_sec, (::booldog::uint64)v4l2buf.timestamp.tv_usec);*/
+						vframe.timestamp = timestamp;
+						callback(_allocator, udata, &vframe);
+					}
 					if(xioctl(_fd, VIDIOC_QBUF, &v4l2buf) == -1)
 					{
 						res->seterrno();
@@ -714,7 +761,24 @@ goto_return:
 						res->seterrno();
 						return false;
 					}
-					callback(_allocator, udata, _buffers[v4l2buf.index].start, v4l2buf.bytesused, _fourcc, _width, _height);
+					timestamp = ::booldog::utils::time::posix::now_as_utc();
+					vframe.fourcc = _fourcc;
+					vframe.width = _width;
+					vframe.height = _height;
+					vframe.data = (::booldog::byte*)_buffers[v4l2buf.index].start;
+					vframe.size = (::booldog::uint32)v4l2buf.bytesused;
+					/*timestamp = v4l2buf.timestamp.tv_sec * 1000000ULL + v4l2buf.timestamp.tv_usec;
+					if(v4l2buf.flags & V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC)
+					{
+					printf("MONOTONIC(" I64u ", " I64u ")\n", (::booldog::uint64)v4l2buf.timestamp.tv_sec, (::booldog::uint64)v4l2buf.timestamp.tv_usec);
+						clock_gettime(CLOCK_MONOTONIC, &ts);
+						timestamp = ts.tv_sec * 1000000LL + ( ts.tv_nsec / 1000ULL ) - timestamp;						
+						timestamp = ::booldog::utils::time::posix::now_as_utc() - timestamp;
+					}
+					else
+					printf("UNKNOWN(" I64u ", " I64u ")\n", (::booldog::uint64)v4l2buf.timestamp.tv_sec, (::booldog::uint64)v4l2buf.timestamp.tv_usec);*/
+					vframe.timestamp = timestamp;
+					callback(_allocator, udata, &vframe);
 					if(xioctl(_fd, VIDIOC_QBUF, &v4l2buf) == -1)
 					{
 						res->seterrno();
@@ -727,7 +791,16 @@ goto_return:
 						res->seterrno();
 						return false;
 					}
-					callback(_allocator, udata, _buffers[0].start, _buffers[0].length, _fourcc, _width, _height);
+					timestamp = ::booldog::utils::time::posix::now_as_utc();
+					vframe.fourcc = _fourcc;
+					vframe.width = _width;
+					vframe.height = _height;
+					vframe.data = (::booldog::byte*)_buffers[0].start;
+					vframe.size = (::booldog::uint32)_buffers[0].length;
+					vframe.timestamp = timestamp;
+					
+					callback(_allocator, udata, &vframe);
+					break;
 				}
 #else
 				callback = callback;

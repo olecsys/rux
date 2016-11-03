@@ -11,6 +11,12 @@
 #include <xan_render_thread.h>
 #include <xan_gui_fps.h>
 #include <xan_gl_context.h>
+
+#ifndef BOOLDOG_HEADER
+#define BOOLDOG_HEADER( header ) <booldog/header>
+#endif
+#include BOOLDOG_HEADER(boo_interlocked.h)
+
 namespace rux
 {
 	namespace gui
@@ -39,6 +45,8 @@ namespace rux
 #endif
 #endif
 			private:
+				::booldog::interlocked::atomic _enable_state;
+
 				size_t _draw_immediately_index;
 				XMallocArray< ::rux::gui::engine::RenderUniversalCache* > _draw_immediately0;
 				XMallocArray< ::rux::gui::engine::RenderUniversalCache* > _draw_immediately1;
@@ -83,6 +91,8 @@ namespace rux
 			public:
 				RenderContext( rux::gui::engine::Window* window , rux::uint32 width , rux::uint32 height );
 				~RenderContext();
+				void disable_render(void);
+				void enable_render(void);
 				void DestroyRenderThread( void );
 				friend dll_internal rux::uint8 dispatch( rux::gui::rux_dispatcher_t rux_dispatcher , void* param , rux::gui::WindowBase* window_base , rux::uint8 stop_render , rux::uint8 no_send_from_render , rux::uint8 wait );
 				bool check_cache( rux::gui::RenderCacheBase** cache , const char* __filename__ , rux::int32 __line__ );

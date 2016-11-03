@@ -16,6 +16,7 @@
 #else
 #include <pthread.h>
 #include <unistd.h>
+#include <limits.h>
 #endif
 namespace booldog
 {
@@ -62,17 +63,20 @@ namespace booldog
 #endif
 		public:
 			thread( booldog::allocator* allocator )
-				: _onthreadstarted( 0 ) , _onthreadstopped( 0 ) , _udata( 0 ) , _allocator( allocator ) , _state( ::booldog::enums::threading::state_stop )
+                                : _state(::booldog::enums::threading::state_stop)
+                                , _allocator(allocator), _udata(0), _onthreadstarted(0)
+                                , _onthreadstopped(0)
 			{
-			};
+                        }
 			void* udata( void )
 			{
 				return _udata;
-			};
+                        }
 			bool pending_in_stop( void )
 			{
-				return booldog::interlocked::compare_exchange( &_state , 0 , 0 ) == ::booldog::enums::threading::state_pending_in_stop;
-			};
+                                return booldog::interlocked::compare_exchange(&_state, 0, 0)
+                                        == ::booldog::enums::threading::state_pending_in_stop;
+                        }
 		private:
 #ifdef __WINDOWS__
 			static unsigned __stdcall func( void* param )
@@ -131,9 +135,11 @@ namespace booldog
 					}
 					if(stack_size != 0)
 					{
+#ifdef PTHREAD_STACK_MIN
 						if(stack_size < PTHREAD_STACK_MIN)
 							stack_size = PTHREAD_STACK_MIN;
 						else
+#endif
 						{
 							long sz = sysconf(_SC_PAGESIZE);
 							if(stack_size % sz)
