@@ -75,11 +75,11 @@ namespace booldog
 printf("Heap memory leak(%d)\n", (int)_size_of_allocated_memory);
 						int u = 5; u-- ; printf( "%d" , 120 / ( u - 4 ) );
 					}
-				};
+                                }
 				virtual size_t size_of_allocated_memory( void )
 				{
 					return ::booldog::interlocked::compare_exchange( &_size_of_allocated_memory , 0 , 0 );
-				};
+                                }
 			private:
 				void* palloc( void* pointer , size_t pointertotal , size_t pointersize , size_t size
 					, const ::booldog::debug::info& debuginfo = debuginfo_macros )

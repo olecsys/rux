@@ -169,17 +169,20 @@ namespace booldog
 				struct stat st;
 				if(stat(name, &st) == -1)
 				{
+				printf("error, %d\n", __LINE__);
 					res->seterrno();
 					goto goto_return;
 				}
 				if(S_ISCHR(st.st_mode) == 0) 
 				{
+				printf("error, %d\n", __LINE__);
 					res->booerr(::booldog::enums::result::booerr_type_file_is_not_character_device);
 					goto goto_return;
 				}
 				fd = ::open(name, O_RDWR | O_NONBLOCK, 0);
 				if(fd == -1)
 				{
+				printf("error, %d\n", __LINE__);
 					res->seterrno();
 					goto goto_return;
 				}
@@ -187,11 +190,13 @@ namespace booldog
 				{
 					if(xioctl(fd, VIDIOC_QUERYCAP, &cap) == -1)
 					{
+					printf("error, %d\n", __LINE__);
 						res->seterrno();
 						goto goto_return;
 					}
 					if((cap.capabilities & V4L2_CAP_VIDEO_CAPTURE) == 0)
 					{
+					printf("error, %d\n", __LINE__);
 						res->booerr(::booldog::enums::result::booerr_type_file_is_not_video_capture_device);
 						goto goto_return;
 					}
@@ -202,6 +207,7 @@ goto_return:
 					res->cam = allocator->create< ::booldog::multimedia::web_camera >(allocator, fd);
 					if(res->cam == 0)
 					{
+					printf("error, %d\n", __LINE__);
 						res->booerr(::booldog::enums::result::booerr_type_cannot_alloc_memory);
 						return false;
 					}
@@ -362,6 +368,7 @@ goto_return:
 
 				if(xioctl(_fd, VIDIOC_QUERYCAP, &cap) == -1)
 				{
+				printf("error, %d\n", __LINE__);
 					res->seterrno();
 					goto goto_return;
 				}
@@ -372,6 +379,7 @@ goto_return:
 					_capture_type = 0;
 					if((cap.capabilities & V4L2_CAP_READWRITE) == false)
 					{
+					printf("error, %d\n", __LINE__);
 						res->booerr(::booldog::enums::result::booerr_type_video_capture_device_does_not_support_neither_streaming_nor_io);
 						goto goto_return;
 					}
@@ -406,6 +414,7 @@ goto_return:
 				fmt.fmt.pix.field = V4L2_FIELD_INTERLACED;
 				if(xioctl(_fd, VIDIOC_S_FMT, &fmt) == -1)
 				{
+				printf("error, %d\n", __LINE__);
 					res->seterrno();
 					goto goto_return;
 				}
@@ -428,6 +437,7 @@ goto_return:
 							v4l2streamparm.parm.capture.timeperframe.denominator = framerate_denominator;
 							if(xioctl(_fd, VIDIOC_S_PARM, &v4l2streamparm) == -1)
 							{
+							printf("error, %d\n", __LINE__);
 								res->seterrno();
 								goto goto_return;
 							}
@@ -453,6 +463,7 @@ goto_return:
 						int errnoval = errno;
 						if(errnoval != EINVAL) 
 						{
+						printf("error, %d\n", __LINE__);
 							res->seterrno(errnoval);
 							goto goto_return;
 						} 
@@ -475,6 +486,7 @@ goto_return:
 								, fmt.fmt.pix.sizeimage, debuginfo);
 							if(_buffers[_buffers_count].start == 0)
 							{
+							printf("error, %d\n", __LINE__);
 								res->booerr(::booldog::enums::result::booerr_type_cannot_alloc_memory);
 								goto goto_return;
 							}
@@ -496,6 +508,7 @@ goto_return:
 						int errnoval = errno;
 						if(errnoval != EINVAL) 
 						{
+						printf("error, %d\n", __LINE__);
 							res->seterrno(errnoval);
 							goto goto_return;
 						} 
@@ -506,6 +519,7 @@ goto_return:
 					{
 						if(req.count < 2)
 						{
+						printf("error, %d\n", __LINE__);
 							res->booerr(::booldog::enums::result::booerr_type_insufficient_memory);
 							goto goto_return;
 						}
@@ -520,6 +534,7 @@ goto_return:
 
 							if(xioctl(_fd, VIDIOC_QUERYBUF, &v4l2buf) == -1)
 							{
+							printf("error, %d\n", __LINE__);
 								res->seterrno();
 								goto goto_return;
 							}
@@ -543,6 +558,7 @@ goto_return:
 								, v4l2buf.m.offset);
 							if(_buffers[_buffers_count].start == MAP_FAILED)
 							{
+							printf("error, %d\n", __LINE__);
 								_buffers[_buffers_count].start = 0;
 								res->booerr(::booldog::enums::result::booerr_type_map_failed);
 								goto goto_return;
@@ -566,6 +582,7 @@ goto_return:
 						, fmt.fmt.pix.sizeimage, debuginfo);
 					if(_buffers[0].start == 0)
 					{
+					printf("error, %d\n", __LINE__);
 						res->booerr(::booldog::enums::result::booerr_type_cannot_alloc_memory);
 						goto goto_return;
 					}
@@ -585,6 +602,7 @@ goto_return:
                         v4l2buf.length = _buffers[index].length;
 						if(xioctl(_fd, VIDIOC_QBUF, &v4l2buf) == -1)
 						{
+						printf("error, %d\n", __LINE__);
 							res->seterrno();
 							goto goto_return;
 						}
@@ -599,6 +617,7 @@ goto_return:
 						v4l2buf.index = index;
 						if(xioctl(_fd, VIDIOC_QBUF, &v4l2buf) == -1)
 						{
+						printf("error, %d\n", __LINE__);
 							res->seterrno();
 							goto goto_return;
 						}
@@ -610,6 +629,7 @@ goto_return:
 				v4l2buftype = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 				if(xioctl(_fd, VIDIOC_STREAMON, &v4l2buftype) == -1)
 				{
+				printf("error, %d\n", __LINE__);
 					res->seterrno();
 					goto goto_return;
 				}

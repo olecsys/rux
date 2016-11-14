@@ -1814,27 +1814,39 @@ namespace rux
 				rux::engine::_globals->_service_globals->_service_status_handle = RegisterServiceCtrlHandlerA( rux::engine::_globals->_service_globals->_service_name , rux::service::service_ctrl_handler );
 				if( rux::engine::_globals->_service_globals->_service_status_handle == NULL )
 				{ 
+					boowritelog(&mbchar0, &mbchar1, "service/daemon %s, cannot RegisterServiceCtrlHandlerA", ::rux::engine::_globals->_service_globals->_service_name);
 					rux::service::private_report_event();
 					return; 
 				}
 				else
 				{
+					boowritelog(&mbchar0, &mbchar1, "service/daemon %s, after RegisterServiceCtrlHandlerA", ::rux::engine::_globals->_service_globals->_service_name);
 					rux::engine::_globals->_service_globals->_service_status.dwServiceType = SERVICE_WIN32_OWN_PROCESS; 
-					rux::engine::_globals->_service_globals->_service_status.dwServiceSpecificExitCode = 0;    
+					rux::engine::_globals->_service_globals->_service_status.dwServiceSpecificExitCode = 0;  
 					rux::service::private_report_status( SERVICE_START_PENDING, NO_ERROR , 10000 );		
-					rux::engine::_globals->_service_globals->_service_stop_handle = CreateEvent( NULL , TRUE , FALSE , NULL );
+					boowritelog(&mbchar0, &mbchar1, "service/daemon %s, after report status SERVICE_START_PENDING"
+						, ::rux::engine::_globals->_service_globals->_service_name);
+					rux::engine::_globals->_service_globals->_service_stop_handle = CreateEvent( NULL , TRUE , FALSE , NULL );					
 					if( rux::engine::_globals->_service_globals->_service_stop_handle == NULL )
 					{
+						boowritelog(&mbchar0, &mbchar1, "service/daemon %s, cannot CreateEvent"
+							, ::rux::engine::_globals->_service_globals->_service_name);
 						rux::service::private_report_status( SERVICE_STOPPED , NO_ERROR , 0 );
 						return;
 					}
 					rux::service::private_report_status( SERVICE_RUNNING , NO_ERROR , 0 );
+					boowritelog(&mbchar0, &mbchar1, "service/daemon %s, after report status SERVICE_RUNNING"
+						, ::rux::engine::_globals->_service_globals->_service_name);
 					if( rux::engine::_globals->_service_globals->_service_task )
 					{
+						boowritelog(&mbchar0, &mbchar1, "service/daemon %s, before service_task"
+							, ::rux::engine::_globals->_service_globals->_service_name);
 						CODE_LABELS_INITIALIZE();
 						CODE_LABEL( NULL , NULL , 100 );
 						rux::int32 argc = 0;
 						char** args = NULL;
+						boowritelog(&mbchar0, &mbchar1, "service/daemon %s, before service_task execute"
+							, ::rux::engine::_globals->_service_globals->_service_name);
 						rux::engine::_globals->_service_globals->_service_task( argc , args );
 					}
 					WaitForSingleObject( rux::engine::_globals->_service_globals->_service_stop_handle , ::rux::threading::infinite );				

@@ -1991,11 +1991,11 @@ namespace rux
 								windowpos->flags |= SWP_NOMOVE;
 							if( window->_is_allow_resize == 0 )
 								windowpos->flags |= SWP_NOSIZE;
-							if((windowpos->flags & SWP_NOSIZE)== false)
+							/*if((windowpos->flags & SWP_NOSIZE)== false)
 							{
 								if(window->_render_context)
 									window->_render_context->disable_render();
-							}
+							}*/
 							if( ( windowpos->flags & SWP_NOMOVE ) == false && ( windowpos->flags & SWP_NOSIZE ) == false )
 								window->_both_size_and_move_msg = 1;
 							else
@@ -2009,8 +2009,8 @@ namespace rux
 						{
 							rux::int32 width = (int)(short)LOWORD( lparam );
 							rux::int32 height = (int)(short)HIWORD( lparam );
-							if(window->_render_context)
-								window->_render_context->disable_render();
+							//if(window->_render_context)
+							//	window->_render_context->disable_render();
 							if( wparam == SIZE_MAXIMIZED )
 							{
 								if( window->_window_state != ::rux::gui::XEnum_WindowState_Maximized )
@@ -2081,8 +2081,8 @@ namespace rux
 								rux::gui::WindowSizeEvent xevent( window , window->_width , window->_height );
 								window->raise_event( xevent );
 							}			
-							if(window->_render_context)
-								window->_render_context->enable_render();
+							//if(window->_render_context)
+							//	window->_render_context->enable_render();
 						}
 						
 						if( window && need_release )
