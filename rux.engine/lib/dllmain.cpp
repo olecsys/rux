@@ -970,64 +970,41 @@ dll_internal void pre_initialize( void )
 	::rux::task::_tasks_event_handlers = alloc_object_macros( XMallocArray< ::rux::task::TaskEventHandler* > );
 	if( rux::engine::_globals->_symsrv[ 0 ] == 0 )
 		strcpy( rux::engine::_globals->_symsrv , "$(origin);$(origin)\\lib;$(origin)\\plugins;srv*\\\\192.168.40.37\\video7" );
-	declare_stack_variable( char , last_dir , 1024 );
-	declare_stack_variable( char , dir , 1024 );
-	strcpy( dir , ::rux::engine::_globals->_executable_directory );
-	strcat( dir , "/stable" );
-	strcpy( last_dir , ::rux::engine::_globals->_executable_directory );
-	strcat( last_dir , "/stable_last" );
-	rux::io::directory::remove_all( last_dir );
-	rux::io::directory::rename( dir , last_dir );
-	if( ::rux::engine::_diagnostic == 1 )
-	{
-		rux::io::directory::create( dir );
-		::chmod( dir , 0777 );
-	}
-	strcpy( dir , ::rux::engine::_globals->_executable_directory );
-	strcat( dir , "/cpu" );
-	strcpy( last_dir , ::rux::engine::_globals->_executable_directory );
-	strcat( last_dir , "/cpu_last" );
-	rux::io::directory::remove_all( last_dir );
-	rux::io::directory::rename( dir , last_dir );
-	if( ::rux::engine::_diagnostic )
-	{
-		rux::io::directory::create( dir );
-		::chmod( dir , 0777 );
-	}
-	strcpy( dir , ::rux::engine::_globals->_executable_directory );
-	strcat( dir , "/memory" );
-	strcpy( last_dir , ::rux::engine::_globals->_executable_directory );
-	strcat( last_dir , "/memory_last" );
-	rux::io::directory::remove_all( last_dir );
-	rux::io::directory::rename( dir , last_dir );
-	if( ::rux::engine::_diagnostic == 1 )
-	{
-		rux::io::directory::create( dir );
-		::chmod( dir , 0777 );
-	}
-	strcpy( dir , ::rux::engine::_globals->_executable_directory );
-	strcat( dir , "/rux_logs" );
-	strcpy( last_dir , ::rux::engine::_globals->_executable_directory );
-	strcat( last_dir , "/rux_logs_last" );
-	rux::io::directory::remove_all( last_dir );
-	rux::io::directory::rename( dir , last_dir );
-	if( ::rux::engine::_diagnostic )
-	{
-		rux::io::directory::create( dir );
-		::chmod( dir , 0777 );
-	}
-	/*{
-		::rux::log::_logger = alloc_object_macros( ::rux::log::Logger );	
-	}
-	{
-		_cs_rux_modules_name->WriteLock();	
-		for( size_t index0 = 0 ; index0 < RUX_MAX_MODULES_SIZE - 1 ; index0++ )
-		{
-			if( _rux_modules_name[ index0 ][ 0 ] != 0 )
-				::rux::log::_logger->register_module( index0 , _rux_modules_name[ index0 ] );
-		}
-		_cs_rux_modules_name->WriteUnlock();
-	}*/
+	//declare_stack_variable( char , last_dir , 1024 );
+	//declare_stack_variable( char , dir , 1024 );
+	//strcpy( dir , ::rux::engine::_globals->_executable_directory );
+	//strcat( dir , "/stable" );
+	//strcpy( last_dir , ::rux::engine::_globals->_executable_directory );
+	//strcat( last_dir , "/stable_last" );
+	//rux::io::directory::remove_all( last_dir );
+	//rux::io::directory::rename( dir , last_dir );
+	//if( ::rux::engine::_diagnostic == 1 )
+	//{
+	//	rux::io::directory::create( dir );
+	//	::chmod( dir , 0777 );
+	//}
+	//strcpy( dir , ::rux::engine::_globals->_executable_directory );
+	//strcat( dir , "/cpu" );
+	//strcpy( last_dir , ::rux::engine::_globals->_executable_directory );
+	//strcat( last_dir , "/cpu_last" );
+	//rux::io::directory::remove_all( last_dir );
+	//rux::io::directory::rename( dir , last_dir );
+	//if( ::rux::engine::_diagnostic )
+	//{
+	//	rux::io::directory::create( dir );
+	//	::chmod( dir , 0777 );
+	//}
+	//strcpy( dir , ::rux::engine::_globals->_executable_directory );
+	//strcat( dir , "/memory" );
+	//strcpy( last_dir , ::rux::engine::_globals->_executable_directory );
+	//strcat( last_dir , "/memory_last" );
+	//rux::io::directory::remove_all( last_dir );
+	//rux::io::directory::rename( dir , last_dir );
+	//if( ::rux::engine::_diagnostic == 1 )
+	//{
+	//	rux::io::directory::create( dir );
+	//	::chmod( dir , 0777 );
+	//}	
 };
 dll_internal ::rux::byte post_deinitialize( void )
 {
@@ -1287,6 +1264,13 @@ void start( void* )
 	{
 		::rux::safe_strncpy( _rux_cpu_filename , ::rux::engine::_globals->_executable_directory , 1023 );
 		rux_concatenation( _rux_cpu_filename , "/cpu/" );
+
+		if(::rux::engine::_diagnostic)
+		{
+			::rux::io::directory::create(_rux_cpu_filename);
+			::chmod(_rux_cpu_filename, 0777);
+		}
+
 		rux_get_executable_filename_only( &_rux_cpu_filename[ strlen( _rux_cpu_filename ) ] );
 		rux_concatenation( _rux_cpu_filename , ".cpu" );
 		rux_remove_file( _rux_cpu_filename );

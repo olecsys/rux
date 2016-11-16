@@ -74,6 +74,7 @@ namespace rux
 		void posix_signal( ::rux::int32 signum );
 #endif
 		void rename_stable_and_memory(::booldog::result_mbchar* mbchar0, ::booldog::result_mbchar* mbchar1);
+		void boowritelog(::booldog::result_mbchar* dst, ::booldog::result_mbchar* mbchar, const char* format, ...);
 	};
 };
 #endif

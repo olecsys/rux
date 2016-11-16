@@ -951,7 +951,7 @@ namespace rux
 				resfile.file->close( &resfile );
 			}
 		};
-		struct listdir_info
+		/*struct listdir_info
 		{
 			::booldog::result_mbchar* stable_toremove_mbchar;
 			int stable_count;
@@ -964,10 +964,10 @@ namespace rux
 			, const char* entry_name, ::booldog::enums::io::entry_type entry_type)
 		{
 			{
+				listdir_info* info00 = (listdir_info*)udata;
+				boowritelog(info00->mbchar0, info00->mbchar1, "end listdir_remove");
 				if(entry_type == ::booldog::enums::io::directory)
 				{
-					listdir_info* info00 = (listdir_info*)udata;
-			
 					::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false, 0
 						, info00->memory_toremove_mbchar->mbchar, info00->memory_toremove_mbchar->mblen
 						, info00->memory_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
@@ -1002,7 +1002,6 @@ namespace rux
 						, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
 						, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize, entry_name, 0
 						, SIZE_MAX);
-
 					::booldog::result res;
 					if(::booldog::utils::io::mbs::rmdir(&res, info00->memory_toremove_mbchar->mbchar) == false)
 					{
@@ -1014,8 +1013,6 @@ namespace rux
 				}
 				else if(entry_type == ::booldog::enums::io::file)
 				{
-					listdir_info* info00 = (listdir_info*)udata;
-
 					::booldog::utils::string::mbs::assign<16>(0, info00->memory_toremove_mbchar->mballocator, false, 0
 						, info00->memory_toremove_mbchar->mbchar, info00->memory_toremove_mbchar->mblen
 						, info00->memory_toremove_mbchar->mbsize, pathname, 0, SIZE_MAX);
@@ -1031,7 +1028,6 @@ namespace rux
 						, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbchar
 						, info00->memory_toremove_mbchar->mblen, info00->memory_toremove_mbchar->mbsize, entry_name, 0
 						, SIZE_MAX);
-
 					::booldog::result res;
 					if(::booldog::utils::io::mbs::remove(&res, info00->memory_toremove_mbchar->mbchar) == false)
 					{
@@ -1041,6 +1037,7 @@ namespace rux
 						boowritelog(info00->mbchar0, info00->mbchar1, "remove %s, errno %s", info00->memory_toremove_mbchar->mbchar, error_string);
 					}
 				}
+				boowritelog(info00->mbchar0, info00->mbchar1, "end listdir_remove");
 			}
 			return true;
 		};
@@ -1204,7 +1201,7 @@ namespace rux
 				}
 			}
 			return true;
-		};
+		};*/
 		bool try_get_process_name_by_pid(::booldog::result_mbchar* mbchar0, ::booldog::result_mbchar* mbchar1
 			, ::booldog::result_mbchar* mbchar2, ::booldog::pid_t pid)
 		{
@@ -1251,8 +1248,8 @@ namespace rux
 			::booldog::result res;
 			::booldog::result_bool resbool;
 			::booldog::result_mbchar exe_dir(mbchar0->mballocator), time_mbchar(mbchar0->mballocator)
-				, dst(mbchar0->mballocator), memory_toremove_mbchar(mbchar0->mballocator)
-				, stable_toremove_mbchar(mbchar0->mballocator), toremove_mbchar(mbchar0->mballocator);
+				, dst(mbchar0->mballocator);//, memory_toremove_mbchar(mbchar0->mballocator)
+				//, stable_toremove_mbchar(mbchar0->mballocator), toremove_mbchar(mbchar0->mballocator);
 
 			::booldog::utils::executable::mbs::directory<16>(&exe_dir, exe_dir.mballocator);
 			
@@ -1282,7 +1279,9 @@ namespace rux
 					, dst.mblen, dst.mbsize, "stable", 0, SIZE_MAX);
 				::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, dst.mblen, dst.mbchar
 					, dst.mblen, dst.mbsize, time_mbchar.mbchar, 0, SIZE_MAX);
-						
+				
+				::rux::service::boowritelog(mbchar0, mbchar1, "before stable rename");
+
 				if(::booldog::utils::io::mbs::rename(&res, exe_dir.mbchar, dst.mbchar) == false)
 				{
 					size_t error_string_len = 0, error_string_size = 0;
@@ -1299,6 +1298,7 @@ namespace rux
 					::chmod(dst.mbchar, 0777);
 		#endif
 				}
+				::rux::service::boowritelog(mbchar0, mbchar1, "after stable rename");
 			}
 
 			::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir_len, exe_dir.mbchar
@@ -1312,6 +1312,8 @@ namespace rux
 					, dst.mblen, dst.mbsize, "memory", 0, SIZE_MAX);
 				::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, dst.mblen, dst.mbchar
 					, dst.mblen, dst.mbsize, time_mbchar.mbchar, 0, SIZE_MAX);
+
+				::rux::service::boowritelog(mbchar0, mbchar1, "before memory rename");
 
 				if(::booldog::utils::io::mbs::rename(&res, exe_dir.mbchar, dst.mbchar) == false)
 				{
@@ -1330,41 +1332,8 @@ namespace rux
 					::chmod(dst.mbchar, 0777);
 		#endif
 				}
-			}
-			listdir_info info;
-			info.mbchar0 = mbchar0;
-			info.mbchar1 = mbchar1;
-			info.stable_count = 0;
-			info.memory_count = 0;
-			info.memory_toremove_mbchar = memory_renamed ? &memory_toremove_mbchar : 0;
-			info.stable_toremove_mbchar = stable_renamed ? &stable_toremove_mbchar : 0;
-			exe_dir.mbchar[exe_dir_len] = 0;
-			::booldog::io::directory::mbs::listdir(0, mbchar0->mballocator, exe_dir.mbchar, listdir_count, &info);
-			if(info.stable_count >= 4)
-			{
-				info.memory_toremove_mbchar = &toremove_mbchar;
-				::booldog::io::directory::mbs::listdir(0, mbchar0->mballocator, stable_toremove_mbchar.mbchar
-					, listdir_remove, &info);
-				if(::booldog::utils::io::mbs::rmdir(&res, stable_toremove_mbchar.mbchar) == false)
-				{
-					size_t error_string_len = 0, error_string_size = 0;
-					char* error_string = 0;
-					::booldog::error::format(&res, mbchar0->mballocator, error_string, error_string_len, error_string_size);
-					boowritelog(mbchar0, mbchar1, "rmdir %s, errno %s", stable_toremove_mbchar.mbchar, error_string);
-				}
-			}
-			if(info.memory_count >= 4)
-			{
-				info.memory_toremove_mbchar = &toremove_mbchar;
-				::booldog::io::directory::mbs::listdir(0, mbchar0->mballocator, memory_toremove_mbchar.mbchar
-					, listdir_remove, &info);
-				if(::booldog::utils::io::mbs::rmdir(&res, memory_toremove_mbchar.mbchar) == false)
-				{
-					size_t error_string_len = 0, error_string_size = 0;
-					char* error_string = 0;
-					::booldog::error::format(&res, mbchar0->mballocator, error_string, error_string_len, error_string_size);
-					boowritelog(mbchar0, mbchar1, "rmdir %s, errno %s", memory_toremove_mbchar.mbchar, error_string);
-				}
+
+				::rux::service::boowritelog(mbchar0, mbchar1, "after memory rename");
 			}
 		};
 		rux::uint8 Start( const char* logfile , char error[ 1024 ] , rux::uint8 check_rux_executing_in_current_path )

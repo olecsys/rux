@@ -2590,12 +2590,14 @@ public:\
 		::rux::int32 main_res = 0;\
 		{\
 			::booldog::result_mbchar mbchar0(&easymixed), mbchar1(&easymixed);\
+			::rux::service::boowritelog(&mbchar0, &mbchar1, "main %s, argc %d", args[0], argc);\
 			::rux::int32 index0 = 0;\
 			const char* command = NULL;\
 			size_t argument_count = 0;\
 			const char* argument_names[ 64 ] = {0} , * argument_values[ 64 ] = {0};\
 			for( index0 = 1 ; index0 < argc ; index0++ )\
 			{\
+				::rux::service::boowritelog(&mbchar0, &mbchar1, "args[%d] = %s", index0, args[index0]);\
 				if( index0 == 1 )\
 					command = args[ index0 ];\
 				else if( index0 + 1 < argc )\
@@ -2726,6 +2728,7 @@ public:\
 						_rux_is_service = 1;\
 						if( ::rux::service::Start( logfile , error , check_rux_executing_in_current_path ) == 0 )\
 						{\
+							::rux::service::boowritelog(&mbchar0, &mbchar1, "Service could not start");\
 							::rux::service::private_report_error_event( name , "Service could not start" );\
 							main_res = 1;\
 							::booldog::utils::console::err::mbs::printf(0, &easymixed, ::booldog::enums::console::red, debuginfo_macros,"%s\n", "Service could not start");\
@@ -2733,6 +2736,7 @@ public:\
 					}\
 					else\
 					{\
+						::rux::service::boowritelog(&mbchar0, &mbchar1, "name is empty");\
 						::rux::service::private_report_error_event( name , "name is empty" );\
 						main_res = 1;\
 						::booldog::utils::console::err::mbs::printf(0, &easymixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , "Service starting is failed.Argument 'name' is empty\n" );\
@@ -2740,6 +2744,7 @@ public:\
 				}\
 				else\
 				{\
+					::rux::service::boowritelog(&mbchar0, &mbchar1, "already executing in current path");\
 					::rux::service::private_report_error_event( name , "already executing in current path" );\
 					main_res = 1;\
 					::booldog::utils::console::err::mbs::printf(0, &easymixed, ::booldog::enums::console::red, debuginfo_macros,"%s" , module_name" is already executing in current path\n" );\
@@ -2747,6 +2752,7 @@ public:\
 			}\
 			else\
 			{\
+				::rux::service::rename_stable_and_memory(&mbchar0, &mbchar1);\
 				::rux::engine::initialize();\
 				if( check_rux_executing_in_current_path == 0\
 					|| rux_is_already_executing_in_current_path() == 0 )\

@@ -141,6 +141,27 @@ XMemoryManager::XMemoryManager()
 	char info_filename[ 1024 ] = {0};
 	::rux::safe_strncpy( info_filename , ::rux::engine::_globals->_executable_directory , 1023 );
 	::rux::safe_strncat( info_filename , "/stable/" , 1023 );
+
+	if(::rux::engine::_diagnostic)
+	{
+		::rux::io::directory::create(info_filename);
+		::chmod(info_filename, 0777);
+	}
+
+	::rux::safe_strncat( info_filename , ::rux::engine::_globals->_executable , 1023 );
+	::rux::safe_strncat( info_filename , ".snapshot" , 1023 );
+	if( rux_is_exists_file( info_filename ) == 1 )
+		rux_remove_file( info_filename );
+
+	::rux::safe_strncpy( info_filename , ::rux::engine::_globals->_executable_directory , 1023 );
+	::rux::safe_strncat( info_filename , "/memory/" , 1023 );
+
+	if(::rux::engine::_diagnostic)
+	{
+		::rux::io::directory::create(info_filename);
+		::chmod(info_filename, 0777);
+	}
+
 	::rux::safe_strncat( info_filename , ::rux::engine::_globals->_executable , 1023 );
 	::rux::safe_strncat( info_filename , ".snapshot" , 1023 );
 	if( rux_is_exists_file( info_filename ) == 1 )
@@ -151,17 +172,7 @@ XMemoryManager::XMemoryManager()
 	::rux::safe_strncat( info_filename , ::rux::engine::_globals->_executable , 1023 );
 	::rux::safe_strncat( info_filename , ".snapshot" , 1023 );
 	if( rux_is_exists_file( info_filename ) == 1 )
-		rux_remove_file( info_filename );
-
-	::rux::safe_strncpy( info_filename , ::rux::engine::_globals->_executable_directory , 1023 );
-	::rux::safe_strncat( info_filename , "/memory/" , 1023 );
-	::rux::safe_strncat( info_filename , ::rux::engine::_globals->_executable , 1023 );
-	::rux::safe_strncat( info_filename , ".snapshot" , 1023 );
-	if( rux_is_exists_file( info_filename ) == 1 )
-		rux_remove_file( info_filename );
-
-
-	::rux::safe_strncpy( _memory_info_filename , ::rux::engine::_globals->_executable_directory , 1023 );
+		rux_remove_file( info_filename );	
 };
 void XMemoryManager::start_info_thread( void )
 {

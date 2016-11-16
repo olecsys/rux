@@ -37,7 +37,6 @@ private:
 	::rux::uint64 _last_diagnostics_time;
 	rux::uint8 _delete_pidfile;	
 	rux::uint8 _is_network_inited;
-	char _memory_info_filename[ 1024 ];
 #ifdef __UNIX__
 	void* _signal_stack;
 	void* _program_stack;
