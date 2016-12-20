@@ -164,10 +164,10 @@
 					"./../extern_lib/$(os)/$(architecture)"
 				]
 			}
-			,"elbrus x64":
+			,"linux elbrus":
 			{
 				"toolchain_dir":"/opt/mcst/lcc-1.21.09.e2k-v3.3.14/",
-				"architecture":"x64",
+				"architecture":"elbrus",
 				"compiler":"$(toolchain_dir)bin/l++",
 				"compiler_flags":"-mptr64",
 				"archiver":"$(toolchain_dir)binutils/bin/e2k-linux-ar",

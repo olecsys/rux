@@ -27,16 +27,6 @@
 				"output_switch":"-o ",
 				"lib_path_switch":"-L",
 				"lib_switch":"-l",
-				"include_paths":
-				[
-					"./lib",
-					"./../includes",
-					"./../extern_includes"
-				],
-				"lib_paths":
-				[
-					"$(intermediate_directory)"
-				],
 				"libs":
 				[
 					"rux.framework",
@@ -62,7 +52,17 @@
 				"compiler":"g++",
 				"compiler_flags":"-m64",			
 				"linker":"g++ -shared -fPIC -m64",
-				"linker_flags":"-Wl,-E,--no-undefined,--build-id=sha1,-O2,-flto,--gc-sections,--strip-all"
+				"linker_flags":"-Wl,-E,--no-undefined,--build-id=sha1,-O2,-flto,--gc-sections,--strip-all",
+				"include_paths":
+				[
+					"./lib",
+					"./../includes",
+					"./../extern_includes"
+				],
+				"lib_paths":
+				[
+					"$(intermediate_directory)"
+				]
 			},
 			"linux x86":
 			{
@@ -70,7 +70,17 @@
 				"compiler":"g++",
 				"compiler_flags":"-m32",			
 				"linker":"g++ -shared -fPIC -m32",
-				"linker_flags":"-Wl,-E,--no-undefined,-O2,-flto,--gc-sections,--strip-all,--build-id=sha1"
+				"linker_flags":"-Wl,-E,--no-undefined,-O2,-flto,--gc-sections,--strip-all,--build-id=sha1",
+				"include_paths":
+				[
+					"./lib",
+					"./../includes",
+					"./../extern_includes"
+				],
+				"lib_paths":
+				[
+					"$(intermediate_directory)"
+				]
 			},
 			"linux crosscompile armv6":
 			{
@@ -79,7 +89,17 @@
 				"compiler":"$(toolchain_dir)g++",
 				"compiler_flags":"-march=armv6 -mfpu=vfp -mfloat-abi=hard -Wno-psabi",			
 				"linker":"$(toolchain_dir)g++ -shared -fPIC",
-				"linker_flags":"-Wl,-E,--no-undefined,-O2,-flto,--strip-all,--build-id=sha1"
+				"linker_flags":"-Wl,-E,--no-undefined,-O2,-flto,--strip-all,--build-id=sha1",
+				"include_paths":
+				[
+					"./lib",
+					"./../includes",
+					"./../extern_includes"
+				],
+				"lib_paths":
+				[
+					"$(intermediate_directory)"
+				]
 			},
 			"linux crosscompile armv6 soft":
 			{
@@ -88,7 +108,38 @@
 				"compiler":"$(toolchain_dir)g++",
 				"compiler_flags":"-march=armv6 -mfpu=vfp -mfloat-abi=softfp -Wno-psabi",			
 				"linker":"$(toolchain_dir)g++ -shared -fPIC",
-				"linker_flags":"-Wl,-E,--no-undefined,-O2,-flto,--strip-all,--build-id=sha1"
+				"linker_flags":"-Wl,-E,--no-undefined,-O2,-flto,--strip-all,--build-id=sha1",
+				"include_paths":
+				[
+					"./lib",
+					"./../includes",
+					"./../extern_includes"
+				],
+				"lib_paths":
+				[
+					"$(intermediate_directory)"
+				]
+			}
+			,"linux elbrus":
+			{
+				"toolchain_dir":"/opt/mcst/lcc-1.21.09.e2k-v3.3.14/",
+				"architecture":"elbrus",
+				"compiler":"$(toolchain_dir)bin/l++",
+				"compiler_flags":"-mptr64",			
+				"linker":"g++ -shared -fPIC -mptr64",
+				"linker_flags":"-Wl,-E,--no-undefined,--build-id=sha1,-O2,-flto,--gc-sections,--strip-all",
+				"include_paths":
+				[
+					"./lib",
+					"./../includes",
+					"./../extern_includes",
+					"/opt/mcst/crossfs-current.e2k-4c.3.14/usr/include"
+				],
+				"lib_paths":
+				[
+					"$(intermediate_directory)",
+					"/opt/mcst/crossfs-current.e2k-4c.3.14/usr/lib"
+				]
 			}
 		},
 		"android":

@@ -19,7 +19,7 @@ namespace rux
 
 		friend class ::rux::Numeric;
 		friend class ::rux::XNumeric;
-		friend dll_internal ::rux::int32 rux::gcref_to_int32( const XGCRef* object );
+		friend ::rux::int32 rux::gcref_to_int32( const XGCRef* object );
 		virtual ::rux::String* ObjectToString( void );
 		::rux::String& ToString( void );
 		::rux::int32 operator()() const;
