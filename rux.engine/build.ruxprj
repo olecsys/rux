@@ -126,7 +126,7 @@
 				"architecture":"elbrus",
 				"compiler":"$(toolchain_dir)bin/l++",
 				"compiler_flags":"-mptr64",			
-				"linker":"g++ -shared -fPIC",
+				"linker":"$(toolchain_dir)bin/l++ -shared -fPIC -mptr64",
 				"linker_flags":"-Wl,-E,--no-undefined,--build-id=sha1,-O2,-flto,--gc-sections,--strip-all",
 				"include_paths":
 				[
