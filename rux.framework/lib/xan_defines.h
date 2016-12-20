@@ -1936,7 +1936,7 @@ public:\
 	namespace rux\
 	{\
 		template class XKeyValuePair< rux_namespace::X##rux_class >;\
-		template class XArray< XKeyValuePair< rux_namespace::X##rux_class > >;\
+		/*template class XArray< XKeyValuePair< rux_namespace::X##rux_class > >;*/\
 		/*template class XArray< rux_namespace::X##rux_class >;*/\
 		template<> rux_volatile Array< rux_namespace::X##rux_class >::_rux_type_index = rux_volatile_max;\
 		template<> rux_volatile KeyValuePair< rux_namespace::X##rux_class >::_rux_type_index = rux_volatile_max;\
