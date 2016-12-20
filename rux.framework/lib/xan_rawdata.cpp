@@ -3,7 +3,7 @@
 #endif
 #include <xan_rawdata.h>
 #include <xan_asm.h>
-#ifdef __ARM_ARCH_6__
+#if defined( __ARM_ARCH_6__ ) || defined(__ELBRUS__)
 #define NO_ASM 1
 #elif defined( __WINDOWS__ ) || defined( __LINUX__ )
 #define NO_ASM 0

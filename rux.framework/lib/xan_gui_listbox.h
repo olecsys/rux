@@ -1,4 +1,4 @@
-﻿#ifndef XAN_GUI_LISTBOX_H
+#ifndef XAN_GUI_LISTBOX_H
 #define XAN_GUI_LISTBOX_H
 #ifdef HAVE_CONFIG_H
 #include <config.h>
