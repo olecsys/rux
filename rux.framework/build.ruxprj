@@ -64,24 +64,6 @@
 				"output_file":"$(intermediate_directory)/lib$(project_name).a",
 				"makefile":"../projects/$(os)/$(architecture)/$(project_name)/Makefile"				
 			},
-			"elbrus x64":
-			{
-				"toolchain_dir":"/opt/mcst/lcc-1.21.09.e2k-v3.3.14/",
-				"architecture":"x64",
-				"compiler":"$(toolchain_dir)bin/l++",
-				"compiler_flags":"-mptr64",
-				"archiver":"$(toolchain_dir)binutils/bin/e2k-linux-ar",
-				"archiver_flags":"rcus",
-				"exclude_files":
-				[
-					"xan_asm.S",
-					"xan_asm_x64.S",
-					"xan_linux_asm32.S",
-					"xan_linux_asm64.S",
-					"xan_asm_armv6.S",
-					"main.cpp"
-				]				
-			},
 			"linux x64":
 			{
 				"architecture":"x64",
@@ -151,6 +133,64 @@
 					"xan_linux_asm64.S",
 					"main.cpp"
 				]	
+			}
+		},
+		"elbrus":
+		{
+			"global":
+			{
+				"os":"elbrus",
+				"compiler_flags":"-std=gnu++0x -fvisibility=hidden -fPIC -ffunction-sections -fdata-sections",
+				"source_directory":"./lib",
+				"post_builds":
+				[
+					"sh $(source_directory)/../_copy_to_includes.sh '$(intermediate_directory)/../includes' '$(source_directory)'"
+				],
+				"intermediate_directory":"./../build/$(os)/$(architecture)",
+				"rm_command":"rm -f",
+				"mk_dir_command":"mkdir -p",
+				"object_suffix":".o",
+				"source_switch":"-c ",
+				"object_switch":"-o ",
+				"include_switch":"-I",
+				"output_switch":"-o ",
+				"lib_path_switch":"-L",
+				"lib_switch":"-l",
+				"include_paths":
+				[
+					"./lib",
+					"./../extern_includes"
+				],
+				"lib_paths":
+				[
+					"./../build/$(os)/$(architecture)",
+					"./../extern_lib/$(os)/$(architecture)",
+					"/opt/mcst/crossfs-current.e2k-4c.3.14/usr/include"
+				],
+				"merged_libs":
+				[
+					"libz.a"
+				],
+				"output_file":"$(intermediate_directory)/lib$(project_name).a",
+				"makefile":"../projects/$(os)/$(architecture)/$(project_name)/Makefile"				
+			},
+			"elbrus x64":
+			{
+				"toolchain_dir":"/opt/mcst/lcc-1.21.09.e2k-v3.3.14/",
+				"architecture":"x64",
+				"compiler":"$(toolchain_dir)bin/l++",
+				"compiler_flags":"-mptr64",
+				"archiver":"$(toolchain_dir)binutils/bin/e2k-linux-ar",
+				"archiver_flags":"rcus",
+				"exclude_files":
+				[
+					"xan_asm.S",
+					"xan_asm_x64.S",
+					"xan_linux_asm32.S",
+					"xan_linux_asm64.S",
+					"xan_asm_armv6.S",
+					"main.cpp"
+				]				
 			}
 		},
 		"android":
