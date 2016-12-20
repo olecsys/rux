@@ -64,6 +64,24 @@
 				"output_file":"$(intermediate_directory)/lib$(project_name).a",
 				"makefile":"../projects/$(os)/$(architecture)/$(project_name)/Makefile"				
 			},
+			"elbrus x64":
+			{
+				"toolchain_dir":"/opt/mcst/lcc-1.21.09.e2k-v3.3.14/binutils/bin/",
+				"architecture":"x64",
+				"compiler":"$(toolchain_dir)bin/l++",
+				"compiler_flags":"-mptr64",
+				"archiver":"$(toolchain_dir)binutils/bin/e2k-linux-ar",
+				"archiver_flags":"rcus",
+				"exclude_files":
+				[
+					"xan_asm.S",
+					"xan_asm_x64.S",
+					"xan_linux_asm32.S",
+					"xan_linux_asm64.S",
+					"xan_asm_armv6.S",
+					"main.cpp"
+				]				
+			},
 			"linux x64":
 			{
 				"architecture":"x64",

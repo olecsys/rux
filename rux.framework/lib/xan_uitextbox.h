@@ -58,6 +58,7 @@ namespace rux
 				declare_content_size();
 				::rux::gui::ColorBase* get_Foreground( void );
 				void set_Foreground( ::rux::gui::ColorBase* foreground );
+				void set_Background(::rux::gui::ColorBase* background);
 			};
 			class XTextBox : public XGCHandle<TextBox>
 			{
@@ -73,6 +74,7 @@ namespace rux
 				explicit XTextBox( const XObject& object );
 				explicit XTextBox( XGCRef* object );
 				void set_Foreground( ::rux::gui::ColorBase* foreground );
+				void set_Background(::rux::gui::ColorBase* background);
 				void set_Font( const char* font_file_name ,
 					::rux::uint32 font_size_height ,
 					::rux::uint32 font_size_width );

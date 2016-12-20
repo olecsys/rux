@@ -13,6 +13,9 @@
 #include <xan_uiimage.h>
 begin_implement_rux_class_with_properties_ns_base_class( Button , rux::gui::controls , rux::gui::ParentBase )
 	_content.set_Info( "content" , __file__ , __line__ );
+	_active_content.set_Info("active_content", __file__, __line__);
+	_over_content.set_Info("over_content", __file__, __line__);
+	_pressed_content.set_Info("pressed_content", __file__, __line__);
 	_tag.set_Info( "tag" , __file__ , __line__ );
 	_private_tag.set_Info( "private_tag" , __file__ , __line__ );
 	IMPLEMENT_BASE_UI_MEMBERS();
@@ -21,10 +24,10 @@ begin_implement_rux_class_with_properties_ns_base_class( Button , rux::gui::cont
 	copy_color(_over_foreground, ::rux::gui::Colors::White());
 	copy_color(_pressed_foreground, ::rux::gui::Colors::White());
 	copy_color(_disabled_foreground, ::rux::gui::Colors::White());
-	copy_color( _background , ::rux::gui::Colors::ButtonNormalColor() );
-	copy_color( _over_background , ::rux::gui::Colors::ButtonOverColor() );
-	copy_color( _pressed_background , ::rux::gui::Colors::ButtonDownColor() );
-	copy_color( _disabled_background , ::rux::gui::Colors::ButtonDisabledColor() );
+	copy_color(_background, ::rux::gui::Colors::ButtonNormalColor() );
+	copy_color(_over_background, ::rux::gui::Colors::ButtonOverColor() );
+	copy_color(_pressed_background, ::rux::gui::Colors::ButtonDownColor() );
+	copy_color(_disabled_background, ::rux::gui::Colors::ButtonDisabledColor() );
 	_active_state_background = _background;
 	_active_state_foreground = _foreground;
 	_on_click_callback = NULL;	
@@ -40,7 +43,7 @@ namespace rux
 		{
 			Button::~Button()
 			{
-				FreeResources( 0 );
+				FreeResources(0);
 				_repeat_thread.Stop();	
 				if( _background )
 					_background->Release();
@@ -126,6 +129,12 @@ namespace rux
 			implement_duplicate_internal_function_1( Button , set_Content , const XObject& );
 			implement_duplicate_internal_function_1( Button , set_Content , const Object& );
 			implement_duplicate_internal_function_1( Button , set_Content , const XGCRef& );
+			implement_duplicate_internal_function_1(Button, set_OverContent, const XObject&);
+			implement_duplicate_internal_function_1(Button, set_OverContent, const Object&);
+			implement_duplicate_internal_function_1(Button, set_OverContent, const XGCRef&);
+			implement_duplicate_internal_function_1(Button, set_PressedContent, const XObject&);
+			implement_duplicate_internal_function_1(Button, set_PressedContent, const Object&);
+			implement_duplicate_internal_function_1(Button, set_PressedContent, const XGCRef&);
 			void Button::raise_OnActivate( void )
 			{		
 			};
@@ -144,46 +153,70 @@ namespace rux
 			{
 				private_ResetCache();
 			};
+			void Button::private_ResetCache(XObject& content)
+			{
+				::rux::gui::ControlBase* common_base = (::rux::gui::ControlBase*)content.get_GCRef()->DynamicCast(
+					::rux::gui::XEnum_ClassType_ControlBase);
+				if(common_base)
+				{		
+					common_base->GCRefAddRef(__FILE__, __LINE__);
+					_cs_content.ReadUnlock();
+					common_base->private_ResetCache();
+					common_base->GCRefRelease(__FILE__, __LINE__);
+				}
+				else
+					_cs_content.ReadUnlock();
+			};
 			void Button::private_ResetCache( void )
 			{
 				READ_LOCK( _cs_content );
-				::rux::gui::ControlBase* common_base = (::rux::gui::ControlBase*)_content.get_GCRef()->DynamicCast( ::rux::gui::XEnum_ClassType_ControlBase );
-				if( common_base )
-				{		
-					common_base->GCRefAddRef( __FILE__ , __LINE__ );
+				private_ResetCache(_content);
+
+				READ_LOCK( _cs_content );
+				private_ResetCache(_over_content);
+
+				READ_LOCK(_cs_content);
+				private_ResetCache(_pressed_content);
+			};
+			void Button::set_ContentOpacity(XObject& content, float opacity)
+			{
+				if( rux_is_object(content, ::rux::gui::controls::XGroup))
+				{
+					declare_variable_param(::rux::gui::controls::XGroup, group, content);
+					group.set_Opacity(opacity);
 					_cs_content.ReadUnlock();
-					common_base->private_ResetCache();
-					common_base->GCRefRelease( __FILE__ , __LINE__ );
+					Invalidate();
+				}
+				else if(rux_is_object(content, ::rux::gui::controls::XTextBlock))
+				{
+					::rux::gui::controls::XTextBlock textblock(content);
+					textblock.set_Opacity(opacity);
+					_cs_content.ReadUnlock();
+					Invalidate();
 				}
 				else
 					_cs_content.ReadUnlock();
 			};
+			void Button::set_OverContentOpacity(float opacity)
+			{
+				READ_LOCK(_cs_content);
+				set_ContentOpacity(_over_content, opacity);
+			}
+			void Button::set_PressedContentOpacity(float opacity)
+			{
+				READ_LOCK(_cs_content);
+				set_ContentOpacity(_pressed_content, opacity);
+			}
 			void Button::set_ContentOpacity( float opacity )
 			{
-				READ_LOCK( _cs_content );
-				if( rux_is_object( _content , ::rux::gui::controls::XGroup ) )
-				{
-					declare_variable_param( ::rux::gui::controls::XGroup , group , _content );
-					group.set_Opacity( opacity );
-					_cs_content.ReadUnlock();
-					Invalidate();
-				}
-				else if( rux_is_object( _content , ::rux::gui::controls::XTextBlock ) )
-				{
-					::rux::gui::controls::XTextBlock textblock( _content );
-					textblock.set_Opacity( opacity );
-					_cs_content.ReadUnlock();
-					Invalidate();
-				}
-				else
-					_cs_content.ReadUnlock();
+				READ_LOCK(_cs_content);
+				set_ContentOpacity(_content, opacity);
 			};
-			void Button::set_ContentOpacity( const ::rux::XString& control_name , float opacity )
+			void Button::set_ContentOpacity(XObject& content, const ::rux::XString& control_name, float opacity)
 			{
-				READ_LOCK( _cs_content );
-				if( rux_is_object( _content , ::rux::gui::controls::XGroup ) )
+				if(rux_is_object(content, ::rux::gui::controls::XGroup))
 				{
-					declare_variable_param( ::rux::gui::controls::XGroup , group , _content );
+					declare_variable_param( ::rux::gui::controls::XGroup , group , content );
 					_cs_content.ReadUnlock();
 					XArray< ::rux::gui::controls::XRectangle > rects;
 					rects.set_ByRef( group.FindAll< ::rux::gui::controls::XRectangle >( control_name ) );
@@ -202,13 +235,27 @@ namespace rux
 				}
 				else
 					_cs_content.ReadUnlock();
-			};
-			void Button::set_ContentBackground( const ::rux::XString& control_name , ::rux::gui::ColorBase* background )
+			}
+			void Button::set_ContentOpacity( const ::rux::XString& control_name , float opacity )
 			{
-				READ_LOCK( _cs_content );
-				if( rux_is_object( _content , ::rux::gui::controls::XGroup ) )
+				READ_LOCK(_cs_content);
+				set_ContentOpacity(_content, control_name, opacity);
+			}
+			void Button::set_OverContentOpacity( const ::rux::XString& control_name , float opacity )
+			{
+				READ_LOCK(_cs_content);
+				set_ContentOpacity(_over_content, control_name, opacity);
+			}
+			void Button::set_PressedContentOpacity( const ::rux::XString& control_name , float opacity )
+			{
+				READ_LOCK(_cs_content);
+				set_ContentOpacity(_pressed_content, control_name, opacity);
+			}
+			void Button::set_ContentBackground(XObject& content, const ::rux::XString& control_name, ::rux::gui::ColorBase* background)
+			{
+				if( rux_is_object(content, ::rux::gui::controls::XGroup ) )
 				{
-					declare_variable_param( ::rux::gui::controls::XGroup , group , _content );
+					declare_variable_param( ::rux::gui::controls::XGroup , group , content );
 					_cs_content.ReadUnlock();
 					XArray< ::rux::gui::controls::XRectangle > rects;
 					rects.set_ByRef( group.FindAll< ::rux::gui::controls::XRectangle >( control_name ) );
@@ -226,19 +273,33 @@ namespace rux
 						XArray< XLine > lines;
 						lines.set_ByRef( group.FindAll< XLine >( control_name ) );
 						for( index0 = 0 ; index0 < lines.Count() ; index0++ )
-							lines[ index0 ].set_Color( (rux::gui::Color*)background );
+							lines[ index0 ].set_Color((::rux::gui::Color*)background);
 					}
 					Invalidate();
 				}
 				else
 					_cs_content.ReadUnlock();
 			};
-			void Button::set_ContentBackground( ::rux::gui::ColorBase* background )
+			void Button::set_ContentBackground( const ::rux::XString& control_name , ::rux::gui::ColorBase* background )
 			{
 				READ_LOCK( _cs_content );
-				if( rux_is_object( _content , ::rux::gui::controls::XGroup ) )
+				set_ContentBackground(_content, control_name, background);				
+			}
+			void Button::set_OverContentBackground(const ::rux::XString& control_name, ::rux::gui::ColorBase* background)
+			{
+				READ_LOCK( _cs_content );
+				set_ContentBackground(_over_content, control_name, background);				
+			}
+			void Button::set_PressedContentBackground(const ::rux::XString& control_name, ::rux::gui::ColorBase* background)
+			{
+				READ_LOCK( _cs_content );
+				set_ContentBackground(_pressed_content, control_name, background);				
+			}
+			void Button::set_ContentBackground(XObject& content, ::rux::gui::ColorBase* background)
+			{
+				if( rux_is_object(content, ::rux::gui::controls::XGroup))
 				{
-					declare_variable_param( ::rux::gui::controls::XGroup , group , _content );
+					declare_variable_param( ::rux::gui::controls::XGroup , group , content );
 					_cs_content.ReadUnlock();
 					XArray< ::rux::gui::controls::XRectangle > rects;
 					rects.set_ByRef( group.FindAll< ::rux::gui::controls::XRectangle >() );
@@ -258,19 +319,33 @@ namespace rux
 						XArray< XLine > lines;
 						lines.set_ByRef( group.FindAll< XLine >() );
 						for( index0 = 0 ; index0 < lines.Count() ; index0++ )
-							lines[ index0 ].set_Color( (rux::gui::Color*)background );
+							lines[ index0 ].set_Color((::rux::gui::Color*)background);
 					}
 					Invalidate();
 				}
 				else
 					_cs_content.ReadUnlock();
-			};
-			void Button::set_ContentBorderColor( ::rux::gui::Color* border_color )
+			}
+			void Button::set_OverContentBackground(::rux::gui::ColorBase* background)
+			{
+				READ_LOCK(_cs_content);
+				set_ContentBackground(_over_content, background);
+			}
+			void Button::set_PressedContentBackground(::rux::gui::ColorBase* background)
+			{
+				READ_LOCK(_cs_content);
+				set_ContentBackground(_pressed_content, background);
+			}
+			void Button::set_ContentBackground( ::rux::gui::ColorBase* background )
 			{
 				READ_LOCK( _cs_content );
-				if( rux_is_object( _content , ::rux::gui::controls::XGroup ) )
+				set_ContentBackground(_content, background);
+			}
+			void Button::set_ContentBorderColor(XObject& content, ::rux::gui::Color* border_color)
+			{
+				if(rux_is_object(content, ::rux::gui::controls::XGroup))
 				{
-					declare_variable_param( ::rux::gui::controls::XGroup , group , _content );
+					declare_variable_param(::rux::gui::controls::XGroup, group, content);
 					_cs_content.ReadUnlock();
 					XArray< ::rux::gui::controls::XRectangle > rects;
 					rects.set_ByRef( group.FindAll< ::rux::gui::controls::XRectangle >() );
@@ -283,6 +358,21 @@ namespace rux
 				}
 				else
 					_cs_content.ReadUnlock();
+			};
+			void Button::set_ContentBorderColor(::rux::gui::Color* border_color)
+			{
+				READ_LOCK(_cs_content);
+				set_ContentBorderColor(_content, border_color);
+			}
+			void Button::set_OverContentBorderColor(::rux::gui::Color* border_color)
+			{
+				READ_LOCK(_cs_content);
+				set_ContentBorderColor(_over_content, border_color);
+			}
+			void Button::set_PressedContentBorderColor(::rux::gui::Color* border_color)
+			{
+				READ_LOCK(_cs_content);
+				set_ContentBorderColor(_pressed_content, border_color);
 			};
 			void Button::set_Background( ::rux::gui::ColorBase* background )
 			{	
@@ -361,31 +451,30 @@ namespace rux
 				}
 				rux::gui::copy_color(_disabled_foreground, foreground);
 				_cs_drawing_elements.wunlock( debuginfo_macros );
-			};
-
+			}
 			::rux::uint8 Button::get_IsSupportContentSize( void )
 			{
 				return 1;
-			};
-			float Button::get_ContentWidth( void )
+			}
+			float Button::get_ContentWidth(void)
 			{
 				float value = 20.f;
 				READ_LOCK( _cs_content );
-				if( rux_is_object( _content, XTextBlock ) )
+				if(rux_is_object(_active_content, XTextBlock))
 				{					
-					XTextBlock textblock( _content );
+					XTextBlock textblock(_active_content);
 					value = textblock.get_ContentWidth();
 				}
 				_cs_content.ReadUnlock();
 				return value;
 			};
-			float Button::get_ContentHeight( void )
+			float Button::get_ContentHeight(void)
 			{
 				float value = 20.f;
-				READ_LOCK( _cs_content );
-				if( rux_is_object( _content, XTextBlock ) )
+				READ_LOCK(_cs_content);
+				if(rux_is_object(_active_content, XTextBlock))
 				{					
-					XTextBlock textblock( _content );
+					XTextBlock textblock(_active_content);
 					value = textblock.get_ContentHeight();
 				}
 				_cs_content.ReadUnlock();
@@ -405,15 +494,15 @@ namespace rux
 				}
 				return 0;
 			};
-			::rux::uint8 Button::get_IsGroup( void )
+			::rux::uint8 Button::get_IsGroup(void)
 			{
 				return 0;
 			};
-			::rux::uint8 Button::get_IsTimePicker( void )
+			::rux::uint8 Button::get_IsTimePicker(void)
 			{
 				return 0;
 			};
-			::rux::uint8 Button::get_IsButton( void )
+			::rux::uint8 Button::get_IsButton(void)
 			{
 				return 1;
 			};
@@ -428,12 +517,13 @@ namespace rux
 				rux::gui::copy_color( _disabled_background , disabled_background );
 				_cs_drawing_elements.wunlock( debuginfo_macros );
 			};
-			void Button::private_ResetChildLocationAndSizeCache( ::rux::uint8 reset , ::rux::gui::ControlBase* control , ::rux::uint8 left , ::rux::uint8 top , ::rux::uint8 width , ::rux::uint8 height , size_t )
-			{	
-				READ_LOCK( _cs_content );
-				if( rux_is_object( _content, XTextBlock ) )
+			void Button::private_ContentResetChildLocationAndSizeCache(XObject& content, ::rux::uint8 reset
+				, ::rux::gui::ControlBase* control, ::rux::uint8 left, ::rux::uint8 top, ::rux::uint8 width
+				, ::rux::uint8 height)
+			{
+				if(rux_is_object(content, XTextBlock))
 				{					
-					XTextBlock ui_textblock( _content );
+					XTextBlock ui_textblock(content);
 					WRITE_LOCK( ui_textblock()->_cs_parent_control );
 					ui_textblock()->_parent_control = this;
 					ui_textblock()->_cs_parent_control.WriteUnlock();
@@ -441,9 +531,9 @@ namespace rux
 					ui_textblock()->private_ResetLocationAndSizeCache( 1 , 1 , 1 , 1 , 0 );
 					_cs_content.ReadUnlock();
 				}
-				else if( rux_is_object( _content, ::rux::gui::controls::XGroup ) )
+				else if( rux_is_object(content, ::rux::gui::controls::XGroup ) )
 				{
-					declare_variable_param( ::rux::gui::controls::XGroup , ui_group , _content );
+					declare_variable_param( ::rux::gui::controls::XGroup , ui_group , content);
 					ui_group.set_Left( 0 );
 					ui_group.set_Top( 0 );
 					ui_group.set_Width( get_Width() );
@@ -457,6 +547,19 @@ namespace rux
 				}
 				else
 					_cs_content.ReadUnlock();
+			}
+			void Button::private_ResetChildLocationAndSizeCache(::rux::uint8 reset, ::rux::gui::ControlBase* control
+				, ::rux::uint8 left, ::rux::uint8 top, ::rux::uint8 width, ::rux::uint8 height, size_t)
+			{	
+				READ_LOCK( _cs_content );
+				private_ContentResetChildLocationAndSizeCache(_content, reset, control, left, top, width, height);
+
+				READ_LOCK( _cs_content );
+				private_ContentResetChildLocationAndSizeCache(_over_content, reset, control, left, top, width, height);
+
+				READ_LOCK( _cs_content );
+				private_ContentResetChildLocationAndSizeCache(_pressed_content, reset, control, left, top, width, height);
+
 				Invalidate();
 			};
 			void Button::render( ::rux::gui::RenderContextBase* render_context , float opacity , float& _selected_z_index , size_t ___rux__thread_index1986 )
@@ -469,11 +572,11 @@ namespace rux
 				render_context->DrawRectangle( left , top , width , height , 0 , _active_state_background , _border_color , _corner , opacity * _opacity , &_ui_border_cache , &_ui_cache , _selected_z_index , 1 , __FILE__ , __LINE__ , ___rux__thread_index1986 );
 				_cs_drawing_elements.wunlock( debuginfo_macros );
 				READ_LOCK( _cs_content );
-				if( rux_is_object( _content, XTextBlock ) )
+				if(rux_is_object(_active_content, XTextBlock))
 				{
 					_selected_z_index += 1.f;//0.001f
-					XTextBlock ui_textblock( _content );		
-					WRITE_LOCK( ui_textblock()->_cs_parent_control );
+					XTextBlock ui_textblock(_active_content);		
+					WRITE_LOCK(ui_textblock()->_cs_parent_control );
 					ui_textblock()->_parent_control = this;
 					ui_textblock()->_cs_parent_control.WriteUnlock();
 					ui_textblock()->_parent_window = get_ParentWindow();
@@ -489,10 +592,10 @@ namespace rux
 					_cs_drawing_elements.wunlock( debuginfo_macros );
 					ui_textblock()->render( render_context , opacity * _opacity , _selected_z_index , ___rux__thread_index1986 );
 				}
-				else if( rux_is_object( _content, ::rux::gui::controls::XGroup ) )
+				else if( rux_is_object(_active_content, ::rux::gui::controls::XGroup))
 				{
 					_selected_z_index += 1.f;//0.001f
-					declare_variable_param( ::rux::gui::controls::XGroup , ui_group , _content );
+					declare_variable_param( ::rux::gui::controls::XGroup , ui_group , _active_content );
 					WRITE_LOCK( ui_group()->_cs_parent_control );
 					ui_group()->_parent_control = this;
 					ui_group()->_cs_parent_control.WriteUnlock();
@@ -568,8 +671,12 @@ namespace rux
 			{
 				_cs_drawing_elements.wlock( debuginfo_macros );
 				_active_state_background = _over_background;
-				_active_state_foreground = _over_foreground;
+				_active_state_foreground = _over_foreground;				
 				_cs_drawing_elements.wunlock( debuginfo_macros );
+				WRITE_LOCK(_cs_content);
+				if(rux_is_object(_over_content, XObject) == false)
+					_active_content = _over_content;
+				_cs_content.WriteUnlock();
 				_on_mouse_enter.raise< const ::rux::gui::events::Event& >( ::rux::gui::events::Event( *this , explicit_event ) );				
 				Invalidate();
 				return 1;
@@ -580,6 +687,10 @@ namespace rux
 				_active_state_background = _background;
 				_active_state_foreground = _foreground;
 				_cs_drawing_elements.wunlock( debuginfo_macros );
+				WRITE_LOCK(_cs_content);
+				if(rux_is_object(_content, XObject) == false)
+					_active_content = _content;
+				_cs_content.WriteUnlock();
 				_on_mouse_leave_callback.raise< const ::rux::gui::events::MouseEvent& >( ::rux::gui::events::MouseEvent( *this , window_event , explicit_event ) );
 				Invalidate();
 			};
@@ -624,6 +735,10 @@ namespace rux
 				_active_state_background = _pressed_background;
 				_active_state_foreground = _pressed_foreground;
 				_cs_drawing_elements.wunlock( debuginfo_macros );
+				WRITE_LOCK(_cs_content);
+				if(rux_is_object(_pressed_content, XObject) == false)
+					_active_content = _pressed_content;
+				_cs_content.WriteUnlock();
 				Invalidate();	
 				if( _is_repeat_until_mouse_up == 1 )
 				{
@@ -648,6 +763,10 @@ namespace rux
 				_active_state_background = _pressed_background;
 				_active_state_foreground = _pressed_foreground;
 				_cs_drawing_elements.wunlock( debuginfo_macros );
+				WRITE_LOCK(_cs_content);
+				if(rux_is_object(_pressed_content, XObject) == false)
+					_active_content = _pressed_content;
+				_cs_content.WriteUnlock();
 				Invalidate();
 				_on_click_callback.raise< const ::rux::gui::events::Event& >( ::rux::gui::events::Event( *this , 1 ) );
 			};
@@ -662,6 +781,10 @@ namespace rux
 					_active_state_background = _over_background;
 					_active_state_foreground = _over_foreground;
 					_cs_drawing_elements.wunlock( debuginfo_macros );
+					WRITE_LOCK(_cs_content);
+					if(rux_is_object(_over_content, XObject) == false)
+						_active_content = _over_content;
+					_cs_content.WriteUnlock();
 				}
 				else
 				{
@@ -669,99 +792,60 @@ namespace rux
 					_active_state_background = _background;
 					_active_state_foreground = _foreground;
 					_cs_drawing_elements.wunlock( debuginfo_macros );
+					WRITE_LOCK(_cs_content);
+					if(rux_is_object(_content, XObject) == false)
+						_active_content = _content;
+					_cs_content.WriteUnlock();
 				}	
 				Invalidate();
 			};
 			void Button::set_Content( const XObject& content )
 			{
-				set_Content( *content.get_GCRef() );
+				set_Content(*content.get_GCRef());
 			};
 			void Button::set_Content( const Object& content )
 			{
 				content.AddRef();
-				if( rux_is_object( content , ::rux::XString ) )
-				{
-					::rux::XString content_string;
-					content_string.set_ByRef( content );
-					WRITE_LOCK( _cs_content );
-					if( rux_is_object( _content, XTextBlock ) )
-					{
-						XTextBlock ui_textblock( _content );
-						WRITE_LOCK( ui_textblock()->_cs_parent_control );
-						ui_textblock()->_parent_control = this;
-						ui_textblock()->_cs_parent_control.WriteUnlock();
-						ui_textblock()->_parent_window = get_ParentWindow();
-						_cs_content.WriteUnlock();
-						ui_textblock.set_Text( content_string );
-					}
-					else
-					{
-						XTextBlock ui_textblock;
-						WRITE_LOCK( ui_textblock()->_cs_parent_control );
-						ui_textblock()->_parent_control = this;
-						ui_textblock()->_cs_parent_control.WriteUnlock();
-						ui_textblock()->_parent_window = get_ParentWindow();						
-						ui_textblock.set_Text( content_string );
-						_content = ui_textblock;
-						_cs_content.WriteUnlock();
-					}		
-				}
-				else if( rux_is_object( content , ::rux::gui::controls::XGroup ) )
-				{
-					rux::gui::controls::XGroup group( content );
-					group.set_Left( 0 );
-					group.set_Top( 0 );
-					group.set_Width( get_Width() );
-					group.set_Height( get_Height() );
-					WRITE_LOCK( _cs_content );
-					WRITE_LOCK( group()->_cs_parent_control );
-					group()->_parent_control = this;
-					group()->_cs_parent_control.WriteUnlock();
-					group()->_parent_window = get_ParentWindow();
-					_content = content;
-					_cs_content.WriteUnlock();
-				}	
-				else if( rux_is_object( content , ::rux::media::XFrame ) )
-				{
-					rux::media::XFrame frame;
-					frame.set_ByRef( content );
-					XImage image;
-					image.set_IsAlpha( 1 );
-					image.set_Frame( frame );
-					image.set_HorizontalFilling( XEnum_Filling_Auto );
-					image.set_VerticalFilling( XEnum_Filling_Auto );
-					declare_variable( ::rux::gui::controls::XGroup , group );
-					group.set_Left( 0 );
-					group.set_Top( 0 );
-					group.set_Width( get_Width() );
-					group.set_Height( get_Height() );
-					WRITE_LOCK( group()->_cs_parent_control );
-					group()->_parent_control = this;
-					group()->_cs_parent_control.WriteUnlock();
-					group()->_parent_window = get_ParentWindow();
-					rux::XString error;
-					group.AddControl( image , error );
-					WRITE_LOCK( _cs_content );
-					_content = group;
-					_cs_content.WriteUnlock();
-				}
+				XGCRef* gcref = content.get_GCRefObj();
+				if(gcref)
+					set_Content(*gcref);
 				content.Release();
-				if( _horizontal_filling == ::rux::gui::XEnum_Filling_FromContent )
-					private_ResetLocationAndSizeCache( 0 , 0 , 1 , 0 );
-				if( _vertical_filling == ::rux::gui::XEnum_Filling_FromContent )
-					private_ResetLocationAndSizeCache( 0 , 0 , 0 , 1 );
 			};
-			void Button::set_Content( const XGCRef& content )
+			void Button::set_OverContent( const XObject& content )
+			{
+				set_OverContent(*content.get_GCRef());
+			};
+			void Button::set_OverContent( const Object& content )
 			{
 				content.AddRef();
-				if( rux_is_object( content , ::rux::XString ) )
+				XGCRef* gcref = content.get_GCRefObj();
+				if(gcref)
+					set_OverContent(*gcref);
+				content.Release();
+			};
+			void Button::set_PressedContent(const XObject& content)
+			{
+				set_PressedContent(*content.get_GCRef());
+			}
+			void Button::set_PressedContent(const Object& content)
+			{
+				content.AddRef();
+				XGCRef* gcref = content.get_GCRefObj();
+				if(gcref)
+					set_PressedContent(*gcref);
+				content.Release();
+			}
+			void Button::set_Content(XObject* obj, const XGCRef& content)
+			{
+				content.AddRef();
+				if(rux_is_object(content, ::rux::XString))
 				{
 					rux::XString content_string;
-					content_string.set_ByRef( content );
-					WRITE_LOCK( _cs_content );
-					if( rux_is_object( _content, XTextBlock ) )
+					content_string.set_ByRef(content);
+					WRITE_LOCK(_cs_content);
+					if(rux_is_object((*obj), XTextBlock))
 					{
-						XTextBlock ui_textblock( _content );			
+						XTextBlock ui_textblock(*obj);			
 						_cs_content.WriteUnlock();
 						WRITE_LOCK( ui_textblock()->_cs_parent_control );
 						ui_textblock()->_parent_control = this;
@@ -777,13 +861,15 @@ namespace rux
 						ui_textblock()->_cs_parent_control.WriteUnlock();
 						ui_textblock()->_parent_window = get_ParentWindow();
 						ui_textblock.set_Text( content_string );
-						_content = ui_textblock;
+						*obj = ui_textblock;
+						if(obj == &_content)
+							_active_content = *obj;
 						_cs_content.WriteUnlock();
 					}		
 				}
-				else if( rux_is_object( content , ::rux::gui::controls::XGroup ) )
+				else if(rux_is_object(content, ::rux::gui::controls::XGroup))
 				{
-					rux::gui::controls::XGroup group( content );
+					rux::gui::controls::XGroup group(content);
 					group.set_Left( 0 );
 					group.set_Top( 0 );
 					group.set_Width( get_Width() );
@@ -793,7 +879,9 @@ namespace rux
 					group()->_parent_control = this;
 					group()->_cs_parent_control.WriteUnlock();
 					group()->_parent_window = get_ParentWindow();
-					_content = content;
+					*obj = content;
+					if(obj == &_content)
+						_active_content = *obj;
 					_cs_content.WriteUnlock();
 				}	
 				else if( rux_is_object( content , ::rux::media::XFrame ) )
@@ -817,7 +905,9 @@ namespace rux
 					rux::XString error;
 					group.AddControl( image , error );
 					WRITE_LOCK( _cs_content );
-					_content = group;
+					*obj = group;
+					if(obj == &_content)
+						_active_content = *obj;
 					_cs_content.WriteUnlock();
 				}
 				content.Release();
@@ -825,7 +915,19 @@ namespace rux
 					private_ResetLocationAndSizeCache( 0 , 0 , 1 , 0 );
 				if( _vertical_filling == ::rux::gui::XEnum_Filling_FromContent )
 					private_ResetLocationAndSizeCache( 0 , 0 , 0 , 1 );
-			};
+			}
+			void Button::set_Content(const XGCRef& content)
+			{
+				set_Content(&_content, content);
+			}
+			void Button::set_OverContent(const XGCRef& content)
+			{
+				set_Content(&_over_content, content);
+			}
+			void Button::set_PressedContent(const XGCRef& content)
+			{
+				set_Content(&_pressed_content, content);
+			}
 			void XButton::set_Font( const char* font_file_name ,
 				::rux::uint32 font_size_height ,
 				::rux::uint32 font_size_width )
@@ -852,20 +954,19 @@ namespace rux
 			{
 				_parent_window = get_ParentWindow();
 			};
-			void Button::FreeResources( ::rux::byte from_removed_controls_schedule )
+			void Button::FreeContentResources(XObject& content, ::rux::byte from_removed_controls_schedule)
 			{
-				WRITE_LOCK( _cs_content );
-				if( rux_is_object( _content, XTextBlock ) )
+				if( rux_is_object(content, XTextBlock))
 				{		
-					XTextBlock ui( _content );
+					XTextBlock ui(content);
 					_cs_content.WriteUnlock();
 					ui()->BeforeFreeSystemResources();
 					ui()->FreeResources( from_removed_controls_schedule );
 					ui()->FreeSystemResources();
 				}
-				else if( rux_is_object( _content , ::rux::gui::controls::XGroup ) )
+				else if( rux_is_object(content, ::rux::gui::controls::XGroup ) )
 				{
-					declare_variable_param( ::rux::gui::controls::XGroup , ui , _content );
+					declare_variable_param( ::rux::gui::controls::XGroup , ui , content);
 					_cs_content.WriteUnlock();
 					ui()->BeforeFreeSystemResources();
 					ui()->FreeResources( from_removed_controls_schedule );
@@ -873,6 +974,18 @@ namespace rux
 				}
 				else
 					_cs_content.WriteUnlock();
+			}
+			void Button::FreeResources( ::rux::byte from_removed_controls_schedule )
+			{
+				WRITE_LOCK( _cs_content );
+				FreeContentResources(_content, from_removed_controls_schedule);
+
+				WRITE_LOCK( _cs_content );
+				FreeContentResources(_over_content, from_removed_controls_schedule);
+
+				WRITE_LOCK( _cs_content );
+				FreeContentResources(_pressed_content, from_removed_controls_schedule);
+				
 				::rux::engine::_globals->_gui_globals->_rux_gui_add_cache( _ui_cache );
 				_ui_cache = NULL;
 				::rux::engine::_globals->_gui_globals->_rux_gui_add_cache( _ui_border_cache );

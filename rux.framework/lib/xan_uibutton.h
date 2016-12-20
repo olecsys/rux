@@ -29,7 +29,10 @@ namespace rux
 				rux::gui::ColorBase* _disabled_background;
 				rux::gui::ColorBase* _active_state_background;
 				rux::gui::Color* _border_color;
+				XObject _active_content;
 				XObject _content;
+				XObject _over_content;
+				XObject _pressed_content;
 				rux::threading::RdWrLock _cs_content;
 				rux::gui::RenderCacheBase* _ui_cache;
 				rux::gui::RenderCacheBase* _ui_border_cache;
@@ -58,15 +61,31 @@ namespace rux
 			public:
 				explicit Button( const char* variable_name = 0 , const char* __file__ = 0 , ::rux::int32 __line__ = 0 );
 				~Button();
+				void set_OverContent(const XObject& content);
+				void set_OverContent(const Object& content);
+				void set_PressedContent(const XObject& content);
+				void set_PressedContent(const Object& content);
+				void set_OverContent(const XGCRef& content);
+				void set_PressedContent(const XGCRef& content);
 				void set_Content( const XObject& content );
 				void set_Content( const Object& content );
 				void set_Content( const XGCRef& content );
 				virtual void get_Clip( ::rux::gui::Rectangle*& clip , ::rux::uint8 scrollbar = 0 );
+				void set_OverContentOpacity(float opacity);
+				void set_PressedContentOpacity(float opacity);
 				void set_ContentOpacity( float opacity );
+				void set_OverContentOpacity(const ::rux::XString& control_name, float opacity);
+				void set_PressedContentOpacity(const ::rux::XString& control_name, float opacity);
 				void set_ContentOpacity( const ::rux::XString& control_name , float opacity );
 				void set_Background( ::rux::gui::ColorBase* background );	
 				void set_ContentBackground( ::rux::gui::ColorBase* background );
+				void set_OverContentBackground(::rux::gui::ColorBase* background);
+				void set_PressedContentBackground(::rux::gui::ColorBase* background);
+				void set_OverContentBackground(const ::rux::XString& control_name, ::rux::gui::ColorBase* background);
+				void set_PressedContentBackground(const ::rux::XString& control_name, ::rux::gui::ColorBase* background);
 				void set_ContentBackground( const ::rux::XString& control_name , ::rux::gui::ColorBase* background );
+				void set_OverContentBorderColor(::rux::gui::Color* border_color);
+				void set_PressedContentBorderColor(::rux::gui::Color* border_color);
 				void set_ContentBorderColor( ::rux::gui::Color* border_color );
 				void set_OverBackground( ::rux::gui::ColorBase* over_background );
 				void set_PressedBackground( ::rux::gui::ColorBase* pressed_background );
@@ -83,6 +102,17 @@ namespace rux
 				void set_Corner( const ::rux::gui::Thickness& corner );
 				void set_OnClick( ::rux::gui::events::on_event_t on_click_callback );
 			private:
+				void FreeContentResources(XObject& content, ::rux::byte from_removed_controls_schedule);
+				void set_Content(XObject* obj, const XGCRef& content);
+				void private_ContentResetChildLocationAndSizeCache(XObject& content, ::rux::uint8 reset
+					, ::rux::gui::ControlBase* control, ::rux::uint8 left, ::rux::uint8 top, ::rux::uint8 width
+					, ::rux::uint8 height);
+				void set_ContentBorderColor(XObject& content, ::rux::gui::Color* border_color);
+				void set_ContentBackground(XObject& content, ::rux::gui::ColorBase* background);
+				void set_ContentBackground(XObject& content, const ::rux::XString& control_name, ::rux::gui::ColorBase* background);
+				void set_ContentOpacity(XObject& content, const ::rux::XString& control_name, float opacity);
+				void set_ContentOpacity(XObject& content, float opacity);
+				void private_ResetCache(XObject& content);
 				virtual void RemoveControl( XGCRef* control );
 				virtual void RemoveTabControls( void );
 				virtual void AddTabControls( void );
@@ -130,6 +160,12 @@ namespace rux
 				void set_Content( const XObject& content );
 				void set_Content( const Object& content );
 				void set_Content( const XGCRef& content );
+				void set_OverContent(const XObject& content);
+				void set_OverContent(const Object& content);
+				void set_OverContent(const XGCRef& content);
+				void set_PressedContent(const XObject& content);
+				void set_PressedContent(const Object& content);				
+				void set_PressedContent(const XGCRef& content);
 				void set_Font( const char* font_file_name ,
 					::rux::uint32 font_size_height ,
 					::rux::uint32 font_size_width );

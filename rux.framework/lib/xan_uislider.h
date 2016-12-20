@@ -55,6 +55,8 @@ namespace rux
 				::rux::uint8 _is_value_change_thread_inited;
 				::rux::uint8 _is_thumb_dragging;
 				XEnum_SliderMouseClickValueChange _slider_mouse_click_value_change;
+				int _thumb_border_width;
+				rux::gui::Color* _thumb_border_color;
 			public:
 				explicit Slider( const char* variable_name = 0 , const char* __file__ = 0 , ::rux::int32 __line__ = 0 );
 				~Slider();
@@ -66,6 +68,8 @@ namespace rux
 				float get_MaxValue( void );
 				float get_MinValue( void );
 				declare_content_size();
+				void set_ThumbBorderWidth(int border_width);
+				void set_ThumbBorderColor(::rux::gui::Color* background);
 			private:
 				static void value_change( void* param , size_t ___rux__thread_index1986 );
 				void private_set_ActiveThumbBackground( ::rux::gui::ColorBase* background );
@@ -100,6 +104,8 @@ namespace rux
 				void set_ThumbThickness( const ::rux::gui::Thickness& thumb_thickness );
 				void set_MouseClickValueChangeType( XEnum_SliderMouseClickValueChange slider_mouse_click_value_change );
 				float get_Value( void );
+				void set_ThumbBorderWidth(int border_width);
+				void set_ThumbBorderColor(::rux::gui::Color* background);
 				DECLARE_BASE_UI_FUNCTIONS();	
 			};
 		};

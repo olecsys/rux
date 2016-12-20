@@ -85,12 +85,19 @@ namespace rux
 				(*this)()->_on_text_changed_event_callback = on_text_changed_event_callback;
 			};
 			implement_duplicate_internal_function_1( TextBox , set_Foreground , ::rux::gui::ColorBase* );
+			implement_duplicate_internal_function_1(TextBox, set_Background, ::rux::gui::ColorBase*);
 			void TextBox::set_Foreground( ::rux::gui::ColorBase* foreground )
 			{				
 				_cs_drawing_elements.wlock( debuginfo_macros );
 				rux::gui::copy_color( _foreground , foreground );
 				_cs_drawing_elements.wunlock( debuginfo_macros );
-			};
+			}
+			void TextBox::set_Background(::rux::gui::ColorBase* background)
+			{
+				_cs_drawing_elements.wlock(debuginfo_macros);
+				rux::gui::copy_color(_background, background);
+				_cs_drawing_elements.wunlock(debuginfo_macros);
+			}
 			::rux::gui::ColorBase* TextBox::get_Foreground( void )
 			{
 				return _foreground;

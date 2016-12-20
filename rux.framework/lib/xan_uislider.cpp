@@ -29,6 +29,8 @@ begin_implement_rux_class_with_properties_ns_base_class( Slider , rux::gui::cont
 	_is_value_change_thread_inited = 0;
 	_is_thumb_dragging = 0;
 	_slider_mouse_click_value_change = XEnum_SliderMouseClickValueChange_Gradual;
+	_thumb_border_width = 0;
+	copy_color(_thumb_border_color, ::rux::gui::Colors::Transparent());
 end_implement_rux_class();
 namespace rux
 {
@@ -43,6 +45,8 @@ namespace rux
 				if( _value_change_thread.get_IsStarted() == 1 )
 					_value_change_thread.Stop();
 				CRITICAL_SECTION_UNLOCK( _cs_value_change_thread );	
+				if(_thumb_border_color)
+					_thumb_border_color->Release();
 				if( _transparent_color )
 					_transparent_color->Release();
 				if( _track_background )
@@ -382,9 +386,9 @@ namespace rux
 				_selected_z_index += 1.f;//0.001f
 				_cs_drawing_elements.wlock( debuginfo_macros );
 				render_context->DrawRectangle( ::rux::math::round( thumb_left , 0 ) , ::rux::math::round( thumb_top , 0 ) 
-					, _thumb_width , _thumb_height , 0 , _thumb_active_background , _transparent_color , _thumb_thickness 
-					, _opacity * opacity , &_ui_thumb_border_cache , &_ui_thumb_cache , _selected_z_index , 1 , __FILE__ 
-					, __LINE__ , ___rux__thread_index1986 );
+					, _thumb_width , _thumb_height , _thumb_border_width , _thumb_active_background , _thumb_border_color
+					, _thumb_thickness, _opacity * opacity , &_ui_thumb_border_cache , &_ui_thumb_cache , _selected_z_index , 1 
+					, __FILE__, __LINE__ , ___rux__thread_index1986 );
 				_cs_drawing_elements.wunlock( debuginfo_macros );
 			};
 			::rux::uint8 Slider::IsPointInTrack( ::rux::int16 x , ::rux::int16 y , ::rux::uint8& left , ::rux::uint8& above , float& x_offset , float& y_offset )
@@ -664,6 +668,22 @@ namespace rux
 				(*this)()->_cs_drawing_elements.wunlock( debuginfo_macros );
 				(*this)()->Invalidate();
 			};
+			implement_duplicate_internal_function_1(Slider, set_ThumbBorderWidth, int);
+			void Slider::set_ThumbBorderWidth(int border_width)
+			{
+				_cs_drawing_elements.wlock( debuginfo_macros );				
+				_thumb_border_width = border_width;
+				_cs_drawing_elements.wunlock( debuginfo_macros );
+				Invalidate();
+			}
+			implement_duplicate_internal_function_1(Slider, set_ThumbBorderColor, ::rux::gui::Color*);
+			void Slider::set_ThumbBorderColor(::rux::gui::Color* background)
+			{
+				_cs_drawing_elements.wlock(debuginfo_macros);
+				::rux::gui::copy_color(_thumb_border_color, background);
+				_cs_drawing_elements.wunlock(debuginfo_macros);
+				Invalidate();
+			}
 			void XSlider::set_ThumbBackground( ::rux::gui::ColorBase* thumb_background )
 			{
 				rux::gui::copy_color( (*this)()->_thumb_background , thumb_background );
