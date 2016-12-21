@@ -1935,7 +1935,7 @@ public:\
 	::rux::register_type_t rux_namespace::rux_class::_register_methods_and_properties = rux_register_methods_and_properties;\
 	namespace rux\
 	{\
-		template class XKeyValuePair< rux_namespace::X##rux_class >;\
+		/*template class XKeyValuePair< rux_namespace::X##rux_class >;*/\
 		/*template class XArray< XKeyValuePair< rux_namespace::X##rux_class > >;*/\
 		/*template class XArray< rux_namespace::X##rux_class >;*/\
 		template<> rux_volatile Array< rux_namespace::X##rux_class >::_rux_type_index = rux_volatile_max;\

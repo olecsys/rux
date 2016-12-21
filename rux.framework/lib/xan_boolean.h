@@ -15,7 +15,7 @@ namespace rux
 		friend class ::rux::data::XJsonSerializer;
 		friend struct ::rux::data::key_value_pair_t;
 		friend dll_internal ::rux::byte gcref_to_byte( const XGCRef* object );
-		friend dll_internal bool ::rux::is_boolean_and_true( XGCRef* object );
+		friend dll_internal bool is_boolean_and_true( XGCRef* object );
 		virtual ::rux::String* ObjectToString( void );
 		::rux::String& ToString( void );
 		Boolean& operator =(const Boolean& value);

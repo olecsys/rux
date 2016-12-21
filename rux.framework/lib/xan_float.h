@@ -19,7 +19,7 @@ namespace rux
 
 		friend class ::rux::Numeric;
 		friend class ::rux::XNumeric;
-		friend dll_internal float rux::gcref_to_float( const XGCRef* object );
+		friend dll_internal float gcref_to_float( const XGCRef* object );
 		virtual ::rux::String* ObjectToString( void );
 		::rux::String& ToString( void );
 		float operator()() const;
