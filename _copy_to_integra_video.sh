@@ -20,10 +20,8 @@ if [ -z $ARCHITECTURE ]; then
 	fi
 fi
 OSPL="$(uname -s)"
-RUX_DIRECTORY="`pwd`"
-cd "$RUX_DIRECTORY/.."
-CORE_DIRECTORY="`pwd`/core"
-cd "$RUX_DIRECTORY"
+RUX_DIRECTORY="$script_dir"
+CORE_DIRECTORY="$script_dir/../core"
 if [ ! -d "$CORE_DIRECTORY/crox_headers" ]; then
 	mkdir "$CORE_DIRECTORY/crox_headers"
 fi
