@@ -19,8 +19,8 @@ namespace rux
 
 		friend class ::rux::Numeric;
 		friend class ::rux::XNumeric;
-		friend dll_internal ::rux::uint64 rux::object_to_uint64( Object* object );
-		friend dll_internal ::rux::uint64 rux::gcref_to_uint64( const XGCRef* object );
+		friend dll_internal ::rux::uint64 object_to_uint64( Object* object );
+		friend dll_internal ::rux::uint64 gcref_to_uint64( const XGCRef* object );
 		virtual ::rux::String* ObjectToString( void );
 		::rux::String& ToString( void );
 		::rux::uint64 operator()() const;
