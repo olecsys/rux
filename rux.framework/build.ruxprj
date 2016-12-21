@@ -190,8 +190,7 @@
 				"lib_paths":
 				[
 					"./../build/$(os)/$(architecture)",
-					"./../extern_lib/$(os)/$(architecture)",
-					"/opt/mcst/crossfs-current.e2k-4c.3.14/usr/lib"
+					"./../extern_lib/$(os)/$(architecture)"
 				]
 			}
 		},
