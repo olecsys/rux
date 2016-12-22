@@ -699,6 +699,7 @@ namespace rux
 			dll_internal Atom _rux_delete_window = None;
 			dll_internal Atom _rux_gui_initialize = None;
 			dll_internal Atom _net_wm_state_max_horz = None;
+			dll_internal Atom _net_wm_state_above = None;
 			dll_internal Atom _net_wm_state_hidden = None;
 			dll_internal Atom _net_wm_state_max_vert = None;
 			dll_internal Atom _net_wm_state_fullscreen = None;
@@ -911,6 +912,7 @@ namespace rux
 							rux::gui::engine::_rux_delete_window = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "RUX_DELETE_WINDOW" , False );
 							rux::gui::engine::_rux_gui_initialize = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "RUX_GUI_INITIALIZE" , False );
 							rux::gui::engine::_net_wm_state_max_horz = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "_NET_WM_STATE_MAXIMIZED_HORZ" , False );    
+							::rux::gui::engine::_net_wm_state_above = ::rux::engine::_globals->_x11_module.XInternAtom(::rux::gui::engine::_x_display_main, "_NET_WM_STATE_ABOVE", False);
 							::rux::gui::engine::_net_wm_state_hidden = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "_NET_WM_STATE_HIDDEN" , False );
 							rux::gui::engine::_net_wm_state_fullscreen = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "_NET_WM_STATE_FULLSCREEN" , False );    
 							rux::gui::engine::_net_wm_state_max_vert = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "_NET_WM_STATE_MAXIMIZED_VERT" , False );
@@ -1431,6 +1433,7 @@ namespace rux
 					::rux::engine::_globals->_x11_module.XSetWMProtocols( ::rux::gui::engine::_x_display_main , window->_x_window , &rux::gui::engine::_net_close_window , 1 );
 					::rux::engine::_globals->_x11_module.XSetWMProtocols( ::rux::gui::engine::_x_display_main , window->_x_window , &rux::gui::engine::_wm_protocols , 1 );
 					::rux::engine::_globals->_x11_module.XSetWMProtocols( ::rux::gui::engine::_x_display_main , window->_x_window , &rux::gui::engine::_net_wm_state_max_horz , 1 );
+					::rux::engine::_globals->_x11_module.XSetWMProtocols( ::rux::gui::engine::_x_display_main , window->_x_window , &rux::gui::engine::_net_wm_state_above, 1);
 					::rux::engine::_globals->_x11_module.XSetWMProtocols( ::rux::gui::engine::_x_display_main , window->_x_window , &rux::gui::engine::_net_wm_state_hidden , 1 );
 					::rux::engine::_globals->_x11_module.XSetWMProtocols( ::rux::gui::engine::_x_display_main , window->_x_window , &rux::gui::engine::_net_wm_state_fullscreen , 1 );
 					::rux::engine::_globals->_x11_module.XSetWMProtocols( ::rux::gui::engine::_x_display_main , window->_x_window , &rux::gui::engine::_net_wm_state_max_vert , 1 );

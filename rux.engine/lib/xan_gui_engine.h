@@ -412,6 +412,7 @@ namespace rux
 			extern dll_internal Atom _rux_gui_initialize;
 			extern dll_internal Atom _net_wm_state_max_vert;
 			extern dll_internal Atom _net_wm_state_max_horz;
+			extern dll_internal Atom _net_wm_state_above;
 			extern dll_internal Atom _net_wm_state_hidden;
 			extern dll_internal Atom _net_wm_action_fullscreen;
 			extern dll_internal Atom _net_wm_allowed_actions;

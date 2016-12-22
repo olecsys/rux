@@ -475,6 +475,31 @@ namespace rux
 						Maximize( 1 );
 					else if( window_state == ::rux::gui::XEnum_WindowState_Minimized )
 						Minimize( 1 );
+#ifndef __WINDOWS__
+#ifndef __ANDROID__
+					if(_is_top_most)
+					{
+						if(_x_display)
+						{		
+							XEvent x_event;
+							memset(&x_event, 0, sizeof(x_event));
+							x_event.xclient.type = ClientMessage;
+							x_event.xclient.send_event = True;
+							x_event.xclient.display = ::rux::gui::engine::_x_display_main;
+							x_event.xclient.window = _x_window;
+							x_event.xclient.message_type = ::rux::gui::engine::_net_wm_state;
+							x_event.xclient.format = 32;
+							x_event.xclient.data.l[ 0 ] = _is_top_most ? _NET_WM_STATE_ADD : _NET_WM_STATE_REMOVE;
+							x_event.xclient.data.l[ 1 ] = ::rux::gui::engine::_net_wm_state_above;
+							::rux::gui::engine::lock_display(0);
+							::rux::engine::_globals->_x11_module.XSendEvent(::rux::gui::engine::_x_display_main
+								, RootWindow(::rux::gui::engine::_x_display_main, ::rux::gui::engine::_x_visual_info->screen), false
+								, SubstructureRedirectMask|SubstructureNotifyMask, &x_event);    
+							rux::gui::engine::unlock_display();
+						}
+					}
+#endif
+#endif
 					set_IsAllowResize( is_allow_resize );
 					set_IsAllowRelocate( is_allow_relocate );
 					set_IsAllowClose( is_allow_close );
@@ -952,8 +977,23 @@ namespace rux
 #else
 #ifdef __ANDROID__
 #else
-					if( _x_display )
+					if(_x_display)
 					{		
+						XEvent x_event;
+						memset(&x_event, 0, sizeof(x_event));
+						x_event.xclient.type = ClientMessage;
+						x_event.xclient.send_event = True;
+						x_event.xclient.display = ::rux::gui::engine::_x_display_main;
+						x_event.xclient.window = _x_window;
+						x_event.xclient.message_type = ::rux::gui::engine::_net_wm_state;
+						x_event.xclient.format = 32;
+						x_event.xclient.data.l[ 0 ] = _is_top_most ? _NET_WM_STATE_ADD : _NET_WM_STATE_REMOVE;
+						x_event.xclient.data.l[ 1 ] = ::rux::gui::engine::_net_wm_state_above;
+						::rux::gui::engine::lock_display(0);
+						::rux::engine::_globals->_x11_module.XSendEvent(::rux::gui::engine::_x_display_main
+							, RootWindow(::rux::gui::engine::_x_display_main, ::rux::gui::engine::_x_visual_info->screen), false
+							, SubstructureRedirectMask|SubstructureNotifyMask, &x_event);    
+						rux::gui::engine::unlock_display();
 					}
 #endif
 #endif
