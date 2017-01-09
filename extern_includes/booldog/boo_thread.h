@@ -18,6 +18,15 @@
 #include <unistd.h>
 #include <limits.h>
 #endif
+#ifndef BOO_THREAD_CPU_MIN
+#define BOO_THREAD_CPU_MIN 0
+#endif
+#ifndef BOO_THREAD_CPU_MAX
+#define BOO_THREAD_CPU_MAX INT_MAX
+#endif
+#ifndef BOO_THREAD_EXCLUDE_CPU
+#define BOO_THREAD_EXCLUDE_CPU INT_MAX
+#endif
 namespace booldog
 {
 	namespace enums
@@ -31,8 +40,8 @@ namespace booldog
 				state_stop ,
 				state_pending_in_stop
 			};
-		};
-	};
+                }
+        }
 	namespace threading
 	{
 		class thread;
@@ -61,6 +70,8 @@ namespace booldog
 #else
 			pthread_t _handle;
 #endif
+		public:
+                         ::booldog::threading::thread* _next;
 		public:
 			thread( booldog::allocator* allocator )
                                 : _state(::booldog::enums::threading::state_stop)
@@ -99,7 +110,7 @@ namespace booldog
 					thr->_onthreadstopped( thr );
 				::booldog::interlocked::exchange( &thr->_state , ::booldog::enums::threading::state_stop );
 				return 0;
-			};
+                        }
 		public:
 			booinline static ::booldog::threading::thread* create( ::booldog::result* pres , booldog::allocator* allocator
 				, size_t stack_size , ::booldog::events::typedefs::onthreadstarted onthreadstarted 
@@ -126,6 +137,8 @@ namespace booldog
 						goto goto_destroy;
 					}
 #else
+                                        cpu_set_t cpus;
+                                        int numberOfProcessors = 0;
 					pthread_attr_t pthread_attr;		
 					int result = pthread_attr_init( &pthread_attr );		
 					if( result != 0 )
@@ -160,6 +173,17 @@ namespace booldog
 						pthread_attr_destroy( &pthread_attr );
 						goto goto_destroy;
 					}
+                                        numberOfProcessors = sysconf(_SC_NPROCESSORS_ONLN);
+                                        if(numberOfProcessors > BOO_THREAD_CPU_MAX)
+                                            numberOfProcessors = BOO_THREAD_CPU_MAX;
+                                        CPU_ZERO(&cpus);
+                                        for(int i = BOO_THREAD_CPU_MIN;i < numberOfProcessors; ++i)
+                                        {
+                                            if(i != BOO_THREAD_EXCLUDE_CPU)
+                                                CPU_SET(i, &cpus);
+                                        }
+                                        pthread_attr_setaffinity_np(&pthread_attr, sizeof(cpu_set_t), &cpus);
+
 					result = pthread_create( &thr->_handle , &pthread_attr , func , (void*)thr );
 					if( result != 0 )
 					{
@@ -199,7 +223,7 @@ goto_return:
 				::booldog::threading::thread::wait_for_start( thr );
 				booldog::interlocked::compare_exchange( &thr->_state , ::booldog::enums::threading::state_pending_in_stop
 					, ::booldog::enums::threading::state_start );
-			};
+			};			
 			booinline static void wait_for_stop( ::booldog::threading::thread* thr )
 			{
 				booldog::byte tries = 0;
@@ -212,12 +236,16 @@ goto_return:
 						tries = 0;
 					}
 				}
-			};
+			}
 			booinline static void destroy( ::booldog::threading::thread* thr )
 			{
 				::booldog::threading::thread::wait_for_stop( thr );
 				thr->_allocator->destroy< ::booldog::threading::thread >( thr );
-			};
+			}
+			booinline bool stopped(void)
+			{
+                                return ::booldog::interlocked::compare_exchange(&_state, 0, 0) == ::booldog::enums::threading::state_stop;
+			}
 		};
 	};
 };

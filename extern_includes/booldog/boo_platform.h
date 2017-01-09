@@ -65,6 +65,10 @@
 		#ifdef __x86_64
 			#define __x64__
 		#endif
+		#ifdef __e2k__
+			#define __x64__
+			#define __ELBRUS__
+		#endif
 		#define __UNIX__
 	#endif
 #endif

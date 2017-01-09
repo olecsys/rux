@@ -32,10 +32,11 @@ namespace booldog
 					H264 = BOOLDOG_MAKEFCC('H', '2', '6', '4'),
 					MJPEG = BOOLDOG_MAKEFCC('M', 'J', 'P', 'G'),
 					YV16 = BOOLDOG_MAKEFCC('Y', 'V', '1', '6'),
+                                        I422 = BOOLDOG_MAKEFCC('I', '4', '2', '2'),
 					Unknown = 0xffffffff
 				};
-			};
-		};
-	};
-};
+                        }
+                }
+        }
+}
 #endif
