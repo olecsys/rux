@@ -809,6 +809,57 @@ goto_conversion_result_targetExhausted:
 			}
 			return res->succeeded();
 		};
+		template< size_t step >
+		booinline bool toutf8(::booldog::result* pres, ::booldog::allocator* allocator, char*& dst , size_t& dstlen , size_t& dstsize
+			, const char* utf32, size_t& srcbyteindex, size_t utf32bytescount
+			, const ::booldog::debug::info& debuginfo = debuginfo_macros)
+		{
+			::booldog::result locres;
+			BOOINIT_RESULT(::booldog::result);
+			size_t dstbyteindex = 0, utf8bytes = step;
+			::booldog::enums::string::conversion_result convres = ::booldog::enums::string::conversion_result_OK;
+			for(;;)
+			{
+				if(dstsize < utf8bytes + 1)
+				{
+					dstsize = utf8bytes + 1;
+					dst = allocator->realloc_array< char >(dst, dstsize, debuginfo);
+				}
+				if(dst == 0)
+				{
+					res->booerr(::booldog::enums::result::booerr_type_cannot_alloc_memory);
+					break;
+				}
+				convres = ::booldog::utf32::to_utf8(utf32, srcbyteindex, utf32bytescount, dst, dstbyteindex , dstsize, utf8bytes
+					, dstlen);
+				if(convres == ::booldog::enums::string::conversion_result_sourceIllegal)
+				{
+					res->booerr(::booldog::enums::result::booerr_type_conversion_result_source_illegal);
+					break;
+				}
+				else if(convres == ::booldog::enums::string::conversion_result_OK)
+				{
+					if(utf8bytes == dstsize)
+					{
+						++dstsize;
+						dst = allocator->realloc_array< char >(dst, dstsize, debuginfo);
+						if(dst == 0)
+						{
+							res->booerr(::booldog::enums::result::booerr_type_cannot_alloc_memory);
+							break;
+						}
+					}
+					dst[utf8bytes] = 0;
+					break;
+				}
+				else if(convres == ::booldog::enums::string::conversion_result_sourceExhausted)
+				{
+					res->booerr(::booldog::enums::result::booerr_type_conversion_result_source_exhausted);
+					break;
+				}
+			}
+			return res->succeeded();
+		}
 		booinline ::booldog::enums::string::conversion_result to_utf16( const char* utf32_ptr , size_t utf32_ptr_count , char* utf16_ptr , size_t utf16_ptr_count , size_t& utf16_bytes )
 		{
 			utf16_bytes = 0;

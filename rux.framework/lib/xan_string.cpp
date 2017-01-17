@@ -3338,12 +3338,16 @@ namespace rux
 	{
 		return operator()()->operator==( string );
 	};
-	bool String::operator ==( const String& string ) const
+	bool String::operator ==(const String& string) const
 	{
-		bool result = false;
-		if( Length() == string.Length() )
-			result = IndexOf( string ) == 0;
-		return result;
+		size_t len0 = Length(), len1 = string.Length();
+		if(len0 == len1)
+		{
+			if(len0 == 0)
+				return true;
+			return IndexOf( string ) == 0;
+		}
+		return false;
 	};
 	bool operator ==(const char* text_ptr,const String& string2)
 	{
@@ -3444,10 +3448,7 @@ namespace rux
 	};
 	bool String::operator !=(const ::rux::String& string) const
 	{
-		bool result = true;
-		if( Length() == string.Length() )
-			result = IndexOf( string ) == -1;
-		return result;
+		return !operator==(string);
 	};
 	bool XString::operator !=(const char* text_ptr) const
 	{

@@ -53,9 +53,15 @@ namespace booldog
 				file_mode_read = 2 ,	
 				file_mode_write = 4 ,
 				file_mode_create = 8 ,
-                                file_mode_truncate = 16,
-                                file_mode_tmpfile = 32,
-                                file_mode_nobuffering = 64
+                file_mode_truncate = 16,
+#ifdef __WINDOWS__
+                file_mode_tmpfile = 32,
+#else
+#ifdef O_TMPFILE
+				file_mode_tmpfile = 32,
+#endif
+#endif
+                file_mode_nobuffering = 64
 			};
 			enum file_position_origin
 			{
@@ -168,20 +174,23 @@ namespace booldog
 					}
 					int mode = 0;
 #ifdef __WINDOWS__
-                                        if(file_mode & ::booldog::enums::io::file_mode_tmpfile)
-                                        {
-                                            mode |= O_TMPFILE;
-                                            mode |= ::booldog::enums::io::CREAT;
-                                        }
-                                        else if(file_mode & ::booldog::enums::io::file_mode_create)
-                                            mode |= ::booldog::enums::io::CREAT;
+					if(file_mode & ::booldog::enums::io::file_mode_tmpfile)
+					{
+						mode |= _O_TEMPORARY;
+						mode |= ::booldog::enums::io::CREAT;
+					}
+					else if(file_mode & ::booldog::enums::io::file_mode_create)
+						mode |= ::booldog::enums::io::CREAT;
 #else
-                                        if(file_mode & ::booldog::enums::io::file_mode_tmpfile)
-                                            mode |= O_TMPFILE;
-                                        else if(file_mode & ::booldog::enums::io::file_mode_create)
-                                            mode |= ::booldog::enums::io::CREAT;
-                                        if(file_mode & ::booldog::enums::io::file_mode_nobuffering)
-                                            mode |= O_SYNC;
+#ifdef O_TMPFILE
+					if(file_mode & ::booldog::enums::io::file_mode_tmpfile)
+						mode |= O_TMPFILE;
+					else
+#endif
+					if(file_mode & ::booldog::enums::io::file_mode_create)
+						mode |= ::booldog::enums::io::CREAT;
+					if(file_mode & ::booldog::enums::io::file_mode_nobuffering)
+						mode |= O_SYNC;
 #endif
 					if( ( file_mode & ::booldog::enums::io::file_mode_read )
 						&& ( file_mode & ::booldog::enums::io::file_mode_write ) )

@@ -196,7 +196,10 @@ goto_next:
 			clear();
 			this->error_type = ::booldog::enums::result::error_type_booerr;
 			this->booerror = booerror;
-		};
+		}
+		/* Copy obj to this
+		* @param obj a source object
+		*/
 		void copy(const ::booldog::result& obj)
 		{
 			clear();

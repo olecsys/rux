@@ -44,6 +44,16 @@ namespace booldog
 					return retval;
 #endif
 				};
+
+				/** Convert number to string
+				* @param pres store the function result or detailed error
+				* @param dst a destination C string pointer
+				* @param dstlen a destination C string length(set to converted string length, even then C string pointer has not enough size)
+				* @param dstsize a destination C string pointer size
+				* @param number a number to convert
+				* @param debuginfo a debug information
+				* @return The function result
+				*/
 				template< class T >
 				booinline bool tostring( ::booldog::result* pres , char* dst , size_t& dstlen , size_t dstsize , T number 
 					, const ::booldog::debug::info& debuginfo = debuginfo_macros )
@@ -59,13 +69,14 @@ debuginfo_macros_statement( 42 );
 					{
 						debuginfo_macros_statement( 35 );
 
+						dstlen = 1;
 						if( 2 > dstsize )
 							res->booerr( ::booldog::enums::result::booerr_type_insufficient_memory );
 						else
 						{
 							dst[ 0 ] = '0';
 							dst[ 1 ] = 0;
-							dstlen = 1;
+							
 						}
 					}
 					else
@@ -96,6 +107,7 @@ debuginfo_macros_statement( 38 );
 						size_t size = count_of_digits + 1;
 						if( number < 0 )
 							size++;
+						dstlen = size - 1;
 						if( size > dstsize )
 							res->booerr( ::booldog::enums::result::booerr_type_insufficient_memory );
 						else
@@ -126,9 +138,7 @@ debuginfo_macros_statement( 40 );
 								number /= 10;
 							}
 
-debuginfo_macros_statement( 41 );
-
-							dstlen = size - 1;
+debuginfo_macros_statement( 41 );							
 							dst[ dstlen ] = 0;
 						}
 					}
