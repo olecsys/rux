@@ -36,6 +36,7 @@ namespace rux
 				declare_content_size();
 				::rux::gui::ColorBase* get_Background( void );
 				::rux::gui::ColorBase* get_BorderColor( void );
+				void set_BorderWidth(float border_width);
 			};
 			class XRectangle : public XGCHandle<Rectangle>
 			{

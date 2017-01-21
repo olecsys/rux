@@ -111,9 +111,13 @@ namespace rux
 			};
 			void XRectangle::set_BorderWidth( float border_width )
 			{
-				if( (*this)()->_border_width != border_width )
+				(*this)()->set_BorderWidth(border_width);
+			}
+			void Rectangle::set_BorderWidth(float border_width)
+			{
+				if(_border_width != border_width)
 				{
-					(*this)()->_border_width = ::rux::math::round( border_width , 0 );
+					_border_width = ::rux::math::round(border_width, 0);
 				}
 			};
 			rux::gui::ColorBase* XRectangle::get_Background( void )
