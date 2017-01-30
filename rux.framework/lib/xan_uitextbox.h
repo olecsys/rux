@@ -59,6 +59,8 @@ namespace rux
 				::rux::gui::ColorBase* get_Foreground( void );
 				void set_Foreground( ::rux::gui::ColorBase* foreground );
 				void set_Background(::rux::gui::ColorBase* background);
+				void set_Text(const ::rux::XString& text);
+				::rux::String& get_Text( void );
 			};
 			class XTextBox : public XGCHandle<TextBox>
 			{

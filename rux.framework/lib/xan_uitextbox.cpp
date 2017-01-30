@@ -86,6 +86,7 @@ namespace rux
 			};
 			implement_duplicate_internal_function_1( TextBox , set_Foreground , ::rux::gui::ColorBase* );
 			implement_duplicate_internal_function_1(TextBox, set_Background, ::rux::gui::ColorBase*);
+			implement_duplicate_internal_function_1(TextBox, set_Text, const ::rux::XString&);
 			void TextBox::set_Foreground( ::rux::gui::ColorBase* foreground )
 			{				
 				_cs_drawing_elements.wlock( debuginfo_macros );
@@ -112,28 +113,32 @@ namespace rux
 					font_size_width );
 				(*this)()->_cs_drawing_elements.wunlock( debuginfo_macros );	
 			};
-			rux::String& XTextBox::get_Text( void )
+			::rux::String& XTextBox::get_Text( void )
+			{
+				return (*this)()->get_Text();
+			};
+			::rux::String& TextBox::get_Text( void )
 			{
 				rux::XString string;
-				if( (*this)()->_is_multi_lines == 1 )
+				if(_is_multi_lines == 1)
 				{
-					(*this)()->_cs_drawing_elements.wlock( debuginfo_macros );
-					if( (*this)()->_lines.Count() > 0 )
-						string.set_ByRef( ::rux::XString::Join( "\n" , (*this)()->_lines ) );
-					(*this)()->_cs_drawing_elements.wunlock( debuginfo_macros );
+					_cs_drawing_elements.wlock( debuginfo_macros );
+					if(_lines.Count() > 0)
+						string.set_ByRef(::rux::XString::Join("\n", _lines));
+					_cs_drawing_elements.wunlock(debuginfo_macros);
 				}
 				else
 				{
-					(*this)()->_cs_drawing_elements.wlock( debuginfo_macros );
-					if( (*this)()->_lines.Count() > 0 )
+					_cs_drawing_elements.wlock(debuginfo_macros);
+					if(_lines.Count() > 0 )
 					{
-						string = (*this)()->_lines[ 0 ];
+						string = _lines[0];
 						string.set_ByRef( string.ReplaceAll( '\r' , '\n' ) );
 					}
-					(*this)()->_cs_drawing_elements.wunlock( debuginfo_macros );
+					_cs_drawing_elements.wunlock( debuginfo_macros );
 				}
 				return string++;
-			};
+			}
 			void XTextBox::set_IsMultiLines( ::rux::uint8 is_multi_lines )
 			{
 				if( (*this)()->_is_multi_lines != is_multi_lines )
@@ -165,43 +170,43 @@ namespace rux
 				else
 					(*this)()->_is_regexp_pattern = 0;
 			};
-			void XTextBox::set_Text( const ::rux::XString& text )
+			void TextBox::set_Text(const ::rux::XString& text)
 			{	
 				rux::XString string;
-				if( (*this)()->_is_multi_lines == 1 )
+				if(_is_multi_lines == 1)
 				{
 					XArray< ::rux::XString > line_separators;
 					line_separators.Add( ::rux::XString( "\n" ) );
 					line_separators.Add( ::rux::XString( "\r" ) );		
 					declare_variable( ::rux::XArray< ::rux::XString > , lines );
 					lines.set_ByRef( text.Split( line_separators , EStringSplitOptions_None ) );
-					(*this)()->_cs_drawing_elements.wlock( debuginfo_macros );
-					(*this)()->_lines.Clear();
+					_cs_drawing_elements.wlock( debuginfo_macros );
+					_lines.Clear();
 					for( size_t index0 = 0 ; index0 < lines.Count() ; index0++ )
-						(*this)()->_lines.AddByRef( lines[ index0 ].ConvertToUTF8() );
-					(*this)()->_cs_drawing_elements.wunlock( debuginfo_macros );
+						_lines.AddByRef( lines[ index0 ].ConvertToUTF8() );
+					_cs_drawing_elements.wunlock( debuginfo_macros );
 				}
 				else
 				{
 					string.set_ByRef( text.ReplaceAll( "\r" , "" ) );
 					string.set_ByRef( text.ReplaceAll( '\n' , '\r' ) );
-					if( (*this)()->_is_regexp_pattern == 1 )
-						string.set_ByRef( XRegexp::Correct( string , (*this)()->_regexp_pattern ) );
-					(*this)()->_cs_drawing_elements.wlock( debuginfo_macros );
-					(*this)()->_lines.Clear();
-					(*this)()->_lines.AddByRef( string.ConvertToUTF8() );
-					(*this)()->_cs_drawing_elements.wunlock( debuginfo_macros );
+					if(_is_regexp_pattern == 1)
+						string.set_ByRef(XRegexp::Correct(string, _regexp_pattern));
+					_cs_drawing_elements.wlock( debuginfo_macros );
+					_lines.Clear();
+					_lines.AddByRef( string.ConvertToUTF8() );
+					_cs_drawing_elements.wunlock( debuginfo_macros );
 				}				
-				(*this)()->_cs_drawing_elements.wlock( debuginfo_macros );
-				if( text.Length() < (*this)()->_selection_char_index )
+				_cs_drawing_elements.wlock(debuginfo_macros);
+				if(text.Length() < _selection_char_index)
 				{
-					(*this)()->_selection_char_index = 0;
-					(*this)()->_old_selection_char_index = 0;
-					(*this)()->_scrollbar_left_offset = 0.f;
-					(*this)()->_scrollbar_top_offset = 0.f;
+					_selection_char_index = 0;
+					_old_selection_char_index = 0;
+					_scrollbar_left_offset = 0.f;
+					_scrollbar_top_offset = 0.f;
 				}
-				(*this)()->_cs_drawing_elements.wunlock( debuginfo_macros );
-				(*this)()->calculate_caret_and_selection();
+				_cs_drawing_elements.wunlock(debuginfo_macros);
+				calculate_caret_and_selection();
 			};
 			void XTextBox::set_IsMasked( ::rux::uint8 is_masked )
 			{

@@ -15,14 +15,14 @@
 #ifndef BOOLDOG_HEADER
 #define BOOLDOG_HEADER( header ) <booldog/header>
 #endif
-#include BOOLDOG_HEADER(boo_string_utils.h)
-#include BOOLDOG_HEADER(boo_heap_allocator.h)
-#include BOOLDOG_HEADER(boo_mixed_allocator.h)
-#include BOOLDOG_HEADER(boo_io_file.h)
-#include BOOLDOG_HEADER(boo_time_utils.h)
-#include BOOLDOG_HEADER(boo_io_directory.h)
-#include BOOLDOG_HEADER(boo_directory_utils.h)
-#include BOOLDOG_HEADER(boo_error_format.h)
+#include <booldog/boo_string_utils.h>
+#include <booldog/boo_heap_allocator.h>
+#include <booldog/boo_mixed_allocator.h>
+#include <booldog/boo_io_file.h>
+#include <booldog/boo_time_utils.h>
+#include <booldog/boo_io_directory.h>
+#include <booldog/boo_directory_utils.h>
+#include <booldog/boo_error_format.h>
 
 const char* _init_d_daemon_script = 
 "#!/bin/sh\n\

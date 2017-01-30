@@ -10,6 +10,7 @@
 #include <xan_time.h>
 #include <xan_uitextblock.h>
 #include <xan_uibutton.h>
+
 namespace rux
 {
 	namespace gui
@@ -51,14 +52,48 @@ namespace rux
 				::rux::gui::XEnum_Alignment _horizontal_text_alignment;	
 				::rux::gui::XEnum_Alignment _vertical_text_alignment;
 				::rux::EventHandler< ::rux::gui::events::on_event_t > _on_datetime_changed_event_callback;
+				::rux::EventHandler< ::rux::gui::events::on_interval_changed > _on_interval_changed_event_callback;
 				XTextBlock _textblock_month;
 				XTextBlock _textblock_year;
+				::rux::XString _mon;
+				::rux::XString _tue;
+				::rux::XString _wed;
+				::rux::XString _thu;
+				::rux::XString _fri;
+				::rux::XString _sat;
+				::rux::XString _sun;
+				::rux::XString _january;
+				::rux::XString _february;
+				::rux::XString _march;
+				::rux::XString _april;
+				::rux::XString _may;
+				::rux::XString _june;
+				::rux::XString _july;
+				::rux::XString _august;
+				::rux::XString _september;
+				::rux::XString _october;
+				::rux::XString _november;
+				::rux::XString _december;
+				::rux::XString _Jan;
+				::rux::XString _Feb;
+				::rux::XString _Mar;
+				::rux::XString _Apr;
+				::rux::XString _May;
+				::rux::XString _Jun;
+				::rux::XString _Jul;
+				::rux::XString _Aug;
+				::rux::XString _Sep;
+				::rux::XString _Oct;
+				::rux::XString _Nov;
+				::rux::XString _Dec;
 			public:
 				explicit DatePicker( const char* variable_name = 0 , const char* __file__ = 0 , ::rux::int32 __line__ = 0 );
 				~DatePicker();
 				void set_DateTime( uint64 unix_time );
 				void set_DateTimeWithoutEvent( uint64 unix_time );
 				void add_gui( void );
+				void set_OnIntervalChanged(::rux::gui::events::on_interval_changed on_interval_changed_event_callback);
+				void set_DayColorAndHeight(int index, ::rux::gui::ColorBase* color, float height_in_percent);
 				declare_content_size();
 			private:		
 				static void on_button_click( const ::rux::gui::events::Event& sender );
@@ -88,6 +123,8 @@ namespace rux
 				void set_DateTimeWithoutEvent( uint64 unix_time );
 				::rux::uint64 get_DateTime( void );
 				void set_OnDatetimeChanged( ::rux::gui::events::on_event_t on_datetime_changed_event_callback );
+				void set_OnIntervalChanged(::rux::gui::events::on_interval_changed on_interval_changed_event_callback);
+				void set_DayColorAndHeight(int index, ::rux::gui::ColorBase* color, float height_in_percent);
 			};
 		};
 	};

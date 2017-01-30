@@ -92,38 +92,46 @@ namespace booldog
 					return ts.tv_sec * 1000000LL + ( ts.tv_nsec / 1000ULL );
 	#endif
 				};
-				booinline void date( ::booldog::uint64 time , ::booldog::uint32& year , ::booldog::uint32& month 
-					, ::booldog::uint32& day_of_month )
+				booinline void date(::booldog::uint64 time, ::booldog::uint32& year, ::booldog::uint32& month
+					, ::booldog::uint32& day_of_month)
 				{
-					day_of_month = (::booldog::uint32)( ( time / 1000000ULL ) / ( 60ULL * 60ULL * 24ULL ) );
-					if( day_of_month >= 2 * 365 )
+					day_of_month = (::booldog::uint32)((time / 1000000ULL) / (60ULL * 60ULL * 24ULL));
+					if(day_of_month >= 2 * 365)
 					{
 						day_of_month -= 2 * 365;
-						::booldog::uint32 leapyears = day_of_month / ( 3 * 365 + 366 );
+						::booldog::uint32 leapyears = day_of_month / (3 * 365 + 366);
 						year = 1972 + leapyears * 4;
-						day_of_month -= leapyears * ( 3 * 365 + 366 );
-						if( day_of_month >= 366 )
+						day_of_month -= leapyears * (3 * 365 + 366);
+						if(day_of_month >= 366)
 						{
 							day_of_month -= 366;
-							year++;
+							++year;
 						}
 					}
 					else
 						year = 1970;
-					year += day_of_month / 365;
-					day_of_month %= 365;
+					if(day_of_month > 0)
+					{
+						year += day_of_month / 365;
+						day_of_month %= 365;
+						if(day_of_month == 0)
+						{
+							--year;
+							day_of_month = 365;
+						}
+					}
 					::booldog::uint32 days_in_month_in_year = 0;
 					month = 1;
-					for( ; month < 13 ; month++ )
+					for(;month < 13;++month)
 					{
-						days_in_month_in_year = ::booldog::utils::time::days_in_month( month , year );
-						if( days_in_month_in_year > day_of_month )
+						days_in_month_in_year = ::booldog::utils::time::days_in_month(month, year);
+						if(days_in_month_in_year > day_of_month)
 							break;
 						else
 							day_of_month -= days_in_month_in_year;
 					}
-					day_of_month++;
-				};
+					++day_of_month;
+				}
 				booinline ::booldog::uint32 day_of_week( ::booldog::uint64 time )
 				{
 					return ( 4 + (::booldog::uint32)( ( time / 1000000ULL ) / ( 60ULL * 60ULL * 24ULL ) ) ) % 7;

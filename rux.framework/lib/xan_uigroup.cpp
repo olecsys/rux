@@ -997,75 +997,71 @@ namespace rux
 				_cs_render_common_bases.ReadLock( __FILE__ , __FUNCTION__ , __LINE__ , 0 );
 				if( _render_common_bases.Count() > 0 )
 				{		
-					rux::gui::Window* window = get_ParentWindow();
+					::rux::gui::Window* window = get_ParentWindow();
 					if( window )
 					{
 						::rux::gui::CommonBase* common_base = this;
-						if( _render_common_bases.Count() > 0 )
+						for(size_t index0 = _render_common_bases.Count() - 1;;--index0)
 						{
-							for( size_t index0 = _render_common_bases.Count() - 1 ; ; index0-- )
+							::rux::gui::ControlBase* temp_control = _render_common_bases[index0];
+							::rux::uint8 temp_res = 0;
+							if(temp_control->get_IsVisible())
 							{
-								::rux::gui::ControlBase* temp_control = _render_common_bases[ index0 ];
-								if( temp_control->get_IsVisible() )
+								temp_control->GCRefAddRef( __FILE__ , __LINE__ );
+								_cs_render_common_bases.ReadUnlock();							
+								temp_res = rux_try_mouse_move(window, temp_control, window_event, enter_raised);
+								temp_control->GCRefRelease(__FILE__, __LINE__);
+								_cs_render_common_bases.ReadLock(__FILE__, __FUNCTION__, __LINE__, 0);
+							}
+							if(index0 == 0 || temp_res == 1)
+							{	
+								if( _is_forward_events_if_children_do_not_raised_event == 0 )
 								{
-									temp_control->GCRefAddRef( __FILE__ , __LINE__ );
-									_cs_render_common_bases.ReadUnlock();								
-									::rux::uint8 temp_res = rux_try_mouse_move( window , temp_control , window_event , enter_raised );
-									temp_control->GCRefRelease( __FILE__ , __LINE__ );
-									_cs_render_common_bases.ReadLock( __FILE__ , __FUNCTION__ , __LINE__ , 0 );
-									if( index0 == 0 || temp_res == 1 )
-									{	
-										if( _is_forward_events_if_children_do_not_raised_event == 0 )
+									WRITE_LOCK( window->_cs_over_control );
+									if( temp_res == 0 && window->_over_control != ((::rux::gui::CommonBase*)common_base) )
+									{
+										if( window->_over_control != NULL )
 										{
-											WRITE_LOCK( window->_cs_over_control );
-											if( temp_res == 0 && window->_over_control != ((::rux::gui::CommonBase*)common_base) )
-											{
-												if( window->_over_control != NULL )
-												{
-													rux::gui::CommonBase* over_control = window->_over_control;
-													common_base->GCRefAddRef( __FILE__ , __LINE__ );
-													window->_over_control = common_base;
-													window->_cs_over_control.WriteUnlock();
-													_cs_render_common_bases.ReadUnlock();
-													::rux::gui::controls::rux_change_over_control( window_event , over_control , common_base );
-													over_control->GCRefRelease( __FILE__ , __LINE__ );
-													_cs_render_common_bases.ReadLock( __FILE__ , __FUNCTION__ , __LINE__ , 0 );
-												}
-												else
-												{
-													common_base->GCRefAddRef( __FILE__ , __LINE__ );
-													window->_over_control = common_base;
-													window->_cs_over_control.WriteUnlock();
-													::rux::gui::controls::rux_change_over_control( window_event , NULL , common_base );
-												}
-												window->set_Cursor( common_base->get_Cursor() );
-											}
-											else
-												window->_cs_over_control.WriteUnlock();		
+											::rux::gui::CommonBase* over_control = window->_over_control;
+											common_base->GCRefAddRef( __FILE__ , __LINE__ );
+											window->_over_control = common_base;
+											window->_cs_over_control.WriteUnlock();
+											_cs_render_common_bases.ReadUnlock();
+											::rux::gui::controls::rux_change_over_control( window_event , over_control , common_base );
+											over_control->GCRefRelease( __FILE__ , __LINE__ );
+											_cs_render_common_bases.ReadLock( __FILE__ , __FUNCTION__ , __LINE__ , 0 );
 										}
-										else if( temp_res == 0 )
-											raised_event = 0;
-										if( _is_forward_events_if_children_do_not_raised_event == 0 || temp_res )
+										else
 										{
-											if( enter_raised == 0 )
-											{
-												_cs_render_common_bases.ReadUnlock();
-												raise_OnMouseMove( window_event , temp_res == 1 ? 0 : 1 );
-												_cs_render_common_bases.ReadLock( __FILE__ , __FUNCTION__ , __LINE__ , 0 );
-											}
+											common_base->GCRefAddRef( __FILE__ , __LINE__ );
+											window->_over_control = common_base;
+											window->_cs_over_control.WriteUnlock();
+											::rux::gui::controls::rux_change_over_control( window_event , NULL , common_base );
 										}
-										break;
+										window->set_Cursor( common_base->get_Cursor() );
+									}
+									else
+										window->_cs_over_control.WriteUnlock();		
+								}
+								else if( temp_res == 0 )
+									raised_event = 0;
+								if( _is_forward_events_if_children_do_not_raised_event == 0 || temp_res )
+								{
+									if( enter_raised == 0 )
+									{
+										_cs_render_common_bases.ReadUnlock();
+										raise_OnMouseMove( window_event , temp_res == 1 ? 0 : 1 );
+										_cs_render_common_bases.ReadLock( __FILE__ , __FUNCTION__ , __LINE__ , 0 );
 									}
 								}
-								else if( index0 == 0 )
-									break;
+								break;
 							}
 						}
 					}
 				}
 				else
 				{
-					rux::gui::Window* window = get_ParentWindow();
+					::rux::gui::Window* window = get_ParentWindow();
 					if( window )
 					{
 						if( _is_forward_events_if_children_do_not_raised_event == 0 )
@@ -1076,7 +1072,7 @@ namespace rux
 							{
 								if( window->_over_control != NULL )
 								{
-									rux::gui::CommonBase* over_control = window->_over_control;
+									::rux::gui::CommonBase* over_control = window->_over_control;
 									common_base->GCRefAddRef( __FILE__ , __LINE__ );
 									window->_over_control = common_base;
 									window->_cs_over_control.WriteUnlock();

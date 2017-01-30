@@ -14,7 +14,7 @@
 #ifndef BOOLDOG_HEADER
 #define BOOLDOG_HEADER( header ) <booldog/header>
 #endif
-#include BOOLDOG_HEADER(boo_rdwrlock.h)
+#include <booldog/boo_rdwrlock.h>
 namespace rux
 {
 	namespace gui

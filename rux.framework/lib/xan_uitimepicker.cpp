@@ -15,9 +15,9 @@
 #ifndef BOOLDOG_HEADER
 #define BOOLDOG_HEADER( header ) <booldog/header>
 #endif
-#include BOOLDOG_HEADER(boo_time_utils.h)
-#include BOOLDOG_HEADER(boo_heap_allocator.h)
-#include BOOLDOG_HEADER(boo_mixed_allocator.h)
+#include <booldog/boo_time_utils.h>
+#include <booldog/boo_heap_allocator.h>
+#include <booldog/boo_mixed_allocator.h>
 begin_implement_rux_class_with_properties_ns_base_class( TimePicker , rux::gui::controls , rux::gui::ParentBase )
 	_tag.set_Info( "tag" , __file__ , __line__ );
 	_private_tag.set_Info( "private_tag" , __file__ , __line__ );

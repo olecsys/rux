@@ -68,6 +68,7 @@ namespace rux
 			typedef void (*on_drop_t)( const XObject& control , const XObject& object );
 			typedef void (*on_value_changed_t)( const XObject& sender , float old_value , float new_value );
 			typedef ::rux::String& (*on_language_t)( const char* english_key );
+			typedef void (*on_interval_changed)(const XObject& sender, ::rux::uint64 left, ::rux::uint64 right);
 		}
 	};
 };

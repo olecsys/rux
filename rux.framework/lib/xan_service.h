@@ -12,7 +12,7 @@
 #ifndef BOOLDOG_HEADER
 #define BOOLDOG_HEADER( header ) <booldog/header>
 #endif
-#include BOOLDOG_HEADER(boo_string_utils.h)
+#include <booldog/boo_string_utils.h>
 
 namespace rux
 {

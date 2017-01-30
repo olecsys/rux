@@ -15,9 +15,9 @@
 #ifndef BOOLDOG_HEADER
 #define BOOLDOG_HEADER( header ) <booldog/header>
 #endif
-#include BOOLDOG_HEADER(boo_time_utils.h)
-#include BOOLDOG_HEADER(boo_heap_allocator.h)
-#include BOOLDOG_HEADER(boo_mixed_allocator.h)
+#include <booldog/boo_time_utils.h>
+#include <booldog/boo_heap_allocator.h>
+#include <booldog/boo_mixed_allocator.h>
 
 begin_implement_rux_class_with_properties_ns_base_class( DatePicker , rux::gui::controls , rux::gui::ControlBase )
 	_tag.set_Info( "tag" , __file__ , __line__ );
@@ -37,9 +37,42 @@ begin_implement_rux_class_with_properties_ns_base_class( DatePicker , rux::gui::
 	_vertical_text_alignment = XEnum_Alignment_Center;
 	_horizontal_text_alignment = XEnum_Alignment_Center;
 	_on_datetime_changed_event_callback = NULL;
+	_on_interval_changed_event_callback = 0;
 	_date_container.set_IsVisible( 0 );
 	_date_container_width = 154;
 	_opened = 0;
+
+	_mon = "Пн";
+	_tue = "Вт";
+	_wed = "Ср";
+	_thu = "Чт";
+	_fri = "Пт";
+	_sat = "Сб";
+	_sun = "Вс";
+	_january = "Январь";
+	_february = "Февраль";
+	_march = "Март";
+	_april = "Апрель";
+	_may = "Май";
+	_june = "Июнь";
+	_july = "Июль";
+	_august = "Август";
+	_september = "Сентябрь";
+	_october = "Октябрь";
+	_november = "Ноябрь";
+	_december = "Декабрь";
+	_Jan = "Янв";
+	_Feb = "Фев";
+	_Mar = "Мар";
+	_Apr = "Апр";
+	_May = "Май";
+	_Jun = "Июн";
+	_Jul = "Июл";
+	_Aug = "Авг";
+	_Sep = "Сен";
+	_Oct = "Окт";
+	_Nov = "Ноя";
+	_Dec = "Дек";
 end_implement_rux_class();
 namespace rux
 {
@@ -175,6 +208,20 @@ namespace rux
 					}
 				}
 			}
+			void DatePicker::set_DayColorAndHeight(int index, ::rux::gui::ColorBase* color, float height_in_percent)
+			{
+				XArray< XRectangle > rects;
+				rects.set_ByRef(_group_calendar.FindAll< XRectangle >());
+				if(rects.Count() > index)
+				{
+					rects[index].set_Background(color);
+					rects[index].set_Height(height_in_percent);
+				}
+			}
+			void XDatePicker::set_DayColorAndHeight(int index, ::rux::gui::ColorBase* color, float height_in_percent)
+			{
+				(*this)()->set_DayColorAndHeight(index, color, height_in_percent);
+			}
 			void DatePicker::add_gui( void )
 			{
 				_date_container()->WaitForFreeSystemResources();
@@ -266,7 +313,7 @@ namespace rux
 					declare_variable( XTextBlock , textblock );
 					textblock = XTextBlock();
 					textblock.set_Background( create_color( 153 , 153 , 153 , 255 ) );
-					textblock.set_Text( "Пн" );	
+					textblock.set_Text(_mon.str(), _mon.Size() - 1);	
 					textblock.set_HorizontalAlignment( ::rux::gui::XEnum_Alignment_LeftOrTop );
 					textblock.set_Margin( margin );
 					textblock.set_Width( item_size );
@@ -277,7 +324,7 @@ namespace rux
 
 					textblock = XTextBlock();
 					textblock.set_Background( create_color( 153 , 153 , 153 , 255 ) );
-					textblock.set_Text( "Вт" );	
+					textblock.set_Text(_tue.str(), _tue.Size() - 1);	
 					textblock.set_HorizontalAlignment( ::rux::gui::XEnum_Alignment_LeftOrTop );
 					textblock.set_Margin( margin );
 					textblock.set_Width( item_size );
@@ -288,7 +335,7 @@ namespace rux
 
 					textblock = XTextBlock();
 					textblock.set_Background( create_color( 153 , 153 , 153 , 255 ) );
-					textblock.set_Text( "Ср" );	
+					textblock.set_Text(_wed.str(), _wed.Size() - 1);	
 					textblock.set_HorizontalAlignment( ::rux::gui::XEnum_Alignment_LeftOrTop );
 					textblock.set_Margin( margin );
 					textblock.set_Width( item_size );
@@ -299,7 +346,7 @@ namespace rux
 
 					textblock = XTextBlock();
 					textblock.set_Background( create_color( 153 , 153 , 153 , 255 ) );
-					textblock.set_Text( "Чт" );	
+					textblock.set_Text(_thu.str(), _thu.Size() - 1);	
 					textblock.set_HorizontalAlignment( ::rux::gui::XEnum_Alignment_LeftOrTop );
 					textblock.set_Margin( margin );
 					textblock.set_Width( item_size );
@@ -310,7 +357,7 @@ namespace rux
 
 					textblock = XTextBlock();
 					textblock.set_Background( create_color( 153 , 153 , 153 , 255 ) );
-					textblock.set_Text( "Пт" );	
+					textblock.set_Text(_fri.str(), _fri.Size() - 1);	
 					textblock.set_HorizontalAlignment( ::rux::gui::XEnum_Alignment_LeftOrTop );
 					textblock.set_Margin( margin );
 					textblock.set_Width( item_size );
@@ -321,7 +368,7 @@ namespace rux
 
 					textblock = XTextBlock();
 					textblock.set_Background( create_color( 153 , 153 , 153 , 255 ) );
-					textblock.set_Text( "Сб" );	
+					textblock.set_Text(_sat.str(), _sat.Size() - 1);	
 					textblock.set_HorizontalAlignment( ::rux::gui::XEnum_Alignment_LeftOrTop );
 					textblock.set_Margin( margin );
 					textblock.set_Width( item_size );
@@ -332,7 +379,7 @@ namespace rux
 
 					textblock = XTextBlock();
 					textblock.set_Background( create_color( 153 , 153 , 153 , 255 ) );
-					textblock.set_Text( "Вс" );	
+					textblock.set_Text(_sun.str(), _sun.Size() - 1);	
 					textblock.set_HorizontalAlignment( ::rux::gui::XEnum_Alignment_LeftOrTop );
 					textblock.set_Margin( margin );
 					textblock.set_Width( item_size );
@@ -352,22 +399,42 @@ namespace rux
 					_group_calendar.set_HorizontalFilling( ::rux::gui::XEnum_Filling_FromParent );
 					_group_calendar.set_VerticalAlignment( ::rux::gui::XEnum_Alignment_LeftOrTop );
 
+					::rux::gui::controls::XGroup group;
+					::rux::gui::controls::XRectangle rect;
+
 					for( size_t index0 = 0 ; index0 < 6 ; index0++ )
 					{
 						for( size_t index1 = 0 ; index1 < 7 ; index1++ )
 						{
+							group = XGroup();
+							group.set_Margin(margin);
+							group.set_Width(item_size);
+							group.set_Height(item_size);
+
+							rect = XRectangle();
+							rect.set_PointUnit(::rux::gui::XEnum_PointUnit_Percent);
+							rect.set_VerticalAlignment(::rux::gui::XEnum_Alignment_RightOrBottom);
+							rect.set_Width(1.f);
+							rect.set_Height(.7f);
+							rect.set_Background(::rux::gui::Colors::Transparent());
+
+							group.AddControl(rect, error);
+
 							textblock = XTextBlock();	
-							textblock.set_Margin( margin );
-							textblock.set_OnLeftMouseButtonDown( on_date_left_mouse_down );
-							textblock.set_OnMouseDoubleClick( on_date_left_mouse_double_click );
-							textblock.set_OnMouseEnter( on_date_enter );
-							textblock.set_OnMouseLeave( on_date_leave );
-							textblock.set_ControlName( "month_day" );	
-							textblock.set_Width( item_size );
-							textblock.set_Height( item_size );
-							textblock.set_OnDeactivated( on_deactivated );
+							//textblock.set_Margin( margin );
+							textblock.set_OnLeftMouseButtonDown(on_date_left_mouse_down);
+							textblock.set_OnMouseDoubleClick(on_date_left_mouse_double_click);
+							textblock.set_OnMouseEnter(on_date_enter);
+							textblock.set_OnMouseLeave(on_date_leave);
+							textblock.set_ControlName("month_day");
+							textblock.set_HorizontalFilling(::rux::gui::XEnum_Filling_FromParent);
+							textblock.set_VerticalFilling(::rux::gui::XEnum_Filling_FromParent);
+							textblock.set_OnDeactivated(on_deactivated);
 							textblock.set_TagPtr( this );
-							_group_calendar.AddControl( textblock , error );
+
+							group.AddControl(textblock, error);
+
+							_group_calendar.AddControl(group, error);
 						}
 					}		
 					_group_calendar.set_OnDeactivated( on_deactivated );
@@ -386,29 +453,29 @@ namespace rux
 					{
 						textblock = XTextBlock();
 						if( index1 == 0 )
-							textblock.set_Text( "Янв" );
+							textblock.set_Text(_Jan.str(), _Jan.Size() - 1);
 						else if( index1 == 1 )
-							textblock.set_Text( "Фев" );
+							textblock.set_Text(_Feb.str(), _Feb.Size() - 1);
 						else if( index1 == 2 )
-							textblock.set_Text( "Мар" );
+							textblock.set_Text(_Mar.str(), _Mar.Size() - 1);
 						else if( index1 == 3 )
-							textblock.set_Text( "Апр" );
+							textblock.set_Text(_Apr.str(), _Apr.Size() - 1);
 						else if( index1 == 4 )
-							textblock.set_Text( "Май" );
+							textblock.set_Text(_May.str(), _May.Size() - 1);
 						else if( index1 == 5 )
-							textblock.set_Text( "Июн" );
+							textblock.set_Text(_Jun.str(), _Jun.Size() - 1);
 						else if( index1 == 6 )
-							textblock.set_Text( "Июл" );
+							textblock.set_Text(_Jul.str(), _Jul.Size() - 1);
 						else if( index1 == 7 )
-							textblock.set_Text( "Авг" );
+							textblock.set_Text(_Aug.str(), _Aug.Size() - 1);
 						else if( index1 == 8 )
-							textblock.set_Text( "Сен" );
+							textblock.set_Text(_Sep.str(), _Sep.Size() - 1);
 						else if( index1 == 9 )
-							textblock.set_Text( "Окт" );
+							textblock.set_Text(_Oct.str(), _Oct.Size() - 1);
 						else if( index1 == 10 )
-							textblock.set_Text( "Ноя" );
+							textblock.set_Text(_Nov.str(), _Nov.Size() - 1);
 						else if( index1 == 11 )
-							textblock.set_Text( "Дек" );
+							textblock.set_Text(_Dec.str(), _Dec.Size() - 1);
 						textblock.set_OnLeftMouseButtonDown( on_date_left_mouse_down );
 						textblock.set_OnMouseDoubleClick( on_date_left_mouse_double_click );
 						textblock.set_OnMouseEnter( on_date_enter );
@@ -429,6 +496,14 @@ namespace rux
 					_date_container.set_TagPtr( this );	
 				}
 			};
+			void XDatePicker::set_OnIntervalChanged(::rux::gui::events::on_interval_changed on_interval_changed_event_callback)
+			{
+				(*this)()->set_OnIntervalChanged(on_interval_changed_event_callback);
+			}
+			void DatePicker::set_OnIntervalChanged(::rux::gui::events::on_interval_changed on_interval_changed_event_callback)
+			{
+				_on_interval_changed_event_callback = on_interval_changed_event_callback;
+			}
 			void XDatePicker::set_OnDatetimeChanged( ::rux::gui::events::on_event_t on_datetime_changed_event_callback )
 			{
 				(*this)()->_on_datetime_changed_event_callback = on_datetime_changed_event_callback;
@@ -497,6 +572,8 @@ namespace rux
 				XArray< XTextBlock > textblocks;
 				textblocks.set_ByRef( _group_calendar.FindAll< XTextBlock >() );
 				
+				::booldog::uint64 left_interval = 0, right_interval = 0;
+
 				::booldog::uint32 day_of_month = 0 , month = 0 , year = 0 , firstday_of_month = 0 
 					, firstmonth = 0 , firstyear = 0;
 
@@ -512,6 +589,7 @@ namespace rux
 				if( first_day_uint32 == 0 )
 					first_day_uint32 = 7;
 				first_day = ::booldog::utils::time::posix::sub_days( first_day , first_day_uint32 - 1 );
+				left_interval = first_day;
 				for( size_t index0 = 0 ; index0 < textblocks.Count() ; index0++ )
 				{
 					::booldog::utils::time::posix::date( first_day , firstyear , firstmonth , firstday_of_month );
@@ -548,6 +626,7 @@ namespace rux
 					}
 					first_day = ::booldog::utils::time::posix::add_days( first_day , 1 );
 				}
+				right_interval = first_day;
 				size_t month_index = month - 1;
 				textblocks.set_ByRef( _group_calendar_months.FindAll< XTextBlock >() );
 				for( size_t index0 = 0 ; index0 < textblocks.Count() ; index0++ )
@@ -563,9 +642,50 @@ namespace rux
 						textblocks[ index0 ].set_Background( ::rux::gui::Colors::Transparent() );
 					}
 				}
-				_textblock_month.set_Text( ::rux::XTime::MonthToString( month ) );
-				_textblock_month.set_Tag( XUInt32( month ) );
+				switch(month)
+				{
+				case 1:
+					_textblock_month.set_Text(_january.str(), _january.Size() - 1);
+					break;
+				case 2:
+					_textblock_month.set_Text(_february.str(), _february.Size() - 1);
+					break;
+				case 3:
+					_textblock_month.set_Text(_march.str(), _march.Size() - 1);
+					break;
+				case 4:
+					_textblock_month.set_Text(_april.str(), _april.Size() - 1);
+					break;
+				case 5:
+					_textblock_month.set_Text(_may.str(), _may.Size() - 1);
+					break;
+				case 6:
+					_textblock_month.set_Text(_june.str(), _june.Size() - 1);
+					break;
+				case 7:
+					_textblock_month.set_Text(_july.str(), _july.Size() - 1);
+					break;
+				case 8:
+					_textblock_month.set_Text(_august.str(), _august.Size() - 1);
+					break;
+				case 9:
+					_textblock_month.set_Text(_september.str(), _september.Size() - 1);
+					break;
+				case 10:
+					_textblock_month.set_Text(_october.str(), _october.Size() - 1);
+					break;
+				case 11:
+					_textblock_month.set_Text(_november.str(), _november.Size() - 1);
+					break;
+				case 12:
+					_textblock_month.set_Text(_december.str(), _december.Size() - 1);
+					break;
+				}				
+				_textblock_month.set_Tag(XUInt32(month));
 				_textblock_year.set_Text( XUInt32( year ).ToString() );
+
+				_on_interval_changed_event_callback.raise< const XObject&, ::rux::uint64, ::rux::uint64 >(XObject(*this), left_interval
+					, right_interval);
 			};
 			void DatePicker::accept_date( void )
 			{
