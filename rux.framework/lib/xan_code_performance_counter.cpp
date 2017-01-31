@@ -6,7 +6,7 @@ namespace rux
 {
 	namespace performance
 	{
-		CodePerformanceCounter::CodePыerformanceCounter( ::rux::byte is_printf )
+		CodePerformanceCounter::CodePerformanceCounter( ::rux::byte is_printf )
 		{
 			_is_printf = is_printf;
 		};

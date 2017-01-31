@@ -959,17 +959,36 @@ namespace rux
 						::rux::XString year_string;
 						year_string.set_ByRef( date_picker->_textblock_year.get_Text() );
 						::rux::uint32 year = year_string.ToUInt32();
-						XUInt32 month( date_picker->_textblock_month.get_Tag() );		
+						XUInt32 month( date_picker->_textblock_month.get_Tag() );
+						::rux::uint32 month_int32 = month();
 						::rux::uint32 day = day_string.ToUInt32();
 						::booldog::uint64 loctime = ::booldog::utils::time::posix::tolocal( date_picker->_posix_time );
-						loctime = ::booldog::utils::time::posix::generate( ::booldog::utils::time::posix::millisecond( loctime )
-							, ::booldog::utils::time::posix::second( loctime ) , ::booldog::utils::time::posix::minute( loctime )
-							, ::booldog::utils::time::posix::hour( loctime ) 
-							, day , month() , year );
-						if( textblock.get_ControlName() == "prev_month_day" )
-							loctime = ::booldog::utils::time::posix::sub_months( loctime , 1 );
-						else if( textblock.get_ControlName() == "next_month_day" )
-							loctime = ::booldog::utils::time::posix::add_months( loctime , 1 );
+
+						if(textblock.get_ControlName() == "prev_month_day")
+						{
+							--month_int32;
+							if(month_int32 == 0)
+							{
+								month_int32 = 12;
+								--year;
+							}
+						}
+						else if(textblock.get_ControlName() == "next_month_day")
+						{
+							++month_int32;
+							if(month_int32 == 13)
+							{
+								month_int32 = 1;
+								++year;
+							}
+						}
+						loctime = ::booldog::utils::time::posix::generate(::booldog::utils::time::posix::millisecond(loctime)
+							, ::booldog::utils::time::posix::second(loctime), ::booldog::utils::time::posix::minute(loctime)
+							, ::booldog::utils::time::posix::hour(loctime), day, month_int32, year);
+						/*if( textblock.get_ControlName() == "prev_month_day" )
+							loctime = ::booldog::utils::time::posix::sub_months(loctime, 1);
+						else if(textblock.get_ControlName() == "next_month_day")
+							loctime = ::booldog::utils::time::posix::add_months(loctime, 1);*/
 						date_picker->refresh_date_container( loctime );
 						date_picker->accept_date();
 					}
@@ -977,13 +996,12 @@ namespace rux
 			};
 			void DatePicker::on_date_left_mouse_double_click( const ::rux::gui::events::MouseEvent& event )
 			{
-				on_date_left_mouse_down( event );
-				XTextBlock textblock( event._sender );
-				declare_variable_param( ::rux::gui::controls::XGroup , group , *textblock.get_ParentControl() );
-				DatePicker* date_picker = (DatePicker*)group.get_TagPtr();
+				on_date_left_mouse_down(event);
+				XTextBlock textblock(event._sender);
+				DatePicker* date_picker = (DatePicker*)textblock.get_TagPtr();
 				date_picker->accept_date();
 				date_picker->_date_container.RemoveControl();
-				date_picker->_date_container.set_IsVisible( 0 );
+				date_picker->_date_container.set_IsVisible(0);
 				date_picker->_opened = 0;
 			};
 			implement_empty_content_size( DatePicker );
