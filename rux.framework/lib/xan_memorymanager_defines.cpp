@@ -4435,7 +4435,7 @@ namespace rux
 				else
 					return false;
 			}
-			else
+		else
 				return false;
 		};
 		bool file::write_text_va_list( const char* format , va_list pargs )
