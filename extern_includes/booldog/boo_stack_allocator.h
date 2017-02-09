@@ -3,12 +3,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifndef BOOLDOG_HEADER
-#define BOOLDOG_HEADER( header ) <header>
-#endif
-#include BOOLDOG_HEADER(boo_mem_cluster.h)
-#include BOOLDOG_HEADER(boo_threading_utils.h)
-#include BOOLDOG_HEADER(boo_rdwrlock.h)
+#include "boo_mem_cluster.h"
+#include "boo_threading_utils.h"
+#include "boo_rdwrlock.h"
 namespace booldog
 {
 	namespace allocators

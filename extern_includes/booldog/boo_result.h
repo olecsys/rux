@@ -3,11 +3,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifndef BOOLDOG_HEADER
-#define BOOLDOG_HEADER( header ) <header>
-#endif
-#include BOOLDOG_HEADER(boo_allocator.h)
-#include BOOLDOG_HEADER(boo_types.h)
+#include "boo_allocator.h"
+#include "boo_types.h"
 #ifdef __UNIX__
 #include <string.h>
 #endif

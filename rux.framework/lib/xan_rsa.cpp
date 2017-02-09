@@ -498,6 +498,8 @@ namespace rux
 									}
 								}
 							}
+							if(base64_data)
+								::rux::engine::free_mem(base64_data);
 						}
 					}
 					else if( lines[ 0 ] == "-----BEGIN RSA PRIVATE KEY-----" )

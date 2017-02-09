@@ -3,15 +3,12 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifndef BOOLDOG_HEADER
-#define BOOLDOG_HEADER( header ) <header>
-#endif
-#include BOOLDOG_HEADER(boo_result.h)
-#include BOOLDOG_HEADER(boo_allocator.h)
-#include BOOLDOG_HEADER(boo_types.h)
-#include BOOLDOG_HEADER(boo_interlocked.h)
-#include BOOLDOG_HEADER(boo_threading_utils.h)
-#include BOOLDOG_HEADER(boo_string_utils.h)
+#include "boo_result.h"
+#include "boo_allocator.h"
+#include "boo_types.h"
+#include "boo_interlocked.h"
+#include "boo_threading_utils.h"
+#include "boo_string_utils.h"
 #include <time.h>
 namespace booldog
 {	
@@ -106,20 +103,23 @@ namespace booldog
 						{
 							day_of_month -= 366;
 							++year;
+
+							year += day_of_month / 365;
+							day_of_month %= 365;
 						}
+						else
+						{
+							year += day_of_month / 366;
+							day_of_month %= 366;
+						}
+					}
+					else if(day_of_month >= 365)
+					{
+						year = 1971;
+						day_of_month -= 365;
 					}
 					else
 						year = 1970;
-					if(day_of_month > 0)
-					{
-						year += day_of_month / 365;
-						day_of_month %= 365;
-						if(day_of_month == 0)
-						{
-							--year;
-							day_of_month = 365;
-						}
-					}
 					::booldog::uint32 days_in_month_in_year = 0;
 					month = 1;
 					for(;month < 13;++month)
@@ -197,13 +197,13 @@ namespace booldog
 					, ::booldog::uint32 minute , ::booldog::uint32 hour , ::booldog::uint32 day_of_month 
 					, ::booldog::uint32 month , ::booldog::uint32 year )
 				{
-					if( year >= 1970 )
+					if(year >= 1970)
 					{
-						::booldog::uint64 time = ( day_of_month - 1 ) * 24ULL * 3600ULL * 1000000ULL 
+						::booldog::uint64 time = (day_of_month - 1) * 24ULL * 3600ULL * 1000000ULL 
 							+ hour * 60ULL * 60ULL * 1000000ULL + minute * 60ULL * 1000000ULL
 							+ second * 1000000ULL + millisecond * 1000ULL;
-						month--;
-						for( ; month > 0 ; month-- )
+						--month;
+						for(;month > 0;--month)
 							time += ::booldog::utils::time::days_in_month( month , year ) * 24ULL * 3600ULL * 1000000ULL;
 						year -= 1970;
 						if( year >= 2 )

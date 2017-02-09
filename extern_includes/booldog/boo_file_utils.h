@@ -3,12 +3,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifndef BOOLDOG_HEADER
-#define BOOLDOG_HEADER( header ) <header>
-#endif
-#include BOOLDOG_HEADER(boo_string_utils.h)
-#include BOOLDOG_HEADER(boo_param.h)
-#include BOOLDOG_HEADER(boo_executable_utils.h)
+#include "boo_string_utils.h"
+#include "boo_param.h"
+#include "boo_executable_utils.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef __UNIX__

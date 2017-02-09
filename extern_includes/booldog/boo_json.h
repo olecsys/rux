@@ -3,17 +3,14 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifndef BOOLDOG_HEADER
-#define BOOLDOG_HEADER( header ) <header>
-#endif
-#include BOOLDOG_HEADER(boo_param.h)
-#include BOOLDOG_HEADER(boo_allocator.h)
-#include BOOLDOG_HEADER(boo_utf16.h)
-#include BOOLDOG_HEADER(boo_utf8.h)
-#include BOOLDOG_HEADER(boo_utils.h)
-#include BOOLDOG_HEADER(boo_mem.h)
-#include BOOLDOG_HEADER(boo_result.h)
-#include BOOLDOG_HEADER(boo_bits_utils.h)
+#include "boo_param.h"
+#include "boo_allocator.h"
+#include "boo_utf16.h"
+#include "boo_utf8.h"
+#include "boo_utils.h"
+#include "boo_mem.h"
+#include "boo_result.h"
+#include "boo_bits_utils.h"
 
 #include <math.h>
 
