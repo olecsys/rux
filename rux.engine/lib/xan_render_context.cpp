@@ -14,7 +14,7 @@ namespace rux
 		namespace engine
 		{
 			RenderContext::RenderContext( ::rux::gui::engine::Window* window , ::rux::uint32 width , ::rux::uint32 height )
-				: _enable_state(1)
+				: _enable_state(1), _need_restart(false)
 			{
 				::rux::log::WriteDebug( "%s:%d BEGIN" , __FUNCTION__ , __LINE__ );
 				if( ::rux::gui::engine::_displays_count > 0 && ::rux::gui::engine::_display_frequencies[ 0 ] != 0 )
@@ -113,7 +113,7 @@ namespace rux
 				if( create_gl_context )
 					_gl = alloc_object_1_param_macros( ::rux::gui::engine::GLContext , window );	
 				_gl->set_CurrentContext( window );
-				_gl->Resize( width , height , SIZE_MAX );
+				_gl->Resize(_need_restart, width , height , SIZE_MAX );
 				_gl->set_EmptyContext();
 				if( rux::gui::engine::_opengl_one_thread_swap_buffers == 0 )
 					_render_thread = alloc_object_1_param_macros( ::rux::gui::engine::RenderThread , this );
@@ -431,7 +431,7 @@ namespace rux
 			};
 			void RenderContext::Render( size_t ___rux__thread_index1986 )
 			{
-				_gl->Resize( _new_width , _new_height , ___rux__thread_index1986 );
+				_gl->Resize(_need_restart, _new_width , _new_height , ___rux__thread_index1986 );
 				_render_objects_count = 0;
 				if( 0 && _gl->_is_support_framebuffer_object == 1 )
 					rux::gui::engine::OpenGL::glBindFramebuffer( GL_FRAMEBUFFER , _gl->_framebuffer_ptr[ 0 ] , _gl , __FUNCTION__ , __LINE__ , ___rux__thread_index1986 );

@@ -338,6 +338,8 @@ namespace rux
 			virtual void set_Top( float top ) const;
 			virtual void* get_TagPtr( void ) const;
 			void cleanup(void);
+			public:
+			void RestartRender();
 		};
 		class XWindow : public XGCHandle<Window>
 		{
@@ -455,6 +457,7 @@ namespace rux
 			void StartDrag( const XObject& control , ::rux::XString& error );
 			void StopDrag( void );
 			void set_Cursor( ::rux::gui::XEnum_Cursors cursor );
+			void RestartRender();
 		};
 	};
 };

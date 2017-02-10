@@ -155,6 +155,7 @@ namespace rux
 				static void wait_for_map_notify( Window* window );
 #endif
 #endif
+				virtual void RestartRender();
 			};
 		};
 	};

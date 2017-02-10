@@ -446,10 +446,11 @@ namespace rux
 				if(	XInterlocked::Decrement( &_ref ) == 0 )
 					::rux::engine::free_object< GLContext >( this );
 			};
-			void GLContext::Resize( ::rux::int32 width , ::rux::int32 height , size_t ___rux__thread_index1986 )
+			void GLContext::Resize(bool& need_restart, ::rux::int32 width , ::rux::int32 height , size_t ___rux__thread_index1986 )
 			{
-				if( _width != width || _height != height )
+				if(need_restart || _width != width || _height != height )
 				{
+					need_restart = false;
 					if( _gl_context )
 					{
 						_width = width;

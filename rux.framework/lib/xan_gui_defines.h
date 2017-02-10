@@ -474,6 +474,7 @@ namespace rux
 			virtual void set_IsAllowResize( ::rux::byte is_allow_resize ) = 0;
 			virtual void set_IsAllowRelocate( ::rux::byte is_allow_relocate ) = 0;
 			virtual void set_IsAllowClose( ::rux::byte is_allow_relocate ) = 0;
+			virtual void RestartRender() = 0;
 		};
 		class FontBase
 		{

@@ -277,6 +277,16 @@ namespace rux
 			if( window_base )
 				window_base->set_Top( top );
 		};
+		void XWindow::RestartRender()
+		{
+			(*this)()->RestartRender();
+		}
+		void Window::RestartRender()
+		{
+			::rux::gui::WindowBase* window_base = get_WindowBase();
+			if(window_base)
+				window_base->RestartRender();
+		}
 		void XWindow::set_TopMost( ::rux::uint8 is_top_most )
 		{
 			(*this)()->set_TopMost( is_top_most );

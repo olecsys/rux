@@ -86,6 +86,7 @@ namespace rux
 				::rux::gui::engine::Fps _fps;
 				::rux::gui::engine::GLContext* _gl;
 				size_t _render_objects_count;
+				bool _need_restart;
 				void Render( size_t ___rux__thread_index1986 );
 				void CleanAfterRender( void );
 			public:

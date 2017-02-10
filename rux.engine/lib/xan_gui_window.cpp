@@ -235,6 +235,11 @@ namespace rux
 			};		
 #endif
 #endif
+			void Window::RestartRender()
+			{
+				if(_render_context)
+					_render_context->_need_restart = true;
+			}
 			void Window::set_MinWidth( ::rux::int32 width )
 			{
 				if( _min_width != width )

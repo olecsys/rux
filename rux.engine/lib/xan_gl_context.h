@@ -316,7 +316,7 @@ namespace rux
 				GLint check_shader_compile_status( ::rux::uint32& program , ::rux::uint32& fragment_shader , ::rux::uint32& vertex_shader , const char* name , size_t ___rux__thread_index1986 );
 				GLint check_shader_link_status( ::rux::uint32& program , ::rux::uint32& fragment_shader , ::rux::uint32& vertex_shader , const char* name , size_t ___rux__thread_index1986 );
 				void delete_shader_and_program( ::rux::uint32& program , ::rux::uint32& fragment_shader , ::rux::uint32& vertex_shader , ::rux::byte attached , size_t ___rux__thread_index1986 );
-				void Resize( rux::int32 width , rux::int32 height , size_t ___rux__thread_index1986 );
+				void Resize(bool& need_restart, rux::int32 width , rux::int32 height , size_t ___rux__thread_index1986 );
 				void AddRef( void );
 				void Release( void );
 			};
