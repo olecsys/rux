@@ -97,9 +97,11 @@ namespace booldog
 #ifdef __WINDOWS__
 #if (_MSC_VER >= 1600 )
 #include <stdint.h>
+#include <stddef.h>
 #endif
 #else
 #include <stdint.h>
+#include <stddef.h>
 #endif
 #ifndef SIZE_MAX
 #ifdef __SIZE_MAX__
@@ -110,6 +112,18 @@ namespace booldog
 #endif
 namespace booldog
 {
+	namespace data
+	{
+		struct buffer
+		{
+			void* buf;
+			size_t size;
+			buffer(::booldog::byte* data, size_t datasize)
+				: buf(data), size(datasize)
+			{
+			}
+		};
+	}
 	namespace io
 	{
 		namespace mbs
@@ -119,7 +133,7 @@ namespace booldog
 #else
 			const char slash = '/';
 #endif
-		};
+		}
 		namespace wcs
 		{
 #ifdef __WINDOWS__
@@ -127,8 +141,8 @@ namespace booldog
 #else
 			const wchar_t slash = '/';
 #endif
-		};
-	};
+		}
+	}
 #ifdef __WINDOWS__	
 	typedef HMODULE module_handle;
 #else

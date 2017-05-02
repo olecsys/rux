@@ -1285,7 +1285,7 @@ namespace rux
 									if( process_name == process_name_ptr 
 										|| alter_process_name == process_name_ptr )
 									{
-										if( TerminateProcess( process_handle , 0 ) )
+										if(TerminateProcess(process_handle, 1112))
 										{
 											WaitForSingleObject( process_handle , ::rux::threading::infinite );
 											is_killed = 1;
@@ -1304,7 +1304,7 @@ namespace rux
 									if( process_name == process_name_ptr
 										|| process_name_without_extension == process_name )
 									{
-										if( TerminateProcess( process_handle , 0 ) )
+										if(TerminateProcess(process_handle, 1112))
 										{
 											WaitForSingleObject( process_handle , ::rux::threading::infinite );
 											is_killed = 1;

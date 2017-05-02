@@ -50,13 +50,8 @@ namespace booldog
 	{
 	private:
 // copy and assignment not allowed
-		result( const ::booldog::result& )
-		{
-		};
-		::booldog::result& operator = ( const ::booldog::result& )
-		{
-			return *this;
-		};
+		result(const ::booldog::result&);
+		::booldog::result& operator = (const ::booldog::result&);
 	public:
 		::booldog::enums::result::error_type error_type;
 		union
@@ -77,7 +72,7 @@ namespace booldog
 			::booldog::uint32 booerror;
 			unsigned int openglerror;
 		};
-		result( void )
+		result()
 		{
 			error_type = ::booldog::enums::result::error_type_no_error;
 		};
@@ -223,17 +218,9 @@ goto_next:
 	{
 	private:
 // copy and assignment not allowed
-		result_wchar( const ::booldog::result_wchar& )
-                    : result()
-		{
-                }
-		result_wchar( const ::booldog::result& )
-		{
-                }
-		::booldog::result_wchar& operator = ( const ::booldog::result_wchar& )
-		{
-			return *this;
-                }
+		result_wchar(const ::booldog::result_wchar&);
+		result_wchar(const ::booldog::result&);
+		::booldog::result_wchar& operator = (const ::booldog::result_wchar&);
 	public:
 		wchar_t* wchar;
 		size_t wsize;
@@ -266,25 +253,25 @@ goto_next:
 			if( _obj_->wchar )
 				_obj_->wchar[ 0 ] = 0;
 			_obj_->wlen = 0;
-		};
+		}
+		booinline operator ::booldog::allocator*() const
+		{
+			return wallocator;
+		}
 	};
 	class result_mbchar : public ::booldog::result
 	{
 	private:
 // copy and assignment not allowed
-                result_mbchar(const ::booldog::result_mbchar&)
-                    : result()
-		{
-                }
-                result_mbchar(const ::booldog::result&)
-		{
-		};
-		::booldog::result_mbchar& operator = ( const ::booldog::result_mbchar& )
-		{
-			return *this;
-		};
+		result_mbchar(const ::booldog::result_mbchar&);
+		result_mbchar(const ::booldog::result&);
+		::booldog::result_mbchar& operator = (const ::booldog::result_mbchar&);
 	public:
-		char* mbchar;
+		union
+		{
+			char* mbchar;
+			const char* cmbchar;
+		};
 		size_t mblen;
 		size_t mbsize;
 		booldog::allocator* mballocator;
@@ -292,20 +279,21 @@ goto_next:
                         : result(), mbchar(0), mblen(0), mbsize(0), mballocator(allocator)
 		{
                 }
-		virtual ~result_mbchar( void )
+		virtual ~result_mbchar()
 		{
-			if( mbchar )
+			if(mbchar)
 				mballocator->free( mbchar );
-		};
-		char* detach( void )
+		}
+		char* detach() const
 		{
 			char* res = mbchar;
-			mbchar = 0;
-			mbsize = 0;
-			mblen = 0;
+			::booldog::result_mbchar* _this = const_cast< ::booldog::result_mbchar* >(this);
+			_this->mbchar = 0;
+			_this->mbsize = 0;
+			_this->mblen = 0;
 			return res;
-		};
-		virtual void clear( void ) const
+		}
+		virtual void clear() const
 		{
 			::booldog::result_mbchar* _obj_ = const_cast< ::booldog::result_mbchar* >( this );
 #ifdef __UNIX__
@@ -315,38 +303,38 @@ goto_next:
 			if( _obj_->mbchar )
 				_obj_->mbchar[ 0 ] = 0;
 			_obj_->mblen = 0;
-		};
+		}
+		booinline operator ::booldog::allocator*() const
+		{
+			return mballocator;
+		}
+		booinline operator const char*() const
+		{
+			return mbchar;
+		}
 	};
 	class result_buffer : public ::booldog::result
 	{
 	private:
 // copy and assignment not allowed
-                result_buffer(const ::booldog::result_buffer&)
-                    : result()
-		{
-		};
-		result_buffer( const ::booldog::result& )
-		{
-		};
-		::booldog::result_buffer& operator = ( const ::booldog::result_buffer& )
-		{
-			return *this;
-		};
+		result_buffer(const ::booldog::result_buffer&);
+		result_buffer(const ::booldog::result&);
+		::booldog::result_buffer& operator = ( const ::booldog::result_buffer& );
 	public:
 		unsigned char* buf;
 		size_t bufdatasize;
 		size_t bufsize;
 		booldog::allocator* allocator;
-		result_buffer( booldog::allocator* pallocator )
-                        : result(), buf(0), bufdatasize(0), bufsize(0), allocator(pallocator)
+		result_buffer(booldog::allocator* pallocator)
+			: result(), buf(0), bufdatasize(0), bufsize(0), allocator(pallocator)
 		{
-                }
-		virtual ~result_buffer( void )
+		}
+		virtual ~result_buffer()
 		{
 			if( buf )
 				allocator->free( buf );
-		};
-		unsigned char* detach( void )
+		}
+		unsigned char* detach()
 		{
 			unsigned char* res = buf;
 			buf = 0;
@@ -362,7 +350,7 @@ goto_next:
 #endif
 			_obj_->error_type = ::booldog::enums::result::error_type_no_error;
 			_obj_->bufdatasize = 0;
-		};
+		}
 		bool copyfrom(const result_buffer& resbuf)
 		{
 			if(resbuf.bufdatasize)
@@ -379,30 +367,57 @@ goto_next:
 				return true;
 			}
 			return false;
-		};
+		}
+		template< size_t step >
+		booinline bool append(unsigned char* buffer, size_t buffer_size, const ::booldog::debug::info& debuginfo = debuginfo_macros)
+		{
+			if(buffer && buffer_size)
+			{
+				size_t offset = bufdatasize;
+				bufdatasize += buffer_size;
+				if(bufsize < bufdatasize)
+				{
+					bufsize = bufdatasize + step;
+					buf = allocator->realloc_array< unsigned char >(buf, bufsize, debuginfo);
+					if(buf == 0)
+						return false;
+				}
+				::memcpy(&buf[offset], buffer, buffer_size);
+				return true;
+			}
+			return false;
+		}
+		booinline operator ::booldog::allocator*() const
+		{
+			return allocator;
+		}
+		booinline bool append(unsigned char* buffer, size_t buffer_size, const ::booldog::debug::info& debuginfo = debuginfo_macros)
+		{
+			return append< 16 >(buffer, buffer_size, debuginfo);
+		}
+		/** Append buffer data to buf field
+		* @param buffer an appended buffer
+		* @return this
+		*/
+		::booldog::result_buffer& operator +=(const ::booldog::data::buffer& buffer)
+		{
+			append< 16 >((unsigned char*)buffer.buf, buffer.size, debuginfo_macros);
+			return *this;
+		}
 	};
 	class result_bool : public ::booldog::result
 	{
 	private:
 // copy and assignment not allowed
-                result_bool(const ::booldog::result_bool&)
-                    : result()
-		{
-                }
-                result_bool(const ::booldog::result&)
-                    : result()
-		{
-                }
-		::booldog::result_bool& operator = ( const ::booldog::result_bool& )
-		{
-			return *this;
-                }
+		result_bool(const ::booldog::result_bool&);
+		result_bool(const ::booldog::result&);
+		::booldog::result_bool& operator = (const ::booldog::result_bool&);
 	public:
 		bool bres;
-		result_bool( void )
+		result_bool()
  			: result()
 		{
-		};
+		}
 		virtual ~result_bool( void )
 		{
 		};
@@ -420,28 +435,20 @@ goto_next:
 	{
 	private:
 // copy and assignment not allowed
-                result_pointer(const ::booldog::result_pointer&)
-                    : result()
-		{
-                }
-		result_pointer( const ::booldog::result& )
-		{
-		};
-		::booldog::result_pointer& operator = ( const ::booldog::result_pointer& )
-		{
-			return *this;
-		};
+		result_pointer(const ::booldog::result_pointer&);
+		result_pointer(const ::booldog::result&);
+		::booldog::result_pointer& operator = (const ::booldog::result_pointer&);
 	public:
 		void* pres;
-		result_pointer( void )
+		result_pointer()
  			: result()
 		{
 			pres = 0;
 		};
-		virtual ~result_pointer( void )
+		virtual ~result_pointer()
 		{
 		};
-		virtual void clear( void ) const
+		virtual void clear() const
 		{
 			::booldog::result_pointer* _obj_ = const_cast< ::booldog::result_pointer* >( this );
 #ifdef __UNIX__
@@ -455,18 +462,9 @@ goto_next:
 	{
 	private:
 // copy and assignment not allowed
-                result_size(const ::booldog::result_size&)
-                    : result()
-		{
-                }
-                result_size(const ::booldog::result&)
-                    : result()
-		{
-                }
-		::booldog::result_size& operator = ( const ::booldog::result_size& )
-		{
-			return *this;
-                }
+		result_size(const ::booldog::result_size&);
+		result_size(const ::booldog::result&);
+		::booldog::result_size& operator = (const ::booldog::result_size&);
 	public:
 		size_t sres;
 		result_size( void )
@@ -490,18 +488,9 @@ goto_next:
 	{
 	private:
 // copy and assignment not allowed
-                result_int64(const ::booldog::result_int64&)
-                    : result()
-		{
-                }
-                result_int64(const ::booldog::result&)
-                    : result()
-		{
-                }
-		::booldog::result_int64& operator = ( const ::booldog::result_int64& )
-		{
-			return *this;
-                }
+		result_int64(const ::booldog::result_int64&);
+		result_int64(const ::booldog::result&);
+		::booldog::result_int64& operator = (const ::booldog::result_int64&);
 	public:
 		::booldog::int64 int64res;
 		result_int64( void )
@@ -521,6 +510,16 @@ goto_next:
 			_obj_->int64res = INT64_MAX;
 		};
 	};
+	namespace results
+	{
+		typedef ::booldog::result_bool boolean;
+		typedef ::booldog::result_mbchar mbchar;
+		typedef ::booldog::result_int64 int64;
+		typedef ::booldog::result_wchar wchar;
+		typedef ::booldog::result_buffer buffer;
+		typedef ::booldog::result_size size;
+		typedef ::booldog::result_pointer pointer;
+	}
 #define BOOINIT_RESULT( booclass ) booclass* res = 0;\
 	if( pres )\
 	{\

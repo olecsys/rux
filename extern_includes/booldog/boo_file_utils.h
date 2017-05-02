@@ -9,6 +9,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef __UNIX__
+#ifndef _LARGEFILE64_SOURCE 
+#define _LARGEFILE64_SOURCE 
+#endif
 #include <unistd.h>
 #endif
 namespace booldog

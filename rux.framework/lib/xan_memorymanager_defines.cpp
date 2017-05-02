@@ -2292,7 +2292,7 @@ LONG __stdcall rux_native_exception_filter( _EXCEPTION_POINTERS * )
 	if( _rux_native_on_any_exit )
 		_rux_native_on_any_exit();	
 	_rux_native_on_any_exit = NULL;
-	TerminateProcess( GetCurrentProcess() , 0 );
+	TerminateProcess(GetCurrentProcess(), 1112);
 	return EXCEPTION_EXECUTE_HANDLER;
 };
 void rux_native_ctrl_c_signal( ::rux::int32 )
@@ -2300,7 +2300,7 @@ void rux_native_ctrl_c_signal( ::rux::int32 )
 	if( _rux_native_on_any_exit )
 		_rux_native_on_any_exit();			
 	_rux_native_on_any_exit = NULL;
-	TerminateProcess( GetCurrentProcess() , 0 );
+	TerminateProcess(GetCurrentProcess(), 0);
 };
 #endif
 #ifdef __UNIX__
@@ -5067,7 +5067,7 @@ namespace rux
 									if( strcmp( module_name , process_name_ptr ) == 0
 										|| alter_process_name == process_name_ptr )
 									{
-										if( TerminateProcess( process_handle , 0 ) )
+										if(TerminateProcess(process_handle, 1112))
 										{
 											WaitForSingleObject( process_handle , ::rux::threading::infinite );
 											is_killed = 1;
@@ -5080,7 +5080,7 @@ namespace rux
 									if( strcmp( module_name , process_name_ptr ) == 0
 										|| strcmp( process_name_without_extension , module_name ) == 0 )
 									{
-										if( TerminateProcess( process_handle , 0 ) )
+										if(TerminateProcess(process_handle, 1112))
 										{
 											WaitForSingleObject( process_handle , ::rux::threading::infinite );
 											is_killed = 1;
@@ -6206,7 +6206,7 @@ namespace rux
 									if( strcmp( module_name , process_name_ptr ) == 0
 										|| strcmp( alter_process_name , process_name_ptr ) == 0 )
 									{
-										if( TerminateProcess( process_handle , 0 ) )
+										if(TerminateProcess(process_handle, 1112))
 										{
 											WaitForSingleObject( process_handle , ::rux::threading::infinite );
 											is_killed = 1;
@@ -6224,7 +6224,7 @@ namespace rux
 									if( strcmp( module_name , process_name_ptr ) == 0
 										|| strcmp( process_name_without_extension , module_name ) == 0 )
 									{
-										if( TerminateProcess( process_handle , 0 ) )
+										if(TerminateProcess(process_handle, 1112))
 										{
 											WaitForSingleObject( process_handle , ::rux::threading::infinite );
 											is_killed = 1;

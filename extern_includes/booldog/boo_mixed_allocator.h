@@ -9,17 +9,17 @@ namespace booldog
 {
 	namespace allocators
 	{
-		template< size_t s >
+		template< size_t s, size_t cluster_count = 32 >
 		class mixed : public ::booldog::allocator
 		{
 		public:
-			::booldog::allocators::stack< s > stack;
+			::booldog::allocators::stack< s, cluster_count > stack;
 			::booldog::allocators::holder holder;
 		public:
-			mixed( ::booldog::heap_allocator* pheap )
-				: holder( &stack , pheap )
+			mixed(::booldog::heap_allocator* pheap)
+				: holder(&stack, pheap)
 			{
-			};
+			}
 		public:
 			virtual void* alloc( size_t size , const ::booldog::debug::info& debuginfo = debuginfo_macros )
 			{

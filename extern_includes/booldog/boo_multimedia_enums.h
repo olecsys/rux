@@ -13,6 +13,14 @@ namespace booldog
 	{
 		namespace multimedia
 		{
+			namespace audio
+			{
+				enum fourcc
+				{	
+					PCM = BOOLDOG_MAKEFCC('P', 'C', 'M', ' '),
+					Unknown = 0xffffffff
+				};
+			}
 			namespace image
 			{
 				enum fourcc
@@ -30,6 +38,8 @@ namespace booldog
 					MJPEG = BOOLDOG_MAKEFCC('M', 'J', 'P', 'G'),
 					YV16 = BOOLDOG_MAKEFCC('Y', 'V', '1', '6'),
 					I422 = BOOLDOG_MAKEFCC('I', '4', '2', '2'),
+                    YUY2 = BOOLDOG_MAKEFCC('Y', 'U', 'Y', '2'),
+					PCM = BOOLDOG_MAKEFCC('P', 'C', 'M', ' '),
 					Unknown = 0xffffffff
 				};
 			}

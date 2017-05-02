@@ -924,7 +924,7 @@ namespace rux
 						create_mini_dump( filename , info );
 					}
 					send_to_exception_server();
-					TerminateProcess( ::rux::engine::_globals->_current_process_handle , 0 );
+					TerminateProcess(::rux::engine::_globals->_current_process_handle, 1112);
 					return EXCEPTION_EXECUTE_HANDLER;
 				}	
 				else
@@ -933,7 +933,7 @@ namespace rux
 					if( ::rux::engine::_globals->_exception_tid == tid
 						|| ( ::rux::engine::_globals->_exception_time != 0ULL 
 						&& rux_get_now_as_local_unix_time() - ::rux::engine::_globals->_exception_time >= 10000000ULL ) )
-						TerminateProcess( ::rux::engine::_globals->_current_process_handle , 0 );
+						TerminateProcess(::rux::engine::_globals->_current_process_handle, 1112);
 					::rux::threading::XThread::Sleep( ::rux::threading::infinite );
 				}
 				return EXCEPTION_EXECUTE_HANDLER;

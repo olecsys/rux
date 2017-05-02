@@ -7,6 +7,9 @@
 #ifdef __WINDOWS__
 #include <io.h>
 #else
+#ifndef _LARGEFILE64_SOURCE 
+#define _LARGEFILE64_SOURCE 
+#endif
 #include <unistd.h>
 #endif
 namespace booldog

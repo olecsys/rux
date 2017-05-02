@@ -14,6 +14,9 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#ifndef _LARGEFILE64_SOURCE 
+#define _LARGEFILE64_SOURCE 
+#endif
 #include <unistd.h>
 #endif
 namespace booldog

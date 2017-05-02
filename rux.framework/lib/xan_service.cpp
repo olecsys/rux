@@ -877,15 +877,14 @@ namespace rux
 				}
 				if(resfile.succeeded())
 				{					
-					::booldog::utils::string::mbs::sprintf(mbchar0, mbchar0->mballocator, debuginfo_macros, "%u"
-						, (::booldog::uint32)getpid());
-
+					::booldog::utils::string::mbs::sprintf(mbchar0, mbchar0->mballocator, debuginfo_macros, "%u", (::booldog::uint32)getpid());
 					size_t written = 0;
 					resfile.file->write(0, (::booldog::byte*)mbchar0->mbchar, mbchar0->mblen, SIZE_MAX, written);
-					resfile.file->close( &resfile );
+					resfile.file->close(&resfile);
+					::chmod(pidfilembchar->mbchar, 0777);
 				}
 			}
-		};
+		}
 		void remove_pid_to_var(::booldog::result_mbchar* pidfilembchar)
 		{
 			::booldog::result_file resfile;

@@ -8,6 +8,7 @@
 #include "boo_if.h"
 #include "boo_utils.h"
 #include "boo_bits_utils.h"
+#include "boo_lockfree_stack.h"
 
 #include <stdio.h>
 namespace booldog
@@ -18,14 +19,14 @@ namespace booldog
 		{
 			enum level
 			{
-				level_error = 40000 ,
-				level_warn = 30000 ,
-				level_debug = 10000 ,
-				level_trace = 5000 , 
+				level_error = 40000,
+				level_warn = 30000,
+				level_debug = 10000,
+				level_trace = 5000, 
 				level_verbose = 0
 			};
-		};
-	};
+		}
+	}
 	namespace typedefs
 	{
 		typedef void (*write_log_t)(::booldog::enums::log::level level, const char* format, va_list ap);
@@ -46,6 +47,7 @@ namespace booldog
 		public:
 			size_t _avail;
 			::booldog::byte* _begin;
+			::booldog::interlocked::atomic _locked;
 #ifdef BOOLDOG_MEM_CLUSTER_LOG
 			::booldog::typedefs::write_log_t _write_log;
 			booinline void write_log(const char* format, ...)
@@ -56,7 +58,7 @@ namespace booldog
 				va_end( ap );
 			};
 #endif
-			cluster( ::booldog::byte* data , size_t data_size )
+			void initialize(::booldog::byte* data , size_t data_size)
 			{
 #ifdef BOOLDOG_MEM_CLUSTER_LOG
 				_write_log = ::booldog::empties::log::write_log;
@@ -101,7 +103,16 @@ namespace booldog
 					info->_size = _avail - sizeof( ::booldog::mem::info4 );
 					_begin[ sizeof( *info ) - 1 ] = info->_flags;
 				}
-			};
+			}
+			cluster()
+				: _locked(0)
+			{
+			}
+			cluster(::booldog::byte* data, size_t data_size)
+				: _locked(0)
+			{
+				initialize(data, data_size);
+			}
 			booinline void print( void )
 			{
 				void* endptr = end();
@@ -122,7 +133,7 @@ namespace booldog
 					from_info( info , offsize , begin_size );
 				}
 			};
-			booinline bool check_consistency(void)
+			booinline bool check_consistency()
 			{
 				void* endptr = end();
 				::booldog::byte* info = _data, * prev = 0;
@@ -151,7 +162,7 @@ namespace booldog
 				}
 				return true;
 			};
-			booinline void check( void )
+			booinline void check()
 			{
 				void* endptr = end();
 				::booldog::byte* info = _data;
@@ -400,18 +411,22 @@ namespace booldog
 				return 0;
 			};
 		public:
-			size_t available( void )
+			size_t available()
 			{
 				return _avail;
 			};
-			void* begin( void )
+			void* begin()
 			{
 				return _begin;
 			};
-			void* end( void )
+			void* end()
 			{
 				return &_data[ _data_size ];
 			};
+			bool contains(void* pointer)
+			{	
+				return pointer >= _data && pointer < &_data[_data_size];
+			}
 			void* alloc( size_t size , const ::booldog::debug::info& debuginfo = debuginfo_macros )
 			{
 #ifdef BOOLDOG_MEM_CLUSTER_CHECK
@@ -509,7 +524,8 @@ namespace booldog
 				}
 				else
 				{
-					int u = 5; u-- ; printf( "%d" , 120 / ( u - 4 ) );
+					int crush = printf("%s, logic bug, EXCEPT!!!\n", __FILE__);
+					printf("%d\n", crush / (crush / 70567));
 				}
 			};
 			size_t getsize( void* pointer )
@@ -782,8 +798,8 @@ namespace booldog
 			{
 				void* oldpointer = 0;
 				return tryrealloc( pointer , size , true , oldpointer , debuginfo );
-			};
+			}
 		};
-	};
-};
+	}
+}
 #endif

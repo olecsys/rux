@@ -32,8 +32,16 @@
 #else
 #ifdef __ELBRUS__
 #define BOOLDOG_MEM_ALIGN_SIZE 16 
-#else 
+#else
+#ifdef __WINDOWS__
+#ifdef __x64__
+#define BOOLDOG_MEM_ALIGN_SIZE 8
+#else
 #define BOOLDOG_MEM_ALIGN_SIZE 4
+#endif
+#else
+#define BOOLDOG_MEM_ALIGN_SIZE 4
+#endif
 #endif
 #endif
 #endif

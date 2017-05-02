@@ -65,9 +65,14 @@ namespace booldog
 				booerr_type_file_is_not_video_capture_device,
 				booerr_type_video_capture_device_does_not_support_neither_streaming_nor_io,
 				booerr_type_map_failed,
-				booerr_type_video_format_is_not_supported
+				booerr_type_video_format_is_not_supported,
+				booerr_type_video_capture_device_has_not_frame_yet,
+				booerr_type_windows_has_not_fifo,
+				booerr_type_select_except,
+				booerr_type_incorrect_packet_size,
+				booerr_type_json_parent_is_not_array
 			};
-		};
-	};
-};
+		}
+	}
+}
 #endif
