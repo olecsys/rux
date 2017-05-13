@@ -16,3 +16,6 @@ gdb --pid=pid
 
 'ps uH p <PID_OF_PROCESS> | wc -l' или 'ps -L -o pid= -p <pid> | wc -l' - количество потоков в процессе
 'lsof -p <PID_OF_PROCESS> | wc -l' - количество открытых файлов в процессе
+
+Для получения номера линии по смещению(+0xd354 например) можно запустить gdb {PATH TO LIB}(lib/libautoloader.so например)
+и набрать info symbol {смещение}(+0xd354 например)

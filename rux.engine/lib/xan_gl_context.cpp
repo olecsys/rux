@@ -7,6 +7,7 @@
 #include <xan_gui_engine.h>
 #include <xan_log.h>
 #include <xan_io_defines.h>
+#define RUX_GDI_TEST 0
 namespace rux
 {
 	namespace gui
@@ -70,6 +71,7 @@ namespace rux
 				"  }\n"
 				"}\n";
 			GLContext::GLContext( ::rux::gui::engine::Window* window )
+				: _draw_pixels(false)
 			{
 				::rux::log::WriteDebug( "%s:%d BEGIN" , __FUNCTION__ , __LINE__ );
 				_ref = 1;
@@ -1636,6 +1638,20 @@ namespace rux
 #if !is_support_smooth_off
 					_is_support_smooth = _is_support_framebuffer_object == 1 && _is_supported_fxaa == 1 ? 1 : 0;
 #endif
+#if RUX_GDI_TEST
+					_is_support_arb_texture_rectangle = _is_supported_old_yv12_to_rgb_shader = _is_supported_yv12_to_rgb_shader 
+						= _is_supported_yv12_to_rgb_3_textures_shader = _is_supported_old_yuyv_to_rgb_shader 
+						= _is_supported_yuyv_to_rgb_shader = _is_supported_fxaa = _is_supported_wgl_swap_buffer_interval 
+						= _is_supported_ext_swap_control_tear =	_is_support_vbo = _is_support_framebuffer_object 
+						= _is_supported_rgba_shader = 0;
+					_max_texture_size[0] = 1024, _max_uniform_locations[0] = 0;
+#endif
+					_draw_pixels = _is_support_arb_texture_rectangle == 0 && _is_supported_old_yv12_to_rgb_shader == 0
+						&& _is_supported_yv12_to_rgb_shader == 0 && _is_supported_yv12_to_rgb_3_textures_shader == 0
+						&& _is_supported_old_yuyv_to_rgb_shader == 0 && _is_supported_yuyv_to_rgb_shader == 0
+						&& _is_supported_fxaa == 0 && _is_supported_wgl_swap_buffer_interval == 0
+						&& _is_supported_ext_swap_control_tear == 0 && _is_support_vbo == 0 && _is_support_framebuffer_object == 0
+						&& _is_supported_rgba_shader == 0;
 					if( iofile.opened() )
 						iofile.write_text( "OpenGL renderer='%s'\n"
 						"OpenGL version='%s'\n"

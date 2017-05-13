@@ -212,7 +212,7 @@ namespace rux
 						{
 							_texture_width = _texture_data_width;
 							_texture_height = _texture_data_height;			
-							if( _gl_context->_max_texture_size[ 0 ] < _texture_width
+							if(_gl_context->_max_texture_size[ 0 ] < _texture_width
 								|| _gl_context->_max_texture_size[ 0 ] < _texture_height )
 								_is_draw_pixels = 1;
 							if( _is_draw_pixels == 0 )
@@ -229,8 +229,8 @@ namespace rux
 						{
 							_texture_width = ::rux::get_NumberPowerOf2( _texture_data_width );
 							_texture_height = ::rux::get_NumberPowerOf2( _texture_data_height );								
-							if( _gl_context->_max_texture_size[ 0 ] < _texture_width
-								|| _gl_context->_max_texture_size[ 0 ] < _texture_height )
+							if(_gl_context->_draw_pixels || (_gl_context->_max_texture_size[ 0 ] < _texture_width
+								|| _gl_context->_max_texture_size[ 0 ] < _texture_height))
 								_is_draw_pixels = 1;
 							if( _is_draw_pixels == 0 )
 							{

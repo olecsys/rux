@@ -287,6 +287,7 @@ namespace rux
 				rux::byte _is_supported_ext_swap_control_tear;
 				::rux::uint32 _shader_version_major_version;
 				::rux::uint32 _shader_version_minor_version;
+				bool _draw_pixels;
 			public:
 				XMallocArray< rux::gui::engine::RenderFont* > _fonts;
 				::rux::threading::RdWrLock _cs_caches;
