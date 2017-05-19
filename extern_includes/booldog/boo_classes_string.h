@@ -172,6 +172,16 @@ namespace booldog
 					_str = string0.detach();					
 				}
 			}
+			/** Make C string pointer, size, length null(without free) and return C string pointer
+			* @return The C string pointer
+			*/
+			char* detach()
+			{
+				char* res = _str;
+				_size = _length = 0;
+				_str = 0;
+				return res;
+			}
 			/** Copy constructor
 			* @param string0 copy string
 			* @param copy if true then _str C string will be copied, if false then string0._str will be detached from string0

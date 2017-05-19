@@ -75,20 +75,22 @@ Type* XTypeManager::TypeOf( rux::int32 module_index , const char *type_name , ru
 	}
 	return 0;
 };
-void XTypeManager::FreeTypes( rux::int32 module_index )
+void XTypeManager::FreeTypes(rux::int32 module_index)
 {
 	WRITE_LOCK( _cs_types );
 	size_t index0 = 0;
 	while( index0 < _types.Count() )
 	{
-		if( g_type_manager->_types[ index0 ]->get_ModuleIndex() != 0 )
+		if(_types[index0]->get_ModuleIndex() != 0)
 		{
-			if( g_type_manager->_types[ index0 ]->get_ModuleIndex() == module_index )
-			{				
-				g_type_manager->_types[ index0 ]->set_ModuleIndex( 0 );
+			if(_types[index0]->get_ModuleIndex() == module_index)
+			{	
+				_types[index0]->Release(__FILE__, __LINE__);
+				_types.RemoveAt(index0);
+				--index0;
 			}
 		}
-		index0++;
+		++index0;
 	}
 	g_type_manager->_cs_types.WriteUnlock();		
 };

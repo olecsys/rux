@@ -54,6 +54,9 @@ namespace booldog
 					{
 						_first = _last = 0;
 						--_count;
+#ifdef BOOLDOG_DOUBLY_LINKED_PARENT_ENABLE
+						item->_doubly_linked_list_parent = 0;
+#endif
 						return;
 					}
 					_first = item->_doubly_linked_list_next;
