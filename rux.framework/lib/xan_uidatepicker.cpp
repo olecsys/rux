@@ -1086,8 +1086,7 @@ namespace rux
 					::booldog::uint64 loctime = ::booldog::utils::time::posix::tolocal( _posix_time );
 					::booldog::result_mbchar mbchar( &mixed );
 
-					::booldog::utils::time::posix::mbs::tostring< 16 >( &mbchar , mbchar.mballocator , "%d.%m.%Y" , loctime 
-						, debuginfo_macros );
+					::booldog::utils::time::posix::mbs::tostring< 16 >(mbchar, "%d.%m.%Y", loctime, debuginfo_macros);
 
 					float text_width = _date_font->get_TextWidth( mbchar.mbchar , ___rux__thread_index1986 );
 					float text_height = _date_font->get_Height( mbchar.mbchar , ___rux__thread_index1986 );

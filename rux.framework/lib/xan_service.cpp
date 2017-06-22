@@ -23,6 +23,7 @@
 #include <booldog/boo_io_directory.h>
 #include <booldog/boo_directory_utils.h>
 #include <booldog/boo_error_format.h>
+#include <booldog/boo_file_utils.h>
 
 const char* _init_d_daemon_script = 
 "#!/bin/sh\n\
@@ -898,7 +899,7 @@ namespace rux
 					const ::booldog::byte* ptr = resbuf.buf;
 					::booldog::pid_t pid = ::booldog::utils::decimal_string_to_number< ::booldog::pid_t >(ptr);
 					if(getpid() == pid)
-						::booldog::utils::io::mbs::remove(0, pidfilembchar->mbchar);
+						::booldog::utils::io::file::mbs::remove(0, pidfilembchar->mballocator, pidfilembchar->mbchar);
 				}
 				else
 					resfile.file->close(0);
@@ -937,7 +938,7 @@ namespace rux
 				::booldog::utils::string::mbs::sprintf(mbchar, mbchar->mballocator, format, ap, debuginfo_macros);
 				va_end(ap);				
 						
-				::booldog::utils::time::posix::mbs::tostring<16>(dst, dst->mballocator, "%Y%m%d %H:%M:%S,%MS - ", now);
+				::booldog::utils::time::posix::mbs::tostring<16>(*dst, "%Y%m%d %H:%M:%S,%MS - ", now);
 
 				::booldog::utils::string::mbs::assign<16>(0, dst->mballocator, false, dst->mblen, dst->mbchar, dst->mblen, dst->mbsize
 					, mbchar->mbchar, 0, SIZE_MAX);
@@ -1259,8 +1260,7 @@ namespace rux
 		
 			::booldog::uint64 now = ::booldog::utils::time::posix::now_as_utc();
 			now = ::booldog::utils::time::posix::tolocal(now);		
-			::booldog::utils::time::posix::mbs::tostring<16>(&time_mbchar, time_mbchar.mballocator, "_%Y%m%d_%H%M%S%MS"
-				, now);
+			::booldog::utils::time::posix::mbs::tostring<16>(time_mbchar, "_%Y%m%d_%H%M%S%MS", now);
 		
 			::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, 0, dst.mbchar
 				, dst.mblen, dst.mbsize, exe_dir.mbchar, 0, SIZE_MAX);

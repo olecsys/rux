@@ -29,8 +29,8 @@ begin_implement_rux_class_with_properties_ns_base_class( TimePicker , rux::gui::
 	{
 		::booldog::result_mbchar mbchar( &mixed );
 
-		::booldog::utils::time::posix::mbs::tostring< 16 >( &mbchar , mbchar.mballocator , "%H:%M:%S" 
-			, ::booldog::utils::time::posix::tolocal( _posix_time ) , debuginfo_macros );
+		::booldog::utils::time::posix::mbs::tostring< 16 >(mbchar, "%H:%M:%S", ::booldog::utils::time::posix::tolocal(_posix_time)
+			, debuginfo_macros);
 		_time_textbox.set_Text( mbchar.mbchar );	
 
 		rux::XString error;
@@ -185,8 +185,8 @@ namespace rux
 					{
 						::booldog::result_mbchar mbchar( &mixed );
 
-						::booldog::utils::time::posix::mbs::tostring< 16 >( &mbchar , mbchar.mballocator , "%H:%M:%S" 
-							, ::booldog::utils::time::posix::tolocal( _posix_time ) , debuginfo_macros );
+						::booldog::utils::time::posix::mbs::tostring< 16 >(mbchar, "%H:%M:%S"
+							, ::booldog::utils::time::posix::tolocal(_posix_time), debuginfo_macros);
 
 						::rux::XString time( mbchar.mbchar );	
 						_time_textbox()->_lines.set_ItemByRef( 0 , time );
@@ -210,7 +210,7 @@ namespace rux
 					{
 						::booldog::result_mbchar mbchar( &mixed );
 
-						::booldog::utils::time::posix::mbs::tostring< 16 >( &mbchar , mbchar.mballocator , "%H:%M:%S" 
+						::booldog::utils::time::posix::mbs::tostring< 16 >(mbchar, "%H:%M:%S" 
 							, ::booldog::utils::time::posix::tolocal( _posix_time ) , debuginfo_macros );
 
 						::rux::XString time( mbchar.mbchar );	
