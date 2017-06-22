@@ -111,6 +111,7 @@ namespace rux
 			system_module_dlsym( XGetErrorText );
 			system_module_dlsym( XSetErrorHandler );
 			system_module_dlsym( XSetIOErrorHandler );
+			system_module_dlsym(XTranslateCoordinates);
 		};
 		::Display* x11_module::XOpenDisplay( char* display_name )
 		{
