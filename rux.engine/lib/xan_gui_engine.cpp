@@ -1409,16 +1409,16 @@ namespace rux
 					if( window->_height < window->_min_height )
 						window->_height = window->_min_height;
 					window->_x_window = ::rux::engine::_globals->_x11_module.XCreateWindow( window->_x_display , RootWindow( ::rux::gui::engine::_x_display_main , ::rux::gui::engine::_x_visual_info->screen ) , window->_left , window->_top , window->_width , window->_height , 0 , ::rux::gui::engine::_x_visual_info->depth , InputOutput , ::rux::gui::engine::_x_visual_info->visual , CWBorderPixel | CWColormap | CWEventMask | CWOverrideRedirect , &rux::gui::engine::_x_set_window_attributes );					
-					::rux::log::WriteTrace( "dispatch_create_window, %p, x=%d, y=%d, width=%d, height=%d" , window , window->_left , window->_top , window->_width , window->_height );
+					::rux::log::WriteTrace( "dispatch_create_window, %pp, x=%d, y=%d, width=%d, height=%d" , window , window->_left , window->_top , window->_width , window->_height );
 
 					{
 						::Window __child;
 						int __real_x = 0, __real_y = 0;
 						::rux::engine::_globals->_x11_module.XTranslateCoordinates(window->_x_display, window->_x_window
 							, RootWindow(::rux::gui::engine::_x_display_main, ::rux::gui::engine::_x_visual_info->screen)
-							, window->_left, window->_top, &__real_x , &__real_y, &__child);
+							, 0, 0, &__real_x , &__real_y, &__child);
 
-						::rux::log::WriteDebug("XTranslateCoordinates, %p, x=%d(%d), y=%d(&d), width=%d, height=%d", window
+						::rux::log::WriteDebug("XTranslateCoordinates, %pp, x=%d(%d), y=%d(%d), width=%d, height=%d", window
 							, window->_left, __real_x, window->_top, __real_y, window->_width, window->_height);
 					}
 					MWMHints mwmhints;
