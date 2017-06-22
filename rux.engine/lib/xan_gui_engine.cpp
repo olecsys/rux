@@ -1420,6 +1420,11 @@ namespace rux
 
 						::rux::log::WriteDebug("XTranslateCoordinates, %pp, x=%d(%d), y=%d(%d), width=%d, height=%d", window
 							, window->_left, __real_x, window->_top, __real_y, window->_width, window->_height);
+
+						XWindowAttributes xwa;
+						::rux::engine::_globals->_x11_module.XGetWindowAttributes(window->_x_display, window->_x_window, &xwa);
+						::rux::log::WriteDebug("XGetWindowAttributes, %pp, x=%d(%d), y=%d(%d), width=%d(%d), height=%d(%d), border_width(%d)", window
+							, window->_left, xwa.x, window->_top, xwa.y, window->_width, xwa.width, window->_height, xwa.height, xwa.border_width);
 					}
 					MWMHints mwmhints;
 					Atom prop;
