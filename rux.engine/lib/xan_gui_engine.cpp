@@ -1412,7 +1412,7 @@ namespace rux
 					::rux::log::WriteTrace( "dispatch_create_window, %p, x=%d, y=%d, width=%d, height=%d" , window , window->_left , window->_top , window->_width , window->_height );
 
 					{
-						XWindow __child;
+						::Window __child;
 						int __real_x = 0, __real_y = 0;
 						::rux::engine::_globals->_x11_module.XTranslateCoordinates(window->_x_display
 							, RootWindow(::rux::gui::engine::_x_display_main, ::rux::gui::engine::_x_visual_info->screen)
