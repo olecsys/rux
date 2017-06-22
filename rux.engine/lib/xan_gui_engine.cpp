@@ -1414,11 +1414,11 @@ namespace rux
 					{
 						::Window __child;
 						int __real_x = 0, __real_y = 0;
-						::rux::engine::_globals->_x11_module.XTranslateCoordinates(window->_x_display
+						::rux::engine::_globals->_x11_module.XTranslateCoordinates(window->_x_display, window->_x_window
 							, RootWindow(::rux::gui::engine::_x_display_main, ::rux::gui::engine::_x_visual_info->screen)
 							, window->_left, window->_top, &__real_x , &__real_y, &__child);
 
-						::rux::log::WriteTrace( "XTranslateCoordinates, %p, x=%d(%d), y=%d(&d), width=%d, height=%d", window
+						::rux::log::WriteDebug("XTranslateCoordinates, %p, x=%d(%d), y=%d(&d), width=%d, height=%d", window
 							, window->_left, __real_x, window->_top, __real_y, window->_width, window->_height);
 					}
 					MWMHints mwmhints;
