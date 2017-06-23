@@ -104,20 +104,25 @@ namespace rux
 						unsigned long remain = 0;
 						unsigned long len = 0;
 						Atom* list = 0;
-						if(net_wm_strut_partial != None 
+						if(net_wm_strut_partial != None
 							&& ::rux::engine::_globals->_x11_module.XGetWindowProperty(display, window, net_wm_strut_partial, 0
 							, LONG_MAX, False, XA_CARDINAL, &type, &form, &len, &remain, (::rux::uint8**)&list) == Success)
 						{
-							::rux::log::WriteDebug("_NET_WM_STRUT_PARTIAL, screen#%u, left=%d, right=%d, top=%d, bottom=%d", index0
+							if(len)
+								::rux::log::WriteDebug("_NET_WM_STRUT_PARTIAL, screen#%u, left=%d, right=%d, top=%d, bottom=%d", index0
 								, (int)list[0], (int)list[1], (int)list[2], (int)list[3]);
 
 							::rux::engine::_globals->_x11_module.XFree(list);
 						}
-						else if(net_wm_strut != None
+						else
+							len = 0;
+							
+						if(len == 0 && net_wm_strut != None
 							&& ::rux::engine::_globals->_x11_module.XGetWindowProperty(display, window, net_wm_strut, 0
 							, LONG_MAX, False, XA_CARDINAL, &type, &form, &len, &remain, (::rux::uint8**)&list) == Success)
 						{
-							::rux::log::WriteDebug("_NET_WM_STRUT, screen#%u, left=%d, right=%d, top=%d, bottom=%d", index0
+							if(len)
+								::rux::log::WriteDebug("_NET_WM_STRUT, screen#%u, left=%d, right=%d, top=%d, bottom=%d", index0
 								, (int)list[0], (int)list[1], (int)list[2], (int)list[3]);
 
 							::rux::engine::_globals->_x11_module.XFree(list);
