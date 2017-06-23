@@ -95,38 +95,25 @@ namespace rux
 					for( ::rux::uint32 index0 = 0 ; index0 < count ; index0++ )
 					{
 						window = RootWindow( display , index0 );
-						Atom net_wm_strut = ::rux::engine::_globals->_x11_module.XInternAtom
-							(display, "_NET_WM_STRUT", False);
-						Atom net_wm_strut_partial = ::rux::engine::_globals->_x11_module.XInternAtom
-							(display, "_NET_WM_STRUT_PARTIAL", False);
+						Atom net_workarea = ::rux::engine::_globals->_x11_module.XInternAtom
+							(display, "_NET_WORKAREA", False);
 						Atom type = None;
 						int form = 0;
 						unsigned long remain = 0;
 						unsigned long len = 0;
 						Atom* list = 0;
 						if(net_wm_strut_partial != None
-							&& ::rux::engine::_globals->_x11_module.XGetWindowProperty(display, window, net_wm_strut_partial, 0
+							&& ::rux::engine::_globals->_x11_module.XGetWindowProperty(display, window, net_workarea, 0
 							, LONG_MAX, False, XA_CARDINAL, &type, &form, &len, &remain, (::rux::uint8**)&list) == Success)
 						{
 							if(len)
-								::rux::log::WriteDebug("_NET_WM_STRUT_PARTIAL, screen#%u, left=%d, right=%d, top=%d, bottom=%d", index0
+								::rux::log::WriteDebug("_NET_WORKAREA, screen#%u, left=%d, right=%d, top=%d, bottom=%d", index0
 								, (int)list[0], (int)list[1], (int)list[2], (int)list[3]);
 
 							::rux::engine::_globals->_x11_module.XFree(list);
 						}
 						else
 							len = 0;
-							
-						if(len == 0 && net_wm_strut != None
-							&& ::rux::engine::_globals->_x11_module.XGetWindowProperty(display, window, net_wm_strut, 0
-							, LONG_MAX, False, XA_CARDINAL, &type, &form, &len, &remain, (::rux::uint8**)&list) == Success)
-						{
-							if(len)
-								::rux::log::WriteDebug("_NET_WM_STRUT, screen#%u, left=%d, right=%d, top=%d, bottom=%d", index0
-								, (int)list[0], (int)list[1], (int)list[2], (int)list[3]);
-
-							::rux::engine::_globals->_x11_module.XFree(list);
-						}
 						if( ::rux::engine::_globals->_xrandr_module._XRRGetScreenResources
 							&& ::rux::engine::_globals->_xrandr_module._XRRFreeScreenResources
 							&& ::rux::engine::_globals->_xrandr_module._XRRFreeCrtcInfo
