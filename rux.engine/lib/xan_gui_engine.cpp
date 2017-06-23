@@ -699,6 +699,8 @@ namespace rux
 			dll_internal Atom _rux_delete_window = None;
 			dll_internal Atom _rux_gui_initialize = None;
 			dll_internal Atom _net_wm_state_max_horz = None;
+			dll_internal Atom _net_wm_strut = None;
+			dll_internal Atom _net_wm_strut_partial = None;
 			dll_internal Atom _net_wm_state_above = None;
 			dll_internal Atom _net_wm_state_hidden = None;
 			dll_internal Atom _net_wm_state_max_vert = None;
@@ -912,6 +914,10 @@ namespace rux
 							rux::gui::engine::_rux_delete_window = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "RUX_DELETE_WINDOW" , False );
 							rux::gui::engine::_rux_gui_initialize = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "RUX_GUI_INITIALIZE" , False );
 							rux::gui::engine::_net_wm_state_max_horz = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "_NET_WM_STATE_MAXIMIZED_HORZ" , False );    
+							::rux::gui::engine::_net_wm_strut = ::rux::engine::_globals->_x11_module.XInternAtom
+								(::rux::gui::engine::_x_display_main, "_NET_WM_STRUT", False);
+							::rux::gui::engine::_net_wm_strut_partial = ::rux::engine::_globals->_x11_module.XInternAtom
+								(::rux::gui::engine::_x_display_main, "_NET_WM_STRUT_PARTIAL", False);
 							::rux::gui::engine::_net_wm_state_above = ::rux::engine::_globals->_x11_module.XInternAtom(::rux::gui::engine::_x_display_main, "_NET_WM_STATE_ABOVE", False);
 							::rux::gui::engine::_net_wm_state_hidden = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "_NET_WM_STATE_HIDDEN" , False );
 							rux::gui::engine::_net_wm_state_fullscreen = ::rux::engine::_globals->_x11_module.XInternAtom( ::rux::gui::engine::_x_display_main , "_NET_WM_STATE_FULLSCREEN" , False );    
