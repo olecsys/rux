@@ -111,7 +111,6 @@ namespace rux
 			system_module_dlsym( XGetErrorText );
 			system_module_dlsym( XSetErrorHandler );
 			system_module_dlsym( XSetIOErrorHandler );
-			system_module_dlsym(XTranslateCoordinates);
 		};
 		::Display* x11_module::XOpenDisplay( char* display_name )
 		{
@@ -358,12 +357,6 @@ namespace rux
 			load();
 			return _XSetIOErrorHandler( handler );
 		};
-		Bool x11_module::XTranslateCoordinates(Display *display, Window src_w, Window dest_w, int src_x, int src_y
-			, int *dest_x_return, int* dest_y_return, Window* child_return)
-		{
-			load();
-			return _XTranslateCoordinates(display, src_w, dest_w, src_x, src_y, dest_x_return, dest_y_return, child_return);
-		}
 #endif
 	};
 };

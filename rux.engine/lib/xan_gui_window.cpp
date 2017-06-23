@@ -78,7 +78,7 @@ namespace rux
 				}
 				rux::engine::free_object< XMallocArray< ScreenBase* > >( screens );
 			};
-			XMallocArray< ScreenBase* >* Screen::get_Screens( void )
+			XMallocArray< ScreenBase* >* Screen::get_Screens()
 			{
 				XMallocArray< ::rux::gui::ScreenBase* >* screens = alloc_object_macros( XMallocArray< ::rux::gui::ScreenBase* > );
 #ifdef __WINDOWS__
@@ -86,15 +86,16 @@ namespace rux
 #else
 #ifdef __ANDROID__
 #else
-				Display* display = ::rux::engine::_globals->_x11_module.XOpenDisplay( NULL );
-				if( display )
+				Display* display = ::rux::engine::_globals->_x11_module.XOpenDisplay(NULL);
+				if(display)
 				{
-					rux::uint32 count = ScreenCount( display );
+					rux::uint32 count = ScreenCount(display);
 					::Window window;
 					XWindowAttributes window_attributes;
-					for( ::rux::uint32 index0 = 0 ; index0 < count ; index0++ )
+					for(::rux::uint32 index0 = 0;index0 < count;++index0)
 					{
-						window = RootWindow( display , index0 );
+						window = RootWindow(display, index0);
+						int xoffset = 0, yoffset = 0;
 						Atom net_workarea = ::rux::engine::_globals->_x11_module.XInternAtom
 							(display, "_NET_WORKAREA", False);
 						Atom type = None;
@@ -102,14 +103,17 @@ namespace rux
 						unsigned long remain = 0;
 						unsigned long len = 0;
 						Atom* list = 0;
-						if(net_wm_strut_partial != None
+						if(net_workarea != None
 							&& ::rux::engine::_globals->_x11_module.XGetWindowProperty(display, window, net_workarea, 0
 							, LONG_MAX, False, XA_CARDINAL, &type, &form, &len, &remain, (::rux::uint8**)&list) == Success)
 						{
 							if(len)
+							{
 								::rux::log::WriteDebug("_NET_WORKAREA, screen#%u, left=%d, right=%d, top=%d, bottom=%d", index0
 								, (int)list[0], (int)list[1], (int)list[2], (int)list[3]);
-
+								xoffset = list[0];
+								yoffset = list[1];
+							}
 							::rux::engine::_globals->_x11_module.XFree(list);
 						}
 						else
@@ -124,18 +128,20 @@ namespace rux
 							for( size_t index0 = 0 ; index0 < screens_res->ncrtc ; index0++ )
 							{
 								info = ::rux::engine::_globals->_xrandr_module.XRRGetCrtcInfo( display , screens_res , screens_res->crtcs[ index0 ] );
-								screens->Add( (rux::gui::ScreenBase*)alloc_object_4_params_macros( ::rux::gui::engine::Screen , info->x , info->y , info->width , info->height ) );
-								::rux::engine::_globals->_xrandr_module.XRRFreeCrtcInfo( info );
+								screens->Add( (rux::gui::ScreenBase*)alloc_object_4_params_macros(::rux::gui::engine::Screen, info->x + xoffset, info->y + yoffset, info->width, info->height));
+								::rux::engine::_globals->_xrandr_module.XRRFreeCrtcInfo(info);
 							}
-							::rux::engine::_globals->_xrandr_module.XRRFreeScreenResources( screens_res );
+							::rux::engine::_globals->_xrandr_module.XRRFreeScreenResources(screens_res);
 						}
 						else
 						{
-							::rux::engine::_globals->_x11_module.XGetWindowAttributes( display , window , &window_attributes );
-							screens->Add( (rux::gui::ScreenBase*)alloc_object_4_params_macros( ::rux::gui::engine::Screen , window_attributes.x , window_attributes.y , window_attributes.width , window_attributes.height ) );
+							::rux::engine::_globals->_x11_module.XGetWindowAttributes(display, window, &window_attributes);
+							screens->Add((rux::gui::ScreenBase*)alloc_object_4_params_macros(::rux::gui::engine::Screen
+								, window_attributes.x + xoffset, window_attributes.y + yoffset, window_attributes.width
+								, window_attributes.height));
 						}
 					}
-					::rux::engine::_globals->_x11_module.XCloseDisplay( display );
+					::rux::engine::_globals->_x11_module.XCloseDisplay(display);
 				}
 #endif
 #endif

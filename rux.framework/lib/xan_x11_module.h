@@ -72,8 +72,6 @@ namespace rux
 		typedef int (*XLookupString_t)(::XKeyEvent *event_struct, char *buffer_return, int bytes_buffer, ::KeySym *keysym_return, XComposeStatus *status_in_out);
 		typedef Status (*XGetWindowAttributes_t)(Display *display, Window w, XWindowAttributes *window_attributes_return);
 		typedef int (*XGetErrorText_t)(Display *display, int code, char *buffer_return, int length);
-		typedef Bool (*XTranslateCoordinates_t)(Display *display, Window src_w, Window dest_w, int src_x, int src_y
-			, int *dest_x_return, int* dest_y_return, Window* child_return);
 		class x11_module : public rux::system::module
 		{
 		protected:
@@ -126,7 +124,6 @@ namespace rux
 			XGetErrorText_t _XGetErrorText;
 			XSetErrorHandler_t _XSetErrorHandler;
 			XSetIOErrorHandler_t _XSetIOErrorHandler;
-			XTranslateCoordinates_t _XTranslateCoordinates;
 		public:
 			x11_module( void );
 			virtual void on_loaded( void );
@@ -179,8 +176,6 @@ namespace rux
 			int XGetErrorText(Display *display, int code, char *buffer_return, int length);
 			int XSetErrorHandler( XSetErrorHandler_handler_t handler );
 			int XSetIOErrorHandler( XSetIOErrorHandler_handler_t handler );
-			Bool XTranslateCoordinates(Display *display, Window src_w, Window dest_w, int src_x, int src_y
-				, int *dest_x_return, int* dest_y_return, Window* child_return);
 		};
 #endif
 	};
