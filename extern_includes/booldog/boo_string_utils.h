@@ -353,7 +353,7 @@ debuginfo_macros_statement( 41 );
 						if( (size_t)( ptr - begin ) >= charcount )
 						{
 #ifdef __WINDOWS__
-							ptr++;
+							++ptr;
 #else
 							charcount = ptr - begin;
 							char* newbegin = allocator->realloc_array< char >( 0 , charcount + 1 , debuginfo );
@@ -363,7 +363,7 @@ debuginfo_macros_statement( 41 );
 								newbegin[ charcount ] = 0;
 								begin = newbegin;
 								ptr = &newbegin[ charcount ];
-								ptr++;
+								++ptr;
 							}
 							else
 							{
@@ -776,7 +776,7 @@ goto_return:
 						}
 						if( (size_t)( ptr - oldsrcbegin ) >= oldsrccharcount )
 						{
-							ptr++;
+							++ptr;
 							break;
 						}
 					}
@@ -794,7 +794,7 @@ goto_next_old:
 						}
 						if( (size_t)( ptr - newsrcbegin ) >= newsrccharcount )
 						{
-							ptr++;
+							++ptr;
 							break;
 						}
 					}

@@ -76,8 +76,8 @@ namespace booldog
 						res->seterrno();
 #endif
 					return res->succeeded();
-				};
-			};
+                                }
+                        }
 			namespace path
 			{
 				namespace mbs
@@ -281,7 +281,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -354,7 +354,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -373,7 +373,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -483,7 +483,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -502,7 +502,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -546,7 +546,7 @@ goto_return:
 									}
 									if( (size_t)( ptr - begin ) >= charcount )
 									{
-										ptr++;
+										++ptr;
 										break;
 									}
 								}
@@ -617,7 +617,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -635,7 +635,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -674,7 +674,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -713,7 +713,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -824,7 +824,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -843,7 +843,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -888,7 +888,7 @@ goto_return:
 									}
 									if( (size_t)( ptr - begin ) >= charcount )
 									{
-										ptr++;
+										++ptr;
 										break;
 									}
 								}
@@ -1166,7 +1166,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -1214,7 +1214,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -1254,7 +1254,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -1273,7 +1273,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -1313,7 +1313,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -1331,7 +1331,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
@@ -1371,7 +1371,7 @@ goto_return:
 							}
 							if( (size_t)( ptr - begin ) >= charcount )
 							{
-								ptr++;
+								++ptr;
 								break;
 							}
 						}
