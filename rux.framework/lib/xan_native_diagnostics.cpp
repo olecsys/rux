@@ -37,13 +37,13 @@ namespace rux
 #ifdef __WINDOWS__
 #else									
 			::booldog::result_mbchar pathname(&easymixed);
-			if(::booldog::utils::string::mbs::sprintf(&pathname, pathname.mballocator, debuginfo_macros, "/proc/%u/fd"
+			if(::booldog::utils::string::mbs::format(&pathname, pathname.mballocator, debuginfo_macros, "/proc/%u/fd"
 				, (::booldog::uint32)::rux::diagnostics::process::get_process_id()))
 			{
 				if(::booldog::io::directory::mbs::listdir(0, &easymixed, pathname.mbchar
 					, ::rux::diagnostics::descriptors_count_callback, &threads))
 				{
-					if(::booldog::utils::string::mbs::sprintf(&pathname, pathname.mballocator, debuginfo_macros, "/proc/%u/maps"
+					if(::booldog::utils::string::mbs::format(&pathname, pathname.mballocator, debuginfo_macros, "/proc/%u/maps"
 						, (::booldog::uint32)::rux::diagnostics::process::get_process_id()))
 					{
 						::booldog::io::directory::mbs::listdir(0, &easymixed, pathname.mbchar
@@ -79,7 +79,7 @@ namespace rux
 			::booldog::allocators::easy::heap easyheap;
 			::booldog::allocators::single_threaded::mixed<1024> easymixed(&easyheap);
 			::booldog::result_mbchar pathname(&easymixed);
-			if(::booldog::utils::string::mbs::sprintf(&pathname, pathname.mballocator, debuginfo_macros, "/proc/%u/task"
+			if(::booldog::utils::string::mbs::format(&pathname, pathname.mballocator, debuginfo_macros, "/proc/%u/task"
 				, (::booldog::uint32)::rux::diagnostics::process::get_process_id()))
 			{
 				::booldog::io::directory::mbs::listdir(0, &easymixed, pathname.mbchar
