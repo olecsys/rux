@@ -945,8 +945,7 @@ dll_internal void pre_initialize( void )
 		}
 	}
 	declare_stack_variable( char , error_string , 1024 );
-	::rux::diagnostics::os::get_os( ::rux::engine::_globals->_os , 128 , error_string , 1024 );
-	rux_get_hostname( ::rux::engine::_globals->_hostname , 256 );
+	::rux::diagnostics::os::get_os( ::rux::engine::_globals->_os , 128 , error_string , 1024 );	
 	rux_get_executable_filename_only( ::rux::engine::_globals->_executable );
 	rux_get_executable_directory( ::rux::engine::_globals->_executable_directory );
 #ifdef __WINDOWS__
@@ -1104,6 +1103,7 @@ dll_internal ::rux::byte post_deinitialize( void )
 };
 void start( void* )
 {
+  rux_get_hostname(::rux::engine::_globals->_hostname, 256);
 	::rux::engine::_globals->_engine_started = 1;
 	{
 		//LAZY_PERFORMANCE;

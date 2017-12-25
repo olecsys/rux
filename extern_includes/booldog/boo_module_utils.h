@@ -72,20 +72,20 @@ namespace booldog
 						goto goto_return;
 					}
 					
-					::booldog::utils::string::mbs::sprintf( &mbchar , allocator , debuginfo , "/proc/%u/maps" 
-						, (::booldog::uint32)getpid() );
+					::booldog::utils::string::mbs::format(&mbchar, allocator, debuginfo, "/proc/%u/maps"
+						, (::booldog::uint32)getpid());
 					
 					if( ::booldog::io::file::mbsopen( &resfile , allocator , mbchar.mbchar 
 						, ::booldog::enums::io::RDONLY , 0 , false , debuginfo ) )
 					{
 						::booldog::result_size index;
 						::booldog::result_buffer buffer( allocator );
-						while( resfile.file->readline< 64 >( &buffer , allocator , debuginfo ) )
+						while(resfile.file->readline< 64 >(buffer, debuginfo))
 						{
-							if( buffer.bufdatasize == 0 )
+							if(buffer.bufdatasize == 0)
 								break;
-							::booldog::utils::string::mbs::indexof( &index , false , (char*)buffer.buf
-								, 0 , buffer.bufdatasize , modulename , 0 , SIZE_MAX , debuginfo );
+							::booldog::utils::string::mbs::indexof(&index, false, (char*)buffer.buf
+								, 0, buffer.bufdatasize, modulename, 0, SIZE_MAX, debuginfo);
 							if( index.sres != SIZE_MAX )
 							{
 								::booldog::result_size index0;
@@ -170,20 +170,20 @@ goto_return:
 #ifdef __ANDROID__
 						//goto goto_return;
 						::booldog::result_mbchar mbchar( res->mballocator );
-						::booldog::utils::string::mbs::sprintf( &mbchar , res->mballocator , debuginfo , "/proc/%u/maps" 
-							, (::booldog::uint32)getpid() );
+						::booldog::utils::string::mbs::format(&mbchar, res->mballocator, debuginfo, "/proc/%u/maps" 
+							, (::booldog::uint32)getpid());
 						::booldog::result_file resfile;
 						if( ::booldog::io::file::mbsopen( &resfile , res->mballocator , mbchar.mbchar 
 							, ::booldog::enums::io::RDONLY , 0 , false , debuginfo ) )
 						{
 							::booldog::result_size index;
 							::booldog::result_buffer buffer( res->mballocator );
-							while( resfile.file->readline< 64 >( &buffer , res->mballocator , debuginfo ) )
+							while(resfile.file->readline< 64 >(buffer, debuginfo))
 							{
-								if( buffer.bufdatasize == 0 )
+								if(buffer.bufdatasize == 0)
 									break;
-								::booldog::utils::string::mbs::indexof( &index , false , (char*)buffer.buf
-									, 0 , buffer.bufdatasize , "/" , 0 , 1 , debuginfo );
+								::booldog::utils::string::mbs::indexof(&index, false, (char*)buffer.buf
+									, 0, buffer.bufdatasize, "/", 0, 1, debuginfo);
 								if( index.sres != SIZE_MAX )
 								{
 									::booldog::module_handle findmodule_handle = dlopen( (char*)&buffer.buf[ index.sres ]

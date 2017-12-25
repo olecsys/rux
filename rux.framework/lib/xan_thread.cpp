@@ -170,7 +170,8 @@ namespace rux
 					::rux::threading::XThread::Sleep( 1 );
 				_event->Set( __FILE__ , __LINE__ );
 #ifdef __WINDOWS__
-				QueueUserAPC( EmptyFunction , _thread_handle , (ULONG_PTR)this );
+        if(_thread_handle)
+				  QueueUserAPC( EmptyFunction , _thread_handle , (ULONG_PTR)this );
 				Sleep( 1 );
 				if( _thread_id != GetCurrentThreadId() )
 #elif defined( __UNIX__ )

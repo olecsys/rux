@@ -878,7 +878,7 @@ namespace rux
 				}
 				if(resfile.succeeded())
 				{					
-					::booldog::utils::string::mbs::sprintf(mbchar0, mbchar0->mballocator, debuginfo_macros, "%u", (::booldog::uint32)getpid());
+					::booldog::utils::string::mbs::format(mbchar0, mbchar0->mballocator, debuginfo_macros, "%u", (::booldog::uint32)getpid());
 					size_t written = 0;
 					resfile.file->write(0, (::booldog::byte*)mbchar0->mbchar, mbchar0->mblen, SIZE_MAX, written);
 					resfile.file->close(&resfile);
@@ -935,7 +935,7 @@ namespace rux
 
 				va_list ap;
 				va_start(ap, format);
-				::booldog::utils::string::mbs::sprintf(mbchar, mbchar->mballocator, format, ap, debuginfo_macros);
+				::booldog::utils::string::mbs::format(mbchar, mbchar->mballocator, format, ap, debuginfo_macros);
 				va_end(ap);				
 						
 				::booldog::utils::time::posix::mbs::tostring<16>(*dst, "%Y%m%d %H:%M:%S,%MS - ", now);
@@ -1220,7 +1220,7 @@ namespace rux
 					, ::booldog::enums::io::file_mode_read, 0))
 				{
 					::booldog::result_buffer resbuf(mbchar0->mballocator);
-					if(resfile.file->readline<16>(&resbuf, resbuf.allocator))
+					if(resfile.file->readline<16>(resbuf))
 					{
 						::booldog::utils::string::mbs::assign<16>(0, mbchar0->mballocator, false, 0, mbchar0->mbchar,
 							mbchar0->mblen, mbchar0->mbsize, (char*)resbuf.buf, 0, SIZE_MAX);

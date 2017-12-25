@@ -11,7 +11,7 @@
 #define BOOLDOG_MEM_ALIGN_SIZE __ARM_ALIGN_MAX_STACK_PWR
 #else
 #ifdef __ELBRUS__
-#define BOOLDOG_MEM_ALIGN_SIZE 16 
+#define BOOLDOG_MEM_ALIGN_SIZE 16
 #else
 #ifdef __WINDOWS__
 #ifdef __x64__
@@ -126,23 +126,21 @@ namespace booldog
 		template< class booclass >
 		booinline bool insert( size_t index , const void* dst , size_t dstsize , size_t dst_allocsize , size_t dstremovesize , const void* src , size_t srcsize )
 		{
-			if( srcsize )
+			if(index > dstsize)
 			{
-				if( index > dstsize )
-				{
-					index = dstsize;
-					dstremovesize = 0;
-				}
-				else if( index + dstremovesize > dstsize )
-					dstremovesize = dstsize - index;
-				if( srcsize + dstsize - dstremovesize > dst_allocsize )
-					return false;
-
-				::booldog::byte* dstptr = (::booldog::byte*)dst;
-				if( dstsize > index + dstremovesize )
-					::memmove( &dstptr[ ( index + srcsize ) * sizeof( booclass ) ] , &dstptr[ ( index + dstremovesize ) * sizeof( booclass ) ] , ( dstsize - index - dstremovesize ) * sizeof( booclass ) );
-				::memmove( &dstptr[ index * sizeof( booclass ) ] , src , srcsize * sizeof( booclass ) );
+				index = dstsize;
+				dstremovesize = 0;
 			}
+			else if(index + dstremovesize > dstsize)
+				dstremovesize = dstsize - index;
+			if(srcsize + dstsize - dstremovesize > dst_allocsize)
+				return false;
+
+			::booldog::byte* dstptr = (::booldog::byte*)dst;
+			if(dstsize > index + dstremovesize)
+				::memmove(&dstptr[(index + srcsize) * sizeof(booclass)], &dstptr[(index + dstremovesize) * sizeof(booclass)]
+						  , (dstsize - index - dstremovesize) * sizeof(booclass));
+			::memmove(&dstptr[index * sizeof(booclass)], src, srcsize * sizeof(booclass));
 			return true;
 		};
 		template< class booclass >
