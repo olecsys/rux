@@ -681,7 +681,7 @@ namespace rux
 			dll_internal ::rux::uint32 _display_frequencies[ 32 ] = {0};
 			dll_internal ::rux::uint32 _display_bits[ 32 ] = {0};
 			dll_internal size_t _displays_count = 0;
-			dll_internal bool _gui_schedule_processing = false;
+			dll_internal ::rux::gui::engine::schedule* _gui_schedule_processing = 0;
 			dll_internal bool _gui_schedule_delayed_delete = false;
 #ifdef __WINDOWS__
 #elif defined( __UNIX__ )
@@ -1003,8 +1003,7 @@ namespace rux
 				rux::gui::engine::schedule* schedule = 0;
 				if( ::rux::gui::engine::_is_pump_message == 1 )
 				{
-					::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteLock( __FILE__ , __FUNCTION__ , __LINE__ );
-					::rux::gui::engine::_gui_schedule_processing = true;
+					::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteLock( __FILE__ , __FUNCTION__ , __LINE__ );					
 					if( ::rux::engine::_globals->_gui_globals->_gui_schedule->ItemsCount() > 0 )
 					{
 						void* max = (void*)0xffffffff;
@@ -1015,7 +1014,7 @@ namespace rux
 						{
 							schedule = ::rux::engine::_globals->_gui_globals->_gui_schedule->operator[]( schedule_index );
 							if( schedule )
-							{
+							{                
 								if( schedule->_execute_time > now )
 									schedule->_execute_time = now;
 								if( now - schedule->_execute_time >= schedule->_timeout )
@@ -1028,7 +1027,9 @@ namespace rux
 										::booldog::interlocked::exchange_pointer(&schedule->_dispatcher, max);
 																		
 									::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteUnlock();
+                  ::rux::gui::engine::_gui_schedule_processing = schedule;
 									fdispatcher(schedule->_param);
+                  ::rux::gui::engine::_gui_schedule_processing = 0;
 									::booldog::interlocked::exchange_pointer(&schedule->_dispatcher, (void*)fdispatcher);
 									if(::rux::gui::engine::_gui_schedule_delayed_delete)
 									{
@@ -1045,7 +1046,6 @@ namespace rux
 							}
 						}
 					}
-					::rux::gui::engine::_gui_schedule_processing = false;
 					::rux::engine::_globals->_gui_globals->_cs_gui_schedule->WriteUnlock();
 				}
 				delay_tickcount = (::rux::XTime::GetTickCount() - delay_tickcount);
@@ -1286,7 +1286,7 @@ namespace rux
 						while(::booldog::interlocked::compare_exchange_pointer(&schedule->_dispatcher, 0, 0) == max)
 							::booldog::threading::sleep(1);
 					}
-					else if(::rux::gui::engine::_gui_schedule_processing)
+					else if(::rux::gui::engine::_gui_schedule_processing == schedule)
 						::rux::gui::engine::_gui_schedule_delayed_delete = true;
 					if(::rux::gui::engine::_gui_schedule_delayed_delete == false)
 						::rux::engine::free_object< ::rux::gui::engine::schedule >(schedule);

@@ -392,7 +392,7 @@ namespace rux
 			extern dll_internal ::rux::uint32 _display_frequencies[ 32 ];
 			extern dll_internal ::rux::uint32 _display_bits[ 32 ];
 			extern dll_internal size_t _displays_count;
-			extern dll_internal bool _gui_schedule_processing;
+			extern dll_internal ::rux::gui::engine::schedule* _gui_schedule_processing;
 			extern dll_internal bool _gui_schedule_delayed_delete;
 #ifdef __WINDOWS__
 			LRESULT CALLBACK WndProc( HWND hwnd , rux::uint32 msg , WPARAM wparam , LPARAM lparam );
