@@ -2,7 +2,7 @@
 
 function usage() {
 	local script=$0
-	__funcerror="Usage: $script [-s tests|rux.configure] [-q true|false] [-a x86|x64] 
+	__funcerror="Usage: $script [-s tests|rux_configure] [-q true|false] [-a x86|x64] 
 -s(skip tests, rux.configure)	
 -q(quiet true, false)
 -a(architecture x86, x64)
@@ -40,7 +40,7 @@ function main() {
 		for skip in "${skips[@]}"
 		do
 			case $skip in
-			rux.configure) skip_rux_configure=1
+			rux_configure) skip_rux_configure=1
 			;;
 			tests) skip_tests=1
 			;;
