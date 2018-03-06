@@ -439,7 +439,7 @@ namespace rux
 					&& (int32)( control->get_Top() + control->get_Height() ) >= y ? 1 : 0;
 			};
 			template< class T >
-			rux_inline float rux_try_get_left( T* control , ::rux::uint8 relative_to_parent = 0 , float* cache_left_ptr = NULL )
+			rux_inline float rux_try_get_left( T* control , ::rux::uint8 relative_to_parent, float* cache_left_ptr)
 			{	
 				rux_interlocked_return inited_res = 0;
 				float val = 0.f;
@@ -659,7 +659,7 @@ namespace rux
 				return val;
 			};
 			template< class T >
-			rux_inline float rux_try_get_top( T* control , ::rux::uint8 relative_to_parent = 0 , float* cache_top_ptr = NULL )
+			rux_inline float rux_try_get_top( T* control , ::rux::uint8 relative_to_parent, float* cache_top_ptr)
 			{	
 				rux_interlocked_return inited_res = 0;
 				float val = 0.f;
@@ -883,7 +883,7 @@ namespace rux
 				else\
 					*cache_width = 0
 			template< class T >
-			rux_inline float rux_try_get_width( T* control , float* cache_width_ptr = NULL )
+			rux_inline float rux_try_get_width( T* control , float* cache_width_ptr)
 			{	
 				rux_interlocked_return inited_res = 0;
 				float val = 0.f;
@@ -1468,7 +1468,7 @@ namespace rux
 				else\
 					*cache_height = 0
 			template< class T >
-			rux_inline float rux_try_get_height( T* control , float* cache_height_ptr = NULL )
+			rux_inline float rux_try_get_height( T* control , float* cache_height_ptr)
 			{	
 				rux_interlocked_return inited_res = 0;
 				float val = 0.f;

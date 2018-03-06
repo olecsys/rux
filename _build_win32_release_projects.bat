@@ -1,1 +1,2 @@
-@call _build_projects.bat "_build_win32_release.bat" "x86"
+@set bat_dir=%~dp0
+@call  "%bat_dir%scripts\build.bat" -a x86

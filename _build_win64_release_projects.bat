@@ -1,1 +1,2 @@
-@call _build_projects.bat "_build_win64_release.bat" "x64"
+@set bat_dir=%~dp0
+@call  "%bat_dir%scripts\build.bat" -a x64

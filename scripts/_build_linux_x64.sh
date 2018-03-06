@@ -1,47 +1,18 @@
 #!/bin/bash
-old_dir="`pwd`/`basename "$0"`"
-old_dir=`dirname "$old_dir"`
-cd "`dirname "$0"`"
-script_dir="`pwd`/`basename "$0"`"
-script_dir=`dirname "$script_dir"`
 
-os=linux
-platform=x64
-rebuild_success="true"
+function main() {
+	local old_dir="`pwd`/`basename "$0"`"
+	old_dir=`dirname "$old_dir"`
+	cd "`dirname "$0"`"
+	local script_dir="`pwd`/`basename "$0"`"
+	script_dir=`dirname "$script_dir"`
+	cd "$old_dir"
 
-if [ $rebuild_success = "true" ]
-then	
-	rebuild_success="false"
-	"$script_dir/../tools/rux.configure/$os/$platform/rux.configure" --build-project "$script_dir/../rux.framework/build.ruxprj" --configuration "$os $platform" && rebuild_success="true"
-fi
-if [ $rebuild_success = "true" ]
-then	
-	rebuild_success="false"
-	"$script_dir/../tools/rux.configure/$os/$platform/rux.configure" --build-project "$script_dir/../rux.framework/test/test.ruxprj" --configuration "$os $platform" && rebuild_success="true"
-fi
-if [ $rebuild_success = "true" ]
-then	
-	rebuild_success="false"
-	"$script_dir/../tools/rux.configure/$os/$platform/rux.configure" --build-project "$script_dir/../rux.engine/build.ruxprj" --configuration "$os $platform" && rebuild_success="true"
-fi
-if [ $rebuild_success = "true" ]
-then	
-	rebuild_success="false"
-	"$script_dir/../build/$os/$platform/rux.basis.test" && rebuild_success="true"
-fi
-if [ $rebuild_success = "true" ]
-then	
-	rebuild_success="false"
-	"$script_dir/../tools/rux.configure/$os/$platform/rux.configure" --build-project "$script_dir/../rux.configure/build.ruxprj" --configuration "$os $platform" && rebuild_success="true"
-fi
-red='\e[0;31m'
-green='\e[0;32m'
-nocolor='\e[0m'
-if [ $rebuild_success = "true" ]
-then
-	echo -e "${green}rux project building succeeded.Press <ENTER> to continue${nocolor}"
+	"$script_dir/build.sh" -a x64	
+}
+main $@
+if [ $__funcfailed -eq 0 ]; then
+	exit 0
 else
-	echo -e "${red}rux project building failed.Press <ENTER> to continue${nocolor}"
+	exit 1
 fi
-cd "$old_dir"
-read
