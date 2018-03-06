@@ -65,8 +65,8 @@ function main() {
 
 		if [ $__funcfailed -eq 0 ]; then
 			if [ $iswindows -eq 1 ]; then
-				"$(msbuild2010)" "$script_dir../rux.framework/rux.framework.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:Clean
-				"$(msbuild2010)" "$script_dir../rux.framework/rux.framework.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:build || __funcfailed=1	
+				"$msbuild2010" "$script_dir/../rux.framework/rux.framework.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:Clean
+				"$msbuild2010" "$script_dir/../rux.framework/rux.framework.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:build || __funcfailed=1	
 			else
 				"$script_dir/../tools/rux.configure/$os/$platform/rux.configure" --build-project "$script_dir/../rux.framework/build.ruxprj" --configuration "$os $platform" || __funcfailed=1
 			fi
@@ -74,8 +74,8 @@ function main() {
 		if [ $skip_tests -eq 0 ]; then
 			if [ $__funcfailed -eq 0 ]; then
 				if [ $iswindows -eq 1 ]; then
-					"$(msbuild2010)" "$script_dir../rux.framework/test/test.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:Clean
-					"$(msbuild2010)" "$script_dir../rux.framework/test/test.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:build || __funcfailed=1
+					"$msbuild2010" "$script_dir/../rux.framework/test/test.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:Clean
+					"$msbuild2010" "$script_dir/../rux.framework/test/test.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:build || __funcfailed=1
 				else
 					"$script_dir/../tools/rux.configure/$os/$platform/rux.configure" --build-project "$script_dir/../rux.framework/test/test.ruxprj" --configuration "$os $platform" || __funcfailed=1
 				fi
@@ -83,8 +83,8 @@ function main() {
 		fi
 		if [ $__funcfailed -eq 0 ]; then
 			if [ $iswindows -eq 1 ]; then
-				"$(msbuild2010)" "$script_dir../rux.engine/rux.engine.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:Clean
-				"$(msbuild2010)" "$script_dir../rux.engine/rux.engine.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:build || __funcfailed=1	
+				"$msbuild2010" "$script_dir/../rux.engine/rux.engine.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:Clean
+				"$msbuild2010" "$script_dir/../rux.engine/rux.engine.vcxproj" //verbosity:n //p:Configuration=Release //p:Platform=$platform //t:build || __funcfailed=1	
 			else
 				"$script_dir/../tools/rux.configure/$os/$platform/rux.configure" --build-project "$script_dir/../rux.engine/build.ruxprj" --configuration "$os $platform" || __funcfailed=1
 			fi
