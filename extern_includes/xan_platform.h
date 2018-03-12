@@ -3,15 +3,13 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#if defined( _WIN64 ) || defined( WIN64 )
+#if defined(_WIN64) || defined(WIN64)
 	#define __WINDOWS__
 	#define __x64__
-#elif defined( WIN32 )
+#elif defined(WIN32) || defined(_WIN32)
 	#define __WINDOWS__
 	#define __x86__
-#endif
-
-#ifdef __GNUC__
+#elif defined(__GNUC__)
 	#ifdef __linux__
 		#if defined( __ANDROID__ ) || defined( ANDROID )
 			#ifndef __ANDROID__
@@ -67,10 +65,11 @@
 		#endif
 		#define __UNIX__
 	#endif
-#endif
-#if defined( __SUNPRO_CC_COMPAT ) || defined( __sun ) || defined( __sun__ )
+#elif defined( __SUNPRO_CC_COMPAT ) || defined( __sun ) || defined( __sun__ )
 	#define __x64__
 	#define __SOLARIS__
 	#define __UNIX__
+#else
+#error "Cannot find OS and architecture"
 #endif
 #endif
