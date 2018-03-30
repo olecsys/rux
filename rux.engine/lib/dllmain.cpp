@@ -24,6 +24,8 @@
 #ifdef __UNIX__
 #include <mcheck.h>
 #endif
+#include "iv_version.h"
+IVVERSION
 
 #ifdef __WINDOWS__
 exports LONG tempexception_filter( _EXCEPTION_POINTERS *ExceptionInfo )
