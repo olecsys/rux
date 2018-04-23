@@ -130,7 +130,7 @@ namespace rux
 				::rux::byte empty_image_rendered = 1;
 				::rux::byte new_image = 0;
 				::rux::media::Frame* frame = 0;
-				READ_LOCK( _cs_frame );				
+				READ_LOCK( _cs_frame );
 				frame = cpp_ptr_cast( ::rux::media::Frame* , _frame.get_GCRef( 0 , 1 ) );
 				if( frame )
 				{
@@ -260,7 +260,15 @@ namespace rux
 			{
 				(*this)()->set_Frame( frame );
 			};
-			void Image::set_FrameData( char* data_ptr , ::rux::uint32 width , ::rux::uint32 height , ::rux::media::XEnum_Fourcc fcc , ::rux::int16 bit_count , ::rux::byte copy )
+      void Image::check_image_data(::rux::uint32 width , ::rux::uint32 height , ::rux::media::XEnum_Fourcc fcc , ::rux::int16 bit_count) {
+        READ_LOCK( _cs_frame );				
+				::rux::media::Frame* frame = _frame();
+				frame->AddRef(__FILE__, __LINE__);
+				_cs_frame.ReadUnlock();
+				frame->check_image_data(width, height, fcc, bit_count);
+				frame->Release(__FILE__, __LINE__);
+      }
+			void Image::set_FrameData(char* data_ptr, ::rux::uint32 width , ::rux::uint32 height , ::rux::media::XEnum_Fourcc fcc , ::rux::int16 bit_count , ::rux::byte copy )
 			{
 				READ_LOCK( _cs_frame );				
 				::rux::media::Frame* frame = _frame();

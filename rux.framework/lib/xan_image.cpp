@@ -1693,6 +1693,94 @@ namespace rux
 		{
 			return _bitmap_info_header._width;
 		};
+    void Frame::check_image_data(::rux::uint32 width, ::rux::uint32 height, ::rux::media::XEnum_Fourcc fcc
+      , ::rux::int16 bits_count) {
+      WRITE_LOCK(_cs_image_data);
+			if(_media_image)
+			{
+				_media_image->release();
+				_media_image = 0;
+			}
+			if(width > 0)
+			{
+				if(height > 0)
+				{
+					_bitmap_info_header._size_image = 0;
+					if(fcc == ::rux::media::XEnum_Fourcc_I420)
+					{
+						_bitmap_info_header._size_image = width * height + width * height / 2;
+						_bitmap_info_header._compression = fcc;
+						_bitmap_info_header._width = width;
+						_bitmap_info_header._height = height;		
+					}
+					else if(fcc == ::rux::media::XEnum_Fourcc_YV12)
+					{
+						_bitmap_info_header._size_image = width * height + width * height / 2;
+						_bitmap_info_header._compression = fcc;
+						_bitmap_info_header._width = width;
+						_bitmap_info_header._height = height;		
+					}
+					else if(fcc == ::rux::media::XEnum_Fourcc_YUYV)
+					{
+						_bitmap_info_header._size_image = 2 * width * height;
+						_bitmap_info_header._compression = fcc;
+						_bitmap_info_header._width = width;
+						_bitmap_info_header._height = height;		
+					}
+					else if(fcc == ::rux::media::XEnum_Fourcc_RGB
+						|| fcc == ::rux::media::XEnum_Fourcc_BI_RGB)
+					{
+						if(bits_count == 8)
+						{
+							_bitmap_info_header._bit_count = 8;
+							_bitmap_info_header._size_image = width * height;
+							_bitmap_info_header._compression = fcc;
+							_bitmap_info_header._width = width;
+							_bitmap_info_header._height = height;		
+						}
+						else if(bits_count == 16)
+						{
+							_bitmap_info_header._bit_count = 16;
+							_bitmap_info_header._size_image = width * height * 2;
+							_bitmap_info_header._compression = fcc;
+							_bitmap_info_header._width = width;
+							_bitmap_info_header._height = height;		
+						}
+						else if(bits_count == 24)
+						{
+							_bitmap_info_header._bit_count = 24;
+							_bitmap_info_header._size_image = width * height * 3;
+							_bitmap_info_header._compression = fcc;
+							_bitmap_info_header._width = width;
+							_bitmap_info_header._height = height;		
+						}
+						else if(bits_count == 32)
+						{
+							_bitmap_info_header._bit_count = 32;
+							_bitmap_info_header._size_image = width * height * 4;
+							_bitmap_info_header._compression = fcc;
+							_bitmap_info_header._width = width;
+							_bitmap_info_header._height = height;		
+						}
+					}
+					if(_image_data && (_image_data_size < _bitmap_info_header._size_image))	{
+						::rux::engine::free_mem(_image_data);
+						_image_data = 0;
+						_image_data_size = 0;
+					}
+					if(_image_data == 0 && _bitmap_info_header._size_image > 0)
+					{							
+						_image_data = alloc_array_macros(::rux::uint8, _bitmap_info_header._size_image);
+						_image_data_size = _bitmap_info_header._size_image;
+					}
+					if(_image_data) {
+            _image_data[0] = 16;
+            _image_data[_bitmap_info_header._size_image - 1] = 16;
+          }
+				}
+			}
+			_cs_image_data.WriteUnlock();
+    }
 		implement_duplicate_internal_result_function_with_const( rux::uint32 , Frame , get_ImageHeight );
 		rux::uint32 Frame::get_ImageHeight( void ) const
 		{

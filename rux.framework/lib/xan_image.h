@@ -45,6 +45,7 @@ namespace rux
 			::rux::int32 get_Fourcc( void ) const;
 			rux::uint32 get_ImageHeight( void ) const;
 			rux::uint32 get_ImageWidth( void ) const;
+      void check_image_data(::rux::uint32 width, ::rux::uint32 height, ::rux::media::XEnum_Fourcc fcc, ::rux::int16 bit_count);
 		begin_declare_rux_class_members( Frame );
 			::rux::threading::RdWrLock _cs_image_data;
 			uint8* _image_data;
