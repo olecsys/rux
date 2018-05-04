@@ -49,9 +49,10 @@
 			"linux x64":
 			{
 				"architecture":"x64",
-				"compiler":"g++",
+				"toolchain_dir":"/usr/local/debian6toolchain/bin/",
+				"compiler":"$(toolchain_dir)g++",
 				"compiler_flags":"-m64",			
-				"linker":"g++ -shared -fPIC -m64",
+				"linker":"$(toolchain_dir)g++ -shared -fPIC -m64",
 				"linker_flags":"-Wl,-E,--no-undefined,--build-id=sha1,-O2,-flto,--gc-sections,--strip-all",
 				"include_paths":
 				[

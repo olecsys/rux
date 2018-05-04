@@ -57,9 +57,10 @@
 			"linux x64":
 			{
 				"architecture":"x64",
-				"compiler":"g++",
+				"toolchain_dir":"/usr/local/debian6toolchain/bin/",
+				"compiler":"$(toolchain_dir)g++",
 				"compiler_flags":"-m64",
-				"archiver":"ar",
+				"archiver":"$(toolchain_dir)ar",
 				"archiver_flags":"rcus",
 				"asm_compiler":"yasm",
 				"asm_compiler_flags":"-a x86 -f elf -m amd64 -p nasm",
