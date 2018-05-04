@@ -334,7 +334,7 @@ dll_internal ::rux::int32 rux_index_of( const char* destination , char letter )
 dll_internal ::rux::int32 rux_index_of( const char* destination , const char* to_find )
 {
 	::rux::int32 result = -1;
-	if( destination != '\0' && to_find != '\0' )
+	if(destination && to_find && *destination != '\0' && *to_find != '\0')
 	{
 		char letter0 = ' ' , letter1 = to_find[ 0 ];
 		::rux::int32 index0 = 0 , index1 = 0;
