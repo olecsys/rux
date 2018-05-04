@@ -317,8 +317,15 @@ namespace rux
 								memset( u32rgba_ptr , 0 , gray_count * sizeof( ::rux::uint32 ) );
 								for( size_t h = 0 ; h < _glyph_slot->bitmap.rows ; h++ )
 								{
-									for( size_t w = 0 ; w < _glyph_slot->bitmap.width ; w++ )
-										u32rgba_ptr[ w + ( h + max_horiBearingY - _glyph_slot->bitmap_top ) * _glyph_slot->bitmap.width ] = ( _glyph_slot->bitmap.buffer[ w + _glyph_slot->bitmap.width * h ] << 24 ) | 0x00ffffff;
+									for( size_t w = 0 ; w < _glyph_slot->bitmap.width ; w++ ) {
+                    size_t index = w + ( h + max_horiBearingY - _glyph_slot->bitmap_top ) * _glyph_slot->bitmap.width;
+                    if(index >= u32rgba_ptr_size) {
+                      break;
+                    }
+                    else {
+										  u32rgba_ptr[index] = (_glyph_slot->bitmap.buffer[w + _glyph_slot->bitmap.width * h] << 24) | 0x00ffffff;
+                    }
+                  }
 								}
 								if( x + _glyph_slot->bitmap.width > _atlas_width )
 								{

@@ -57,6 +57,7 @@ namespace rux
 				void set_ImageHeight( ::rux::int32 height );
 				static void dispatch_on_empty_image_rendered( void* param );
 				void set_OnEmptyImageRendered( ::rux::gui::events::on_event_t on_empty_image_rendered );
+        void check_image_data(::rux::uint32 width , ::rux::uint32 height , ::rux::media::XEnum_Fourcc fcc , ::rux::int16 bit_count);
 			};
 			class XImage : public XGCHandle<Image>
 			{

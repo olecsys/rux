@@ -2867,21 +2867,22 @@ namespace rux
 			{
 				::rux::byte convert = 0;
 				XEnumCodePage code_page = _code_page;
-				if( code_page != XEnumCodePage_UTF8 )
+				for(size_t index0 = 0;index0 < separators.Count();++index0)
 				{
-					for( size_t index0 = 0 ; index0 < separators.Count() ; index0++ )
-					{
-						if( code_page == XEnumCodePage_CP1251 || separators[ index0 ]._code_page != XEnumCodePage_CP1251 )
-						{
-							if( code_page != separators[ index0 ]._code_page )
-								convert = 1;
-							code_page = separators[ index0 ]._code_page;
-						}
-						if( code_page == XEnumCodePage_UTF8 )
-							break;
-					}
+          XEnumCodePage cp = separators[index0]._code_page;
+          if(code_page != cp) {
+            convert = 1;
+            if(code_page == XEnumCodePage_UTF8) {
+              break;
+            }
+            if(cp != XEnumCodePage_CP1251) 
+              code_page = cp;
+            if(code_page == XEnumCodePage_UTF8) {
+              break;
+            }
+          }
 				}
-				if( convert )
+				if(convert)
 				{
 					::rux::XString converted_this;
 					if( _code_page != code_page )
