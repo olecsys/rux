@@ -97,6 +97,7 @@ namespace rux
 			::rux::XString _output_file;
 			::rux::XBoolean _debug;
 			::rux::XArray< ::rux::XString > _merged_libs;
+			::rux::XString _ranlib;
 		end_declare_rux_class_members( CPPMakefileProject );
 			static CPPMakefileProject& load( const ::rux::XString configuration_name , const ::rux::XString& js , const ::rux::XString& relative_dir , ::rux::XString& error );
 			rux::String& generate_makefile( void );

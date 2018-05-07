@@ -127,6 +127,7 @@ function main() {
 	cd "$old_dir"
 }
 main $@
+export __funcfailed
 if [ $__funcfailed -eq 0 ]; then
 	exit 0
 else

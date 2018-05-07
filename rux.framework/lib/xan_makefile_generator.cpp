@@ -483,6 +483,7 @@ namespace rux
 								cpp_makefile_project()->_linker.set_ByRef( configuration.GetValue< ::rux::XString >( "linker" , found , 6 , 0 ) );
 								cpp_makefile_project()->_linker_flags.set_ByRef( configuration.GetValue< ::rux::XString >( "linker_flags" , found , 12 , 0 ) );
 								cpp_makefile_project()->_archiver.set_ByRef( configuration.GetValue< ::rux::XString >( "archiver" , found , 8 , 0 ) );
+								cpp_makefile_project()->_ranlib.set_ByRef( configuration.GetValue< ::rux::XString >("ranlib", found, 6, 0));
 								cpp_makefile_project()->_archiver_flags.set_ByRef( configuration.GetValue< ::rux::XString >( "archiver_flags" , found , 14 , 0 ) );
 								cpp_makefile_project()->_asm_compiler.set_ByRef( configuration.GetValue< ::rux::XString >( "asm_compiler" , found , 12 , 0 ) );
 								cpp_makefile_project()->_asm_compiler_flags.set_ByRef( configuration.GetValue< ::rux::XString >( "asm_compiler_flags" , found , 18 , 0 ) );
@@ -629,6 +630,8 @@ namespace rux
 								{
 									::rux::XString archiver;
 									archiver.set_ByRef( _archiver.ConvertToAnsi() );
+									::rux::XString ranlib;
+									ranlib.set_ByRef(_ranlib.ConvertToAnsi());
 									for( size_t index0 = 0 ; index0 < _merged_libs.Count() ; index0++ )
 									{
 										::rux::XString lib_path( _merged_libs[ index0 ] );
@@ -713,12 +716,15 @@ namespace rux
 											}
 											::rux::engine::free_mem( archiver_compress );
 											if( error.Length() == 0 )
-											{												
-												char* ranlib[] =
+											{		
+												if(ranlib.Length()) {
+													ranlib = "ranlib";
+												}
+												char* ranlib_params[] =
 												{
 													output_file.str()
 												};
-												if( ::rux::diagnostics::process::start_with_redirect( "ranlib" , ranlib , 1 , on_process_stdout , on_process_stderr , NULL , 0 , 0 , error_str ) != 0 )
+												if( ::rux::diagnostics::process::start_with_redirect(ranlib.str(), ranlib_params, 1, on_process_stdout, on_process_stderr, NULL , 0 , 0 , error_str ) != 0 )
 												{
 													if( error_str[ 0 ] != 0 )
 													{
