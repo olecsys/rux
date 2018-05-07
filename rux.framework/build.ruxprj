@@ -61,6 +61,7 @@
 				"compiler":"$(toolchain_dir)g++",
 				"compiler_flags":"-m64",
 				"archiver":"$(toolchain_dir)ar",
+				"ranlib":"$(toolchain_dir)ranlib",
 				"archiver_flags":"rcus",
 				"asm_compiler":"yasm",
 				"asm_compiler_flags":"-a x86 -f elf -m amd64 -p nasm",
