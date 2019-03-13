@@ -9,6 +9,7 @@ namespace rux
 	namespace system
 	{
 #ifdef __WINDOWS__
+#include <timeapi.h>
 		typedef MMRESULT (*timeGetDevCaps_t)( LPTIMECAPS ptc , UINT cbtc );
 		typedef MMRESULT (*timeBeginPeriod_t)( UINT uPeriod );
 		typedef MMRESULT (*timeEndPeriod_t)( UINT uPeriod );
