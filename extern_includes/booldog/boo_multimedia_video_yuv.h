@@ -5,12 +5,119 @@
 #endif
 #include "boo_multimedia_video_frame.h"
 #include "boo_multimedia_enums.h"
+
+#ifndef BOOLDOG_MALLOC
+#define BOOLDOG_MALLOC(size, allocation_data, allocation_info) malloc(size)
+#define BOOLDOG_REALLOC(pointer, size, allocation_udata, allocation_info) realloc(pointer, size)
+#define BOOLDOG_FREE(pointer, allocation_udata, allocation_info) free(pointer)
+#include <stdlib.h>
+#endif
 namespace booldog
 {
+  namespace enums
+  {
+    namespace multimedia {
+      typedef enum
+      {
+        chrominance_subsampling_444,
+        chrominance_subsampling_422,
+        chrominance_subsampling_420,
+        chrominance_subsampling_gray
+      } chrominance_subsampling;
+    }
+  }
 	namespace multimedia
 	{
 		namespace video
 		{
+      namespace planes
+      {
+        struct yuv 
+        { 
+          ::booldog::data::buffer _buffer;
+          unsigned char* _yuv[3];
+          int _strides[3];
+          int _width;
+          int _height;
+          ::booldog::enums::multimedia::chrominance_subsampling _chrominance_subsampling;
+        };
+				inline int copyfrom_yv12(yuv* dst, unsigned char* src, int width, int height, void* allocation_data, void* allocation_info)
+        {
+          allocation_data = allocation_data;
+          allocation_info = allocation_info;
+
+          dst->_width = width;
+          dst->_height = height;
+          dst->_chrominance_subsampling = ::booldog::enums::multimedia::chrominance_subsampling_420;
+          dst->_strides[0] = width;
+          dst->_strides[1] = dst->_strides[2] = width / 2;
+							
+          unsigned int size = 3 * width * height / 2;
+          if(size > dst->_buffer.allocsize) {
+            dst->_buffer.buf = BOOLDOG_REALLOC(dst->_buffer.buf, size, allocation_data, allocation_info);
+            if(dst->_buffer.buf == 0) {
+              int error = ::booldog::enums::result::booerr_type_cannot_alloc_memory;
+              return error;
+            }
+            dst->_buffer.allocsize = size;
+          }
+          dst->_buffer.size = size;
+          unsigned char* yuv = (unsigned char*)dst->_buffer.buf;
+          dst->_yuv[0] = yuv;
+          dst->_yuv[1] = yuv + dst->_strides[0] * height / 2;
+          dst->_yuv[2] = dst->_yuv[1] + dst->_strides[1] * height / 2;
+
+          unsigned char* y = dst->_yuv[0], * v = dst->_yuv[1], * u = dst->_yuv[2];
+          unsigned int y_offset = 0, uv_offset = 0, index = 0;
+          while(index < size)
+					{								
+            y[y_offset++] = src[index];
+            u[uv_offset] = src[++index];
+            y[y_offset++] = src[++index];
+            v[uv_offset++] = src[++index];
+						++index;
+          }
+          return 0;
+        }
+        inline int copyfrom_yuyv(yuv* dst, unsigned char* src, int width, int height, void* allocation_data, void* allocation_info)
+        {
+          allocation_data = allocation_data;
+          allocation_info = allocation_info;
+
+          dst->_width = width;
+          dst->_height = height;
+          dst->_chrominance_subsampling = ::booldog::enums::multimedia::chrominance_subsampling_422;
+          dst->_strides[0] = width;
+          dst->_strides[1] = dst->_strides[2] = width / 2;
+							
+          unsigned int size = 2 * width * height;
+          if(size > dst->_buffer.allocsize) {
+            dst->_buffer.buf = BOOLDOG_REALLOC(dst->_buffer.buf, size, allocation_data, allocation_info);
+            if(dst->_buffer.buf == 0) {
+              int error = ::booldog::enums::result::booerr_type_cannot_alloc_memory;
+              return error;
+            }
+            dst->_buffer.allocsize = size;
+          }
+          dst->_buffer.size = size;
+          unsigned char* yuv = (unsigned char*)dst->_buffer.buf;
+          dst->_yuv[0] = yuv;
+          dst->_yuv[1] = yuv + dst->_strides[0] * height;
+          dst->_yuv[2] = dst->_yuv[1] + dst->_strides[1] * height;
+
+          unsigned char* y = dst->_yuv[0], * u = dst->_yuv[1], * v = dst->_yuv[2];
+          unsigned int y_offset = 0, uv_offset = 0, index = 0;
+          while(index < size)
+					{								
+            y[y_offset++] = src[index];
+            u[uv_offset] = src[++index];
+            y[y_offset++] = src[++index];
+            v[uv_offset++] = src[++index];
+						++index;
+          }
+          return 0;
+        }
+      }
 			struct yuv
 			{
 				bool isallocated;
@@ -179,7 +286,7 @@ namespace booldog
 								res->booerr(::booldog::enums::result::booerr_type_cannot_alloc_memory);
 								return false;
 							}
-							::memcpy(y, vframe->data, y_size);
+							::memcpy(y, vframe->data, y_size); 
 							::memcpy(u, &vframe->data[y_size], v_size);
 							::memcpy(v, &vframe->data[y_size + v_size], u_size);
 							break;

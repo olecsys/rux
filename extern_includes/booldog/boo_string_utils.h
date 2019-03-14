@@ -514,7 +514,7 @@ goto_return:
 						const char* srcbegin = &src[ srccharindex ];
 						if( *srcbegin != 0 )
 						{
-							const char* srcbegin = &src[ srccharindex ];
+							srcbegin = &src[ srccharindex ];
 							const char* ptr = srcbegin;
 							for( ; ; )
 							{
@@ -657,7 +657,7 @@ goto_return:
 					const char* srcbegin = &src[srccharindex], * srcend = 0, * ptr = 0;
 					if(srccharcount == SIZE_MAX)
 					{
-						const char* ptr = srcbegin;
+						ptr = srcbegin;
 						for(;;)
 						{
 							switch(*ptr++)
@@ -1506,7 +1506,8 @@ goto_next:
 							wchar_t* newbegin = allocator->realloc_array< wchar_t >(0, charcount + 1, debuginfo);
 							if(newbegin)
 							{
-								::memcpy(newbegin, begin, charcount * sizeof(wchar_t));
+								size_t wcharcount = charcount * sizeof(wchar_t);
+								::memcpy(newbegin, begin, wcharcount);
 								newbegin[charcount] = 0;
 								begin = newbegin;
 								ptr = &newbegin[charcount];

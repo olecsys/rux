@@ -313,12 +313,12 @@ goto_return:
 								::memcpy( res->mbchar , begin , res->mblen );
 							res->mbchar[ res->mblen ] = 0;
 						
-							::booldog::result locres;
-							::booldog::utils::io::path::mbs::toabsolute( &locres , res->mbchar , res->mblen , res->mbsize );
-							if( locres.succeeded() == false )
+							::booldog::result locres1;
+							::booldog::utils::io::path::mbs::toabsolute( &locres1 , res->mbchar , res->mblen , res->mbsize );
+							if( locres1.succeeded() == false )
 							{
 								res->clear();
-								res->copy( locres );
+								res->copy( locres1 );
 							}
 						}
 						else
@@ -1326,12 +1326,12 @@ goto_return:
 							res->wchar[ res->wlen ] = 0;
 							res->wsize *= sizeof( wchar_t );
 						
-							::booldog::result locres;
-							::booldog::utils::io::path::wcs::toabsolute( &locres , res->wchar , res->wlen , res->wsize );
-							if( locres.succeeded() == false )
+							::booldog::result locres1;
+							::booldog::utils::io::path::wcs::toabsolute( &locres1 , res->wchar , res->wlen , res->wsize );
+							if( locres1.succeeded() == false )
 							{
 								res->clear();
-								res->copy( locres );
+								res->copy( locres1 );
 							}
 						}
 						else

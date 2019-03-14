@@ -6,6 +6,9 @@
 #include "boo_platform.h"
 
 #ifdef __WINDOWS__
+#ifndef WIN32_LEAN_AND_MEAN
+	#define WIN32_LEAN_AND_MEAN
+#endif
 #define boobegin_struct_pack( bytes ) __pragma( pack( push ) )\
 	__pragma( pack( bytes ) )\
 	__declspec( align( bytes ) )
@@ -20,8 +23,17 @@
 #define booexternc extern "C"
 #endif
 #ifdef __WINDOWS__
+#ifdef booexport
+#undef booexport
+#endif
 #define booexport booexternc __declspec(dllexport)
+#ifdef boointernal
+#undef boointernal
+#endif
 #define boointernal
+#ifdef booinline
+#undef booinline
+#endif
 #define booinline inline
 #define dlsym( handle , name ) GetProcAddress( handle , name )
 #elif defined( __UNIX__ )
@@ -118,8 +130,13 @@ namespace booldog
 		{
 			void* buf;
 			size_t size;
+      size_t allocsize;
+      buffer()
+				: buf(0), size(0), allocsize(0)
+			{
+			}
 			buffer(::booldog::byte* data, size_t datasize)
-				: buf(data), size(datasize)
+				: buf(data), size(datasize), allocsize(0)
 			{
 			}
 		};

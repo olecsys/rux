@@ -8,6 +8,8 @@
 #ifdef __WINDOWS__
 #include <WinSock2.h>
 #include <windows.h>
+#include <stdlib.h>
+#include <malloc.h>
 #elif defined( __UNIX__ )
 #include <sys/time.h>
 #include <time.h>
