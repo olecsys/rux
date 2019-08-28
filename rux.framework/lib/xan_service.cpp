@@ -1243,15 +1243,46 @@ namespace rux
 			}
 			return res;
 		}
+		struct listdir_info {
+			int stable_count;
+			int memory_count;
+		};
+		bool listdir_first_count(::booldog::allocator* allocator, void* udata, const char* pathname,
+                           const char* entry_name, ::booldog::enums::io::entry_type entry_type) {
+			if(entry_type != ::booldog::enums::io::directory) {
+				return true;
+			}
+			listdir_info* info00 = (listdir_info*)udata;
+
+			::booldog::result_size ressize;
+			::booldog::utils::string::mbs::indexof(
+				&ressize, false, entry_name, 0, SIZE_MAX, "stable_", 0, SIZE_MAX);
+			if(ressize.sres == 0) {
+				++info00->stable_count;
+				return true;
+			}
+			::booldog::utils::string::mbs::indexof(
+				&ressize, false, entry_name, 0, SIZE_MAX, "memory_", 0, SIZE_MAX);
+			if(ressize.sres == 0) {
+				++info00->memory_count;
+			}
+			return true;
+		}
 		void rename_stable_and_memory(::booldog::result_mbchar* mbchar0, ::booldog::result_mbchar* mbchar1)
 		{
 			::booldog::result res;
 			::booldog::result_bool resbool;
 			::booldog::result_mbchar exe_dir(mbchar0->mballocator), time_mbchar(mbchar0->mballocator)
-				, dst(mbchar0->mballocator);//, memory_toremove_mbchar(mbchar0->mballocator)
-				//, stable_toremove_mbchar(mbchar0->mballocator), toremove_mbchar(mbchar0->mballocator);
+				, dst(mbchar0->mballocator);
 
 			::booldog::utils::executable::mbs::directory<16>(&exe_dir, exe_dir.mballocator);
+
+			listdir_info info;
+			info.stable_count = 0;
+			info.memory_count = 0;
+
+			::booldog::io::directory::mbs::listdir(
+			0, mbchar0->mballocator, exe_dir.mbchar, listdir_first_count, &info);
 			
 			::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir.mblen, exe_dir.mbchar
 				, exe_dir.mblen, exe_dir.mbsize, &::booldog::io::mbs::slash, 0, 1);
@@ -1263,78 +1294,75 @@ namespace rux
 			::booldog::utils::time::posix::mbs::tostring<16>(time_mbchar, "_%Y%m%d_%H%M%S%MS", now);
 		
 			::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, 0, dst.mbchar
-				, dst.mblen, dst.mbsize, exe_dir.mbchar, 0, SIZE_MAX);
+				, dst.mblen, dst.mbsize, exe_dir.mbchar, 0, SIZE_MAX);			
 
-
-			::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir_len, exe_dir.mbchar
-				, exe_dir.mblen, exe_dir.mbsize, "stable", 0, SIZE_MAX);
-		
-			bool stable_renamed = false;
-
-			::booldog::utils::io::directory::mbs::exists(&resbool, mbchar0->mballocator, exe_dir.mbchar, debuginfo_macros);
-			if(resbool.bres)
-			{
-				::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, exe_dir_len, dst.mbchar
-					, dst.mblen, dst.mbsize, "stable", 0, SIZE_MAX);
-				::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, dst.mblen, dst.mbchar
-					, dst.mblen, dst.mbsize, time_mbchar.mbchar, 0, SIZE_MAX);
-				
-				::rux::service::boowritelog(mbchar0, mbchar1, "before stable rename");
-
-				if(::booldog::utils::io::mbs::rename(&res, exe_dir.mbchar, dst.mbchar) == false)
+			if(info.stable_count < 5) {
+				::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir_len, exe_dir.mbchar
+					, exe_dir.mblen, exe_dir.mbsize, "stable", 0, SIZE_MAX);
+			
+				::booldog::utils::io::directory::mbs::exists(&resbool, mbchar0->mballocator, exe_dir.mbchar, debuginfo_macros);
+				if(resbool.bres)
 				{
-					size_t error_string_len = 0, error_string_size = 0;
-					char* error_string = 0;
-					::booldog::error::format(&res, mbchar0->mballocator, error_string, error_string_len, error_string_size);
-					boowritelog(mbchar0, mbchar1, "rename '%s' to '%s', errno %s", exe_dir.mbchar, dst.mbchar, error_string);
+					::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, exe_dir_len, dst.mbchar
+						, dst.mblen, dst.mbsize, "stable", 0, SIZE_MAX);
+					::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, dst.mblen, dst.mbchar
+						, dst.mblen, dst.mbsize, time_mbchar.mbchar, 0, SIZE_MAX);
+					
+					::rux::service::boowritelog(mbchar0, mbchar1, "before stable rename");
+
+					if(::booldog::utils::io::mbs::rename(&res, exe_dir.mbchar, dst.mbchar) == false)
+					{
+						size_t error_string_len = 0, error_string_size = 0;
+						char* error_string = 0;
+						::booldog::error::format(&res, mbchar0->mballocator, error_string, error_string_len, error_string_size);
+						boowritelog(mbchar0, mbchar1, "rename '%s' to '%s', errno %s", exe_dir.mbchar, dst.mbchar, error_string);
+					}
+					else
+					{
+			#ifdef __WINDOWS__
+						::_chmod(dst.mbchar, 0777);
+			#else
+						::chmod(dst.mbchar, 0777);
+			#endif
+					}
+					::rux::service::boowritelog(mbchar0, mbchar1, "after stable rename");
 				}
-				else
-				{
-					stable_renamed = true;
-		#ifdef __WINDOWS__
-					::_chmod(dst.mbchar, 0777);
-		#else
-					::chmod(dst.mbchar, 0777);
-		#endif
-				}
-				::rux::service::boowritelog(mbchar0, mbchar1, "after stable rename");
 			}
 
-			::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir_len, exe_dir.mbchar
-				, exe_dir.mblen, exe_dir.mbsize, "memory", 0, SIZE_MAX);
+			if(info.memory_count < 5) {
+				::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir_len, exe_dir.mbchar
+					, exe_dir.mblen, exe_dir.mbsize, "memory", 0, SIZE_MAX);
 
-			bool memory_renamed = false;
-			::booldog::utils::io::directory::mbs::exists(&resbool, mbchar0->mballocator, exe_dir.mbchar, debuginfo_macros);
-			if(resbool.bres)
-			{
-				::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, exe_dir_len, dst.mbchar
-					, dst.mblen, dst.mbsize, "memory", 0, SIZE_MAX);
-				::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, dst.mblen, dst.mbchar
-					, dst.mblen, dst.mbsize, time_mbchar.mbchar, 0, SIZE_MAX);
-
-				::rux::service::boowritelog(mbchar0, mbchar1, "before memory rename");
-
-				if(::booldog::utils::io::mbs::rename(&res, exe_dir.mbchar, dst.mbchar) == false)
+				::booldog::utils::io::directory::mbs::exists(&resbool, mbchar0->mballocator, exe_dir.mbchar, debuginfo_macros);
+				if(resbool.bres)
 				{
-					size_t error_string_len = 0, error_string_size = 0;
-					char* error_string = 0;
-					::booldog::error::format(&res, mbchar0->mballocator, error_string, error_string_len, error_string_size);
-					boowritelog(mbchar0, mbchar1, "rename '%s' to '%s', errno %s", exe_dir.mbchar, dst.mbchar
-					, error_string);
-				}
-				else
-				{
-					memory_renamed = true;
-		#ifdef __WINDOWS__
-					::_chmod(dst.mbchar, 0777);
-		#else
-					::chmod(dst.mbchar, 0777);
-		#endif
-				}
+					::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, exe_dir_len, dst.mbchar
+						, dst.mblen, dst.mbsize, "memory", 0, SIZE_MAX);
+					::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, dst.mblen, dst.mbchar
+						, dst.mblen, dst.mbsize, time_mbchar.mbchar, 0, SIZE_MAX);
 
-				::rux::service::boowritelog(mbchar0, mbchar1, "after memory rename");
+					::rux::service::boowritelog(mbchar0, mbchar1, "before memory rename");
+
+					if(::booldog::utils::io::mbs::rename(&res, exe_dir.mbchar, dst.mbchar) == false)
+					{
+						size_t error_string_len = 0, error_string_size = 0;
+						char* error_string = 0;
+						::booldog::error::format(&res, mbchar0->mballocator, error_string, error_string_len, error_string_size);
+						boowritelog(mbchar0, mbchar1, "rename '%s' to '%s', errno %s", exe_dir.mbchar, dst.mbchar
+						, error_string);
+					}
+					else
+					{
+			#ifdef __WINDOWS__
+						::_chmod(dst.mbchar, 0777);
+			#else
+						::chmod(dst.mbchar, 0777);
+			#endif
+					}
+					::rux::service::boowritelog(mbchar0, mbchar1, "after memory rename");
+				}
 			}
-		};
+		}
 		rux::uint8 Start( const char* logfile , char error[ 1024 ] , rux::uint8 check_rux_executing_in_current_path )
 		{
 			::booldog::allocators::easy::heap heap;
