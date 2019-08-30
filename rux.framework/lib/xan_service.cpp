@@ -1283,6 +1283,10 @@ namespace rux
 
 			::booldog::io::directory::mbs::listdir(
 			0, mbchar0->mballocator, exe_dir.mbchar, listdir_first_count, &info);
+
+			boowritelog(mbchar0, mbchar1
+				, "rename_stable_and_memory, exe_dir=%s, stable_count=%d, memory_count=%d"
+				, exe_dir.mbchar, info.stable_count, info.memory_count);		
 			
 			::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir.mblen, exe_dir.mbchar
 				, exe_dir.mblen, exe_dir.mbsize, &::booldog::io::mbs::slash, 0, 1);
@@ -1294,7 +1298,7 @@ namespace rux
 			::booldog::utils::time::posix::mbs::tostring<16>(time_mbchar, "_%Y%m%d_%H%M%S%MS", now);
 		
 			::booldog::utils::string::mbs::assign<16>(0, dst.mballocator, false, 0, dst.mbchar
-				, dst.mblen, dst.mbsize, exe_dir.mbchar, 0, SIZE_MAX);			
+				, dst.mblen, dst.mbsize, exe_dir.mbchar, 0, SIZE_MAX);				
 
 			if(info.stable_count < 5) {
 				::booldog::utils::string::mbs::assign<16>(0, exe_dir.mballocator, false, exe_dir_len, exe_dir.mbchar
@@ -1327,6 +1331,11 @@ namespace rux
 					}
 					::rux::service::boowritelog(mbchar0, mbchar1, "after stable rename");
 				}
+			}
+			else {
+				boowritelog(mbchar0, mbchar1
+				, "rename_stable_and_memory, stable directories dirs limit is exceeded(%d)"
+				, info.stable_count);
 			}
 
 			if(info.memory_count < 5) {
@@ -1361,6 +1370,11 @@ namespace rux
 					}
 					::rux::service::boowritelog(mbchar0, mbchar1, "after memory rename");
 				}
+			}
+			else {
+				boowritelog(mbchar0, mbchar1
+				, "rename_stable_and_memory, memory directories dirs limit is exceeded(%d)"
+				, info.memory_count);
 			}
 		}
 		rux::uint8 Start( const char* logfile , char error[ 1024 ] , rux::uint8 check_rux_executing_in_current_path )
