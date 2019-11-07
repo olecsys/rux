@@ -1091,7 +1091,7 @@ namespace rux
 			DWORD processes[ 1024 ] = {0} , size = 0 , processes_count = 0;
 			rux::XString alter_process_name;
 			alter_process_name.set_ByRef( process_name.ReplaceAll( '/' , '\\' ) );
-			if( ::rux::engine::_globals->_psapi_module.EnumProcesses( processes , sizeof( processes ) , &size ) )
+			if( ::rux::engine::_globals->_psapi_module.EnumProcessesF( processes , sizeof( processes ) , &size ) )
 			{
 				processes_count = size / sizeof( DWORD );
 				declare_stack_variable( char , process_name_ptr , 1024 );
@@ -1105,9 +1105,9 @@ namespace rux
 						process_handle = OpenProcess( SYNCHRONIZE | PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION | PROCESS_VM_READ , FALSE , processes[ index0 ] );
 						if( process_handle != NULL )
 						{
-							if( ::rux::engine::_globals->_psapi_module.EnumProcessModules( process_handle , &module_handle , sizeof( module_handle ) , &size ) )
+							if( ::rux::engine::_globals->_psapi_module.EnumProcessModulesF( process_handle , &module_handle , sizeof( module_handle ) , &size ) )
 							{						
-								if( ::rux::engine::_globals->_psapi_module.GetModuleFileNameExA( process_handle , module_handle , process_name_ptr , 1024 ) > 0 )
+								if( ::rux::engine::_globals->_psapi_module.GetModuleFileNameExAF( process_handle , module_handle , process_name_ptr , 1024 ) > 0 )
 								{
 									if( process_name == process_name_ptr 
 										|| alter_process_name == process_name_ptr )
@@ -1133,7 +1133,7 @@ namespace rux
 										}
 									}	
 								}
-								if( ::rux::engine::_globals->_psapi_module.GetModuleBaseNameA( process_handle , module_handle , process_name_ptr , sizeof( process_name_ptr ) / sizeof( char ) ) > 0 )
+								if( ::rux::engine::_globals->_psapi_module.GetModuleBaseNameAF( process_handle , module_handle , process_name_ptr , sizeof( process_name_ptr ) / sizeof( char ) ) > 0 )
 								{
 									process_name_without_extension.set_ByRef( rux::io::XPath::GetFileNameWithoutExtension( process_name_ptr ) );
 									if( process_name == process_name_ptr
@@ -1264,7 +1264,7 @@ namespace rux
 			DWORD processes[ 1024 ] = {0} , size = 0 , processes_count = 0;
 			rux::XString alter_process_name;
 			alter_process_name.set_ByRef( process_name.ReplaceAll( '/' , '\\' ) );
-			if( ::rux::engine::_globals->_psapi_module.EnumProcesses( processes , sizeof( processes ) , &size ) )
+			if( ::rux::engine::_globals->_psapi_module.EnumProcessesF( processes , sizeof( processes ) , &size ) )
 			{
 			processes_count = size / sizeof( DWORD );
 				declare_stack_variable( char , process_name_ptr , 1024 );
@@ -1278,9 +1278,9 @@ namespace rux
 						process_handle = OpenProcess( SYNCHRONIZE | PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION | PROCESS_VM_READ , FALSE , processes[ index0 ] );
 						if( process_handle != NULL )
 						{
-							if( ::rux::engine::_globals->_psapi_module.EnumProcessModules( process_handle , &module_handle , sizeof( module_handle ) , &size ) )
+							if( ::rux::engine::_globals->_psapi_module.EnumProcessModulesF( process_handle , &module_handle , sizeof( module_handle ) , &size ) )
 							{						
-								if( ::rux::engine::_globals->_psapi_module.GetModuleFileNameExA( process_handle , module_handle , process_name_ptr , 1024 ) > 0 )
+								if( ::rux::engine::_globals->_psapi_module.GetModuleFileNameExAF( process_handle , module_handle , process_name_ptr , 1024 ) > 0 )
 								{
 									if( process_name == process_name_ptr 
 										|| alter_process_name == process_name_ptr )
@@ -1298,7 +1298,7 @@ namespace rux
 										}
 									}	
 								}
-								if( ::rux::engine::_globals->_psapi_module.GetModuleBaseNameA( process_handle , module_handle , process_name_ptr , sizeof( process_name_ptr ) / sizeof( char ) ) > 0 )
+								if( ::rux::engine::_globals->_psapi_module.GetModuleBaseNameAF( process_handle , module_handle , process_name_ptr , sizeof( process_name_ptr ) / sizeof( char ) ) > 0 )
 								{
 									process_name_without_extension.set_ByRef( rux::io::XPath::GetFileNameWithoutExtension( process_name_ptr ) );
 									if( process_name == process_name_ptr
