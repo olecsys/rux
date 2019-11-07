@@ -3,8 +3,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_array.h>
-#include <xan_loader_defines.h>
+#include "xan_array.h"
+#include "xan_loader_defines.h"
 #include <openssl/des.h>
 #include <openssl/md4.h>
 namespace rux

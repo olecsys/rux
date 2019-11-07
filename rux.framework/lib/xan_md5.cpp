@@ -1,8 +1,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_md5.h>
-#include <xan_keyvaluepair.h>
+#include "xan_md5.h"
+#include "xan_keyvaluepair.h"
 namespace rux
 {
 	namespace cryptography

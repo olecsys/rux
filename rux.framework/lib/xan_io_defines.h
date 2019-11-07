@@ -1,7 +1,7 @@
 #ifndef XAN_IO_DEFINES_H
 #define XAN_IO_DEFINES_H
-#include <xan_string.h>
-#include <xan_stream.h>
+#include "xan_string.h"
+#include "xan_stream.h"
 enum XFileMode
 {
 	XReadText,	

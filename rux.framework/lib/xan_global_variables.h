@@ -3,8 +3,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_typedefs.h>
-#include <xan_global_initialization.h>
+#include "xan_typedefs.h"
+#include "xan_global_initialization.h"
 namespace rux
 {
 	class XConsole;

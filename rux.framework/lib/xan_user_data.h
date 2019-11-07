@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_diagnostic_defines.h>
+#include "xan_diagnostic_defines.h"
 #endif
 struct XUserData2
 {

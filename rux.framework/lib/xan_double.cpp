@@ -2,9 +2,9 @@
 #include <config.h>
 #endif
 #include "xan_double.h"
-#include <xan_keyvaluepair.h>
-#include <xan_uint64.h>
-#include <xan_boolean.h>
+#include "xan_keyvaluepair.h"
+#include "xan_uint64.h"
+#include "xan_boolean.h"
 begin_implement_rux_class_without_operators_ns( Double , rux )
 	_value = 0.0;
 end_implement_rux_class();

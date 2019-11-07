@@ -3,8 +3,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_defines.h>
-#include <xan_string.h>
+#include "xan_defines.h"
+#include "xan_string.h"
 namespace rux
 {
 	namespace io

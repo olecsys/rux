@@ -3,9 +3,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_string.h>
-#include <xan_methodparameter.h>
-#include <xan_asm.h>
+#include "xan_string.h"
+#include "xan_methodparameter.h"
+#include "xan_asm.h"
 namespace rux
 {	
 	begin_declare_rux_class( MethodInfo );

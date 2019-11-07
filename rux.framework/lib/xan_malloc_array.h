@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_includes.h>
+#include "xan_includes.h"
 #ifndef RUX_ARRAY_MAX_STEP
 #define RUX_ARRAY_MAX_STEP (size_t)524288
 #endif

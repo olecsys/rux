@@ -1,11 +1,11 @@
-#include <xan_thread.h>
-#include <xan_time.h>
-#include <xan_keyvaluepair.h>
-#include <xan_uint64.h>
-#include <xan_user_data.h>
-#include <xan_gui_defines.h>
-#include <xan_boolean.h>
-#include <xan_log.h>
+#include "xan_thread.h"
+#include "xan_time.h"
+#include "xan_keyvaluepair.h"
+#include "xan_uint64.h"
+#include "xan_user_data.h"
+#include "xan_gui_defines.h"
+#include "xan_boolean.h"
+#include "xan_log.h"
 begin_implement_rux_class_ns( Thread , rux::threading );
 	_thread_before_exit = NULL;
 	_thread_before_exit_user_data = NULL;
@@ -89,7 +89,7 @@ namespace rux
 #ifdef __WINDOWS__
 				for( ; ; )
 				{
-					_thread_handle = ( HANDLE )_beginthreadex( NULL , _stack_size , rux_thread_function , this , CREATE_SUSPENDED , NULL );
+					_thread_handle = ( HANDLE )_beginthreadex( NULL , (unsigned int)_stack_size , rux_thread_function , this , CREATE_SUSPENDED , NULL );
 					if( _thread_handle )
 						break;
 					else

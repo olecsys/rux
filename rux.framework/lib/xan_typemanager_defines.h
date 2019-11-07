@@ -1,6 +1,6 @@
 #ifndef XAN_TYPEMANAGER_DEFINES_H
 #define XAN_TYPEMANAGER_DEFINES_H
-#include <xan_type.h>
+#include "xan_type.h"
 dll_internal Type* _typeof( const char* class_name , rux_volatile* rux_type_index , ::rux::register_type_t register_type , ::rux::uint8 is_array , Type* item_type );
 #define typeof( xclass ) *_typeof( xclass::get_Alias() , &xclass::InternalClass::_rux_type_index , xclass::InternalClass::register_type , xclass::InternalClass::_rux_is_array , xclass::InternalClass::get_rux_array_item_type() )
 #define typeofptr( xclass ) _typeof( xclass::get_Alias() , &xclass::InternalClass::_rux_type_index , xclass::InternalClass::register_type , xclass::InternalClass::_rux_is_array , xclass::InternalClass::get_rux_array_item_type() )

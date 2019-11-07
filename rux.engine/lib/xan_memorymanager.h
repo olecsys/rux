@@ -87,6 +87,7 @@ public:
 	static void get_memory_extended_info( void* memory , ::rux::memory::extended_memory_info*& extended_memory_info );
 	static ::rux::uint32 add_times33_hash( const char* value_string , size_t value_string_length );
 	static void add_or_remove_thread_event( ::rux::byte event_type , ::rux::byte add , ::rux::on_thread_registered_or_unregistered );
+	static char* get_time33_hash_value( ::rux::uint32 times33_hash );
 };
 extern dll_internal XMemoryManager* g_rux_memory_manager;
 extern dll_internal ::rux::threading::RdWrLock* _rux_cs_exception_events;

@@ -1,9 +1,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_jsonserializer.h>
-#include <xan_error.h>
-#include <xan_directory.h>
+#include "xan_jsonserializer.h"
+#include "xan_error.h"
+#include "xan_directory.h"
 namespace rux
 {
 	namespace data
@@ -158,6 +158,8 @@ namespace rux
 			};
 			void serializer::end_array( const char* __file__ , ::rux::int32 __line__ , size_t ___rux__thread_index1986 )
 			{
+				(void)__file__;
+				(void)__line__;
 				UNREFERENCED_PARAMETER( ___rux__thread_index1986 );
 				CODE_LABEL_START( 0 , 0 , 5 );
 				if( _formatted == 1 )

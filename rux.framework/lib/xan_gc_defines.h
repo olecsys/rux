@@ -1,6 +1,6 @@
 #ifndef XAN_GC_DEFINES_H
 #define XAN_GC_DEFINES_H
-#include <xan_defines.h>
+#include "xan_defines.h"
 namespace rux
 {
 	namespace memory

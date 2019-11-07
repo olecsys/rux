@@ -1,9 +1,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_memory_helper.h>
-#include <xan_memorymanager_defines.h>
-#include <xan_gc_defines.h>
+#include "xan_memory_helper.h"
+#include "xan_memorymanager_defines.h"
+#include "xan_gc_defines.h"
 namespace rux
 {
 	dll_internal char* safe_strncpy( char* dest , const char* src , size_t dest_size , size_t src_size )

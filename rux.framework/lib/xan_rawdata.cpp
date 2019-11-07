@@ -1,9 +1,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_rawdata.h>
-#include <xan_asm.h>
-#if defined( __ARM_ARCH_6__ ) || defined(__ELBRUS__)
+#include "xan_rawdata.h"
+#include "xan_asm.h"
+#if defined( __ARM_ARCH_6__ ) || defined(__ELBRUS__) || defined(RUX_NO_ASM)
 #define NO_ASM 1
 #elif defined( __WINDOWS__ ) || defined( __LINUX__ )
 #define NO_ASM 0
@@ -303,9 +303,9 @@ const ::rux::uint32 _prime_numbers[ 1240 ] = {
 	9901, 9907, 9923, 9929, 9931, 9941, 9949, 9967, 9973,
 	10007, 10009, 10037, 10039, 10061, 10067, 10069, 10079, 10091, 10093, 10099
 };
-#include <xan_keyvaluepair.h>
-#include <xan_uint64.h>
-#include <xan_boolean.h>
+#include "xan_keyvaluepair.h"
+#include "xan_uint64.h"
+#include "xan_boolean.h"
 implement_rux_base_methods_ns( RawData , rux );
 implement_rux_set_operators_ns_( RawData , rux );
 namespace rux
@@ -1285,7 +1285,7 @@ namespace rux
 			}
 			else
 				_raw_data_ptr = alloc_array_macros( ::rux::uint8 , max_data_length );
-			_max_data_length = max_data_length;
+			_max_data_length = (::rux::uint32)max_data_length;
 		}
 	};
 	RawData& XRawData::operator + ( XRawData& raw_data )
@@ -3596,7 +3596,7 @@ namespace rux
 		::rux::uint32 index0 = 0;
 		for( ; index0 < bytes.Count() ; index0 += octet_string_length )	
 			octet_strings.Add( XString::Join( " " , bytes , index0 , octet_string_length ) );
-		index0 = bytes.Count() / octet_string_length;
+		index0 = (::rux::uint32)(bytes.Count() / octet_string_length);
 		if( bytes.Count() - index0 * octet_string_length > 0 )
 			octet_strings.Add( XString::Join( " " , bytes , index0 , bytes.Count() - index0 * octet_string_length ) );
 		return octet_strings++;
@@ -3612,7 +3612,7 @@ namespace rux
 		XArray<XString> bytes;
 		bytes.set_ByRef( octet_string.Split( separators ) );
 		XRawData result;
-		result()->_raw_data_ptr_size = bytes.Count() == 0 ? 8 : bytes.Count();
+		result()->_raw_data_ptr_size = bytes.Count() == 0 ? 8 : (::rux::uint32)bytes.Count();
 		result()->_raw_data_ptr_size = ( ( result()->_raw_data_ptr_size + 7 ) >> 3 ) << 3;						 
 	#ifdef __x86__
 		result()->_max_data_length = ( result()->_raw_data_ptr_size << 1 ) + sizeof( ::rux::uint32 );

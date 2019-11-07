@@ -3,9 +3,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_keyvaluepair.h>
-#include <xan_hash.h>
-#include <xan_double_linked_list.h>
+#include "xan_keyvaluepair.h"
+#include "xan_hash.h"
+#include "xan_double_linked_list.h"
 #define OLD_KEY_VALUE_PAIR 0
 namespace rux
 {

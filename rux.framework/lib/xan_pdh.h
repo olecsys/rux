@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_string.h>
+#include "xan_string.h"
 #ifdef __WINDOWS__
 #include <pdh.h>
 typedef PDH_FUNCTION __stdcall pdh_get_formatted_counter_value_function( PDH_HCOUNTER hCounter, DWORD dwFormat, LPDWORD lpdwType, PPDH_FMT_COUNTERVALUE pValue );

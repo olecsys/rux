@@ -2,9 +2,9 @@
 #include <config.h>
 #endif
 #include "xan_numeric.h"
-#include <xan_keyvaluepair.h>
-#include <xan_uint64.h>
-#include <xan_boolean.h>
+#include "xan_keyvaluepair.h"
+#include "xan_uint64.h"
+#include "xan_boolean.h"
 begin_implement_rux_class_without_set_operators_ns( Numeric , rux )
 	_value_gcref = 0;
 end_implement_rux_class();

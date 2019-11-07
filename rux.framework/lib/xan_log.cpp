@@ -1,9 +1,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_log.h>
-#include <xan_global_variables.h>
-#include <xan_engine_globals.h>
+#include "xan_log.h"
+#include "xan_global_variables.h"
+#include "xan_engine_globals.h"
 namespace rux
 {
 	namespace log

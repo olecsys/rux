@@ -3,10 +3,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_thread.h>
-#include <xan_array.h>
-#include <xan_keyvaluepair.h>
-#include <xan_crtsect.h>
+#include "xan_thread.h"
+#include "xan_array.h"
+#include "xan_keyvaluepair.h"
+#include "xan_crtsect.h"
 namespace rux
 {
 	namespace threading

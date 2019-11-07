@@ -1,7 +1,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_error.h>
+#include "xan_error.h"
 rux::String& XError::ConvertErrorCodeToString( ::rux::int32 error_code , XEnum_ErrorType error_type )
 {	
 	::rux::XString error;		

@@ -3,8 +3,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_types.h>
-#include <xan_utils_consts.h>
+#include "xan_types.h"
+#include "xan_utils_consts.h"
 #ifdef __WINDOWS__
 #include <WinSock2.h>
 #include <windows.h>
@@ -163,7 +163,7 @@ namespace rux
 					vsnprintf_s( temp_ptr , res , res , format , ap );
 					::memcpy( str , temp_ptr , str_size - 1 );
 					free( temp_ptr );
-					res = str_size - 1;
+					res = (int)str_size - 1;
 					str[ res ] = 0;			
 				}
 #else
@@ -172,11 +172,11 @@ namespace rux
 				va_end( ap );
 				return res;
 			};
-			static int safe_sprintf( char * str , size_t str_size , const char* format )
+			inline int safe_sprintf( char * str , size_t str_size , const char* format )
 			{
 				return ::rux::utils::string::safe_sprintf( str , str_size , "%s" , format );
 			};
-			static int _scprintf( const char* format , ... )
+			inline int _scprintf( const char* format , ... )
 			{
 				va_list ap;
 				va_start( ap , format );

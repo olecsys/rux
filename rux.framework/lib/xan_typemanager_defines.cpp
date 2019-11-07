@@ -1,7 +1,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_typemanager_defines.h>
+#include "xan_typemanager_defines.h"
 dll_internal Type* _typeof( const char* class_name , rux_volatile* rux_type_index , ::rux::register_type_t register_type , ::rux::uint8 is_array , Type* item_type )
 {	
 	if( ::rux::engine::_globals && ::rux::engine::_globals->_rux_typeof )

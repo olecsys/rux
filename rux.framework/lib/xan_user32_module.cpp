@@ -1,7 +1,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_user32_module.h>
+#include "xan_user32_module.h"
 namespace rux
 {
 	namespace system

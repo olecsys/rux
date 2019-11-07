@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_platform.h>
+#include "xan_platform.h"
 #ifdef __WINDOWS__
 #define dll_internal
 #define rux_inline __forceinline

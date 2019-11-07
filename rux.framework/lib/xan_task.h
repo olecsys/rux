@@ -3,9 +3,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_includes.h>
-#include <xan_enums.h>
-#include <xan_thread.h>
+#include "xan_includes.h"
+#include "xan_enums.h"
+#include "xan_thread.h"
 namespace rux
 {
 	namespace task

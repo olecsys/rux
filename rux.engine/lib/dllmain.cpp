@@ -865,6 +865,7 @@ dll_internal void pre_initialize( void )
 	rux::engine::_globals->_log_globals->_write_log = rux_write_log;
 	rux::engine::_globals->_add_task = ::rux::task::Tasker::add;
 	rux::engine::_globals->_add_times33_hash = XMemoryManager::add_times33_hash;
+	rux::engine::_globals->_get_time33_hash_value = XMemoryManager::get_time33_hash_value;
 	rux::engine::_globals->_add_or_remove_thread_event = XMemoryManager::add_or_remove_thread_event;
 	rux::engine::_globals->_remove_task = ::rux::task::Tasker::remove;
 	rux::engine::_globals->_force_execute_task = ::rux::task::Tasker::force_execute_task;

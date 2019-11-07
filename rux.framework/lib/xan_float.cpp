@@ -2,9 +2,9 @@
 #include <config.h>
 #endif
 #include "xan_float.h"
-#include <xan_keyvaluepair.h>
-#include <xan_uint64.h>
-#include <xan_boolean.h>
+#include "xan_keyvaluepair.h"
+#include "xan_uint64.h"
+#include "xan_boolean.h"
 begin_implement_rux_class_without_operators_ns( Float , rux )
 	_value = 0.f;
 end_implement_rux_class();

@@ -1,7 +1,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_interlocked.h>
+#include "xan_interlocked.h"
 rux_interlocked_return XInterlocked::Increment( rux_volatile* lpAddend )
 {
 #ifdef __WINDOWS__

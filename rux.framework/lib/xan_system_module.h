@@ -3,9 +3,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_includes.h>
-#include <xan_crtsect.h>
-#include <xan_interlocked.h>
+#include "xan_includes.h"
+#include "xan_crtsect.h"
+#include "xan_interlocked.h"
 namespace rux
 {
 #define system_module_dlsym( func ) {\

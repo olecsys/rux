@@ -1,7 +1,7 @@
 #ifndef XAN_MEMORYMANAGER_DEFINES_H
 #define XAN_MEMORYMANAGER_DEFINES_H
-#include <xan_defines.h>
-#include <xan_diagnostic_defines.h>
+#include "xan_defines.h"
+#include "xan_diagnostic_defines.h"
 namespace rux
 {
 	namespace engine

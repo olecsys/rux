@@ -3,8 +3,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_methodinfo.h>
-#include <xan_crtsect.h>
+#include "xan_methodinfo.h"
+#include "xan_crtsect.h"
 class ModuleManager;
 namespace rux
 {	

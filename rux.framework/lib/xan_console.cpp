@@ -1,10 +1,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_console.h>
-#include <xan_debug.h>
-#include <xan_file_descriptor_waiter.h>
-#include <xan_memory_helper.h>
+#include "xan_console.h"
+#include "xan_debug.h"
+#include "xan_file_descriptor_waiter.h"
+#include "xan_memory_helper.h"
 namespace rux
 {	
 	dll_internal rux_start_event_t _rux_console_start_event = NULL;

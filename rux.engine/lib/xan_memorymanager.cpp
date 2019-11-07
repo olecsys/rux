@@ -1733,6 +1733,16 @@ void XMemoryManager::add_or_remove_thread_event( ::rux::byte event_type , ::rux:
 			::rux::engine::_globals->_on_after_module_dll_init -= thread_event;
 	}
 };
+char* XMemoryManager::get_time33_hash_value( ::rux::uint32 times33_hash )
+{
+	char* value_string = NULL;
+	READ_LOCK( ::rux::engine::_globals->_cs_times33_hashes );
+	std::map< ::rux::uint32 , char* >::iterator i = ::rux::engine::_globals->_times33_hashes.find( times33_hash );
+	if( i != ::rux::engine::_globals->_times33_hashes.end() )
+		value_string = i->second;
+	::rux::engine::_globals->_cs_times33_hashes.ReadUnlock();
+	return value_string;
+};
 ::rux::uint32 XMemoryManager::add_times33_hash( const char* value_string , size_t value_string_length )
 {
 	::rux::byte exists = 0;

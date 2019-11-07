@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_array.h>
+#include "xan_array.h"
 namespace rux
 {
 	class String;

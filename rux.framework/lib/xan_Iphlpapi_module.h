@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_system_module.h>
+#include "xan_system_module.h"
 #ifdef __WINDOWS__
 #include <IPHlpApi.h>
 #endif

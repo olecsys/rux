@@ -1,10 +1,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_property_info.h>
-#include <xan_keyvaluepair.h>
-#include <xan_uint64.h>
-#include <xan_boolean.h>
+#include "xan_property_info.h"
+#include "xan_keyvaluepair.h"
+#include "xan_uint64.h"
+#include "xan_boolean.h"
 begin_implement_rux_class_ns( PropertyInfo , rux );
 end_implement_rux_class();
 namespace rux

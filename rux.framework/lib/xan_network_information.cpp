@@ -1,7 +1,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_network_information.h>
+#include "xan_network_information.h"
 #ifdef __WINDOWS__
 #include <IPHlpApi.h>
 #endif
@@ -12,9 +12,9 @@
 #include <linux/if.h>
 #include <netdb.h>
 #endif
-#include <xan_error.h>
-#include <xan_keyvaluepair.h>
-#include <xan_network_functions.h>
+#include "xan_error.h"
+#include "xan_keyvaluepair.h"
+#include "xan_network_functions.h"
 namespace rux
 {
 	namespace network

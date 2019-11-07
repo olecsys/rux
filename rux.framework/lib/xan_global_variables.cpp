@@ -1,8 +1,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_global_variables.h>
-#include <xan_engine_globals.h>
+#include "xan_global_variables.h"
+#include "xan_engine_globals.h"
 #ifdef __UNIX__
 extern char** environ;
 #endif

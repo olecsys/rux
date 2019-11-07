@@ -1,6 +1,6 @@
 #ifndef XAN_EVENT_H
 #define XAN_EVENT_H
-#include <xan_array.h>
+#include "xan_array.h"
 #define OLD_RUX_EVENT 0
 namespace rux
 {

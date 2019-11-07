@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_system_module.h>
+#include "xan_system_module.h"
 namespace rux
 {
 	namespace system
@@ -25,11 +25,11 @@ namespace rux
 		public:
 			psapi_module( void );
 			virtual void on_loaded( void );
-			BOOL WINAPI EnumProcesses( DWORD* pProcessIds , DWORD cb , DWORD* pBytesReturned );
-			BOOL WINAPI EnumProcessModules( HANDLE hProcess , HMODULE* lphModule , DWORD cb , LPDWORD lpcbNeeded );
-			DWORD WINAPI GetModuleBaseNameA( HANDLE hProcess , HMODULE hModule , char* lpBaseName , DWORD nSize );
-			DWORD WINAPI GetModuleFileNameExA( HANDLE hProcess , HMODULE hModule , char* lpFilename , DWORD nSize );
-			DWORD WINAPI GetProcessImageFileNameA( HANDLE hProcess , char* lpImageFileName , DWORD nSize );
+			BOOL WINAPI EnumProcessesF( DWORD* pProcessIds , DWORD cb , DWORD* pBytesReturned );
+			BOOL WINAPI EnumProcessModulesF( HANDLE hProcess , HMODULE* lphModule , DWORD cb , LPDWORD lpcbNeeded );
+			DWORD WINAPI GetModuleBaseNameAF( HANDLE hProcess , HMODULE hModule , char* lpBaseName , DWORD nSize );
+			DWORD WINAPI GetModuleFileNameExAF( HANDLE hProcess , HMODULE hModule , char* lpFilename , DWORD nSize );
+			DWORD WINAPI GetProcessImageFileNameAF( HANDLE hProcess , char* lpImageFileName , DWORD nSize );
 		};
 #endif
 	};

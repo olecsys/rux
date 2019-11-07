@@ -3,8 +3,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_string.h>
-#include <xan_hash.h>
+#include "xan_string.h"
+#include "xan_hash.h"
 namespace rux
 {
 	template < class T > class XKeyValuePair;

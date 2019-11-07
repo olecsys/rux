@@ -1,8 +1,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_data.h>
-#include <xan_memorymanager_defines.h>
+#include "xan_data.h"
+#include "xan_memorymanager_defines.h"
 XData::XData()
 {
 	_offset = 0;

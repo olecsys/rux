@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_typemanager_defines.h>
+#include "xan_typemanager_defines.h"
 namespace rux
 {
 	class String;
@@ -35,7 +35,7 @@ public:
 	virtual ::rux::uint32 get_RuxTypeIndex( void ) const;
 	virtual ::rux::byte IsObjectType( void ) const;
 	XGCRef* get_GCRefObj( void ) const;
-	char* ToString( void );
+	const char* ToString( void );
 };
 class XObject : public GCContainer
 {

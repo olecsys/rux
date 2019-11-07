@@ -1,14 +1,14 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_gc_defines.h>
-#include <xan_loader_defines.h>
-#include <xan_gui_defines.h>
-#include <xan_io_defines.h>
-#include <xan_error.h>
-#include <xan_memory_helper.h>
-#include <xan_thread.h>
-#include <xan_log.h>
+#include "xan_gc_defines.h"
+#include "xan_loader_defines.h"
+#include "xan_gui_defines.h"
+#include "xan_io_defines.h"
+#include "xan_error.h"
+#include "xan_memory_helper.h"
+#include "xan_thread.h"
+#include "xan_log.h"
 namespace rux
 {
 	dll_internal void deinitialize( void )

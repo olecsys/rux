@@ -4,10 +4,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_diagnostic_defines.h>
-#include <xan_defines.h>
-#include <xan_function_info.h>
-#include <xan_property_info.h>
+#include "xan_diagnostic_defines.h"
+#include "xan_defines.h"
+#include "xan_function_info.h"
+#include "xan_property_info.h"
 #ifndef RUX_ARRAY_MAX_STEP
 #define RUX_ARRAY_MAX_STEP (::rux::uint32)524288
 #endif

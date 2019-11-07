@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_gchandle.h>
+#include "xan_gchandle.h"
 namespace rux
 {	
 	typedef void (*set_property_t)( const XGCRef* object , const XGCRef* param );

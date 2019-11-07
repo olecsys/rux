@@ -1,10 +1,10 @@
 #ifndef XAN_THREAD_H
 #define XAN_THREAD_H
-#include <xan_defines.h>
-#include <xan_crtsect.h>
-#include <xan_string.h>
-#include <xan_malloc_array.h>
-#include <xan_event.h>
+#include "xan_defines.h"
+#include "xan_crtsect.h"
+#include "xan_string.h"
+#include "xan_malloc_array.h"
+#include "xan_event.h"
 namespace rux
 {
 	namespace threading

@@ -2,8 +2,8 @@
 #include <config.h>
 #endif
 #include "xan_security.h"
-#include <xan_error.h>
-#include <xan_uint32.h>
+#include "xan_error.h"
+#include "xan_uint32.h"
 #ifdef __WINDOWS__
 #include <AclAPI.h>
 #include <WtsApi32.h>

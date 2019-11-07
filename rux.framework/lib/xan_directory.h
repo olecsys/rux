@@ -3,8 +3,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_file.h>
-#include <xan_thread.h>
+#include "xan_file.h"
+#include "xan_thread.h"
 enum XEnum_DirectoryChanged
 {
 	XEnum_DirectoryChanged_WriteFile

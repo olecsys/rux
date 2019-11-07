@@ -1,20 +1,20 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_dataobject.h>
-#include <xan_keyvaluepair.h>
-#include <xan_boolean.h>
-#include <xan_int64.h>
-#include <xan_double.h>
-#include <xan_float.h>
-#include <xan_property_info.h>
-#include <xan_constructor_info.h>
-#include <xan_function_info.h>
-#include <xan_uint64.h>
-#include <xan_null.h>
-#include <xan_int32.h>
-#include <xan_uint32.h>
-#include <xan_numeric.h>
+#include "xan_dataobject.h"
+#include "xan_keyvaluepair.h"
+#include "xan_boolean.h"
+#include "xan_int64.h"
+#include "xan_double.h"
+#include "xan_float.h"
+#include "xan_property_info.h"
+#include "xan_constructor_info.h"
+#include "xan_function_info.h"
+#include "xan_uint64.h"
+#include "xan_null.h"
+#include "xan_int32.h"
+#include "xan_uint32.h"
+#include "xan_numeric.h"
 begin_implement_rux_class_ns( DataObject , rux::data );
 end_implement_rux_class();
 namespace rux

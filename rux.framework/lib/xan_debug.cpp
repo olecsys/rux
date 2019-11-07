@@ -8,17 +8,17 @@
 #ifdef __WINDOWS__
 #include <Psapi.h>
 #endif
-#include <xan_console.h>
-#include <xan_thread.h>
-#include <xan_io_defines.h>
-#include <xan_file_descriptor_waiter.h>
-#include <xan_memory_helper.h>
-#include <xan_memory_chunk.h>
-#include <xan_directory.h>
-#include <xan_engine_globals.h>
-#include <xan_log.h>
-#include <xan_error.h>
-#include <xan_native_diagnostics.h>
+#include "xan_console.h"
+#include "xan_thread.h"
+#include "xan_io_defines.h"
+#include "xan_file_descriptor_waiter.h"
+#include "xan_memory_helper.h"
+#include "xan_memory_chunk.h"
+#include "xan_directory.h"
+#include "xan_engine_globals.h"
+#include "xan_log.h"
+#include "xan_error.h"
+#include "xan_native_diagnostics.h"
 namespace rux
 {
 	namespace debug

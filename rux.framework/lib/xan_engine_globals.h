@@ -3,23 +3,23 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_typedefs.h>
-#include <xan_wtsapi32_module.h>
-#include <xan_Iphlpapi_module.h>
-#include <xan_ole32_module.h>
-#include <xan_oleaut32_module.h>
-#include <xan_psapi_module.h>
-#include <xan_user32_module.h>
-#include <xan_userenv32_module.h>
-#include <xan_winmm_module.h>
-#include <xan_ws2_32_module.h>
-#include <xan_x11_module.h>
-#include <xan_xrandr_module.h>
-#include <xan_dbghelp_module.h>
-#include <xan_symsrv_module.h>
-#include <xan_kernel32_module.h>
-#include <xan_enums.h>
-#include <xan_event_handler.h>
+#include "xan_typedefs.h"
+#include "xan_wtsapi32_module.h"
+#include "xan_Iphlpapi_module.h"
+#include "xan_ole32_module.h"
+#include "xan_oleaut32_module.h"
+#include "xan_psapi_module.h"
+#include "xan_user32_module.h"
+#include "xan_userenv32_module.h"
+#include "xan_winmm_module.h"
+#include "xan_ws2_32_module.h"
+#include "xan_x11_module.h"
+#include "xan_xrandr_module.h"
+#include "xan_dbghelp_module.h"
+#include "xan_symsrv_module.h"
+#include "xan_kernel32_module.h"
+#include "xan_enums.h"
+#include "xan_event_handler.h"
 namespace rux
 {
 	namespace data
@@ -193,7 +193,7 @@ namespace rux
 			::rux::EventHandler< ::rux::on_thread_registered_or_unregistered > _on_before_module_dll_init;
 			::rux::EventHandler< ::rux::on_thread_registered_or_unregistered > _on_after_module_dll_init;
 			XMallocArray< char* >* _protect_markers_files;
-			XMallocArray< ::rux::uint32 >* _protect_markers_lines;
+			XMallocArray< ::rux::uint32 >* _protect_markers_lines;			
 			void add_thread_registered_event( ::rux::on_thread_registered_or_unregistered on_thread_registered );
 			void remove_thread_registered_event( ::rux::on_thread_registered_or_unregistered on_thread_registered );
 			void add_thread_unregistered_event( ::rux::on_thread_registered_or_unregistered on_thread_unregistered );
@@ -208,6 +208,9 @@ namespace rux
 			void remove_afterload_module_event( ::rux::on_thread_registered_or_unregistered on_engine_event );
 			void remove_before_module_dll_init_event( ::rux::on_thread_registered_or_unregistered on_engine_event );
 			void remove_after_module_dll_init_event( ::rux::on_thread_registered_or_unregistered on_engine_event );
+			bool has_field(void* field_addr);
+			get_time33_hash_value_t _get_time33_hash_value;
+			void* _end;
 		};
 		extern dll_internal ::rux::on_thread_registered_or_unregistered _on_thread_registered;
 		extern dll_internal ::rux::on_thread_registered_or_unregistered _on_thread_unregistered;

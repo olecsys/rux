@@ -3,10 +3,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_crtsect.h>
-#include <xan_interlocked.h>
-#include <xan_global_variables.h>
-#include <xan_engine_globals.h>
+#include "xan_crtsect.h"
+#include "xan_interlocked.h"
+#include "xan_global_variables.h"
+#include "xan_engine_globals.h"
 
 #ifndef UNREFERENCED_PARAMETER
 #define UNREFERENCED_PARAMETER(P)          \
@@ -16,7 +16,9 @@
 #endif
 
 #ifdef __WINDOWS__
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 #endif
 #define MAX_CLASS_NAME 256
 #ifdef __cplusplus
@@ -199,7 +201,9 @@ namespace rux
 	dll_internal ::rux::uint32 get_array_object_rux_type_index( void );
 	dll_internal ::rux::uint32 get_data_object_rux_type_index( void );
 	dll_internal ::rux::uint32 get_int32_rux_type_index( void );
+#ifndef RUX_NO_XGROUP_RUX_TYPE_INDEX
 	dll_internal ::rux::uint32 get_group_rux_type_index( void );
+#endif	
 	dll_internal ::rux::uint32 get_uint32_rux_type_index( void );
 	dll_internal ::rux::uint32 get_int64_rux_type_index( void );
 	dll_internal ::rux::uint32 get_uint64_rux_type_index( void );
@@ -539,7 +543,10 @@ dll_internal void rux_get_directory_only( const char* module_path , char module_
 	};\
 	implement_ctor_and_register_type( rux_class );\
 	void rux_class::initialize_members( const char* variable_name , const char* __file__ , ::rux::int32 __line__ )\
-	{
+	{\
+		(void)variable_name;\
+		(void)__file__;\
+		(void)__line__;
 #define implement_duplicate_internal_result_function( result_class , rux_class , rux_function ) result_class X##rux_class::rux_function( void )\
 	{\
 		return (*static_cast< XGCHandle< rux_class >*>( this ))()->rux_function();\
@@ -652,7 +659,10 @@ dll_internal void rux_get_directory_only( const char* module_path , char module_
 	};\
 	implement_ctor_and_register_type_ns( rux_namespace , rux_class );\
 	void rux_namespace::rux_class::initialize_members( const char* variable_name , const char* __file__ , ::rux::int32 __line__ )\
-	{
+	{\
+		(void)variable_name;\
+		(void)__file__;\
+		(void)__line__;
 #define begin_implement_rux_class_without_operators_ns( rux_class , rux_namespace ) implement_rux_constructors_ns_( rux_class , rux_namespace , NULL )\
 	implement_rux_set_operators_ns_( rux_class , rux_namespace );\
 	rux_namespace::rux_class::rux_class( const char* variable_name , const char* __file__ , ::rux::int32 __line__ )\
@@ -662,7 +672,10 @@ dll_internal void rux_get_directory_only( const char* module_path , char module_
 	};\
 	implement_ctor_and_register_type_ns( rux_namespace , rux_class );\
 	void rux_namespace::rux_class::initialize_members( const char* variable_name , const char* __file__ , ::rux::int32 __line__ )\
-	{
+	{\
+		(void)variable_name;\
+		(void)__file__;\
+		(void)__line__;
 #define begin_implement_rux_class( rux_class ) begin_implement_rux_class_( rux_class , NULL , XGCRef )
 #define begin_implement_rux_class_base_class( rux_class , rux_base_class ) begin_implement_rux_class_( rux_class , NULL , rux_base_class )
 #define begin_implement_rux_class_with_properties( rux_class ) begin_implement_rux_class_( rux_class , rux_class::register_methods_and_properties , XGCRef )
@@ -677,7 +690,10 @@ dll_internal void rux_get_directory_only( const char* module_path , char module_
 	};\
 	implement_ctor_and_register_type( rux_class );\
 	void rux_class::initialize_members( const char* variable_name , const char* __file__ , ::rux::int32 __line__ )\
-	{
+	{\
+		(void)variable_name;\
+		(void)__file__;\
+		(void)__line__;
 #define begin_implement_rux_class_ns( rux_class , rux_namespace ) implement_rux_set_operators_ns_( rux_class , rux_namespace );\
 	begin_implement_rux_class_ns_( rux_class , rux_namespace , NULL , XGCRef )
 #define begin_implement_rux_class_ns_( rux_class , rux_namespace , rux_register_methods_and_properties , rux_base_class ) implement_rux_constructors_and_operators_ns_( rux_class , rux_namespace , rux_register_methods_and_properties )\
@@ -688,7 +704,10 @@ dll_internal void rux_get_directory_only( const char* module_path , char module_
 	};\
 	implement_ctor_and_register_type_ns( rux_namespace , rux_class );\
 	void rux_namespace::rux_class::initialize_members( const char* variable_name , const char* __file__ , ::rux::int32 __line__ )\
-	{
+	{\
+		(void)variable_name;\
+		(void)__file__;\
+		(void)__line__;
 #define end_implement_rux_class() }
 #define begin_declare_rux_class_members( rux_class ) private:
 #define end_declare_rux_class_members( rux_class ) };\
@@ -3137,19 +3156,23 @@ namespace rux
 {
 	namespace compile
 	{
+#ifdef __WINDOWS__
+#pragma warning( push )
+#pragma warning( disable: 4307 )
+#endif		
 		template< const char n0 = 0 , const char n1 = 0 , const char n2 = 0 , const char n3 = 0 , const char n4 = 0 , const char n5 = 0 , const char n6 = 0 , const char n7 = 0 , const char n8 = 0 , const char n9 = 0 , const char n10 = 0 , const char n11 = 0 , const char n12 = 0 , const char n13 = 0 , const char n14 = 0 , const char n15 = 0 , const char n16 = 0 , const char n17 = 0 , const char n18 = 0 , const char n19 = 0 >
 		struct times33_hash
 		{
 			template< const char k , ::rux::uint32 hash = 0 >
 			struct hash_calc
 			{
-				enum { value = ( k == 0 ) ? hash : hash * 33 + k };
+				static const ::rux::uint32 value = ( k == 0 ) ? hash : (::rux::uint32)(hash * 33) + (::rux::uint32)k;
 			};
-			enum
-			{
-				value = hash_calc< n19 , hash_calc< n18 , hash_calc< n17 , hash_calc< n16 , hash_calc< n15 , hash_calc< n14 , hash_calc< n13 , hash_calc< n12 , hash_calc< n11 , hash_calc< n10 , hash_calc< n9 , hash_calc< n8 , hash_calc< n7 , hash_calc< n6 , hash_calc< n5 , hash_calc< n4 , hash_calc< n3 , hash_calc< n2 , hash_calc< n1 , hash_calc< n0 >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value
-			};
+			static const ::rux::uint32 value = hash_calc< n19 , hash_calc< n18 , hash_calc< n17 , hash_calc< n16 , hash_calc< n15 , hash_calc< n14 , hash_calc< n13 , hash_calc< n12 , hash_calc< n11 , hash_calc< n10 , hash_calc< n9 , hash_calc< n8 , hash_calc< n7 , hash_calc< n6 , hash_calc< n5 , hash_calc< n4 , hash_calc< n3 , hash_calc< n2 , hash_calc< n1 , hash_calc< n0 >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value >::value;
 		};
+#ifdef __WINDOWS__
+#pragma warning( pop )
+#endif		
 	};
 };
 #endif

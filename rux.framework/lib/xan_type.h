@@ -3,8 +3,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_gcref.h>
-#include <xan_crtsect.h>
+#include "xan_gcref.h"
+#include "xan_crtsect.h"
 enum XEnumMethodParameterType
 {
 	XEnumMethodParameterType_Int32,

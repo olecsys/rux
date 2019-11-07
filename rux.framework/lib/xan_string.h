@@ -3,10 +3,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_defines.h>
-#include <xan_array.h>
-#include <xan_object.h>
-#include <xan_char.h>
+#include "xan_defines.h"
+#include "xan_array.h"
+#include "xan_object.h"
+#include "xan_char.h"
 enum EStringSplitOptions
 {
 	EStringSplitOptions_None,

@@ -1,10 +1,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_engine_globals.h>
-#include <xan_gui_defines.h>
-#include <xan_loader_defines.h>
-#include <xan_dataobject.h>
+#include "xan_engine_globals.h"
+#include "xan_gui_defines.h"
+#include "xan_loader_defines.h"
+#include "xan_dataobject.h"
 namespace rux
 {
 	namespace gui
@@ -174,6 +174,7 @@ namespace rux
 			_exception_tid = 0;
 			_protect_markers_files = 0;
 			_protect_markers_lines = 0;
+			_end = (unsigned char*)&_end + sizeof(_end);
 		};
 		globals::~globals( void )
 		{
@@ -203,14 +204,8 @@ namespace rux
 		};
 		char* globals::get_time33_hash_value( ::rux::uint32 times33_hash )
 		{
-			char* value_string = 0;
-			READ_LOCK( _cs_times33_hashes );
-			std::map< ::rux::uint32 , char* >::iterator i = _times33_hashes.find( times33_hash );
-			if( i != _times33_hashes.end() )
-				value_string = i->second;
-			_cs_times33_hashes.ReadUnlock();
-			return value_string;
-		};
+			return _get_time33_hash_value(times33_hash);
+		}
 		void globals::add_thread_registered_event( ::rux::on_thread_registered_or_unregistered on_thread_registered )
 		{
 			_add_or_remove_thread_event( ::rux::engine::XEnum_EngineEvent_RegisteredThread , 1 , on_thread_registered );
@@ -259,6 +254,9 @@ namespace rux
 		{
 			_add_or_remove_thread_event( ::rux::engine::XEnum_EngineEvent_AfterModuleDllInit , 0 , on_engine_event );
 		};
+		bool globals::has_field(void* field_address) {
+			return _end > field_address;
+		}
 		dll_internal void add_thread_registered_event( ::rux::on_thread_registered_or_unregistered on_thread_registered )
 		{
 			if( ::rux::engine::_globals )
@@ -272,7 +270,7 @@ namespace rux
 				::rux::engine::_globals->add_thread_unregistered_event( on_thread_unregistered );
 			else
 				::rux::engine::_on_thread_unregistered = on_thread_unregistered;
-		};
+		};		
 		dll_internal ::rux::on_thread_registered_or_unregistered _on_thread_registered = 0;
 		dll_internal ::rux::on_thread_registered_or_unregistered _on_thread_unregistered = 0;
 	}

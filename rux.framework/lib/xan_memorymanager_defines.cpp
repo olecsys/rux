@@ -1,11 +1,11 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_memorymanager_defines.h>
-#include <xan_asm.h>
-#include <xan_console.h>
-#include <xan_error.h>
-#include <xan_io_defines.h>
+#include "xan_memorymanager_defines.h"
+#include "xan_asm.h"
+#include "xan_console.h"
+#include "xan_error.h"
+#include "xan_io_defines.h"
 #ifdef __WINDOWS__
 #include <aclapi.h>
 #include <WtsApi32.h>
@@ -18,24 +18,26 @@ dll_internal HMODULE _engine_handle = NULL;
 #include <pwd.h>
 dll_internal void* _engine_handle = NULL;
 #endif
-#include <xan_debug.h>
-#include <xan_log.h>
-#include <xan_native_diagnostics.h>
-#include <xan_file_descriptor_waiter.h>
-#include <xan_code_performance_counter.h>
-#include <xan_memory_chunk.h>
-#include <xan_network_functions.h>
-#include <xan_boolean.h>
-#include <xan_uint64.h>
-#include <xan_float.h>
-#include <xan_double.h>
-#include <xan_uint32.h>
-#include <xan_int64.h>
-#include <xan_numeric.h>
-#include <xan_event.h>
-#include <xan_uigroup.h>
-#include <xan_dataobject.h>
-#include <xan_data.h>
+#include "xan_debug.h"
+#include "xan_log.h"
+#include "xan_native_diagnostics.h"
+#include "xan_file_descriptor_waiter.h"
+#include "xan_code_performance_counter.h"
+#include "xan_memory_chunk.h"
+#include "xan_network_functions.h"
+#include "xan_boolean.h"
+#include "xan_uint64.h"
+#include "xan_float.h"
+#include "xan_double.h"
+#include "xan_uint32.h"
+#include "xan_int64.h"
+#include "xan_numeric.h"
+#include "xan_event.h"
+#ifndef RUX_NO_XGROUP_RUX_TYPE_INDEX	
+#include "xan_uigroup.h"
+#endif
+#include "xan_dataobject.h"
+#include "xan_data.h"
 dll_internal ::rux::pid_t _engine_init_thread_id = 0;
 dll_internal ::rux::int32 _rux_current_module_index = 0;
 dll_internal ::rux::uint8 _rux_deinitialization_funcs_count = 0;
@@ -2567,10 +2569,12 @@ namespace rux
 	{
 		return ::rux::XDouble::get_static_RuxTypeIndex();
 	};
+#ifndef RUX_NO_XGROUP_RUX_TYPE_INDEX	
 	dll_internal ::rux::uint32 get_group_rux_type_index( void )
 	{
 		return ::rux::gui::controls::XGroup::get_static_RuxTypeIndex();
 	};
+#endif	
 	dll_internal ::rux::uint32 get_int32_rux_type_index( void )
 	{
 		return ::rux::XInt32::get_static_RuxTypeIndex();
@@ -5046,7 +5050,7 @@ namespace rux
 			declare_stack_variable( char , alter_process_name , 1024 );
 			rux_concatenation( alter_process_name , module_name );
 			rux_replace( alter_process_name , '/' , '\\' );
-			if( ::rux::engine::_globals->_psapi_module.EnumProcesses( processes , sizeof( processes ) , &size ) )
+			if( ::rux::engine::_globals->_psapi_module.EnumProcessesF( processes , sizeof( processes ) , &size ) )
 			{
 				processes_count = size / sizeof( DWORD );
 				declare_stack_variable( char , process_name_ptr , 1024 );
@@ -5060,9 +5064,9 @@ namespace rux
 						process_handle = OpenProcess( SYNCHRONIZE | PROCESS_TERMINATE  | PROCESS_QUERY_INFORMATION | PROCESS_VM_READ , FALSE , processes[ index0 ] );
 						if( process_handle != NULL )
 						{					
-							if( ::rux::engine::_globals->_psapi_module.EnumProcessModules( process_handle , &module_handle , sizeof( module_handle ) , &size ) )
+							if( ::rux::engine::_globals->_psapi_module.EnumProcessModulesF( process_handle , &module_handle , sizeof( module_handle ) , &size ) )
 							{						
-								if( ::rux::engine::_globals->_psapi_module.GetModuleFileNameExA( process_handle , module_handle , process_name_ptr , 1024 ) > 0 )
+								if( ::rux::engine::_globals->_psapi_module.GetModuleFileNameExAF( process_handle , module_handle , process_name_ptr , 1024 ) > 0 )
 								{
 									if( strcmp( module_name , process_name_ptr ) == 0
 										|| alter_process_name == process_name_ptr )
@@ -5074,7 +5078,7 @@ namespace rux
 										}
 									}	
 								}
-								if( ::rux::engine::_globals->_psapi_module.GetModuleBaseNameA( process_handle , module_handle , process_name_ptr , sizeof( process_name_ptr ) / sizeof( char ) ) > 0 )
+								if( ::rux::engine::_globals->_psapi_module.GetModuleBaseNameAF( process_handle , module_handle , process_name_ptr , sizeof( process_name_ptr ) / sizeof( char ) ) > 0 )
 								{
 									::rux::io::path::get_filename_without_extension( process_name_ptr , process_name_without_extension );
 									if( strcmp( module_name , process_name_ptr ) == 0
@@ -6185,7 +6189,7 @@ namespace rux
 			declare_stack_variable( char , alter_process_name , 1024 );
 			rux_concatenation( alter_process_name , module_name );
 			rux_replace( alter_process_name , '/' , '\\' );
-			if( ::rux::engine::_globals->_psapi_module.EnumProcesses( processes , sizeof( processes ) , &size ) )
+			if( ::rux::engine::_globals->_psapi_module.EnumProcessesF( processes , sizeof( processes ) , &size ) )
 			{
 				processes_count = size / sizeof( DWORD );
 				declare_stack_variable( char , process_name_ptr , 1024 );
@@ -6199,9 +6203,9 @@ namespace rux
 						process_handle = OpenProcess( SYNCHRONIZE | PROCESS_TERMINATE  | PROCESS_QUERY_INFORMATION | PROCESS_VM_READ , FALSE , processes[ index0 ] );
 						if( process_handle != NULL )
 						{					
-							if( ::rux::engine::_globals->_psapi_module.EnumProcessModules( process_handle , &module_handle , sizeof( module_handle ) , &size ) )
+							if( ::rux::engine::_globals->_psapi_module.EnumProcessModulesF( process_handle , &module_handle , sizeof( module_handle ) , &size ) )
 							{						
-								if( ::rux::engine::_globals->_psapi_module.GetModuleFileNameExA( process_handle , module_handle , process_name_ptr , 1024 ) > 0 )
+								if( ::rux::engine::_globals->_psapi_module.GetModuleFileNameExAF( process_handle , module_handle , process_name_ptr , 1024 ) > 0 )
 								{
 									if( strcmp( module_name , process_name_ptr ) == 0
 										|| strcmp( alter_process_name , process_name_ptr ) == 0 )
@@ -6218,7 +6222,7 @@ namespace rux
 										}
 									}	
 								}
-								if( ::rux::engine::_globals->_psapi_module.GetModuleBaseNameA( process_handle , module_handle , process_name_ptr , sizeof( process_name_ptr ) / sizeof( char ) ) > 0 )
+								if( ::rux::engine::_globals->_psapi_module.GetModuleBaseNameAF( process_handle , module_handle , process_name_ptr , sizeof( process_name_ptr ) / sizeof( char ) ) > 0 )
 								{
 									::rux::io::path::get_filename_without_extension( process_name_ptr , process_name_without_extension );
 									if( strcmp( module_name , process_name_ptr ) == 0

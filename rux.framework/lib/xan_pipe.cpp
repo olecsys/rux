@@ -1,16 +1,16 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_pipe.h>
-#include <xan_security.h>
-#include <xan_error.h>
-#include <xan_keyvaluepair.h>
-#include <xan_uint64.h>
-#include <xan_log.h>
-#include <xan_file_descriptor_waiter.h>
-#include <xan_user_data.h>
-#include <xan_time.h>
-#include <xan_boolean.h>
+#include "xan_pipe.h"
+#include "xan_security.h"
+#include "xan_error.h"
+#include "xan_keyvaluepair.h"
+#include "xan_uint64.h"
+#include "xan_log.h"
+#include "xan_file_descriptor_waiter.h"
+#include "xan_user_data.h"
+#include "xan_time.h"
+#include "xan_boolean.h"
 begin_implement_rux_class_ns( PipeClient , rux );
 	_buffer_size = 5;
 end_implement_rux_class();

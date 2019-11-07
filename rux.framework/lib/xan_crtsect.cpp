@@ -1,12 +1,12 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_crtsect.h>
-#include <xan_interlocked.h>
-#include <xan_thread.h>
-#include <xan_global_initialization.h>
-#include <xan_gui_defines.h>
-#include <xan_global_variables.h>
+#include "xan_crtsect.h"
+#include "xan_interlocked.h"
+#include "xan_thread.h"
+#include "xan_global_initialization.h"
+#include "xan_gui_defines.h"
+#include "xan_global_variables.h"
 XCrtSect::XCrtSect()
 {
 	_crt_sect_index = SIZE_MAX;

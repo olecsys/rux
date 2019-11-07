@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_string.h>
+#include "xan_string.h"
 namespace rux
 {	
 	extern dll_internal const ::rux::uint64 min_unix_time;

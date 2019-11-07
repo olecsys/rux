@@ -3,12 +3,12 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_float.h>
-#include <xan_double.h>
-#include <xan_int32.h>
-#include <xan_uint32.h>
-#include <xan_int64.h>
-#include <xan_uint64.h>
+#include "xan_float.h"
+#include "xan_double.h"
+#include "xan_int32.h"
+#include "xan_uint32.h"
+#include "xan_int64.h"
+#include "xan_uint64.h"
 namespace rux
 {
 	class Expr;

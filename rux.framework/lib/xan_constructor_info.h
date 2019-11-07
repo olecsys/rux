@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_string.h>
+#include "xan_string.h"
 namespace rux
 {	
 	typedef XGCRef& (*ctor_t)( void );

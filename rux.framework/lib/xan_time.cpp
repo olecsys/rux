@@ -1,11 +1,11 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_time.h>
-#include <xan_uint32.h>
-#include <xan_keyvaluepair.h>
-#include <xan_uint64.h>
-#include <xan_boolean.h>
+#include "xan_time.h"
+#include "xan_uint32.h"
+#include "xan_keyvaluepair.h"
+#include "xan_uint64.h"
+#include "xan_boolean.h"
 begin_implement_rux_class_ns( Time , rux )
 	_time = 0;
 	_is_unix_time = 0;
@@ -258,7 +258,7 @@ namespace rux
 			}
 			year -= months / 12;
 			month -= months % 12;
-			size_t days_in_month = XTime::DaysInMonth( month , year );
+			size_t days_in_month = (size_t)XTime::DaysInMonth( month , year );
 			if( day_of_month > days_in_month )
 				day_of_month = days_in_month;
 			declare_stack_variable( char , format , 64 );
@@ -331,7 +331,7 @@ namespace rux
 			if( year < 1970 )
 				year = 1970;
 
-			size_t days_in_month = XTime::DaysInMonth( month , year );
+			size_t days_in_month = (size_t)XTime::DaysInMonth( month , year );
 			if( day_of_month > days_in_month )
 				day_of_month = days_in_month;
 

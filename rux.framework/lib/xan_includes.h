@@ -3,8 +3,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_diagnostic_defines.h>
+#include "xan_diagnostic_defines.h"
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 #ifdef __WINDOWS__
 #include <WinSock2.h>
 #include <windows.h>
@@ -128,5 +130,5 @@ namespace rux
 	};
 };
 #define alloc_array_macros( object_class , size ) ::rux::engine::alloc_array< object_class >( size , (const char*)__FILE__ , (::rux::uint32)__LINE__ , (char*)0 )
-#include <xan_malloc_array.h>
+#include "xan_malloc_array.h"
 #endif

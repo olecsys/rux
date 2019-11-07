@@ -1,15 +1,15 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_type.h>
-#include <xan_asm.h>
-#include <xan_keyvaluepair.h>
-#include <xan_property_info.h>
-#include <xan_constructor_info.h>
-#include <xan_function_info.h>
-#include <xan_uint64.h>
-#include <xan_boolean.h>
-#include <xan_log.h>
+#include "xan_type.h"
+#include "xan_asm.h"
+#include "xan_keyvaluepair.h"
+#include "xan_property_info.h"
+#include "xan_constructor_info.h"
+#include "xan_function_info.h"
+#include "xan_uint64.h"
+#include "xan_boolean.h"
+#include "xan_log.h"
 implement_rux_base_methods_for_object( Type );
 implement_ctor_and_register_type( Type );
 Type::Type( void )

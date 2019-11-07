@@ -1,17 +1,17 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_file.h>
-#include <xan_error.h>
-#include <xan_console.h>
-#include <xan_path.h>
+#include "xan_file.h"
+#include "xan_error.h"
+#include "xan_console.h"
+#include "xan_path.h"
 #ifdef __WINDOWS__
 #include <AclAPI.h>
 #endif
-#include <xan_uint32.h>
-#include <xan_keyvaluepair.h>
-#include <xan_uint64.h>
-#include <xan_boolean.h>
+#include "xan_uint32.h"
+#include "xan_keyvaluepair.h"
+#include "xan_uint64.h"
+#include "xan_boolean.h"
 const rux::uint8 g_utf8_header[] = { 0xef , 0xbb , 0xbf };
 begin_implement_rux_class_ns( File , rux::io );
 	_file_ptr = NULL;

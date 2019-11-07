@@ -3,8 +3,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_includes.h>
-#include <xan_memorymanager_defines.h>
+#include "xan_includes.h"
+#include "xan_memorymanager_defines.h"
 #define begin_memory_marker 25071986
 #define end_memory_marker 18121963
 namespace rux

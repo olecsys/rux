@@ -1,8 +1,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_stream.h>
-#include <xan_memorymanager_defines.h>
+#include "xan_stream.h"
+#include "xan_memorymanager_defines.h"
 namespace rux
 {
 	namespace io

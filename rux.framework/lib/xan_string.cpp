@@ -1,17 +1,17 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_includes.h>
+#include "xan_includes.h"
 #include "xan_string.h"
-#include <xan_int64.h>
-#include <xan_uint32.h>
-#include <xan_console.h>
+#include "xan_int64.h"
+#include "xan_uint32.h"
+#include "xan_console.h"
 dll_public XEnumCodePage g_code_page = XEnumCodePage_Unknown;
 dll_public ::rux::uint32 _rux_ansi_code_page = 0;
-#include <xan_keyvaluepair.h>
-#include <xan_uint64.h>
-#include <xan_file_descriptor_waiter.h>
-#include <xan_boolean.h>
+#include "xan_keyvaluepair.h"
+#include "xan_uint64.h"
+#include "xan_file_descriptor_waiter.h"
+#include "xan_boolean.h"
 implement_rux_base_methods_ns( String , rux );
 implement_rux_set_operators_ns_( String , rux );
 namespace rux
@@ -4354,7 +4354,7 @@ namespace rux
 			::rux::utils::string::cp1251::to_utf16( cp1251_ptr , cp1251_ptr_count , (char*)utf16_ptr , utf16_ptr_count * 2 , result_bytes );
 		else
 		{
-			result_bytes = MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , cp1251_ptr_count , (wchar_t*)utf16_ptr , utf16_ptr_count );
+			result_bytes = (size_t)MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , cp1251_ptr_count , (wchar_t*)utf16_ptr , utf16_ptr_count );
 			result_bytes *= 2;
 		}
 #else

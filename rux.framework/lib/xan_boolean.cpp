@@ -2,7 +2,7 @@
 #include <config.h>
 #endif
 #include "xan_boolean.h"
-#include <xan_uint64.h>
+#include "xan_uint64.h"
 begin_implement_rux_class_without_operators_ns( Boolean , rux )
 	_value = 0;
 end_implement_rux_class();

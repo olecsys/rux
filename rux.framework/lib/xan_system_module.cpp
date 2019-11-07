@@ -1,9 +1,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_system_module.h>
-#include <xan_defines.h>
-#include <xan_io_defines.h>
+#include "xan_system_module.h"
+#include "xan_defines.h"
+#include "xan_io_defines.h"
 namespace rux
 {
 	namespace system

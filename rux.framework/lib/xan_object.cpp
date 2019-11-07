@@ -1,12 +1,12 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_object.h>
-#include <xan_typemanager_defines.h>
-#include <xan_keyvaluepair.h>
-#include <xan_string.h>
-#include <xan_uint64.h>
-#include <xan_boolean.h>
+#include "xan_object.h"
+#include "xan_typemanager_defines.h"
+#include "xan_keyvaluepair.h"
+#include "xan_string.h"
+#include "xan_uint64.h"
+#include "xan_boolean.h"
 implement_rux_base_methods_for_object( Object );
 Object::Object( XGCRef* gcref )
 	: XGCRef( Object::get_static_Type )
@@ -22,7 +22,7 @@ Type* Object::get_rux_array_item_type( void )
 {
 	return NULL;
 };
-char* Object::ToString( void )
+const char* Object::ToString( void )
 {
 	if( _gc_ref_obj )
 	{

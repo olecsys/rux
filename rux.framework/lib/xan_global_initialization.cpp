@@ -1,10 +1,10 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_global_initialization.h>
-#include <xan_memorymanager_defines.h>
-#include <xan_debug.h>
-#include <xan_memory_helper.h>
+#include "xan_global_initialization.h"
+#include "xan_memorymanager_defines.h"
+#include "xan_debug.h"
+#include "xan_memory_helper.h"
 dll_internal XCrtSect* _cs_engine = NULL;
 dll_internal XCrtSect* _cs_rux_deinitialization_funcs = NULL;
 namespace rux

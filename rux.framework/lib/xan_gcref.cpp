@@ -1,14 +1,13 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_gcref.h>
-#include <xan_typemanager_defines.h>
-#include <xan_debug.h>
-#include <xan_time.h>
-#include <xan_memory_helper.h>
-#include <xan_log.h>
+#include "xan_gcref.h"
+#include "xan_typemanager_defines.h"
+#include "xan_debug.h"
+#include "xan_time.h"
+#include "xan_memory_helper.h"
+#include "xan_log.h"
 
-#include <xan_uigroup.h>
 GCContainer::GCContainer( void )
 {
 	_gc_ref = 0;
@@ -25,11 +24,6 @@ void XGCRef::AddRef( const char* file , ::rux::int32 line ) const
 {
 	UNREFERENCED_PARAMETER( file );
 	UNREFERENCED_PARAMETER( line );
-	if( _get_static_Type == rux::gui::controls::XGroup::get_static_Type )
-	{
-		if( ((rux::gui::controls::Group*)this)->_utf8_control_name_hash	== 1712401978 )
-			file = file;
-	}
 	::rux::memory::check_memory( const_cast< XGCRef* >( this ) , 0 , sizeof( XGCRef ) );
 	XInterlocked::Increment( const_cast<rux_volatile*>( &_ref ) );
 };
@@ -37,11 +31,6 @@ void XGCRef::Release( const char* file , ::rux::int32 line ) const
 {	
 	UNREFERENCED_PARAMETER( file );
 	UNREFERENCED_PARAMETER( line );
-	if( _get_static_Type == rux::gui::controls::XGroup::get_static_Type )
-	{
-		if( ((rux::gui::controls::Group*)this)->_utf8_control_name_hash	== 1712401978 )
-			file = file;
-	}
 	::rux::memory::check_memory( const_cast< XGCRef* >( this ) , 0 , sizeof( XGCRef ) );
 	if(	XInterlocked::Decrement( const_cast< rux_volatile* >( &_ref ) ) == 0 )
 		::rux::engine::free_object<XGCRef>( const_cast< XGCRef* >( this ) );

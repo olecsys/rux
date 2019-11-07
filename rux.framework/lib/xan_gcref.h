@@ -3,11 +3,11 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_interlocked.h>
-#include <xan_memorymanager_defines.h>
-#include <xan_gc_defines.h>
-#include <xan_malloc_array.h>
-#include <xan_memory_helper.h>
+#include "xan_interlocked.h"
+#include "xan_memorymanager_defines.h"
+#include "xan_gc_defines.h"
+#include "xan_malloc_array.h"
+#include "xan_memory_helper.h"
 class Type;
 class XType;
 namespace rux
