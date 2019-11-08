@@ -3,7 +3,11 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_types.h>
+#ifdef RUX_USE_HEADER_PREFIX
+#include "rux_extern_includes/xan_types.h"
+#else
+#include "xan_types.h"
+#endif
 namespace rux
 {
 #ifdef IAM_EXPORT

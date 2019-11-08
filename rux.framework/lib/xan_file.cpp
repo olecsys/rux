@@ -508,6 +508,7 @@ namespace rux
 				error = XError::ConvertErrorCodeToString( GetLastError() , XEnum_ErrorType_GetLastError );
 		#endif
 		#ifdef __UNIX__
+			(void)last_write_file_time;
 			//stat
 		#endif		
 			ReOpen( (*this)()->_file_mode , error );
@@ -539,6 +540,7 @@ namespace rux
 				error = XError::ConvertErrorCodeToString( GetLastError() , XEnum_ErrorType_GetLastError );
 		#endif
 		#ifdef __UNIX__
+			(void)creation_file_time_utc;
 			//stat
 		#endif		
 			ReOpen( (*this)()->_file_mode , error );
@@ -1372,6 +1374,8 @@ namespace rux
 					}
 					LocalFree( sid_ptr );
 				}
+		#else
+		(void)user_or_group;
 		#endif
 			}
 			else
@@ -1381,6 +1385,7 @@ namespace rux
 		};
 		void XFile::AddAllowExecuteAccess( const rux::XString& file_name , const rux::XString& user_or_group , rux::XString& error )
 		{
+			(void)user_or_group;
 			error.Clear();
 			if( XFile::Exists( file_name ) == 1 )
 			{

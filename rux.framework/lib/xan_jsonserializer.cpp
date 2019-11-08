@@ -114,6 +114,8 @@ namespace rux
 			};
 			void serializer::end_object( const char* __file__ , ::rux::int32 __line__ , size_t ___rux__thread_index1986 )
 			{
+				(void)__file__;
+				(void)__line__;
 				UNREFERENCED_PARAMETER( ___rux__thread_index1986 );
 				CODE_LABEL_START( 0 , 0 , 5 );
 				if( _formatted == 1 )
@@ -1606,15 +1608,15 @@ namespace rux
 			serialize_json_value( object , json , json_size , json_cursor , is_formatted , tab_count , step , error , __FILE__ , __LINE__ , ___rux__thread_index1986 );
 			if( error.Length() == 0 )
 			{
-				size_t json_index = json_cursor - json;
+				size_t json_index0 = json_cursor - json;
 				rux_check_json_string_memory( json , json_size , json_cursor , 1 , step , __FILE__ , __LINE__ );
-				json[ json_index ] = '\0';
-				json_index++;
+				json[ json_index0 ] = '\0';
+				json_index0++;
 				rux::XString new_str( (size_t)0 , "new_str" , __FILE__ , __LINE__ );
 				rux::String* json_result_internal = new_str();
 				json_result_internal->_code_page = XEnumCodePage_UTF8;
 				json_result_internal->_str = json;
-				json_result_internal->_count = json_index;
+				json_result_internal->_count = json_index0;
 				json_result_internal->_size = json_size;
 				CODE_LABEL_END();
 				return new_str++;

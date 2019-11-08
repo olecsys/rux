@@ -1256,8 +1256,8 @@ namespace rux
 			else
 				return 0;
 		};
-		implement_duplicate_internal_result_function_1( uint64 , DataObject , get_FieldNameHash , size_t );
-		uint64 DataObject::get_FieldNameHash( size_t field_index )
+		implement_duplicate_internal_result_function_1( ::rux::uint32 , DataObject , get_FieldNameHash , size_t );
+		::rux::uint32 DataObject::get_FieldNameHash( size_t field_index )
 		{
 			return _pairs[ field_index ]->operator->()->_name_hash;
 		};

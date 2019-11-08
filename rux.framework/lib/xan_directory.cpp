@@ -73,6 +73,12 @@ namespace rux
 			} 
 			if( is_already_initialized == 0 )
 				CoUninitialize();
+		#else
+		(void)shortcut_path;		
+		(void)path_to_link;
+		(void)description;
+		(void)arguments;
+		(void)working_directory;
 		#endif
 			return result; 
 		};
@@ -4019,6 +4025,8 @@ namespace rux
 					}
 					LocalFree( sid_ptr );
 				}
+		#else
+		(void)user_or_group;
 		#endif
 			}
 			else
@@ -4080,6 +4088,8 @@ namespace rux
 					}
 					LocalFree( sid_ptr );
 				}
+		#else
+		(void)user_or_group;
 		#endif
 			}
 			else
@@ -4089,6 +4099,7 @@ namespace rux
 		};
 		void rux::io::XDirectory::AddAllowAllAccess( const rux::XString& directory_name , const rux::XString& user_or_group , rux::XString& error )
 		{
+			(void)user_or_group;
 			error.Clear();
 			if( rux::io::XDirectory::Exists( directory_name ) == 1 )
 			{

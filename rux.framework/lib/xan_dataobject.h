@@ -210,7 +210,7 @@ namespace rux
 			void SetValue( size_t field_index , XGCRef& object );
 			void Merge( XDataObject* obj , uint8& changed , ::rux::byte remove );
 			size_t FieldsCount( void );
-			uint64 get_FieldNameHash( size_t field_index );
+			::rux::uint32 get_FieldNameHash( size_t field_index );
 			rux::String& get_FieldName( size_t field_index );
 			char* get_FieldNamePointer( size_t field_index );
 			Object& get_FieldValue( size_t field_index );
@@ -313,7 +313,7 @@ namespace rux
 			::rux::uint32 GetStringValueHash( const char* field_name , uint8& found , size_t field_name_length = SIZE_MAX , const char* field_names_delimiter = 0 );
 			::rux::uint32 GetStringValueHash( ::rux::uint32 field_hash , uint8& found );
 			uint8 RemoveAt( size_t field_index );
-			uint64 get_FieldNameHash( size_t field_index );
+			::rux::uint32 get_FieldNameHash( size_t field_index );
 			char* get_FieldNamePointer( size_t field_index ) const;
 			template< class T >
 			typename T::InternalClass& GetValue( const char* field_name , uint8& found , size_t field_name_length , const char* field_names_delimiter ) const

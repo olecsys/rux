@@ -23,9 +23,13 @@ namespace rux
 {
 	namespace diagnostics
 	{
-		static bool descriptors_count_callback(::booldog::allocator* allocator, void* udata, const char* pathname
+		inline bool descriptors_count_callback(::booldog::allocator* allocator, void* udata, const char* pathname
 			, const char* entry_name, ::booldog::enums::io::entry_type entry_type)
 		{
+			(void)allocator;
+			(void)pathname;
+			(void)entry_name;
+			(void)entry_type;
 			++(*(rux::int64*)udata);
 			return true;
 		};
@@ -35,7 +39,11 @@ namespace rux
 			::booldog::allocators::single_threaded::mixed<1024> easymixed(&easyheap);
 			::rux::int64 threads = 0;
 #ifdef __WINDOWS__
-#else									
+			(void)pid;
+			(void)error;
+#else								
+			(void)pid;
+			(void)error;
 			::booldog::result_mbchar pathname(&easymixed);
 			if(::booldog::utils::string::mbs::format(&pathname, pathname.mballocator, debuginfo_macros, "/proc/%u/fd"
 				, (::booldog::uint32)::rux::diagnostics::process::get_process_id()))
@@ -57,6 +65,7 @@ namespace rux
 		::rux::int64 process_info::threads_count( ::rux::pid_t pid , ::rux::XString* error )
 		{
 			::rux::int64 threads = 0;
+			(void)error;
 #ifdef __WINDOWS__
 			HANDLE toolhelp32snapshot_handle = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS , 0 );
 			if( toolhelp32snapshot_handle )
@@ -76,6 +85,8 @@ namespace rux
 				CloseHandle( toolhelp32snapshot_handle );
 			}
 #else
+			(void)pid;
+			(void)error;
 			::booldog::allocators::easy::heap easyheap;
 			::booldog::allocators::single_threaded::mixed<1024> easymixed(&easyheap);
 			::booldog::result_mbchar pathname(&easymixed);
@@ -92,7 +103,10 @@ namespace rux
 		{
 			::rux::int64 value = 0LL;
 #ifdef __WINDOWS__
+		(void)pid;
+		(void)error;
 #else
+			(void)error;
 			declare_stack_variable( char , filename , 2048 );
 			::rux::safe_sprintf( filename , 2048 , "/proc/%u/status" , (::rux::uint32)pid );
 			FILE* file = fopen( filename , "r" );
@@ -122,7 +136,10 @@ namespace rux
 		{
 			::rux::int64 value = 0LL;
 #ifdef __WINDOWS__
+			(void)pid;
+			(void)error;
 #else
+			(void)error;
 			declare_stack_variable( char , filename , 2048 );
 			::rux::safe_sprintf( filename , 2048 , "/proc/%u/status" , (::rux::uint32)pid );
 			FILE* file = fopen( filename , "r" );
@@ -165,6 +182,7 @@ namespace rux
 			else
 				::rux::pdh::counter( instance_name , 230 , 180 , PDH_FMT_LARGE , &value , error );
 #else
+			(void)error;
 			pid_t pid = ::rux::diagnostics::process_info::pidof( instance_name );
 			declare_stack_variable( char , filename , 2048 );
 			::rux::safe_sprintf( filename , 2048 , "/proc/%u/status" , (::rux::uint32)pid );
@@ -375,6 +393,7 @@ namespace rux
 			else
 				::rux::pdh::counter( instance_name , 230 , 186 , PDH_FMT_LARGE , &value , error );
 #else
+			(void)error;
 			pid_t pid = ::rux::diagnostics::process_info::pidof( instance_name );
 			declare_stack_variable( char , filename , 2048 );
 			::rux::safe_sprintf( filename , 2048 , "/proc/%u/status" , (::rux::uint32)pid );

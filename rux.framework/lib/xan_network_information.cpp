@@ -79,7 +79,7 @@ namespace rux
 				if( local == 1 )
 				{
 					struct ifaddrs* ifaddr0 = NULL ,* ifaddr1 = NULL;
-					rux::int32 family = -1 , result = -1;
+					rux::int32 family = -1;
 					declare_stack_variable( char , host , NI_MAXHOST );
 					if( getifaddrs( &ifaddr0 ) != -1 )
 					{
@@ -186,8 +186,7 @@ namespace rux
 				rux::engine::free_mem( addresses );    
 		#elif defined( __LINUX__ )
 			struct ifaddrs* ifaddr0 = NULL ,* ifaddr1 = NULL;
-			rux::int32 family, s;
-			declare_stack_variable( char , host , NI_MAXHOST );
+			rux::int32 family;
 			if( getifaddrs( &ifaddr0 ) != -1 )
 			{
 				for( ifaddr1 = ifaddr0 ; ifaddr1 != NULL ; ifaddr1 = ifaddr1->ifa_next )
@@ -398,8 +397,7 @@ namespace rux
 				rux::engine::free_mem( addresses );    
 		#elif defined( __LINUX__ )
 			struct ifaddrs* ifaddr0 = NULL ,* ifaddr1 = NULL;
-			rux::int32 family, s;
-			declare_stack_variable( char , host , NI_MAXHOST );
+			rux::int32 family;
 			if( getifaddrs( &ifaddr0 ) != -1 )
 			{
 				declare_stack_variable( char , ipip , 256 );

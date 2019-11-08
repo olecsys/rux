@@ -58,7 +58,7 @@ namespace rux
 				{
 					if( send_data_size > data_size - offset )
 						send_data_size = data_size - offset;
-					if( WriteFile( pipe , &( (::rux::uint8*)data )[ offset ] , send_data_size , &written_size , NULL ) == TRUE )
+					if( WriteFile( pipe , &( (::rux::uint8*)data )[ offset ] , (DWORD)send_data_size , &written_size , NULL ) == TRUE )
 					{
 						offset += written_size;
 					}
@@ -93,7 +93,7 @@ namespace rux
 						offset += written_size;
 					}
 					if( offset > (*this)()->_buffer_size )
-						(*this)()->_buffer_size = offset;
+						(*this)()->_buffer_size = (rux::uint32)offset;
 					::rux::engine::free_mem( buffer );
 				}
 				CloseHandle( pipe ); 
@@ -153,6 +153,7 @@ namespace rux
 											break;
 										}
 										::rux::int32 read_fd = fd_waiter.get_read_fd();
+										(void)read_fd;
 										read_size = read( response_fifo , &( (::rux::uint8*)received_data._data )[ received_data._data_size ] , sizeof( ssize_t ) + sizeof( ::rux::int32 ) - received_data._data_size );
 										if( read_size > 0 )
 											received_data._data_size += read_size;
@@ -748,7 +749,7 @@ namespace rux
 				}
 			}
 			if( pipe_server_object->_pipe_server->_buffer_size < offset )
-				pipe_server_object->_pipe_server->_buffer_size = offset;
+				pipe_server_object->_pipe_server->_buffer_size = (::rux::uint32)offset;
 			if( is_success == TRUE )
 			{
 				if( pipe_server_object->_pipe_server->_on_pipe_callback )
@@ -761,7 +762,7 @@ namespace rux
 					{
 						if( send_data_size > send_data._data_size - offset )
 							send_data_size = send_data._data_size - offset;
-						if( WriteFile( pipe_server_object->_pipe , &( (::rux::uint8*)send_data._data )[ offset ] , send_data_size , &readed_bytes , NULL ) == TRUE )
+						if( WriteFile( pipe_server_object->_pipe , &( (::rux::uint8*)send_data._data )[ offset ] , (DWORD)send_data_size , &readed_bytes , NULL ) == TRUE )
 							offset += readed_bytes;
 						else
 						{
@@ -784,7 +785,6 @@ namespace rux
 			CRITICAL_SECTION_LOCK( pipe_server_object->_pipe_server->_cs_buffer_size );
 			XData recv_data( pipe_server_object->_pipe_server->_buffer_size ) , send_data;
 			CRITICAL_SECTION_UNLOCK( pipe_server_object->_pipe_server->_cs_buffer_size );
-			::rux::int32 last_error = 0;
 			::rux::io::file_descriptor_waiter fd_waiter;
 			fd_waiter.add( pipe_server_object->_client_request );
 			::rux::int32 recv_data_size = 0 , total_recv_data_size = 0;

@@ -258,6 +258,11 @@ void XSystemSecurity::ExecuteByUser( const ::rux::XString& login , const ::rux::
 	{
 		rux_write_error( XError::ConvertErrorCodeToString( 0 , XEnum_ErrorType_GetLastError ) , error );
 	}
+#else
+	(void)login;
+	(void)password;
+	(void)executable;
+	(void)arguments;
 #endif
 };
 rux::uint8 XSystemSecurity::IsAdminUserProcess( void )

@@ -3,7 +3,11 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#ifdef RUX_USE_HEADER_PREFIX
+#include "rux_extern_includes/xan_utils.h"
+#else
 #include "xan_utils.h"
+#endif
 #define RUX_STACK_AND_GLOBAL_DIAGNOSTIC 1
 #if RUX_STACK_AND_GLOBAL_DIAGNOSTIC
 #define declare_stack_variable( type , var , size ) class __1986_memory_##var\

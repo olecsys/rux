@@ -1066,7 +1066,7 @@ namespace rux
 					{
 						if( memcmp( &_str[ index ] , utf16_ptr , utf16_ptr_count ) == 0 )
 						{
-							local_index = index / 2;
+							local_index = (int)index / 2;
 							break;
 						}
 					}
@@ -1090,7 +1090,7 @@ namespace rux
 						{
 							if( memcmp( &utf16_ptr[ index ] , string._str , string._count - 2 ) == 0 )
 							{
-								local_index = index / 2;
+								local_index = (int)index / 2;
 								break;
 							}
 						}
@@ -1107,7 +1107,7 @@ namespace rux
 						{
 							if( memcmp( &_str[ index ] , string._str , string._count - 1 ) == 0 )
 							{
-								local_index = index;
+								local_index = (int)index;
 								break;
 							}
 						}
@@ -1120,7 +1120,7 @@ namespace rux
 					size_t ansi_to_utf8_bytes = 0;
 					char* 	utf8_ptr = XString::ansi_to_utf8( _str , _count - 1 , ansi_to_utf8_bytes );
 					size_t utf8_ptr_count = ansi_to_utf8_bytes;
-					local_index = index;
+					local_index = (int)index;
 					index = XString::utf8_symbol_index_to_byte_index( utf8_ptr , index );
 					if( index != SIZE_MAX )
 					{
@@ -1164,7 +1164,7 @@ namespace rux
 					utf8_ptr = XString::utf16_to_utf8( (::rux::uint16*)string._str , string.Length() , utf16_to_utf8_bytes );
 					utf8_ptr_count = utf16_to_utf8_bytes;
 				}
-				local_index = index;
+				local_index = (int)index;
 				index = XString::utf8_symbol_index_to_byte_index( _str , index );
 				if( index != SIZE_MAX )
 				{
@@ -1236,7 +1236,7 @@ namespace rux
 						}
 						if( *(::rux::uint16*)&_str[ index ] == wide_symbol11 )
 						{
-							local_index = index / 2;
+							local_index = (int)index / 2;
 							array_index = index1;
 							break;					
 						}
@@ -1265,7 +1265,7 @@ namespace rux
 							symbol00 = char_array[ index1 ]._char;
 						if( _str[ index ] == symbol00 )
 						{
-							local_index = index;
+							local_index = (int)index;
 							array_index = index1;
 							break;					
 						}
@@ -1276,7 +1276,7 @@ namespace rux
 			}
 			else if( _code_page == XEnumCodePage_UTF8 )
 			{
-				local_index = index;
+				local_index = (int)index;
 				index = XString::utf8_symbol_index_to_byte_index( _str , index );
 				if( index != SIZE_MAX )
 				{
@@ -1362,7 +1362,7 @@ namespace rux
 						{
 							if( memcmp( &_str[ index ] , utf16_ptr , utf16_count ) == 0 )
 							{
-								local_index = index / 2;
+								local_index = (int)index / 2;
 								array_index = index1;
 								break;
 							}
@@ -1379,7 +1379,7 @@ namespace rux
 			}
 			else if( _code_page == XEnumCodePage_UTF8 )
 			{			
-				local_index = index;
+				local_index = (int)index;
 				index = XString::utf8_symbol_index_to_byte_index( _str , index );
 				if( index != SIZE_MAX )
 				{
@@ -1461,7 +1461,7 @@ namespace rux
 					size_t ansi_to_utf8_bytes = 0;
 					char* utf8_this_ptr = XString::ansi_to_utf8( _str , _count - 1 , ansi_to_utf8_bytes );
 					size_t utf8_this_ptr_count = ansi_to_utf8_bytes;
-					local_index = index;
+					local_index = (int)index;
 					index = XString::utf8_symbol_index_to_byte_index( utf8_this_ptr , index );
 					if( index != SIZE_MAX )
 					{
@@ -1486,10 +1486,10 @@ namespace rux
 									}
 									else if( string_array[ index1 ]._code_page == XEnumCodePage_CP1251 )
 									{
-										size_t ansi_to_utf8_bytes = 0;
+										size_t ansi_to_utf8_bytes1 = 0;
 										utf8_ptr = XString::ansi_to_utf8( string_array[ index1 ]._str , string_array[ index1 ]._count - 1 , ansi_to_utf8_bytes );
 										utf8_ptrs.Add( utf8_ptr );
-										utf8_ptrs_bytes.Add( ansi_to_utf8_bytes );
+										utf8_ptrs_bytes.Add( ansi_to_utf8_bytes1 );
 									}
 									else if( string_array[ index1 ]._code_page == XEnumCodePage_UTF8 )
 									{
@@ -1543,8 +1543,8 @@ namespace rux
 									utf16_ptrs.Add( string_array[ index1 ]._str );
 								else if( string_array[ index1 ]._code_page == XEnumCodePage_CP1251 )
 								{
-									size_t ansi_to_utf16_bytes = 0;
-									utf16_ptr = (char*)XString::ansi_to_utf16( string_array[ index1 ]._str , string_array[ index1 ]._count - 1 , ansi_to_utf16_bytes );
+									size_t ansi_to_utf16_bytes00 = 0;
+									utf16_ptr = (char*)XString::ansi_to_utf16( string_array[ index1 ]._str , string_array[ index1 ]._count - 1 , ansi_to_utf16_bytes00 );
 									utf16_ptrs.Add( utf16_ptr );
 								}
 								else if( string_array[ index1 ]._code_page == XEnumCodePage_UTF8 )
@@ -1560,7 +1560,7 @@ namespace rux
 							{
 								if( memcmp( &utf16_this_ptr[ index ] , utf16_ptr , utf16_count ) == 0 )
 								{
-									local_index = index / 2;
+									local_index = (int)index / 2;
 									array_index = index1;
 									break;
 								}
@@ -1586,7 +1586,7 @@ namespace rux
 							{
 								if( memcmp( &_str[ index ] , string_array[ index1 ]._str , string_array[ index1 ]._count - 1 ) == 0 )
 								{
-									local_index = index;
+									local_index = (int)index;
 									array_index = index1;
 									break;
 								}
@@ -1651,7 +1651,7 @@ namespace rux
 					{					
 						if( memcmp( &_str[ index ] , utf16_ptr , utf16_ptr_count ) == 0 )
 						{
-							local_index = index / 2;
+							local_index = (int)index / 2;
 							break;
 						}
 						if( index == 0 )
@@ -1678,7 +1678,7 @@ namespace rux
 						{						
 							if( memcmp( &utf16_ptr[ index ] , string._str , string._count - 2 ) == 0 )
 							{
-								local_index = index / 2;
+								local_index = (int)index / 2;
 								break;
 							}
 							if( index == 0 )
@@ -1698,7 +1698,7 @@ namespace rux
 						{
 							if( memcmp( &_str[ index ] , string._str , string._count - 1 ) == 0 )
 							{
-								local_index = index;
+								local_index = (int)index;
 								break;
 							}
 							if( index == 0 )
@@ -4178,7 +4178,7 @@ namespace rux
 				index0++;
 			}
 		}
-		return utf8_symbol;
+		return (::rux::uint32)utf8_symbol;
 	};
 	::rux::uint32 String::get_UTF8Char( size_t index ) const
 	{
@@ -4309,8 +4309,8 @@ namespace rux
 		else
 		{
 			wchar_t* wide_array_ptr = alloc_array_macros( wchar_t , utf8_ptr_count + 1 );
-			size_t wide_array_ptr_length = MultiByteToWideChar( XEnumCodePage_UTF8 , 0 , utf8_ptr , utf8_ptr_count  , wide_array_ptr , utf8_ptr_count );	
-			result_bytes = WideCharToMultiByte( _rux_ansi_code_page , WC_NO_BEST_FIT_CHARS , wide_array_ptr , wide_array_ptr_length , cp1251_ptr , cp1251_ptr_count , NULL , NULL );
+			size_t wide_array_ptr_length = MultiByteToWideChar( XEnumCodePage_UTF8 , 0 , utf8_ptr , (int)utf8_ptr_count  , wide_array_ptr , (int)utf8_ptr_count );	
+			result_bytes = WideCharToMultiByte( _rux_ansi_code_page , WC_NO_BEST_FIT_CHARS , wide_array_ptr , (int)wide_array_ptr_length , cp1251_ptr , (int)cp1251_ptr_count , NULL , NULL );
 			::rux::engine::free_mem( wide_array_ptr );
 		}
 #else
@@ -4332,7 +4332,7 @@ namespace rux
 			::rux::utils::string::cp1251::to_utf16( cp1251_ptr , cp1251_ptr_count , (char*)wide_char_array , 2 * ( cp1251_ptr_count + 1 ) , result_bytes );
 		else
 		{
-			result_bytes = MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , cp1251_ptr_count , (wchar_t*)wide_char_array , cp1251_ptr_count );
+			result_bytes = MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , (int)cp1251_ptr_count , (wchar_t*)wide_char_array , (int)cp1251_ptr_count );
 			result_bytes *= 2;
 		}
 #else
@@ -4354,7 +4354,7 @@ namespace rux
 			::rux::utils::string::cp1251::to_utf16( cp1251_ptr , cp1251_ptr_count , (char*)utf16_ptr , utf16_ptr_count * 2 , result_bytes );
 		else
 		{
-			result_bytes = (size_t)MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , cp1251_ptr_count , (wchar_t*)utf16_ptr , utf16_ptr_count );
+			result_bytes = (size_t)MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , (int)cp1251_ptr_count , (wchar_t*)utf16_ptr , (int)utf16_ptr_count );
 			result_bytes *= 2;
 		}
 #else
@@ -4409,7 +4409,7 @@ namespace rux
 		else
 		{
 			::rux::uint16* source_array_ptr = alloc_array_macros( ::rux::uint16 , cp1251_ptr_count + 1 );
-			MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , cp1251_ptr_count , (wchar_t*)source_array_ptr , cp1251_ptr_count );				
+			MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , (int)cp1251_ptr_count , (wchar_t*)source_array_ptr , (int)cp1251_ptr_count );				
 			utf16_to_utf32( (::rux::uint16*)source_array_ptr , cp1251_ptr_count , utf32_ptr , utf32_ptr_count );
 			::rux::engine::free_mem( source_array_ptr );					
 		}
@@ -4427,8 +4427,8 @@ namespace rux
 		else
 		{
 			::rux::uint16* source_array_ptr = alloc_array_macros( ::rux::uint16 , cp1251_ptr_count + 1 );
-			MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , cp1251_ptr_count , (wchar_t*)source_array_ptr , cp1251_ptr_count );				
-			result_bytes = WideCharToMultiByte( XEnumCodePage_UTF8 , 0 , (wchar_t*)source_array_ptr , cp1251_ptr_count , utf8_ptr , utf8_ptr_count , NULL , NULL );
+			MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , (int)cp1251_ptr_count , (wchar_t*)source_array_ptr , (int)cp1251_ptr_count );				
+			result_bytes = WideCharToMultiByte( XEnumCodePage_UTF8 , 0 , (wchar_t*)source_array_ptr , (int)cp1251_ptr_count , utf8_ptr , (int)utf8_ptr_count , NULL , NULL );
 			::rux::engine::free_mem( source_array_ptr );					
 		}
 #else
@@ -4451,8 +4451,8 @@ namespace rux
 		else
 		{
 			::rux::uint16* source_array_ptr = alloc_array_macros( ::rux::uint16 , cp1251_ptr_count + 1 );
-			MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , cp1251_ptr_count , (wchar_t*)source_array_ptr , cp1251_ptr_count );				
-			res_length = WideCharToMultiByte( XEnumCodePage_UTF8 , 0 , (wchar_t*)source_array_ptr , cp1251_ptr_count , utf8_ptr , cp1251_ptr_count * 4 , NULL , NULL );
+			MultiByteToWideChar( _rux_ansi_code_page , MB_USEGLYPHCHARS , cp1251_ptr , (int)cp1251_ptr_count , (wchar_t*)source_array_ptr , (int)cp1251_ptr_count );				
+			res_length = WideCharToMultiByte( XEnumCodePage_UTF8 , 0 , (wchar_t*)source_array_ptr , (int)cp1251_ptr_count , utf8_ptr , (int)cp1251_ptr_count * 4 , NULL , NULL );
 			::rux::engine::free_mem( source_array_ptr );
 		}
 #else
@@ -4509,7 +4509,7 @@ namespace rux
 		if( _rux_ansi_code_page == XEnumCodePage_CP1251 )
 			::rux::utils::string::utf16::to_cp1251( (char*)utf16_ptr , 2 * utf16_ptr_count , cp1251_ptr , cp1251_ptr_count , result_bytes );
 		else
-			result_bytes = WideCharToMultiByte( _rux_ansi_code_page , WC_NO_BEST_FIT_CHARS , (wchar_t*)utf16_ptr , utf16_ptr_count , cp1251_ptr , cp1251_ptr_count , NULL , NULL );
+			result_bytes = WideCharToMultiByte( _rux_ansi_code_page , WC_NO_BEST_FIT_CHARS , (wchar_t*)utf16_ptr , (int)utf16_ptr_count , cp1251_ptr , (int)cp1251_ptr_count , NULL , NULL );
 #else
 		::rux::utils::string::utf16::to_cp1251( (char*)utf16_ptr , 2 * utf16_ptr_count , cp1251_ptr , cp1251_ptr_count , result_bytes );
 #endif
@@ -4902,9 +4902,9 @@ namespace rux
 				index0++;
 			}
 		}
-		return value;
+		return (::rux::uint32)value;
 	};
-	static void cp1251_to_utf8(char *out, const char *in)
+	inline void cp1251_to_utf8(char *out, const char *in)
 	{
 		static const int table[128] = {                    
 			0x82D0,0x83D0,0x9A80E2,0x93D1,0x9E80E2,0xA680E2,0xA080E2,0xA180E2,

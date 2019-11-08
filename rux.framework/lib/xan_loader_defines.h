@@ -1,6 +1,6 @@
 #ifndef XAN_LOADER_DEFINES_H
 #define XAN_LOADER_DEFINES_H
-#include <xan_module.h>
+#include "xan_module.h"
 namespace rux
 {	
 	typedef void (* rux_add_exclude_directory_t)( const ::rux::XString& directory );

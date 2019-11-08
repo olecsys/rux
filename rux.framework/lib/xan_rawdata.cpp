@@ -169,13 +169,13 @@ typedef ::rux::int64 raw_data_one_part_signed_type;
 #if NO_ASM
 #define raw_data_minus( number1, number2 ) {\
 		::rux::uint64 sub = 0;\
-		::rux::int32 _is_carry = 0;\
+		::rux::int32 is_carry = 0;\
 		for( size_t index0 = 0 ; index0 < number1->_max_data_length ; index0 += sizeof( ::rux::uint32 ) )\
 		{\
 			sub = (::rux::uint64)( *(::rux::uint32*)&number1->_raw_data_ptr[ index0 ] );\
 			sub -= ( *(::rux::uint32*)&number2->_raw_data_ptr[ index0 ] );\
-			sub -= (::rux::uint32)_is_carry;\
-			_is_carry = ( sub & 0x0000000100000000 ) ? 1 : 0;\
+			sub -= (::rux::uint32)is_carry;\
+			is_carry = ( sub & 0x0000000100000000 ) ? 1 : 0;\
 			*(::rux::uint32*)&number1->_raw_data_ptr[ index0 ] = (::rux::uint32)sub;\
 		}\
 	}
@@ -3694,7 +3694,7 @@ namespace rux
 		XArray<XString> bytes;
 		bytes.set_ByRef( octet_string.Split( separators ) );
 		XRawData result;
-		result()->_raw_data_ptr_size = bytes.Count() == 0 ? 8 : bytes.Count();
+		result()->_raw_data_ptr_size = bytes.Count() == 0 ? 8 : (::rux::uint32)bytes.Count();
 		result()->_raw_data_ptr_size = ( ( result()->_raw_data_ptr_size + 7 ) >> 3 ) << 3;						 
 	#ifdef __x86__
 		result()->_max_data_length = ( result()->_raw_data_ptr_size << 1 ) + sizeof( ::rux::uint32 );
@@ -3772,7 +3772,7 @@ namespace rux
 			size_t i2osp_ptr_length = i2osp_file.size();
 			if( i2osp_ptr_length > 0 )
 			{
-				result()->_raw_data_ptr_size = i2osp_ptr_length;
+				result()->_raw_data_ptr_size = (::rux::uint32)i2osp_ptr_length;
 				result()->_raw_data_ptr_size = ( ( result()->_raw_data_ptr_size + 7 ) >> 3 ) << 3;						 
 	#ifdef __x86__
 				result()->_max_data_length = ( result()->_raw_data_ptr_size << 1 ) + sizeof( ::rux::uint32 );
@@ -3850,7 +3850,7 @@ namespace rux
 		XArray<XString> bytes;
 		bytes.set_ByRef( i2osp.Split( separators ) );
 		XRawData result;
-		result()->_raw_data_ptr_size = bytes.Count() == 0 ? 8 : bytes.Count();
+		result()->_raw_data_ptr_size = bytes.Count() == 0 ? 8 : (rux::uint32)bytes.Count();
 		result()->_raw_data_ptr_size = ( ( result()->_raw_data_ptr_size + 7 ) >> 3 ) << 3;						 
 	#ifdef __x86__
 		result()->_max_data_length = ( result()->_raw_data_ptr_size << 1 ) + sizeof( ::rux::uint32 );
@@ -3864,7 +3864,7 @@ namespace rux
 			::rux::uint8 high = 0;
 			::rux::uint8 low = 0;
 			char letter = ' ';
-			for( ::rux::uint32 index0 = bytes.Count() - 1 ; index0 >= 0 ; index0-- )
+			for( ::rux::uint32 index0 = (::rux::uint32)bytes.Count() - 1 ; index0 >= 0 ; index0-- )
 			{
 				if( bytes[ index0 ].Length() == 2 )
 				{
@@ -3977,7 +3977,7 @@ namespace rux
 			return size;
 		}
 		else
-			return (*this)()->_force_size;
+			return (::rux::uint32)(*this)()->_force_size;
 	};
 	::rux::uint32 XRawData::get_AlignedSize( void ) const
 	{
@@ -4496,7 +4496,7 @@ namespace rux
 				ptr += 2;
 				length -= 2;
 			}
-			local_data_ptr_size = length / 2;		
+			local_data_ptr_size = (::rux::uint32)length / 2;		
 			if( data_ptr && local_data_ptr_size != data_ptr_size )
 			{
 				::rux::engine::free_mem( data_ptr );
@@ -4541,7 +4541,7 @@ namespace rux
 				string.RemoveRange( 0 , 2 );		
 			if( string.Length() % 2 != 0 )
 				string.Insert( 0 , '0' );		
-			local_data_ptr_size = string.Length() / 2;		
+			local_data_ptr_size = (::rux::uint32)string.Length() / 2;		
 			if( data_ptr && local_data_ptr_size != data_ptr_size )
 			{
 				::rux::engine::free_mem( data_ptr );

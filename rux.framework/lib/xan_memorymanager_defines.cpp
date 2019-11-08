@@ -784,7 +784,7 @@ dll_internal size_t rux_get_process_detailed_virtual_memory( ::rux::pid_t pid , 
 	char* result = (char*)rux_read_all_from_file( filename , readen_size );
 	if( result )
 	{
-		size_t offset = 0 , memory_offset = 0 , memory_size = 0;
+		size_t offset = 0;
 		if( readen_size > 3 && memcmp( result , _rux_utf8_header , 3 ) == 0 )
 			offset = 3;
 		size_t begin = 0 , splits_count = 0 , splits_len = 0 , vm = 0 , modules_index = 0;
@@ -1312,6 +1312,8 @@ dll_internal ::rux::uint8 rux_start_detached_process( const char* executable , c
 			if (Token != NULL) CloseHandle(Token);    
 		}
 #elif defined( __UNIX__ )
+		(void)show;
+		(void)start_process_method;
 		::rux::pid_t child_pid = fork();
 		if( child_pid == 0 )
 		{
@@ -1336,7 +1338,7 @@ dll_internal ::rux::uint8 rux_start_detached_process( const char* executable , c
 				dup( stdio_fd );
 				char* arguments[ 1024 ] = {0};
 				size_t arguments_size = 0;
-				char* copy = ::rux::arguments_string_to_array( arguments_string , arguments , arguments_size );
+				::rux::arguments_string_to_array( arguments_string , arguments , arguments_size );
 				if( arguments_size == 0 )
 					execl( executable , executable , (char*)0 );
 				else if( arguments_size == 1 )
@@ -2188,6 +2190,10 @@ dll_internal ::rux::uint64 rux_hash( unsigned char* data_ptr, ::rux::int32 data_
 };
 void rux_start_process_with_redirect( const char* executable , char** arguments , size_t arguments_size , char* result , size_t result_size , size_t& readen_size )
 {
+	(void)arguments;
+	(void)arguments_size;
+	(void)result;
+	(void)result_size;
 	readen_size = 0;
 	if( executable )
 	{		
@@ -2308,6 +2314,9 @@ void rux_native_ctrl_c_signal( ::rux::int32 )
 #ifdef __UNIX__
 void rux_native_posix_death_signal2( ::rux::int32 signum , siginfo_t* siginfo , void* context )
 {	
+	(void)signum;
+	(void)siginfo;
+	(void)context;
 	if( _rux_native_on_any_exit )
 		_rux_native_on_any_exit();	
 	_rux_native_on_any_exit = NULL;
@@ -3614,6 +3623,7 @@ namespace rux
 			bufsize = 16384;
 		buffer = (char*)alloc_array_macros( char , bufsize );
 		::rux::int32 s = getpwnam_r( username , &pwd , buffer , bufsize , &result );
+		(void)s;
 		if( result )
 		{
 			uid = pwd.pw_uid;
@@ -5016,6 +5026,7 @@ namespace rux
 #ifdef __WINDOWS__
 		::rux::uint8 process::adjust_token_privileges( HANDLE process_handle , char* error_string , size_t error_string_size )
 		{
+			(void)error_string_size;
 			if( process_handle == NULL )
 				process_handle = GetCurrentProcess();
 			::rux::byte res = 0;
@@ -5452,6 +5463,7 @@ namespace rux
 				FreeLibrary( module_handle );
 			}
 #else
+			(void)error_string_size;
 			::rux::memory::stack_chunk_t chunk( (::rux::byte*)os_string , os_string_size , ::rux::memory::string_type );
 			char* args[] =
 			{
@@ -5496,6 +5508,7 @@ namespace rux
 		};		
 		void on_lines_count_redirect_stdout_or_stderr_handler( void* udata , const char* data , size_t data_size )
 		{
+			(void)data_size;
 			::rux::int64* lines_count = (::rux::int64*)udata;
 			char* ptr = (char*)data;
 			for( ; ; )
@@ -6417,6 +6430,8 @@ namespace rux
 						CloseHandle( process_information.hProcess );
 					if( process_information.hThread )
 						CloseHandle( process_information.hThread );
+#else
+				(void)arguments;						
 #endif
 				}
 			}
@@ -6455,6 +6470,7 @@ namespace rux
 				}
 			}
 #elif defined __LINUX__
+			(void)filename;
 #endif
 			return binary_type;
 		};

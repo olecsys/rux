@@ -83,8 +83,10 @@ void XObject::set_Info( const char* variable_name , const char* __file__ , ::rux
 			_variable_name[ 31 ] = 0;
 		}
 		else
-			strcpy( _variable_name , variable_name );	
+			strcpy( _variable_name , variable_name );				
 	}
+#else
+	(void)variable_name;
 #endif
 	if( __file__ )
 	{

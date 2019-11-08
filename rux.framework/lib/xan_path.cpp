@@ -14,7 +14,7 @@ namespace rux
 				{
 					rux::int32 local_index = -1;	
 					rux::uint32 local_index3 = 0;
-					rux::uint32 local_count1 = file_name_ptr ? XString::LengthA( file_name_ptr ) : 0;
+					rux::uint32 local_count1 = file_name_ptr ? (rux::uint32)XString::LengthA( file_name_ptr ) : 0;
 					if( local_count1 > 0 )
 					{
 						local_index3 = local_count1 - 1;
@@ -146,7 +146,7 @@ namespace rux
 				local_file_name.set_ByRef( file_name.ConvertToUTF16() );
 				rux::int32 local_index = -1;	
 				rux::uint32 local_index3 = 0;
-				rux::uint32 local_count1 = local_file_name()->_count - 2;
+				rux::uint32 local_count1 = (rux::uint32)local_file_name()->_count - 2;
 				if( local_count1 > 0 )
 				{
 					local_index3 = local_count1 - 2;
@@ -297,7 +297,7 @@ namespace rux
 			{
 				rux::int32 local_index = -1;	
 				rux::uint32 local_index3 = 0;
-				rux::uint32 local_count1 = file_name_ptr ? wcslen( file_name_ptr ) : 0;
+				rux::uint32 local_count1 = file_name_ptr ? (rux::uint32)wcslen( file_name_ptr ) : 0;
 				if( local_count1 > 0 )
 				{
 					local_index3 = local_count1 - 1;

@@ -25,6 +25,11 @@ namespace rux
 	{
 		dll_internal void get_CallStack( char stack_ptr[] , size_t stack_ptr_size , void** stack_frames , ::rux::uint16 stack_frames_count , size_t stack_frames_offset )
 		{	
+			(void)stack_ptr;
+			(void)stack_ptr_size;
+			(void)stack_frames;
+			(void)stack_frames_count;
+			(void)stack_frames_offset;
 			::rux::debug::initialize();
 		#ifdef __WINDOWS__
 			stack_ptr[ 0 ] = 0;
@@ -157,6 +162,8 @@ namespace rux
 		};
 		dll_internal rux::uint16 get_CallStack( void** stack_frames , size_t stack_frames_offset )
 		{
+			(void)stack_frames;
+			(void)stack_frames_offset;
 			::rux::uint16 stack_frames_count0 = 0;
 		#ifdef __WINDOWS__
 			::rux::engine::_globals->_kernel32_module.load();
@@ -1108,7 +1115,11 @@ namespace rux
 				rux_write( exception_file , exception_text , strlen( exception_text ) );
 				::rux::XConsole::WriteToStdErr( exception_text );
 				rux_close( exception_file );
+#ifdef __WINDOWS__				
+				::_chmod( exception_filename , 0777 );
+#else				
 				::chmod( exception_filename , 0777 );
+#endif				
 			}
 		};
 #ifdef __UNIX__
@@ -1199,12 +1210,11 @@ namespace rux
 		};
 #endif
 #ifdef __UNIX__
-#ifdef __SOLARIS__
 		dll_internal void debug_posix_alarm_signal2( ::rux::int32 signum , siginfo_t* siginfo , void* context )
-#else
-		dll_internal void debug_posix_alarm_signal2( ::rux::int32 signum , siginfo_t* siginfo , void* context )
-#endif
 		{
+			(void)signum;
+			(void)siginfo;
+			(void)context;
 			if( ::rux::engine::_globals->_alarm_is_addr2line && *(::rux::engine::_globals->_alarm_is_addr2line ) )
 				*(::rux::engine::_globals->_alarm_is_addr2line) = 0;
 			else if( ::rux::engine::_globals->_exception_raised == 1 )

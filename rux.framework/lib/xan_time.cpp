@@ -258,7 +258,7 @@ namespace rux
 			}
 			year -= months / 12;
 			month -= months % 12;
-			size_t days_in_month = (size_t)XTime::DaysInMonth( month , year );
+			size_t days_in_month = (size_t)XTime::DaysInMonth( (::rux::uint32)month , (::rux::uint32)year );
 			if( day_of_month > days_in_month )
 				day_of_month = days_in_month;
 			declare_stack_variable( char , format , 64 );
@@ -293,7 +293,7 @@ namespace rux
 		
 			year += years;
 
-			size_t days_in_month = XTime::DaysInMonth( month , year );
+			size_t days_in_month = XTime::DaysInMonth( (::rux::uint32)month , (::rux::uint32)year );
 			if( day_of_month > days_in_month )
 				day_of_month = days_in_month;
 
@@ -331,7 +331,7 @@ namespace rux
 			if( year < 1970 )
 				year = 1970;
 
-			size_t days_in_month = (size_t)XTime::DaysInMonth( month , year );
+			size_t days_in_month = (size_t)XTime::DaysInMonth( (::rux::uint32)month , (::rux::uint32)year );
 			if( day_of_month > days_in_month )
 				day_of_month = days_in_month;
 
@@ -454,7 +454,7 @@ namespace rux
 			size_t day_of_month = local_time.get_DayOfMonth();
 			while( days )
 			{
-				size_t days_in_month = XTime::DaysInMonth( month , year );
+				size_t days_in_month = XTime::DaysInMonth( (::rux::uint32)month , (::rux::uint32)year );
 				if( day_of_month + days > days_in_month )
 				{
 					days -= 1 + ( days_in_month - day_of_month );
