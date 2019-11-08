@@ -113,6 +113,7 @@ namespace rux
 {
 	typedef void* (* rux_alloc_t)(size_t size,const char* type_name_ptr,const char* file_name_ptr,rux::int32 line , ::rux::int32 module_index , const char* variable_name );
 	typedef void (* rux_free_t)(void* mem_ptr );
+	typedef char* (*get_time33_hash_value_t)( ::rux::uint32 times33_hash );
 	namespace engine
 	{
 		dll_internal void free_mem( void* mem_ptr );
@@ -122,6 +123,7 @@ namespace rux
 		extern dll_internal ::rux::rux_alloc_t _rux_alloc;
 		extern dll_internal ::rux::rux_free_t _rux_free;
 		extern dll_internal ::rux::engine::globals* _globals;
+		extern dll_internal ::rux::get_time33_hash_value_t _get_time33_hash_value;
 		template< class T >
 		dll_internal T* alloc_array( size_t size , const char* file = __FILE__ , ::rux::uint32 line = __LINE__ , char* variable_name = 0 )
 		{

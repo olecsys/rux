@@ -136,12 +136,15 @@ namespace rux
 									strcpy( library , dynamic_library_prefix "rux.engine" dynamic_library_extension );
 #ifdef __WINDOWS__
 								rux_get_engine_globals_t get_engine_globals = (rux_get_engine_globals_t)dlsym( GetModuleHandleA( library ) , "rux_get_engine_globals" );
+								::rux::get_time33_hash_value_t get_time33_hash_value = (::rux::get_time33_hash_value_t)dlsym( GetModuleHandleA( library ) , "rux_get_time33_hash_value" );
 #else
 								rux_get_engine_globals_t get_engine_globals = (rux_get_engine_globals_t)dlsym( NULL , "rux_get_engine_globals" );
+								::rux::get_time33_hash_value_t get_time33_hash_value = (::rux::get_time33_hash_value_t)dlsym( NULL , "rux_get_time33_hash_value" );
 #endif
 								if( get_engine_globals )
 								{
 									::rux::engine::_globals = get_engine_globals();
+									::rux::engine::_get_time33_hash_value = get_time33_hash_value;
 									::rux::engine::_rux_alloc = ::rux::engine::_globals->_alloc;
 									::rux::engine::_rux_free = ::rux::engine::_globals->_free;
 									_engine_handle = dlopen( ::rux::engine::_globals->_engine_full_filename , RTLD_LAZY );
@@ -265,7 +268,9 @@ namespace rux
 									}
 		#endif
 									rux_get_engine_globals_t get_engine_globals = (rux_get_engine_globals_t)dlsym( _engine_handle , "rux_get_engine_globals" );
+									::rux::get_time33_hash_value_t get_time33_hash_value = (::rux::get_time33_hash_value_t)dlsym( _engine_handle , "rux_get_time33_hash_value" );
 									::rux::engine::_globals = get_engine_globals();
+									::rux::engine::_get_time33_hash_value = get_time33_hash_value;
 									::rux::engine::_rux_alloc = ::rux::engine::_globals->_alloc;
 									::rux::engine::_rux_free = ::rux::engine::_globals->_free;
 									::rux::safe_strncpy( ::rux::engine::_globals->_main_lib_path , main_lib_path , 2048 );

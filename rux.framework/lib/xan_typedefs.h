@@ -68,8 +68,7 @@ namespace rux
 		struct extended_memory_info;
 	};
 	typedef void (*add_task_t)( size_t& task_index , XTHREADFUNC func , void* param , ::rux::uint32 timeout_in_milliseconds , XThreadMode mode );
-	typedef ::rux::uint32 (*add_times33_hash_t)( const char* value_string , size_t value_string_length );
-	typedef char* (*get_time33_hash_value_t)( ::rux::uint32 times33_hash );
+	typedef ::rux::uint32 (*add_times33_hash_t)( const char* value_string , size_t value_string_length );	
 	typedef void (*add_or_remove_thread_event_t)( ::rux::byte event_type , ::rux::byte add , ::rux::on_thread_registered_or_unregistered );
 	typedef void (*remove_task_t)( size_t& task_index );
 	typedef void (*force_execute_task_t)( size_t task_index );

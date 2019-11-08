@@ -209,7 +209,6 @@ namespace rux
 			void remove_before_module_dll_init_event( ::rux::on_thread_registered_or_unregistered on_engine_event );
 			void remove_after_module_dll_init_event( ::rux::on_thread_registered_or_unregistered on_engine_event );
 			bool has_field(void* field_addr);
-			get_time33_hash_value_t _get_time33_hash_value;
 			void* _end;
 		};
 		extern dll_internal ::rux::on_thread_registered_or_unregistered _on_thread_registered;

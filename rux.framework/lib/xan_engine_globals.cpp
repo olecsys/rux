@@ -174,7 +174,6 @@ namespace rux
 			_exception_tid = 0;
 			_protect_markers_files = 0;
 			_protect_markers_lines = 0;
-			_get_time33_hash_value = 0;
 			_end = (unsigned char*)&_end + sizeof(_end);
 		};
 		globals::~globals( void )

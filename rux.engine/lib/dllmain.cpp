@@ -55,6 +55,9 @@ exports ::rux::engine::globals* rux_get_engine_globals( void )
 {
 	return ::rux::engine::_globals;
 };
+exports char* rux_get_time33_hash_value(::rux::uint32 times33_hash) {
+	return XMemoryManager::get_time33_hash_value(times33_hash);
+}
 /*begin loader engine*/
 exports void rux_write_log( ::rux::int32 module_index , ::rux::log::XEnum_LogLevel level , const char* format , va_list ap )
 {
@@ -491,6 +494,7 @@ dll_internal void pre_initialize( void )
 	_rux_is_memory_manager = 1;
 	rux::engine::_rux_alloc = XMemoryManager::Alloc;
 	rux::engine::_rux_free = XMemoryManager::Free;
+	rux::engine::_get_time33_hash_value = XMemoryManager::get_time33_hash_value;
 	::rux::engine::_page_size = ::rux::memory::get_page_size();
 
 	std::string debug_utf8_control_names , protect_markers_file_and_line;
@@ -865,7 +869,6 @@ dll_internal void pre_initialize( void )
 	rux::engine::_globals->_log_globals->_write_log = rux_write_log;
 	rux::engine::_globals->_add_task = ::rux::task::Tasker::add;
 	rux::engine::_globals->_add_times33_hash = XMemoryManager::add_times33_hash;
-	rux::engine::_globals->_get_time33_hash_value = XMemoryManager::get_time33_hash_value;
 	rux::engine::_globals->_add_or_remove_thread_event = XMemoryManager::add_or_remove_thread_event;
 	rux::engine::_globals->_remove_task = ::rux::task::Tasker::remove;
 	rux::engine::_globals->_force_execute_task = ::rux::task::Tasker::force_execute_task;
@@ -1056,6 +1059,7 @@ dll_internal ::rux::byte post_deinitialize( void )
 		rux::engine::_globals = NULL;
 
 		XMemoryManager::memory_unload_module( _rux_current_module_index );
+		rux::engine::_get_time33_hash_value = NULL;
 		rux::engine::_rux_alloc = 0;
 		rux::engine::_rux_free = 0;
 
