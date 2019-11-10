@@ -443,9 +443,9 @@ namespace rux
 					rux::int32 ip_part4 = ip_parts[ 3 ].ToInt32();
 					sockaddr_in* sockaddr_in_object = rux::engine::alloc_object< sockaddr_in >();
 		#ifdef __WINDOWS__
-					sockaddr_in_object->sin_addr.S_un.S_addr = ::rux::network::htonl( (rux::uint32)( ( ip_part1 << 24 ) + ( ip_part2 << 16 ) + ( ip_part3 << 8 ) + ip_part4 ) );
+					sockaddr_in_object->sin_addr.S_un.S_addr = ::rux::network::htonlF( (rux::uint32)( ( ip_part1 << 24 ) + ( ip_part2 << 16 ) + ( ip_part3 << 8 ) + ip_part4 ) );
 		#else
-					sockaddr_in_object->sin_addr.s_addr = ::rux::network::htonl( (rux::uint32)( ( ip_part1 << 24 ) + ( ip_part2 << 16 ) + ( ip_part3 << 8 ) + ip_part4 ) );
+					sockaddr_in_object->sin_addr.s_addr = ::rux::network::htonlF( (rux::uint32)( ( ip_part1 << 24 ) + ( ip_part2 << 16 ) + ( ip_part3 << 8 ) + ip_part4 ) );
 		#endif
 					sockaddr_in_object->sin_port = 0;
 					sockaddr_in_object->sin_family = AF_INET;

@@ -15,11 +15,11 @@ namespace rux
 		dll_internal int getsockname( SOCKET s , struct sockaddr *name , socklen_t *namelen );
 		dll_internal int recvfrom( SOCKET s , char *buf , int len , int flags , struct sockaddr *from , socklen_t *fromlen );			
 		dll_internal int gethostname( char* name , int namelen );
-		dll_internal u_long htonl( u_long hostlong );
+		dll_internal u_long htonlF( u_long hostlong );
 		dll_internal char* inet_ntoa( struct in_addr in );
 		dll_internal struct hostent* gethostbyname( const char *name );
 		dll_internal int select( int nfds , fd_set *readfds , fd_set *writefds , fd_set *exceptfds , struct timeval *timeout );
-		dll_internal u_short htons( u_short hostshort );
+		dll_internal u_short htonsF( u_short hostshort );
 		dll_internal int listen( SOCKET s , int backlog );
 		dll_internal SOCKET accept( SOCKET s , struct sockaddr *addr , socklen_t *addrlen );
 		dll_internal int send( SOCKET s , const char *buf , int len , int flags );

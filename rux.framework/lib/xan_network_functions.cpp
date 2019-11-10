@@ -64,12 +64,12 @@ namespace rux
 			return ::gethostname( name , namelen );
 #endif
 		};
-		u_long htonl( u_long hostlong )
+		u_long htonlF( u_long hostlong )
 		{
 #ifdef __WINDOWS__
 			return ::rux::engine::_globals->_ws2_32_module.htonl( hostlong );
 #else
-			return ::htonl( hostlong );
+			return htonl( hostlong );
 #endif
 		};
 		char* inet_ntoa( struct in_addr in )
@@ -96,12 +96,12 @@ namespace rux
 			return ::select( nfds , readfds , writefds , exceptfds , timeout );
 #endif
 		};
-		u_short htons( u_short hostshort )
+		u_short htonsF( u_short hostshort )
 		{
 #ifdef __WINDOWS__
 			return ::rux::engine::_globals->_ws2_32_module.htons( hostshort );
 #else
-			return ::htons( hostshort );
+			return htons( hostshort );
 #endif
 		};
 		int listen( SOCKET s , int backlog )

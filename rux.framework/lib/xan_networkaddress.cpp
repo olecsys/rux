@@ -47,11 +47,11 @@ namespace rux
 					rux::int32 ip_part3 = ip_parts[ 2 ].ToInt32();
 					rux::int32 ip_part4 = ip_parts[ 3 ].ToInt32();
 		#ifdef __WINDOWS__
-					(*this)()->sockaddr_in_object.sin_addr.S_un.S_addr = ::rux::network::htonl( (rux::uint32)( ( ip_part1 << 24 ) + ( ip_part2 << 16 ) + ( ip_part3 << 8 ) + ip_part4 ) );
+					(*this)()->sockaddr_in_object.sin_addr.S_un.S_addr = ::rux::network::htonlF( (rux::uint32)( ( ip_part1 << 24 ) + ( ip_part2 << 16 ) + ( ip_part3 << 8 ) + ip_part4 ) );
 		#else
-					(*this)()->sockaddr_in_object.sin_addr.s_addr = ::rux::network::htonl( (rux::uint32)( ( ip_part1 << 24 ) + ( ip_part2 << 16 ) + ( ip_part3 << 8 ) + ip_part4 ) );
+					(*this)()->sockaddr_in_object.sin_addr.s_addr = ::rux::network::htonlF( (rux::uint32)( ( ip_part1 << 24 ) + ( ip_part2 << 16 ) + ( ip_part3 << 8 ) + ip_part4 ) );
 		#endif
-					(*this)()->sockaddr_in_object.sin_port = ::rux::network::htons( (*this)()->_port );
+					(*this)()->sockaddr_in_object.sin_port = ::rux::network::htonsF( (*this)()->_port );
 					(*this)()->sockaddr_in_object.sin_family = AF_INET;
 				}
 				else
@@ -77,7 +77,7 @@ namespace rux
 		#ifdef __UNIX__
 							if( inet_pton( AF_INET6 , (*this)()->_address.str() , &(*this)()->sockaddr_in6_object.sin6_addr ) > 0 )
 							{
-								(*this)()->sockaddr_in6_object.sin6_port = ::rux::network::htons( (*this)()->_port );
+								(*this)()->sockaddr_in6_object.sin6_port = ::rux::network::htonsF( (*this)()->_port );
 								(*this)()->sockaddr_in6_object.sin6_family = AF_INET6;
 							}
 							else
