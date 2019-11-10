@@ -494,7 +494,7 @@ namespace rux
 	};
 	void XConsole::WriteToStdIn( const char* text_ptr )
 	{
-		rux_write( 0 , text_ptr , strlen( text_ptr ) );
+		rux_write( 0 , text_ptr , (unsigned int)strlen( text_ptr ) );
 	#ifdef __UNIX__
 		fsync( STDIN_FILENO );
 	#elif defined( __WINDOWS__ )
@@ -512,7 +512,7 @@ namespace rux
 		if( console_ptr != INVALID_HANDLE_VALUE )
 				SetConsoleTextAttribute( console_ptr , FOREGROUND_GREEN | FOREGROUND_INTENSITY );	
 	#endif
-		rux_write( 1 , text_ptr , strlen( text_ptr ) );
+		rux_write( 1 , text_ptr , (unsigned int)strlen( text_ptr ) );
 	#ifdef __UNIX__
 		fsync( STDOUT_FILENO );
 	#ifdef __LINUX__
@@ -535,7 +535,7 @@ namespace rux
 		if( console_ptr != INVALID_HANDLE_VALUE )
 				SetConsoleTextAttribute( console_ptr , FOREGROUND_RED | FOREGROUND_INTENSITY );	
 	#endif
-		rux_write( 2 , text_ptr , strlen( text_ptr ) );
+		rux_write( 2 , text_ptr , (unsigned int)strlen( text_ptr ) );
 	#ifdef __UNIX__
 		fsync( STDERR_FILENO );
 	#ifdef __LINUX__

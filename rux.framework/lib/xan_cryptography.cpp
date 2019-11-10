@@ -137,7 +137,7 @@ namespace rux
 								}
 							}						
 							memcpy( &_buffer_ptr[ written_bytes + length_of_length + 2 ] , asn_packets[ index0 ]->_buffer_ptr , asn_packets[ index0 ]->_buffer_ptr_length );									
-							written_bytes += 2 * sizeof( char ) + asn_packets[ index0 ]->_buffer_ptr_length + length_of_length;
+							written_bytes += (unsigned int)(2 * sizeof( char ) + asn_packets[ index0 ]->_buffer_ptr_length + length_of_length);
 						}
 						else
 						{
@@ -204,7 +204,7 @@ namespace rux
 						_buffer_ptr = alloc_array_macros( char , _buffer_ptr_size );
 					}
 					_buffer_ptr_length = buffer_length;
-					_buffer_ptr[ 0 ] = 40 * values[ 0 ] + values[ 1 ];
+					_buffer_ptr[ 0 ] = (char)(40 * values[ 0 ] + values[ 1 ]);
 					cur = 1;
 					for( size_t index0 = 2 ; index0 < values_count ; index0++ )
 					{
@@ -217,43 +217,43 @@ namespace rux
 						{
 							if( values[ index0 ] <= 16256 )//128
 							{
-								_buffer_ptr[ cur++ ] = 0x80 + values[ index0 ] / 0x80;
+								_buffer_ptr[ cur++ ] = (char)(0x80 + values[ index0 ] / 0x80);
 								_buffer_ptr[ cur++ ] = values[ index0 ] % 0x80;
 							}
 							else if( values[ index0 ] <= 2080768 )//16384
 							{
 								rux::uint32 value_uint32 = values[ index0 ] / 16384;
-								_buffer_ptr[ cur++ ] = 0x80 + value_uint32;
+								_buffer_ptr[ cur++ ] = (char)(0x80 + value_uint32);
 								values[ index0 ] = values[ index0 ] % 16384;
 								value_uint32 = values[ index0 ] / 128;
-								_buffer_ptr[ cur++ ] = 0x80 + value_uint32;
+								_buffer_ptr[ cur++ ] = (char)(0x80 + value_uint32);
 								_buffer_ptr[ cur++ ] = values[ index0 ] % 128;
 							}
 							else if( values[ index0 ] <= 266338304 )//2097152
 							{
 								rux::uint32 value_uint32 = values[ index0 ] / 2097152;
-								_buffer_ptr[ cur++ ] = 0x80 + value_uint32;
+								_buffer_ptr[ cur++ ] = (char)(0x80 + value_uint32);
 								values[ index0 ] = values[ index0 ] % 2097152;
 								value_uint32 = values[ index0 ] / 16384;
-								_buffer_ptr[ cur++ ] = 0x80 + value_uint32;
+								_buffer_ptr[ cur++ ] = (char)(0x80 + value_uint32);
 								values[ index0 ] = values[ index0 ] % 16384;
 								value_uint32 = values[ index0 ] / 128;
-								_buffer_ptr[ cur++ ] = 0x80 + value_uint32;
+								_buffer_ptr[ cur++ ] = (char)(0x80 + value_uint32);
 								_buffer_ptr[ cur++ ] = values[ index0 ] % 128;
 							}
 							else//268435456
 							{
 								rux::uint32 value_uint32 = values[ index0 ] / 268435456;
-								_buffer_ptr[ cur++ ] = 0x80 + value_uint32;
+								_buffer_ptr[ cur++ ] = (char)(0x80 + value_uint32);
 								values[ index0 ] = values[ index0 ] % 268435456;
 								value_uint32 = values[ index0 ] / 2097152;
-								_buffer_ptr[ cur++ ] = 0x80 + value_uint32;
+								_buffer_ptr[ cur++ ] = (char)(0x80 + value_uint32);
 								values[ index0 ] = values[ index0 ] % 2097152;
 								value_uint32 = values[ index0 ] / 16384;
-								_buffer_ptr[ cur++ ] = 0x80 + value_uint32;
+								_buffer_ptr[ cur++ ] = (char)(0x80 + value_uint32);
 								values[ index0 ] = values[ index0 ] % 16384;
 								value_uint32 = values[ index0 ] / 128;
-								_buffer_ptr[ cur++ ] = 0x80 + value_uint32;
+								_buffer_ptr[ cur++ ] = (char)(0x80 + value_uint32);
 								_buffer_ptr[ cur++ ] = values[ index0 ] % 128;
 							}					
 						}

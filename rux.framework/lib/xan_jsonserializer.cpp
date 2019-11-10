@@ -99,8 +99,10 @@ namespace rux
 					for( size_t index1 = 0 ; index1 < _tab_count ; index1++ )
 						*_json_cursor++ = '\t';
 				}
-				else
-					rux_check_json_string_memory( _json , _json_size , _json_cursor , 3 , _step , __FILE__ , __LINE__ );
+				else{
+					int eq = 3;
+					rux_check_json_string_memory( _json , _json_size , _json_cursor , eq , _step , __FILE__ , __LINE__ );
+				}
 				*_json_cursor++ = '{';
 				if( _formatted == 1 )
 				{
@@ -127,8 +129,10 @@ namespace rux
 					for( size_t index1 = 0 ; index1 < _tab_count ; index1++ )
 						*_json_cursor++ = '\t';
 				}
-				else
-					rux_check_json_string_memory( _json , _json_size , _json_cursor , 2 , _step , __FILE__ , __LINE__ );
+				else {					
+					int eq = 2;
+					rux_check_json_string_memory( _json , _json_size , _json_cursor , eq , _step , __FILE__ , __LINE__ );
+				}
 				*_json_cursor++ = '}';
 				*_json_cursor = 0;
 				_states.RemoveAt( _states.Count() - 1 );
@@ -145,8 +149,10 @@ namespace rux
 					for( size_t index1 = 0 ; index1 < _tab_count ; index1++ )
 						*_json_cursor++ = '\t';
 				}
-				else
-					rux_check_json_string_memory( _json , _json_size , _json_cursor , 3 , _step , __FILE__ , __LINE__ );
+				else{
+					int eq = 3;
+					rux_check_json_string_memory( _json , _json_size , _json_cursor , eq , _step , __FILE__ , __LINE__ );
+				}
 				*_json_cursor++ = '[';
 				if( _formatted == 1 )
 				{
@@ -173,8 +179,10 @@ namespace rux
 					for( size_t index1 = 0 ; index1 < _tab_count ; index1++ )
 						*_json_cursor++ = '\t';
 				}
-				else
-					rux_check_json_string_memory( _json , _json_size , _json_cursor , 2 , _step , __FILE__ , __LINE__ );
+				else{
+					int eq = 2;
+					rux_check_json_string_memory( _json , _json_size , _json_cursor , eq , _step , __FILE__ , __LINE__ );
+				}
 				*_json_cursor++ = ']';
 				*_json_cursor = 0;
 				_states.RemoveAt( _states.Count() - 1 );
@@ -201,7 +209,8 @@ namespace rux
 				}
 				else if( _need_delimiter )
 				{
-					rux_check_json_string_memory( _json , _json_size , _json_cursor , 2 , _step , __file__ , __line__ );
+					int eq = 2;
+					rux_check_json_string_memory( _json , _json_size , _json_cursor , eq , _step , __file__ , __line__ );
 					*_json_cursor++ = ',';
 					*_json_cursor = 0;
 				}
@@ -216,7 +225,8 @@ namespace rux
 			void serializer::generate_object_name( const char* utf8_name , const char* __file__ , ::rux::int32 __line__ , size_t ___rux__thread_index1986 )
 			{
 				::rux::data::XJsonSerializer::serialize_json_string_value( const_cast< char* >( utf8_name ) , _json , _json_size , _json_cursor , _step , __file__ , __line__ , ___rux__thread_index1986 );
-				rux_check_json_string_memory( _json , _json_size , _json_cursor , 2 , _step , __file__ , __line__ );
+				int eq = 2;
+				rux_check_json_string_memory( _json , _json_size , _json_cursor , eq , _step , __file__ , __line__ );
 				*_json_cursor++ = ':';
 				*_json_cursor = 0;
 			};
@@ -1071,25 +1081,25 @@ namespace rux
 									}
 									else
 									{
-										size_t length = 0;
+										size_t length00 = 0;
 										slash++;
 										begin = slash;
 										for( ; ; )
 										{
 											if( ( *slash & 0xc0 ) != 0x80 )
 											{
-												if( length == 0 )
-													length = 1;
+												if( length00 == 0 )
+													length00 = 1;
 												else
 												{
-													::memcpy( &name[ name_count - 1 ] , begin , length );								
-													name_count += length;
+													::memcpy( &name[ name_count - 1 ] , begin , length00 );								
+													name_count += length00;
 													begin = slash;
 													break;
 												}
 											}
 											else
-												length++;
+												length00++;
 											slash++;
 										}
 									}
@@ -1609,7 +1619,8 @@ namespace rux
 			if( error.Length() == 0 )
 			{
 				size_t json_index0 = json_cursor - json;
-				rux_check_json_string_memory( json , json_size , json_cursor , 1 , step , __FILE__ , __LINE__ );
+				int eq = 1;
+				rux_check_json_string_memory( json , json_size , json_cursor , eq , step , __FILE__ , __LINE__ );
 				json[ json_index0 ] = '\0';
 				json_index0++;
 				rux::XString new_str( (size_t)0 , "new_str" , __FILE__ , __LINE__ );
@@ -1692,7 +1703,8 @@ namespace rux
 		void XJsonSerializer::serialize_json_object_value( rux::data::DataObject* object , char*& json_ptr , size_t& json_ptr_size , char*& json_cursor , uint8 is_formatted , uint32 tab_count , size_t& step , rux::XString& error , const char* __file__ , ::rux::int32 __line__ , size_t ___rux__thread_index1986 )
 		{
 			CODE_LABEL_START( 0 , 0 , 5 );
-			rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 2 , step , __FILE__ , __LINE__ );
+			int eq = 2;
+			rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __FILE__ , __LINE__ );
 			*json_cursor++ = '{';
 			if( is_formatted == 1 )
 				*json_cursor++ = '\n';
@@ -1707,7 +1719,8 @@ namespace rux
 						*json_cursor++ = '\t';
 				}
 				serialize_json_string_value( object->get_FieldNamePointer( index0 ) , json_ptr , json_ptr_size , json_cursor , step , __file__ , __line__ , ___rux__thread_index1986 );
-				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 1 , step , __FILE__ , __LINE__ );
+				eq = 1;
+				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __FILE__ , __LINE__ );
 				*json_cursor++ = ':';
 				::rux::data::key_value_pair_t* pair = object->_pairs[ index0 ]->operator->();
 				if( pair->_type == ::rux::data::key_value_pair_t_type_gcref )
@@ -1759,12 +1772,14 @@ namespace rux
 					break;
 				if( index0 + 1 < object->_pairs.Count() )
 				{
-					rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 1 , step , __FILE__ , __LINE__ );
+					eq = 1;
+					rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __FILE__ , __LINE__ );
 					*json_cursor++ = ',';
 				}
 				if( is_formatted == 1 )
 				{
-					rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 1 , step , __FILE__ , __LINE__ );
+					eq = 1;
+					rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __FILE__ , __LINE__ );
 					*json_cursor++ = '\n';
 				}
 			}
@@ -1777,7 +1792,8 @@ namespace rux
 					for( uint32 index1 = 0 ; index1 < tab_count ; index1++ )
 						*json_cursor++ = '\t';
 				}
-				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 2 , step , __FILE__ , __LINE__ );
+				eq = 2;
+				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __FILE__ , __LINE__ );
 				*json_cursor++ = '}';
 				*json_cursor = 0;
 			}
@@ -1788,13 +1804,15 @@ namespace rux
 			CODE_LABEL_START( 0 , 0 , 5 );
 			if( object )
 			{
-				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 5 , step , __file__ , __line__ );
+				int eq = 5;
+				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __file__ , __line__ );
 				::memcpy( json_cursor , "true" , 4 );
 				json_cursor += 4;
 			}
 			else
 			{
-				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 6 , step , __file__ , __line__ );
+				int eq = 6;
+				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __file__ , __line__ );
 				::memcpy( json_cursor , "false" , 5 );
 				json_cursor += 5;
 			}
@@ -1804,7 +1822,8 @@ namespace rux
 		void XJsonSerializer::serialize_json_null_value( char*& json_ptr , size_t& json_ptr_size , char*& json_cursor , size_t& step , const char* __file__ , ::rux::int32 __line__ , size_t ___rux__thread_index1986 )
 		{
 			CODE_LABEL_START( 0 , 0 , 5 );
-			rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 5 , step , __file__ , __line__ );
+			int eq = 5;
+			rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __file__ , __line__ );
 			::memcpy( json_cursor , "null" , 4 );
 			json_cursor += 4;
 			*json_cursor = 0;
@@ -1890,7 +1909,7 @@ namespace rux
 					ptr = strpbrk( begin , "\\/\b\n\f\r\t\"" );
 					if( ptr )
 					{			
-						rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , end - begin + 2 , step , __file__ , __line__ );
+						rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , (int)(end - begin + 2) , step , __file__ , __line__ );
 						if( ptr != begin )
 						{
 							::memcpy( json_cursor , begin , ptr - begin );
@@ -1934,7 +1953,7 @@ namespace rux
 					}
 					else if( end != begin )
 					{
-						rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , end - begin , step , __file__ , __line__ );
+						rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , (int)(end - begin) , step , __file__ , __line__ );
 						::memcpy( json_cursor , begin , end - begin );
 						json_cursor += end - begin;
 						break;
@@ -1942,13 +1961,15 @@ namespace rux
 					else
 						break;
 				}	
-				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 2 , step , __file__ , __line__ );
+				int eq = 2;
+				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __file__ , __line__ );
 				*json_cursor++ = '"';
 				*json_cursor = 0;
 			}
 			else
 			{
-				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 3 , step , __file__ , __line__ );
+				int eq = 3;
+				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __file__ , __line__ );
 				*json_cursor++ = '"';
 				*json_cursor++ = '"';
 				*json_cursor = 0;
@@ -1958,7 +1979,8 @@ namespace rux
 		void XJsonSerializer::serialize_json_array_value( const XGCRef* object , char*& json_ptr , size_t& json_ptr_size , char*& json_cursor , uint8 is_formatted , uint32 tab_count , size_t& step , rux::XString& error , const char* __file__ , ::rux::int32 __line__ , size_t ___rux__thread_index1986 )
 		{
 			CODE_LABEL_START( 0 , 0 , 5 );
-			rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 2 , step , __file__ , __line__ );
+			int eq = 2;
+			rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __file__ , __line__ );
 			*json_cursor++ = '[';
 			if( is_formatted == 1 )
 				*json_cursor++ = '\n';
@@ -1994,12 +2016,14 @@ namespace rux
 								break;
 							if( index0 + 1 < count )
 							{
-								rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 1 , step , __file__ , __line__ );
+								eq = 1;
+								rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __file__ , __line__ );
 								*json_cursor++ = ',';
 							}
 							if( is_formatted == 1 )
 							{
-								rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 1 , step , __file__ , __line__ );
+								eq = 1;
+								rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __file__ , __line__ );
 								*json_cursor++ = '\n';
 							}
 						}
@@ -2015,7 +2039,8 @@ namespace rux
 					for( uint32 index1 = 0 ; index1 < tab_count ; index1++ )
 						*json_cursor++ = '\t';
 				}
-				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , 1 , step , __file__ , __line__ );
+				eq = 1;
+				rux_check_json_string_memory( json_ptr , json_ptr_size , json_cursor , eq , step , __file__ , __line__ );
 				*json_cursor++ = ']';
 			}
 			CODE_LABEL_END();
@@ -2089,7 +2114,7 @@ rux::String& rux::io::XDirectory::get_JSONDirectoriesStructure( const rux::XStri
 	rux::XString json = "{\"directories\":[" , string;
 	if( dirs.Count() > 0 )
 	{
-		for( uint32 index0 = dirs.Count() - 1 ; index0 >= 0 ; index0-- )
+		for( uint32 index0 = (unsigned int)dirs.Count() - 1 ; index0 >= 0 ; index0-- )
 		{
 			if( index0 < dirs.Count() - 1 )
 				json += ",";

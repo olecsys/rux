@@ -487,7 +487,7 @@ namespace rux
 		{
 			while( _thread_id == 0 && XInterlocked::CompareExchange( &_is_started , 1 , 1 ) == 1 )
 				::rux::threading::XThread::Sleep( 1 );
-			return XInterlocked::CompareExchange( &_is_started , 1 , 1 );
+			return (::rux::uint8)XInterlocked::CompareExchange( &_is_started , 1 , 1 );
 		};
 		void XThread::set_ThreadName( const char* thread_name_ptr )
 		{

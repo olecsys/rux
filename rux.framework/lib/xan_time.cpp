@@ -371,7 +371,7 @@ namespace rux
 				year += month / 12;
 				month %= 12;
 			}
-			size_t days_in_month = XTime::DaysInMonth( month , year );
+			size_t days_in_month = XTime::DaysInMonth( (::rux::uint32)month , (::rux::uint32)year );
 			if( day_of_month > days_in_month )
 				day_of_month = days_in_month;
 
@@ -415,7 +415,7 @@ namespace rux
 						month = 12;
 						year--;
 					}
-					day_of_month = XTime::DaysInMonth( month , year );
+					day_of_month = XTime::DaysInMonth( (::rux::uint32)month , (::rux::uint32)year );
 				}
 				else
 				{

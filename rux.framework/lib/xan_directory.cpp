@@ -2266,7 +2266,7 @@ namespace rux
 					if( ( find_handle = FindFirstFileW( (wchar_t*)local_directory_name.str() , &win32_find_data ) ) != INVALID_HANDLE_VALUE )
 					{
 						rux::io::XDirectory directory;
-						rux::uint32 index1 = directories.Count();
+						rux::uint32 index1 = (unsigned int)directories.Count();
 						do
 						{
 							if( ( win32_find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY ) )
@@ -2493,7 +2493,7 @@ namespace rux
 					if( ( find_handle = FindFirstFileW( (wchar_t*)directory_name.str() , &win32_find_data ) ) != INVALID_HANDLE_VALUE )
 					{
 						rux::io::XDirectory directory;
-						rux::uint32 index1 = directories.Count();
+						rux::uint32 index1 = (rux::uint32)directories.Count();
 						do
 						{
 							if( ( win32_find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY ) )

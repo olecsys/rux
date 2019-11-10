@@ -267,8 +267,8 @@ namespace rux
 											printf( "cannot load module 'librux.engine.so'\n" );
 									}
 		#endif
-									rux_get_engine_globals_t get_engine_globals = (rux_get_engine_globals_t)dlsym( _engine_handle , "rux_get_engine_globals" );
-									::rux::get_time33_hash_value_t get_time33_hash_value = (::rux::get_time33_hash_value_t)dlsym( _engine_handle , "rux_get_time33_hash_value" );
+									get_engine_globals = (rux_get_engine_globals_t)dlsym( _engine_handle , "rux_get_engine_globals" );
+									get_time33_hash_value = (::rux::get_time33_hash_value_t)dlsym( _engine_handle , "rux_get_time33_hash_value" );
 									::rux::engine::_globals = get_engine_globals();
 									::rux::engine::_get_time33_hash_value = get_time33_hash_value;
 									::rux::engine::_rux_alloc = ::rux::engine::_globals->_alloc;
@@ -399,6 +399,9 @@ namespace rux
 	};
 };
 #ifdef __WINDOWS__
+#pragma warning( push )
+#pragma warning( disable: 4075 )
 #pragma init_seg( ".CRT$XCB" )
+#pragma warning( pop )
 dll_internal ::rux::global_initialization _global_initialization;
 #endif

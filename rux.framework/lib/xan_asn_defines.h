@@ -3,7 +3,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <xan_string.h>
+#include "xan_string.h"
 enum XEnum_AsnClass
 {
 	XEnum_AsnClass_Universal,
@@ -83,7 +83,7 @@ rux_inline void rux_convert_asn_objectidentifier_to_string( const rux::uint8* da
 		}
 		else
 		{
-			value += ( data_ptr[ position + asn_length ] - 0x80 ) * multiplicator;
+			value += (::rux::uint32)(( data_ptr[ position + asn_length ] - 0x80 ) * multiplicator);
 			multiplicator *= 0x80;
 		}
 		asn_length--;

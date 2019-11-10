@@ -39,6 +39,8 @@ namespace rux
 				DWORD displacement32 = 0;		
 				IMAGEHLP_SYMBOL64* imagehlp_symbol64 = NULL;
 				IMAGEHLP_LINEA64 imagehelp_line64;
+				memset( &imagehelp_line64 , 0 , sizeof( IMAGEHLP_LINEA64 ) );				
+				imagehelp_line64.SizeOfStruct = sizeof( IMAGEHLP_LINEA64 );
 				::rux::uint8 is_imagehlp_line64 = 0;
 				::rux::uint8 is_sym_from_addr = 0;
 				::rux::uint8 imagehlp_symbol64_ptr[ sizeof( IMAGEHLP_SYMBOL64 ) + MAX_SYM_NAME ] = {0};
@@ -112,9 +114,7 @@ namespace rux
 						}
 					}
 					if( is_sym_from_addr == 1 )
-					{				
-						memset( &imagehelp_line64 , 0 , sizeof( IMAGEHLP_LINEA64 ) );				
-						imagehelp_line64.SizeOfStruct = sizeof( IMAGEHLP_LINEA64 );
+					{	
 						CS_PTR_LOCK( ::rux::debug::_cs );
 						is_imagehlp_line64 = ::rux::engine::_globals->_dbghelp_module.SymGetLineFromAddr64( ::rux::engine::_globals->_current_process_handle , (::rux::uint64)stack_frames[ index0 ] , &displacement32 , &imagehelp_line64 ) ? 1 : 0;																		
 						::rux::debug::_cs->UnLock();
@@ -168,7 +168,7 @@ namespace rux
 		#ifdef __WINDOWS__
 			::rux::engine::_globals->_kernel32_module.load();
 			if( ::rux::engine::_globals->_kernel32_module._RtlCaptureStackBackTrace )
-				stack_frames_count0 = ::rux::engine::_globals->_kernel32_module.RtlCaptureStackBackTrace( 1 + stack_frames_offset , RUX_MAX_STACK_FRAMES , stack_frames , NULL );
+				stack_frames_count0 = ::rux::engine::_globals->_kernel32_module.RtlCaptureStackBackTrace( (ULONG)(1 + stack_frames_offset) , RUX_MAX_STACK_FRAMES , stack_frames , NULL );
 		#endif
 			return stack_frames_count0;
 		};
@@ -952,7 +952,7 @@ namespace rux
 		{
 			::rux::int32 exception_file = *((::rux::int32*)udata);
 			if( data && data_size > 0 )
-				rux_write( exception_file , data , data_size );
+				rux_write( exception_file , data , (unsigned int)data_size );
 		};
 		dll_internal void CheckFileDescriptors( const char* exception_filename , char* exception_text )
 		{
@@ -965,9 +965,14 @@ namespace rux
 			{
 				if( errno == EMFILE )
 				{
-					rux::int32 max_descriptors = ::rux::diagnostics::process::get_max_descriptors();
-					for( ::rux::int32 fd = max_descriptors - 10 ; fd < max_descriptors ; fd++ )
+					rux::int32 max_descriptors = (int)::rux::diagnostics::process::get_max_descriptors();
+					for( ::rux::int32 fd = max_descriptors - 10 ; fd < max_descriptors ; fd++ ) {
+#ifdef __WINDOWS__		
+						_close( fd );
+#else
 						close( fd );
+#endif
+					}
 
 					::rux::uint8 is_exists = rux_is_exists_file( exception_filename );
 					::rux::int32 exception_file = -1;
@@ -979,7 +984,7 @@ namespace rux
 					{
 						if( exception_text[ 0 ] != 0 )
 						{
-							rux_write( exception_file , exception_text , strlen( exception_text ) );
+							rux_write( exception_file , exception_text , (unsigned int)strlen( exception_text ) );
 							::rux::XConsole::WriteToStdErr( exception_text );
 							exception_text[ 0 ] = 0;
 						}
@@ -1007,14 +1012,28 @@ namespace rux
 								*(::rux::engine::_globals->_alarm_is_addr2line) = 0;
 						}
 		#endif
+#ifdef __WINDOWS__		
+						_close( exception_file );
+#else
 						close( exception_file );
+#endif						
 					}
-					for( ::rux::int32 fd = max_descriptors / 2 ; fd < max_descriptors ; fd++ )
+					for( ::rux::int32 fd = max_descriptors / 2 ; fd < max_descriptors ; fd++ ) {
+#ifdef __WINDOWS__		
+						_close( fd );
+#else
 						close( fd );
+#endif
+					}
 				}
 			}
-			else
+			else {
+#ifdef __WINDOWS__		
+				_close( file );
+#else
 				close( file );
+#endif					
+			}
 		};
 #ifdef __WINDOWS__
 		dll_internal void ExceptionToFile( const char* exception_code_string , _EXCEPTION_POINTERS* info )
@@ -1093,7 +1112,7 @@ namespace rux
 				rux_lseek( exception_file , 0L , SEEK_END );
 				if( exception_text[ 0 ] != 0 )
 				{
-					rux_write( exception_file , exception_text , strlen( exception_text ) );
+					rux_write( exception_file , exception_text , (unsigned int)strlen( exception_text ) );
 					::rux::XConsole::WriteToStdErr( exception_text );
 				}
 				exception_text[ 0 ] = 0;
@@ -1105,14 +1124,14 @@ namespace rux
 #endif
 				if( callstack_ptr[ 0 ] != 0 )
 				{			
-					rux_write( exception_file , callstack_ptr , strlen( callstack_ptr ) );
+					rux_write( exception_file , callstack_ptr , (unsigned int)strlen( callstack_ptr ) );
 					::rux::XConsole::WriteToStdErr( callstack_ptr );
 					::rux::safe_strncat( exception_text , "\n" , 2048 );
 				}
 				else
 					::rux::safe_strncat( exception_text , "empty\n" , 2048 );
 				::rux::safe_strncat( exception_text , "\n=========================\n" , 2048 );
-				rux_write( exception_file , exception_text , strlen( exception_text ) );
+				rux_write( exception_file , exception_text , (unsigned int)strlen( exception_text ) );
 				::rux::XConsole::WriteToStdErr( exception_text );
 				rux_close( exception_file );
 #ifdef __WINDOWS__				

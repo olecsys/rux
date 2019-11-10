@@ -219,7 +219,7 @@ namespace rux
 					while( ( readen_size = rux::io::fread( &str.str()[ offset ] , sizeof( char ) , size , _file_ptr ) ) > 0 )
 					{
 						offset += readen_size;
-						if( readen_size == size )
+						if( readen_size == (::rux::uint64)size )
 							break;
 						size -= readen_size;
 					}			
@@ -465,7 +465,7 @@ namespace rux
 				if( (*this)()->_file_ptr != NULL )
 				{
 		#ifdef __WINDOWS__
-					if( rux::io::chsize( _fileno( (*this)()->_file_ptr ) , size ) != 0 )
+					if( rux::io::chsize( _fileno( (*this)()->_file_ptr ) , (long)size ) != 0 )
 		#else
 					if( rux::io::chsize( fileno( (*this)()->_file_ptr ) , size ) != 0 )
 		#endif

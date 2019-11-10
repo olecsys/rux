@@ -307,9 +307,9 @@ namespace rux
 				else if( rux_is_object_ptr( gcref , ::rux::XNumeric ) )
 				{
 					_type = ::rux::data::key_value_pair_t_type_null;
-					::rux::Numeric* value = (::rux::Numeric*)gcref->get_ObjectAddress();
-					if( value->_value_gcref )
-						set00( value->_value_gcref , ::rux::data::key_value_pair_t_type_gcref , gcref_addref , SIZE_MAX , ___rux__thread_index1986 );
+					::rux::Numeric* value00 = (::rux::Numeric*)gcref->get_ObjectAddress();
+					if( value00->_value_gcref )
+						set00( value00->_value_gcref , ::rux::data::key_value_pair_t_type_gcref , gcref_addref , SIZE_MAX , ___rux__thread_index1986 );
 				}
 				else
 					next = 1;

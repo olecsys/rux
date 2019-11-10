@@ -94,7 +94,7 @@ namespace rux
 								{
 									::rux::safe_strncpy( module_name , ::rux::engine::_globals->_env_variables[ index0 ] , 4096 );
 									::rux::string::replace_all( module_name , '\\' , '/' );
-									size_t len = strlen( module_name );
+									len = strlen( module_name );
 									module_name[ len ] = '/';
 									module_name[ len + 1 ] = 0;
 									::rux::safe_strncat( module_name , _alter_library , 4096 );

@@ -415,7 +415,7 @@ dll_internal void rux_substring( char* destination , const char* source , ::rux:
 		if( start_index < source_length )
 		{
 			if( start_index + length > source_length )
-				length = source_length - start_index;
+				length = (unsigned int)(source_length - start_index);
 			if( length > 0 )
 			{
 				if( destination == source )
@@ -531,7 +531,7 @@ dll_internal void rux_clear_and_write_to_file( const char* filename , const char
 	::rux::int32 file = rux_open( filename , O_CREAT | O_WRONLY | O_TRUNC );
 	if( file != -1 )
 	{		
-		rux_write( file , text , strlen( text ) );
+		rux_write( file , text , (unsigned int)strlen( text ) );
 #ifdef __UNIX__
 		fsync( file );
 #endif
@@ -874,7 +874,7 @@ dll_internal void* rux_read_all_from_file( const char* filename , size_t& readen
 					avail_size = 1024;
 				}			
 #ifdef __WINDOWS__
-				read_size = _read( file , &result[ readen_size ] , avail_size ); 
+				read_size = _read( file , &result[ readen_size ] , (unsigned int)avail_size ); 
 #else
 				read_size = read( file , &result[ readen_size ] , avail_size ); 
 #endif
@@ -896,7 +896,7 @@ dll_internal void rux_append_to_file( const char* filename , const char* text )
 	if( file != -1 )
 	{
 		rux_lseek( file , 0L , SEEK_END );
-		rux_write( file , text , strlen( text ) );
+		rux_write( file , text , (unsigned int)strlen( text ) );
 #ifdef __UNIX__
 		fsync( file );
 #endif
@@ -914,7 +914,7 @@ dll_internal void rux_append_to_file( const char* filename , const ::rux::uint8*
 	if( file != -1 )
 	{
 		rux_lseek( file , 0L , SEEK_END );
-		rux_write( file , bytes , bytes_size );
+		rux_write( file , bytes , (unsigned int)bytes_size );
 #ifdef __UNIX__
 		fsync( file );
 #endif
@@ -1383,7 +1383,7 @@ dll_internal ::rux::uint8 rux_start_detached_process( const char* executable , c
 dll_internal void rux_get_working_directory( char string[] , size_t string_size )
 {
 #ifdef __WINDOWS__
-	_getcwd( string , string_size );
+	_getcwd( string , (int)string_size );
 #elif defined( __UNIX__ )
 	getcwd( string , string_size );
 #endif
@@ -2288,7 +2288,7 @@ rux::uint8 rux_get_hostname( char* hostname , size_t hostname_size )
 		WSADATA wsa_data;			
 		::rux::engine::_globals->_ws2_32_module.WSAStartup( version_requested , &wsa_data );
 #endif
-		if( ::rux::network::gethostname( hostname , hostname_size ) == 0 )
+		if( ::rux::network::gethostname( hostname , (int)hostname_size ) == 0 )
 			success = 1;	
 	}
 	return success;
@@ -2410,7 +2410,7 @@ namespace rux
 			vsnprintf( temp_ptr , res , format , ap );
 			::memcpy( str , temp_ptr , str_size - 1 );
 			::rux::engine::free_mem( temp_ptr );
-			res = str_size - 1;
+			res = (int)str_size - 1;
 			str[ res ] = 0;			
 		}
 #else
@@ -2616,7 +2616,7 @@ namespace rux
 		::rux::uint8 byte = 0 , value = 0;
 		for( ; ; )
 		{
-			byte = rux_get_byte( number1 , byte_index );
+			byte = rux_get_byte( number1 , (::rux::uint32)byte_index );
 			value = byte / 16;
 			if( value < 10 )
 				string[ string_index ] = (char)( value + 48 );
@@ -3169,7 +3169,7 @@ namespace rux
 		::rux::uint8 byte = 0 , value = 0;
 		for( ; ; )
 		{
-			byte = rux_get_byte( number1 , byte_index );
+			byte = rux_get_byte( number1 , (::rux::uint32)byte_index );
 			value = byte / 16;
 			if( value < 10 )
 				string[ string_index ] = (char)( value + 48 );
@@ -3569,7 +3569,7 @@ namespace rux
 	bool security::get_current_user_name( char* user_name , size_t user_name_size )
 	{
 #ifdef __WINDOWS__
-		DWORD user_name_dword = user_name_size;
+		DWORD user_name_dword = (DWORD)user_name_size;
 		if( GetUserNameA( user_name , &user_name_dword ) )
 			return true;
 		else
@@ -3597,6 +3597,7 @@ namespace rux
 		uid = geteuid();
 		return true;
 #else
+		(void)uid;
 		return false;
 #endif
 	};
@@ -3632,6 +3633,8 @@ namespace rux
 		}
 		::rux::engine::free_mem( buffer );
 #endif
+#else
+		(void)username;
 #endif
 		return res;
 	};
@@ -4186,7 +4189,7 @@ namespace rux
 							avail_size = 1024;
 						}			
 			#ifdef __WINDOWS__
-						read_size = _read( file , &result[ readen_size ] , avail_size ); 
+						read_size = _read( file , &result[ readen_size ] , (unsigned int)avail_size ); 
 			#else
 						read_size = ::read( file , &result[ readen_size ] , avail_size ); 
 			#endif
@@ -4233,7 +4236,7 @@ namespace rux
 			if( file != -1 )
 			{
 				rux_lseek( file , 0L , SEEK_END );
-				rux_write( file , text , strlen( text ) );
+				rux_write( file , text , (unsigned int)strlen( text ) );
 #ifdef __UNIX__
 				fsync( file );
 #endif
@@ -4534,7 +4537,7 @@ namespace rux
 			if( reopen( XOpenWriteText ) )
 			{
 #ifdef __WINDOWS__
-				if( ::rux::io::chsize( _fileno( _file ) , size ) != 0 )
+				if( ::rux::io::chsize( _fileno( _file ) , (long)size ) != 0 )
 #else
 				if( ::rux::io::chsize( fileno( _file ) , size ) != 0 )
 #endif
@@ -4678,6 +4681,7 @@ namespace rux
 						&& ( find_link_too == 0 || S_ISLNK( st.st_mode ) == 0 ) )
 						is_file_exists = 0;
 #elif defined( __WINDOWS__ )
+					(void)find_link_too;
 					if( ( st.st_mode & _S_IFREG ) == 0 )
 						is_file_exists = 0;		
 #endif
@@ -5018,7 +5022,7 @@ namespace rux
 		void process::get_working_directory( char* string , size_t string_size )
 		{
 #ifdef __WINDOWS__
-			_getcwd( string , string_size );
+			_getcwd( string , (int)string_size );
 #elif defined( __UNIX__ )
 			getcwd( string , string_size );
 #endif
@@ -5280,6 +5284,7 @@ namespace rux
 				error_string[ 0 ] = 0;
 			bool res = false;
 #ifdef __WINDOWS__
+			(void)error_string_size;
 			SYSTEM_INFO system_info;	
 			memset( &system_info , 0 , sizeof( SYSTEM_INFO ) );			
 			HMODULE module_handle = LoadLibraryA( "kernel32.dll" );
@@ -5556,7 +5561,7 @@ namespace rux
 			HMODULE module_handle = GetModuleHandleA( NULL );
 			if( module_handle )
 			{
-				if( GetModuleFileNameA( module_handle , module_filename , module_filename_size ) != 0 )
+				if( GetModuleFileNameA( module_handle , module_filename , (DWORD)module_filename_size ) != 0 )
 				{
 				}				
 			}
@@ -5589,7 +5594,7 @@ namespace rux
 			HMODULE module_handle = GetModuleHandleA( g_current_module_name );
 			if( module_handle )
 			{
-				if( GetModuleFileNameA( module_handle , module_filename , module_filename_size ) != 0 )
+				if( GetModuleFileNameA( module_handle , module_filename , (DWORD)module_filename_size ) != 0 )
 				{	
 				}				
 			}	
@@ -5799,7 +5804,10 @@ namespace rux
 					sa.bInheritHandle = TRUE; 
 					OSVERSIONINFO osv;
 					osv.dwOSVersionInfoSize = sizeof( osv );
+#pragma warning( push )
+#pragma warning( disable: 4996 )					
 					GetVersionEx( &osv );
+#pragma warning( pop )					
 					if( osv.dwPlatformId == VER_PLATFORM_WIN32_NT )
 					{
 						SECURITY_DESCRIPTOR sd;

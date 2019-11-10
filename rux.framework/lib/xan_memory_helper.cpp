@@ -68,8 +68,12 @@ namespace rux
 			::rux::uint64 size = rux_get_file_size( info_filename );
 			if( size >= 1024ULL * 1024ULL )
 				rux_remove_file( info_filename );
-			rux_append_to_file( info_filename , one_line );	
+			rux_append_to_file( info_filename , one_line );
+#ifdef __WINDOWS__
+			_chmod( info_filename , 0777 );
+#else				
 			chmod( info_filename , 0777 );
+#endif			
 		};
 		dll_internal void check_memory( ::rux::memory::begin_memory_chunk* bmc )
 		{
