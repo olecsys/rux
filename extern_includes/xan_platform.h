@@ -26,6 +26,10 @@
 		#ifdef __ARM__
 			#define __x86__
 		#endif
+		#ifdef __aarch64__
+			#define __x64__
+			#define RUX_NO_ASM
+		#endif
 		#ifdef __i386__
 			#define __x86__
 		#endif
