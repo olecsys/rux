@@ -21,23 +21,18 @@ namespace booldog
 				: _index(0)
 			{
 				_count = cluster_count;
-				size_t cluster_size = (s + sizeof(::booldog::mem::info4)) / _count;				
-				while(cluster_size < sizeof(::booldog::mem::info4))
+				size_t cluster_index = 0, cluster_size = ( s + sizeof(::booldog::mem::info4) ) / _count;
+				if( cluster_size % BOOLDOG_MEM_ALIGN_SIZE )
+				  cluster_size = BOOLDOG_MEM_ALIGN_SIZE * ( cluster_size / BOOLDOG_MEM_ALIGN_SIZE ) + BOOLDOG_MEM_ALIGN_SIZE;
+				::booldog::byte *ptr = _data;
+				for( ; cluster_index < _count - 1; cluster_index++ )
 				{
-					--_count;
-					if(_count == 0)
-						break;
-					cluster_size = (s + sizeof(::booldog::mem::info4)) / _count;
-					if(cluster_size % BOOLDOG_MEM_ALIGN_SIZE)
-						cluster_size = BOOLDOG_MEM_ALIGN_SIZE * (cluster_size /BOOLDOG_MEM_ALIGN_SIZE) + BOOLDOG_MEM_ALIGN_SIZE;
-				}
-				_count = (s + sizeof(::booldog::mem::info4)) / cluster_size;
-				::booldog::byte* ptr = _data;
-				for(size_t cluster_index = 0;cluster_index < _count;++cluster_index)
-				{
-					_clusters[cluster_index].initialize(ptr, cluster_size);
-					ptr += cluster_size;
-				}
+				  _clusters[ cluster_index ].initialize( ptr, cluster_size );
+				  ptr += cluster_size;
+				};
+				if( _count > 1 )
+				  cluster_size = ( s + sizeof(::booldog::mem::info4) ) - cluster_size * ( _count - 1 );
+				_clusters[ cluster_index ].initialize( ptr, cluster_size );
 			}
 			booinline void print()
 			{
