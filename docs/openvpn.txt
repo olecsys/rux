@@ -1,6 +1,6 @@
 sudo apt-get install iptables
 
-iptables -F #удалить все правила
+iptables -F #СѓРґР°Р»РёС‚СЊ РІСЃРµ РїСЂР°РІРёР»Р°
 
 iptables -t nat -A POSTROUTING -o <local_lan_interface_name> -j MASQUERADE
 iptables -A INPUT -i tun+ -j ACCEPT
@@ -8,27 +8,27 @@ iptables -A FORWARD -i tun+ -o <local_lan_interface_name> -j ACCEPT
 iptables -A FORWARD -i <local_lan_interface_name> -o tun+ -j ACCEPT
 
 
-Делаем скрипт, выполняемый при поднятии интерфейса
+Р”РµР»Р°РµРј СЃРєСЂРёРїС‚, РІС‹РїРѕР»РЅСЏРµРјС‹Р№ РїСЂРё РїРѕРґРЅСЏС‚РёРё РёРЅС‚РµСЂС„РµР№СЃР°
 nano -w /etc/network/if-up.d/00-iptables
 #!/bin/sh
 iptables-restore < /etc/firewall.conf
 ip6tables-restore < /etc/firewall6.conf
-Даём право запуска этого скрипта
+Р”Р°С‘Рј РїСЂР°РІРѕ Р·Р°РїСѓСЃРєР° СЌС‚РѕРіРѕ СЃРєСЂРёРїС‚Р°
 chmod +x nano -w /etc/network/if-up.d/00-iptables
-Сохраняем в конфиг правила для IPv4
+РЎРѕС…СЂР°РЅСЏРµРј РІ РєРѕРЅС„РёРі РїСЂР°РІРёР»Р° РґР»СЏ IPv4
 iptables-save >/etc/firewall.conf
-Сохраняем в конфиг правила для IPv6
+РЎРѕС…СЂР°РЅСЏРµРј РІ РєРѕРЅС„РёРі РїСЂР°РІРёР»Р° РґР»СЏ IPv6
 ip6tables-save >/etc/firewall6.conf
 
 
 /sbin/iptables-save > /etc/iptables/iptables_snat.conf
 
-iptables -L -n -v #статус
+iptables -L -n -v #СЃС‚Р°С‚СѓСЃ
 
-Еще кое-что полезное:
+Р•С‰Рµ РєРѕРµ-С‡С‚Рѕ РїРѕР»РµР·РЅРѕРµ:
 
 tcpdump -nn -v dst host <ip address> and tcp port <port>
 
-Открытые порты по процессу:
+РћС‚РєСЂС‹С‚С‹Рµ РїРѕСЂС‚С‹ РїРѕ РїСЂРѕС†РµСЃСЃСѓ:
 lsof -i -nP grep sshd
 

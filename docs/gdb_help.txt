@@ -1,21 +1,21 @@
 gdb --pid=pid
 
 
-‘thread threadno’, a command to switch among threads
-‘info threads’, a command to inquire about existing threads
-'frame N' - переход по функциям в стеке, где N - номер функции
-'print funcname' - значение переменной
-'info symbol address' - информация о функции или переменной
-'break <file.cpp>:<line>' - установить точку останова
-'delete breakpoints <range>' - удалить точки останова
-'info breakpoints' - информация о точках останова
-'break <file.cpp>:<line> if strcmp(y, "hello") == 0' - установить точку останова с условием
-'info share' - информация о загруженных модулях
+вЂthread threadnoвЂ™, a command to switch among threads
+вЂinfo threadsвЂ™, a command to inquire about existing threads
+'frame N' - РїРµСЂРµС…РѕРґ РїРѕ С„СѓРЅРєС†РёСЏРј РІ СЃС‚РµРєРµ, РіРґРµ N - РЅРѕРјРµСЂ С„СѓРЅРєС†РёРё
+'print funcname' - Р·РЅР°С‡РµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№
+'info symbol address' - РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ С„СѓРЅРєС†РёРё РёР»Рё РїРµСЂРµРјРµРЅРЅРѕР№
+'break <file.cpp>:<line>' - СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С‚РѕС‡РєСѓ РѕСЃС‚Р°РЅРѕРІР°
+'delete breakpoints <range>' - СѓРґР°Р»РёС‚СЊ С‚РѕС‡РєРё РѕСЃС‚Р°РЅРѕРІР°
+'info breakpoints' - РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ С‚РѕС‡РєР°С… РѕСЃС‚Р°РЅРѕРІР°
+'break <file.cpp>:<line> if strcmp(y, "hello") == 0' - СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С‚РѕС‡РєСѓ РѕСЃС‚Р°РЅРѕРІР° СЃ СѓСЃР»РѕРІРёРµРј
+'info share' - РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ Р·Р°РіСЂСѓР¶РµРЅРЅС‹С… РјРѕРґСѓР»СЏС…
 
-Полезные команды bash для отладки:
+РџРѕР»РµР·РЅС‹Рµ РєРѕРјР°РЅРґС‹ bash РґР»СЏ РѕС‚Р»Р°РґРєРё:
 
-'ps uH p <PID_OF_PROCESS> | wc -l' или 'ps -L -o pid= -p <pid> | wc -l' - количество потоков в процессе
-'lsof -p <PID_OF_PROCESS> | wc -l' - количество открытых файлов в процессе
+'ps uH p <PID_OF_PROCESS> | wc -l' РёР»Рё 'ps -L -o pid= -p <pid> | wc -l' - РєРѕР»РёС‡РµСЃС‚РІРѕ РїРѕС‚РѕРєРѕРІ РІ РїСЂРѕС†РµСЃСЃРµ
+'lsof -p <PID_OF_PROCESS> | wc -l' - РєРѕР»РёС‡РµСЃС‚РІРѕ РѕС‚РєСЂС‹С‚С‹С… С„Р°Р№Р»РѕРІ РІ РїСЂРѕС†РµСЃСЃРµ
 
-Для получения номера линии по смещению(+0xd354 например) можно запустить gdb {PATH TO LIB}(lib/libautoloader.so например)
-и набрать info symbol {смещение}(+0xd354 например)
+Р”Р»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РЅРѕРјРµСЂР° Р»РёРЅРёРё РїРѕ СЃРјРµС‰РµРЅРёСЋ(+0xd354 РЅР°РїСЂРёРјРµСЂ) РјРѕР¶РЅРѕ Р·Р°РїСѓСЃС‚РёС‚СЊ gdb {PATH TO LIB}(lib/libautoloader.so РЅР°РїСЂРёРјРµСЂ)
+Рё РЅР°Р±СЂР°С‚СЊ info symbol {СЃРјРµС‰РµРЅРёРµ}(+0xd354 РЅР°РїСЂРёРјРµСЂ)
